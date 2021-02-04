@@ -1,9 +1,9 @@
 {
   "extends": [
-    "react-app",
-    "react-app/jest",
     "airbnb", 
-    "airbnb/hooks"
+    "airbnb/hooks",
+    "prettier",
+    "prettier/react"
   ],
   "rules": {
     "react/jsx-filename-extension": [
