@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="41mm"
+   height="41mm"
+   viewBox="0 0 41 41"
+   version="1.1"
+   id="svg8"
+   inkscape:version="0.92.1 r15371"
+   sodipodi:docname="logo.svg">
+  <defs
+     id="defs2" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="1.4"
+     inkscape:cx="48.63422"
+     inkscape:cy="20.480018"
+     inkscape:document-units="mm"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     inkscape:window-width="1366"
+     inkscape:window-height="709"
+     inkscape:window-x="0"
+     inkscape:window-y="27"
+     inkscape:window-maximized="1"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0" />
+  <metadata
+     id="metadata5">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-45.410797,-34.241386)">
+    <circle
+       style="opacity:1;fill:#ffd829;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.18907578"
+       id="path4548"
+       cx="65.910797"
+       cy="54.741386"
+       r="20.5" />
+    <path
+       id="path4795"
+       d="m 54.64676,47.905749 v 2.098388 h 4.211834 v 2.084862 H 54.64676 v 3.269849 h -2.69802 v -9.537962 h 7.4805 v 2.084863 z m 12.072367,5.599356 h -4.03311 l -0.74937,1.853743 h -2.752429 l 4.210235,-9.537962 h 2.657131 l 4.223729,9.537962 h -2.806826 z m -0.791848,-1.988746 -1.226282,-3.052248 -1.224721,3.052248 z m 14.25374,-5.695473 -4.087531,9.537962 H 73.43638 l -4.074039,-9.537962 h 2.916049 l 2.588794,6.213298 2.643222,-6.213298 z M 57.680746,57.175679 v 6.356643 H 56.200287 L 53.393465,60.1457 v 3.386622 h -1.76241 v -6.356643 h 1.48046 l 2.808409,3.388191 v -3.388191 z m 4.478289,6.485715 a 3.8031931,3.8031931 0 0 1 -1.812042,-0.42691 3.1828964,3.1828964 0 0 1 -1.721501,-2.879105 3.1828964,3.1828964 0 0 1 1.721501,-2.879485 3.8031931,3.8031931 0 0 1 1.812042,-0.426913 3.8031931,3.8031931 0 0 1 1.812033,0.426913 3.1828964,3.1828964 0 0 1 1.721524,2.879485 3.1828964,3.1828964 0 0 1 -1.721524,2.879517 3.8031931,3.8031931 0 0 1 -1.812033,0.426498 z m 0,-1.489585 a 1.7032357,1.7032357 0 0 0 0.873654,-0.227165 1.6333444,1.6333444 0 0 0 0.617526,-0.640536 1.9391251,1.9391251 0 0 0 0.227146,-0.949123 1.9391251,1.9391251 0 0 0 -0.227146,-0.949097 1.6333444,1.6333444 0 0 0 -0.619103,-0.638973 1.7870275,1.7870275 0 0 0 -1.744139,0 1.6333444,1.6333444 0 0 0 -0.617522,0.640551 1.9391251,1.9391251 0 0 0 -0.227167,0.949119 1.9391251,1.9391251 0 0 0 0.227167,0.949122 1.6333444,1.6333444 0 0 0 0.617522,0.638146 1.7032357,1.7032357 0 0 0 0.872062,0.227542 z m 5.740728,-3.570089 h -1.952637 v -1.426041 h 5.695469 v 1.426041 h -1.942701 v 4.930602 h -1.800131 z m 9.519694,3.540703 v 1.389899 h -5.104943 v -6.356643 h 4.986999 v 1.389891 h -3.206322 v 1.072228 h 2.825094 v 1.344251 h -2.825094 v 1.160374 z m 1.735016,1.471718 a 1.0166206,1.0166206 0 0 1 -0.735859,-0.290693 0.9812772,0.9812772 0 0 1 -0.299823,-0.735866 0.97055481,0.97055481 0 0 1 0.295057,-0.735851 1.1198708,1.1198708 0 0 1 1.485211,0 0.97849721,0.97849721 0 0 1 0.290699,0.735851 0.98921921,0.98921921 0 0 1 -0.295076,0.735866 1.0122522,1.0122522 0 0 1 -0.740209,0.29227 z"
+       inkscape:connector-curvature="0"
+       style="stroke-width:0.39711696" />
+  </g>
+</svg>
