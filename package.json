@@ -1,6 +1,6 @@
 {
   "name": "react-note-app",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "private": true,
   "description": "Simple React serverless application to manage your notes.",
   "keywords": [
@@ -8,7 +8,6 @@
     "serverless",
     "firebase"
   ],
-  "homepage": "https://github.com/pawelrusak/react-note-app#readme",
   "bugs": {
     "url": "https://github.com/pawelrusak/react-note-app/issues"
   },
