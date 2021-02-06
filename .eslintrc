@@ -11,6 +11,15 @@
   "globals": {
     "document": true
   },
+  "overrides": [
+    {
+      "files": ["*.stories.js"],
+      "rules": {
+          "react/prop-types": 0,
+          "react/jsx-props-no-spreading": 0
+      }
+    }
+  ],
   "rules": {
     "react/jsx-filename-extension": [
       1, 
