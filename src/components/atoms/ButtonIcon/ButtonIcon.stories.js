@@ -8,7 +8,7 @@ import ButtonIcon from './ButtonIcon';
 const icons = { bulbIcon, logoutIcon, penIcon, plusIcon, twitterIcon };
 
 export default {
-  title: 'ButtonIcon',
+  title: 'Atoms/ButtonIcon',
   component: ButtonIcon,
   parameters: {
     layout: 'centered',

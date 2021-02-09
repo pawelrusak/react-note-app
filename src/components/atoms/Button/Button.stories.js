@@ -7,7 +7,7 @@ const colors = {
 };
 
 export default {
-  title: 'Button',
+  title: 'Atoms/Button',
   component: Button,
   argTypes: {
     color: {
