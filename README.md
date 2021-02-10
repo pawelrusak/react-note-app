@@ -1,4 +1,4 @@
-<p align="center"><img src="./logo.svg" height="150" alt="FAV Note."><p>
+<p align="center"><img src="https://raw.githubusercontent.com/pawelrusak/react-note-app/851af0930676810310cac0c0e39832b03580d972/logo.svg" height="150" alt="FAV Note."><p>
   
 # React note app
 
