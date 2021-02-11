@@ -67,22 +67,18 @@ const StyledLinkButton = styled.a`
   transform: translateY(-50%);
 `;
 
-const Card = ({ cardType }) => (
+const Card = ({ cardType, title, created, twitterName, articleUrl, content }) => (
   <StyledWrapper>
     <InnerWrapper activeColor={cardType}>
-      <StyledHeading>Hello, World!</StyledHeading>
-      <DateInfo>3 days</DateInfo>
-
+      <StyledHeading>{title}</StyledHeading>
+      <DateInfo>{created}</DateInfo>
       {cardType === 'twitter' && (
-        <StyledAvatar src={`https://unavatar.now.sh/twitter/${'hello_roman'}`} />
+        <StyledAvatar src={`https://unavatar.now.sh/twitter/${twitterName}`} />
       )}
-      {cardType === 'article' && <StyledLinkButton href="https//youtube.com/helloroman" />}
+      {cardType === 'article' && <StyledLinkButton href={articleUrl} />}
     </InnerWrapper>
     <InnerWrapper flex>
-      <Paragraph>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-        labore et dolore magna aliqua.
-      </Paragraph>
+      <Paragraph>{content}</Paragraph>
       <Button secondary>REMOVE</Button>
     </InnerWrapper>
   </StyledWrapper>
@@ -90,10 +86,17 @@ const Card = ({ cardType }) => (
 
 Card.propTypes = {
   cardType: PropTypes.oneOf(['note', 'twitter', 'article']),
+  title: PropTypes.string.isRequired,
+  created: PropTypes.string.isRequired,
+  twitterName: PropTypes.string,
+  articleUrl: PropTypes.string,
+  content: PropTypes.string.isRequired,
 };
 
 Card.defaultProps = {
   cardType: 'note',
+  twitterName: null,
+  articleUrl: null,
 };
 
 export default Card;
