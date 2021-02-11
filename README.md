@@ -15,3 +15,7 @@ Build using [NPM](https://www.npmjs.com/get-npm) scripts. The following scripts 
   and scripts into the app directory. **If you do this, you can’t go back!**
 
 This project was bootstrapped with [Create React App](https://create-react-app.dev/).
+
+## License
+
+Licensed under the MIT License. See [LICENSE](./LICENSE) for more information.
