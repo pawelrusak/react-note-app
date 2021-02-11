@@ -12,7 +12,9 @@ Build using [NPM](https://www.npmjs.com/get-npm) scripts. The following scripts 
 - `build` - bundles the app into static files for production,
 - `test` - starts the test runner,
 - `eject` - removes this CRA tool and copies build dependencies, configuration files
-  and scripts into the app directory. **If you do this, you can’t go back!**
+  and scripts into the app directory. **If you do this, you can’t go back!**,
+- `storybook` - start the component explorer,
+- `build-storybook` - bundles the component explorer,
 
 This project was bootstrapped with [Create React App](https://create-react-app.dev/).
 
