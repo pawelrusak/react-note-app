@@ -1,4 +1,9 @@
+import styled from 'styled-components';
 import Card from './Card';
+
+const CardWrapper = styled.div`
+  max-width: 45.5rem;
+`;
 
 export default {
   title: 'Molecules/Card',
@@ -6,10 +11,17 @@ export default {
   args: {
     title: 'My best note ever',
     created: '3 days',
-    content: `Miles Dewey Davis III (May 26, 1926 -
+    content: `Miles Dewey Davis III (May 26, 1926 - 
        September 28, 1991) was an American jazz
        trumpeter, bandleader, and composer.`,
   },
+  decorators: [
+    (Story) => (
+      <CardWrapper>
+        <Story style={{ zIndex: 2 }} />
+      </CardWrapper>
+    ),
+  ],
 };
 
 const Template = (args) => <Card {...args} />;
