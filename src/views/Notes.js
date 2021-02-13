@@ -1,30 +1,31 @@
 import UserPageTemplate from 'templates/UserPageTemplate';
 import Card from 'components/molecules/Card/Card';
+import { v4 as getUuid } from 'uuid';
 
 const notes = [
   {
-    id: 1,
+    id: getUuid(),
     title: 'Wake me up when Vue ends',
     content:
       'Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus, tempora quibusdam natus modi tempore esse adipisci, dolore odit animi',
     created: '1 day',
   },
   {
-    id: 2,
+    id: getUuid(),
     title: 'Como es An Gular?',
     content:
       'Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus, tempora quibusdam natus modi tempore esse adipisci, dolore odit animi',
     created: '1 day',
   },
   {
-    id: 3,
+    id: getUuid(),
     title: 'Du bist Reactish',
     content:
       'Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus, tempora quibusdam natus modi tempore esse adipisci, dolore odit animi',
     created: '5 days',
   },
   {
-    id: 4,
+    id: getUuid(),
     title: 'Reactuj się kto moze!',
     content:
       'Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus, tempora quibusdam natus modi tempore esse adipisci, dolore odit animi',
