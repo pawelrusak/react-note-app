@@ -1,9 +1,10 @@
 import UserPageTemplate from 'templates/UserPageTemplate';
 import Card from 'components/molecules/Card/Card';
+import { v4 as getUuid } from 'uuid';
 
 const twitters = [
   {
-    id: 1,
+    id: getUuid(),
     title: 'Hello Roman',
     content:
       'Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus, tempora quibusdam natus modi tempore esse adipisci, dolore odit animi',
@@ -11,7 +12,7 @@ const twitters = [
     twitterName: 'hello_roman',
   },
   {
-    id: 2,
+    id: getUuid(),
     title: 'Redux guy',
     content:
       'Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus, tempora quibusdam natus modi tempore esse adipisci, dolore odit animi',
@@ -19,7 +20,7 @@ const twitters = [
     twitterName: 'dan_abramov',
   },
   {
-    id: 3,
+    id: getUuid(),
     title: 'React router stuff',
     content:
       'Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus, tempora quibusdam natus modi tempore esse adipisci, dolore odit animi',
@@ -27,7 +28,7 @@ const twitters = [
     twitterName: 'mjackson',
   },
   {
-    id: 4,
+    id: getUuid(),
     title: 'Super animacje!',
     content:
       'Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus, tempora quibusdam natus modi tempore esse adipisci, dolore odit animi',
