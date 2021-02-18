@@ -1,14 +1,16 @@
-import Button from 'components/atoms/Button/Button';
 import MainTemplate from 'templates/MainTemplate';
+import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
+import Notes from 'views/Notes';
 
 const Root = () => (
-  <MainTemplate>
-    <>
-      <h1>React note app</h1>
-      <Button>Close / Save</Button>
-      <Button secondary>Remove</Button>
-    </>
-  </MainTemplate>
+  <BrowserRouter>
+    <MainTemplate>
+      <Switch>
+        <Route exact path="/" render={() => <Redirect to="/notes" />} />
+        <Route path="/notes" component={Notes} />
+      </Switch>
+    </MainTemplate>
+  </BrowserRouter>
 );
 
 export default Root;
