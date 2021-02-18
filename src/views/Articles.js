@@ -1,9 +1,10 @@
 import UserPageTemplate from 'templates/UserPageTemplate';
 import Card from 'components/molecules/Card/Card';
+import { v4 as getUuid } from 'uuid';
 
 const articles = [
   {
-    id: 1,
+    id: getUuid(),
     title: 'React on my mind',
     content:
       'Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus, tempora quibusdam natus modi tempore esse adipisci, dolore odit animi',
@@ -11,7 +12,7 @@ const articles = [
     created: '1 day',
   },
   {
-    id: 2,
+    id: getUuid(),
     title: 'Wish you React',
     content:
       'Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus, tempora quibusdam natus modi tempore esse adipisci, dolore odit animi',
@@ -19,7 +20,7 @@ const articles = [
     created: '1 day',
   },
   {
-    id: 3,
+    id: getUuid(),
     title: 'You gave React a bad name',
     content:
       'Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus, tempora quibusdam natus modi tempore esse adipisci, dolore odit animi',
@@ -27,7 +28,7 @@ const articles = [
     created: '5 days',
   },
   {
-    id: 4,
+    id: getUuid(),
     title: 'Is it React you looking for?',
     content:
       'Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus, tempora quibusdam natus modi tempore esse adipisci, dolore odit animi',
