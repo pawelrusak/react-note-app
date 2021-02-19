@@ -1,4 +1,4 @@
-import UserPageTemplate from 'templates/UserPageTemplate';
+import GridTemplate from 'templates/GridTemplate';
 import Card from 'components/molecules/Card/Card';
 import { v4 as getUuid } from 'uuid';
 
@@ -34,7 +34,7 @@ const notes = [
 ];
 
 const Notes = () => (
-  <UserPageTemplate pageType="note">
+  <GridTemplate pageType="note">
     <>
       {notes.map((item) => (
         <Card
@@ -46,7 +46,7 @@ const Notes = () => (
         />
       ))}
     </>
-  </UserPageTemplate>
+  </GridTemplate>
 );
 
 export default Notes;

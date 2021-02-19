@@ -1,4 +1,4 @@
-import UserPageTemplate from 'templates/UserPageTemplate';
+import GridTemplate from 'templates/GridTemplate';
 import Card from 'components/molecules/Card/Card';
 import { v4 as getUuid } from 'uuid';
 
@@ -38,7 +38,7 @@ const twitters = [
 ];
 
 const Twitters = () => (
-  <UserPageTemplate pageType="twitter">
+  <GridTemplate pageType="twitter">
     <>
       {twitters.map((item) => (
         <Card
@@ -51,7 +51,7 @@ const Twitters = () => (
         />
       ))}
     </>
-  </UserPageTemplate>
+  </GridTemplate>
 );
 
 export default Twitters;
