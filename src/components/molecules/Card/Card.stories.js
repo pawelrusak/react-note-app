@@ -28,17 +28,17 @@ const Template = (args) => <Card {...args} />;
 
 export const Note = Template.bind({});
 Note.args = {
-  cardType: 'note',
+  cardType: 'notes',
 };
 
 export const Twitter = Template.bind({});
 Twitter.args = {
-  cardType: 'twitter',
-  twitterName: 'hello_roman',
+  cardType: 'twitters',
+  twitterName: 'hello_romans',
 };
 
 export const Article = Template.bind({});
 Article.args = {
-  cardType: 'article',
+  cardType: 'articles',
   articleUrl: 'https://youtube.com/helloroman',
 };
