@@ -40,15 +40,15 @@ const twitters = [
 const Twitters = () => (
   <GridTemplate pageType="twitters">
     <>
-      {twitters.map((item) => (
+      {twitters.map(({ id, title, content, twitterName, created }) => (
         <Card
-          id={item.id}
+          id={id}
           cardType="twitters"
-          title={item.title}
-          content={item.content}
-          twitterName={item.twitterName}
-          created={item.created}
-          key={item.id}
+          title={title}
+          content={content}
+          twitterName={twitterName}
+          created={created}
+          key={id}
         />
       ))}
     </>
