@@ -42,6 +42,7 @@ const Twitters = () => (
     <>
       {twitters.map((item) => (
         <Card
+          id={item.id}
           cardType="twitters"
           title={item.title}
           content={item.content}

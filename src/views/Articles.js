@@ -42,6 +42,7 @@ const Articles = () => (
     <>
       {articles.map((item) => (
         <Card
+          id={item.id}
           cardType="articles"
           title={item.title}
           content={item.content}
