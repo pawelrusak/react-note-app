@@ -32,7 +32,8 @@
         ] 
       }
     ],
-    "react/react-in-jsx-scope": 0
+    "react/react-in-jsx-scope": 0,
+    "react/state-in-constructor": [2, "never"]
   },
   "settings": {
     "import/resolver": {
