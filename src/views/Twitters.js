@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 const Twitters = ({ twitters }) => (
-  <GridTemplate pageType="twitters">
+  <GridTemplate>
     <>
       {twitters.map(({ id, title, content, twitterName, created }) => (
         <Card
