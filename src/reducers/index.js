@@ -101,7 +101,22 @@ const initialState = {
   ],
 };
 
-// eslint-disable-next-line no-unused-vars
-const rootReducer = (state = initialState, action) => state;
+const rootReducer = (state = initialState, action) => {
+  /* eslint-disable no-unreachable */
+  switch (action.type) {
+    case 'REMOVE_ITEM':
+      return {
+        ...state,
+        [action.payload.itemType]: [
+          ...state[action.payload.itemType].filter((item) => item.id !== action.payload.id),
+        ],
+      };
+      break;
+    default:
+      return state;
+      break;
+  }
+  /* eslint-allow no-unreachable */
+};
 
 export default rootReducer;
