@@ -1,4 +1,5 @@
 import { v4 as getUuid } from 'uuid';
+import { ADD_ITEM, REMOVE_ITEM } from 'actions';
 
 const initialState = {
   twitters: [
@@ -103,12 +104,12 @@ const initialState = {
 
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
-    case 'ADD_ITEM':
+    case ADD_ITEM:
       return {
         ...state,
         [action.payload.itemType]: [...state[action.payload.itemType], action.payload.item],
       };
-    case 'REMOVE_ITEM':
+    case REMOVE_ITEM:
       return {
         ...state,
         [action.payload.itemType]: [
