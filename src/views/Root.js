@@ -7,12 +7,14 @@ import { routes } from 'routes';
 import { Provider } from 'react-redux';
 import store from 'store';
 import DetailsPage from './DetailsPage';
+import LoginPage from './LoginPage';
 
 const Root = () => (
   <Provider store={store}>
     <BrowserRouter>
       <MainTemplate>
         <Switch>
+          <Route exact path={routes.login} component={LoginPage} />
           <Route exact path={routes.home} render={() => <Redirect to="/notes" />} />
           <Route exact path={routes.notes} component={Notes} />
           <Route path={routes.note} component={DetailsPage} />
