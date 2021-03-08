@@ -4,8 +4,10 @@ import AuthTemplate from 'templates/AuthTemplate';
 import Heading from 'components/atoms/Heading/Heading';
 import Input from 'components/atoms/Input/Input';
 import Button from 'components/atoms/Button/Button';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import { routes } from 'routes';
+import { connect } from 'react-redux';
+import { authenticate as authenticateAction } from 'actions';
 
 const StyledForm = styled(Form)`
   display: flex;
@@ -29,42 +31,60 @@ const StyledLink = styled(Link)`
   margin: 20px 0 50px;
 `;
 
-const LoginPage = () => (
+/**
+ * @todo Change name and type of the username field after finish the course.
+ */
+// eslint-disable-next-line react/prop-types
+const LoginPage = ({ userID, authenticate }) => (
   <AuthTemplate>
     <Formik
       initialValues={{ username: '', password: '' }}
       // eslint-disable-next-line no-unused-vars
-      onSubmit={({ username, password }) => {}}
+      onSubmit={({ username, password }) => {
+        // eslint-disable-next-line no-console
+        authenticate(username, password);
+      }}
     >
-      {({ handleChange, handleBlur, values }) => (
-        <>
-          <Heading>Sign in</Heading>
-          <StyledForm>
-            <StyledInput
-              type="text"
-              name="username"
-              placeholder="Login"
-              onChange={handleChange}
-              onBlur={handleBlur}
-              value={values.title}
-            />
-            <StyledInput
-              type="password"
-              name="password"
-              placeholder="Password"
-              onChange={handleChange}
-              onBlur={handleBlur}
-              value={values.title}
-            />
-            <Button activeColor="notes" type="submit">
-              sign in
-            </Button>
-          </StyledForm>
-          <StyledLink to={routes.register}>I want my account!</StyledLink>
-        </>
-      )}
+      {({ handleChange, handleBlur, values }) => {
+        if (userID) {
+          return <Redirect to={routes.home} />;
+        }
+        return (
+          <>
+            <Heading>Sign in</Heading>
+            <StyledForm>
+              <StyledInput
+                type="text"
+                name="username"
+                placeholder="Login"
+                onChange={handleChange}
+                onBlur={handleBlur}
+                value={values.title}
+              />
+              <StyledInput
+                type="password"
+                name="password"
+                placeholder="Password"
+                onChange={handleChange}
+                onBlur={handleBlur}
+                value={values.title}
+              />
+              <Button activeColor="notes" type="submit">
+                sign in
+              </Button>
+            </StyledForm>
+            <StyledLink to={routes.register}>I want my account!</StyledLink>
+          </>
+        );
+      }}
     </Formik>
   </AuthTemplate>
 );
 
-export default LoginPage;
+const mapStateToProps = ({ userID = null }) => ({ userID });
+
+const mapDispatchToProps = (dispatch) => ({
+  authenticate: (username, password) => dispatch(authenticateAction(username, password)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(LoginPage);
