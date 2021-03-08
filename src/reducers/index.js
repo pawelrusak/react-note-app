@@ -1,5 +1,5 @@
 import { v4 as getUuid } from 'uuid';
-import { ADD_ITEM, REMOVE_ITEM } from 'actions';
+import { ADD_ITEM, REMOVE_ITEM, AUTH_SUCCESS } from 'actions';
 
 const initialState = {
   twitters: [
@@ -104,6 +104,16 @@ const initialState = {
 
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
+    /**
+     * You can find the original code of the course in the link below.
+     *
+     * @see {@link https://github.com/eduwebpl/kurs-react-w-praktyce/blob/ecdbd720fa8e84f853b127293328f6addaf2c587/06/src/reducers/index.js#L106-L110 }
+     */
+    case AUTH_SUCCESS:
+      return {
+        ...state,
+        userID: action.payload.user.uid,
+      };
     case ADD_ITEM:
       return {
         ...state,
