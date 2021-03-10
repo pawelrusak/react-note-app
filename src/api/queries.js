@@ -1,4 +1,4 @@
 import { db } from './firebase';
 
-export const queryNotesByTypeAndUserID = (type, userID = null) =>
+export const queryItemsByTypeAndUserID = (type, userID = null) =>
   db.collection('notes').where('userID', '==', userID).where('type', '==', type).get();
