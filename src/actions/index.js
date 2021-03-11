@@ -1,11 +1,39 @@
 import { v4 as getUuid } from 'uuid';
-import { authenticateUser } from 'api';
+import { authenticateUser, fetchItems as fetchRemoteItems } from 'api';
 
 export const REMOVE_ITEM = 'REMOVE_ITEM';
 export const ADD_ITEM = 'ADD_ITEM';
+
 export const AUTH_REQUEST = 'AUTH_REQUEST';
 export const AUTH_SUCCESS = 'AUTH_SUCCESS';
 export const AUTH_FAILURE = 'AUTH_FAILURE';
+
+export const FETCH_REQUEST = 'FETCH_REQUEST';
+export const FETCH_SUCCESS = 'FETCH_SUCCESS';
+export const FETCH_FAILURE = 'FETCH_FAILURE';
+
+/**
+ * You can find the original code in the link below
+ *
+ * @see {@link https://github.com/eduwebpl/kurs-react-w-praktyce/blob/a54a88872b762b772252d26b0373ae3b66248895/06/src/actions/index.js#L14-L30}
+ */
+export const fetchItems = (itemType) => (dispatch, getState) => {
+  dispatch({ type: FETCH_REQUEST });
+
+  return fetchRemoteItems({ type: itemType, userID: getState().userID })
+    .then(({ data }) => {
+      dispatch({
+        type: FETCH_SUCCESS,
+        payload: {
+          data,
+          itemType,
+        },
+      });
+    })
+    .catch(() => {
+      dispatch({ type: FETCH_FAILURE });
+    });
+};
 
 export const removeItem = (itemType, id) => ({
   type: REMOVE_ITEM,
