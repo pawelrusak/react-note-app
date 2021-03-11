@@ -9,7 +9,16 @@ import {
   FETCH_FAILURE,
 } from 'actions';
 
-const initialState = {};
+const initialState = {
+  /**
+   * You can find the original code of the course in the link below.
+   *
+   * @deprecated This hard code userID property value will be removing in future
+   *
+   * @see {@link https://github.com/eduwebpl/kurs-react-w-praktyce/blob/ce05514413ce0d022623870c7327ca4fe7dea0d5/06/src/reducers/index.js#L4}
+   */
+  userID: process.env.REACT_APP_TEMPORARY_USER_ID,
+};
 
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
