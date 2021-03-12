@@ -1,6 +1,7 @@
 import {
   ADD_ITEM,
-  REMOVE_ITEM,
+  // REMOVE_ITEM_REQUEST,
+  REMOVE_ITEM_SUCCESS,
   AUTH_SUCCESS,
   // eslint-disable-next-line
   FETCH_REQUEST,
@@ -42,7 +43,7 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         [action.payload.itemType]: [...state[action.payload.itemType], action.payload.item],
       };
-    case REMOVE_ITEM:
+    case REMOVE_ITEM_SUCCESS:
       return {
         ...state,
         [action.payload.itemType]: [

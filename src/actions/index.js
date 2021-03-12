@@ -1,8 +1,15 @@
 import { v4 as getUuid } from 'uuid';
-import { authenticateUser, fetchItems as fetchRemoteItems } from 'api';
+import {
+  authenticateUser,
+  fetchItems as fetchRemoteItems,
+  removeItem as removeRemoteItems,
+} from 'api';
 
-export const REMOVE_ITEM = 'REMOVE_ITEM';
 export const ADD_ITEM = 'ADD_ITEM';
+
+export const REMOVE_ITEM_REQUEST = 'REMOVE_ITEM_REQUEST';
+export const REMOVE_ITEM_SUCCESS = 'REMOVE_ITEM_SUCCESS';
+export const REMOVE_ITEM_FAILURE = 'REMOVE_ITEM_FAILURE';
 
 export const AUTH_REQUEST = 'AUTH_REQUEST';
 export const AUTH_SUCCESS = 'AUTH_SUCCESS';
@@ -35,13 +42,21 @@ export const fetchItems = (itemType) => (dispatch, getState) => {
     });
 };
 
-export const removeItem = (itemType, id) => ({
-  type: REMOVE_ITEM,
-  payload: {
-    itemType,
-    id,
-  },
-});
+export const removeItem = (itemType, id) => (dispatch) => {
+  dispatch({ type: REMOVE_ITEM_REQUEST });
+
+  removeRemoteItems(id)
+    .then(() => {
+      dispatch({
+        type: REMOVE_ITEM_SUCCESS,
+        payload: {
+          itemType,
+          id,
+        },
+      });
+    })
+    .catch(() => dispatch({ type: REMOVE_ITEM_FAILURE }));
+};
 
 export const addItem = (itemType, itemContent) => ({
   type: ADD_ITEM,
