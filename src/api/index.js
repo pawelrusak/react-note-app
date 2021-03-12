@@ -1,5 +1,5 @@
 import { convertQuerySnapshot, convertQuerySnapshotItem } from 'utils';
-import { queryItemsByTypeAndUserID, queryItemByID } from './queries';
+import { queryItemsByTypeAndUserID, queryItemByID, queryRemoveItemByID } from './queries';
 import { auth } from './firebase';
 
 export const authenticateUser = (email, password) =>
@@ -22,6 +22,16 @@ export const fetchItem = async (id) => {
     const data = convertQuerySnapshotItem(querySnapshotResponse);
 
     return Promise.resolve({ data });
+  } catch (error) {
+    return Promise.reject(error);
+  }
+};
+
+export const removeItem = async (id) => {
+  try {
+    const response = await queryRemoveItemByID(id);
+
+    return Promise.resolve(response);
   } catch (error) {
     return Promise.reject(error);
   }
