@@ -3,7 +3,6 @@ import {
   // REMOVE_ITEM_REQUEST,
   REMOVE_ITEM_SUCCESS,
   AUTH_SUCCESS,
-  // eslint-disable-next-line
   FETCH_REQUEST,
   FETCH_SUCCESS,
   // eslint-disable-next-line
@@ -19,13 +18,20 @@ const initialState = {
    * @see {@link https://github.com/eduwebpl/kurs-react-w-praktyce/blob/ce05514413ce0d022623870c7327ca4fe7dea0d5/06/src/reducers/index.js#L4}
    */
   userID: process.env.REACT_APP_TEMPORARY_USER_ID,
+  isLoading: false,
 };
 
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
+    case FETCH_REQUEST:
+      return {
+        ...state,
+        isLoading: true,
+      };
     case FETCH_SUCCESS:
       return {
         ...state,
+        isLoading: false,
         [action.payload.itemType]: [...action.payload.data],
       };
     /**
