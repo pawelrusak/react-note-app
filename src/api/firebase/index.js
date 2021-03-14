@@ -7,3 +7,6 @@ firebase.initializeApp(config);
 
 export const auth = firebase.auth();
 export const db = firebase.firestore();
+export const {
+  FieldValue: { serverTimestamp },
+} = firebase.firestore;
