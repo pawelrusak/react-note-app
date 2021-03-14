@@ -1,11 +1,13 @@
-import { v4 as getUuid } from 'uuid';
 import {
   authenticateUser,
   fetchItems as fetchRemoteItems,
   removeItem as removeRemoteItems,
+  addItem as addRemoteItems,
 } from 'api';
 
-export const ADD_ITEM = 'ADD_ITEM';
+export const ADD_ITEM_REQUEST = 'ADD_ITEM_REQUEST';
+export const ADD_ITEM_SUCCESS = 'ADD_ITEM_SUCCESS';
+export const ADD_ITEM_FAILURE = 'ADD_ITEM_FAILURE';
 
 export const REMOVE_ITEM_REQUEST = 'REMOVE_ITEM_REQUEST';
 export const REMOVE_ITEM_SUCCESS = 'REMOVE_ITEM_SUCCESS';
@@ -58,16 +60,32 @@ export const removeItem = (itemType, id) => (dispatch) => {
     .catch(() => dispatch({ type: REMOVE_ITEM_FAILURE }));
 };
 
-export const addItem = (itemType, itemContent) => ({
-  type: ADD_ITEM,
-  payload: {
-    itemType,
-    item: {
-      id: getUuid(),
-      ...itemContent,
-    },
-  },
-});
+/**
+ * You can find the original code in the link below
+ *
+ * @see {@link https://github.com/eduwebpl/kurs-react-w-praktyce/blob/1144f53bbb0014406bb97cc03801b0bcf4a3ed97/06/src/actions/index.js#L82-L104}
+ */
+export const addItem = (itemType, itemContent) => (dispatch, getState) => {
+  dispatch({ type: ADD_ITEM_REQUEST });
+
+  addRemoteItems({
+    type: itemType,
+    userID: getState().userID,
+    ...itemContent,
+  })
+    .then(({ data }) => {
+      dispatch({
+        type: ADD_ITEM_SUCCESS,
+        payload: {
+          itemType,
+          data,
+        },
+      });
+    })
+    .catch(() => {
+      dispatch({ type: ADD_ITEM_FAILURE });
+    });
+};
 
 /**
  * Simulate original course code by Firebase
