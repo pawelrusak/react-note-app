@@ -1,7 +1,7 @@
 import Button from './Button';
 
 export default {
-  title: 'Atoms/XButton',
+  title: 'Atoms/Button',
   component: Button,
   args: {
     secondary: false,
