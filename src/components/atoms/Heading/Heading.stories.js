@@ -7,8 +7,8 @@ export default {
 
 const Template = (args) => <Heading {...args}>Hello, World!</Heading>;
 
-export const Normal = Template.bind({});
-Normal.args = {
+export const Default = Template.bind({});
+Default.args = {
   big: false,
 };
 
