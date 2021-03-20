@@ -1,7 +1,7 @@
 import Button from './Button';
 
 export default {
-  title: 'Atoms/Button',
+  title: 'Atoms/XButton',
   component: Button,
   args: {
     secondary: false,
@@ -21,9 +21,19 @@ export default {
 
 const Template = (args) => <Button {...args}>Hello World</Button>;
 
-export const Primary = Template.bind({});
-Primary.args = {
+export const Note = Template.bind({});
+Note.args = {
   activeColor: 'notes',
+};
+
+export const Twitter = Template.bind({});
+Twitter.args = {
+  activeColor: 'twitters',
+};
+
+export const Article = Template.bind({});
+Article.args = {
+  activeColor: 'articles',
 };
 
 export const Secondary = Template.bind({});
