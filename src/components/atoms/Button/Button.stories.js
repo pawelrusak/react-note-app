@@ -19,7 +19,7 @@ export default {
   },
 };
 
-const Template = (args) => <Button {...args}>Hello World</Button>;
+const Template = (args) => <Button {...args}>Hello, World!</Button>;
 
 export const Note = Template.bind({});
 Note.args = {
