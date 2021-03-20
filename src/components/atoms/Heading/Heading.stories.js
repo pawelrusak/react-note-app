@@ -5,7 +5,7 @@ export default {
   component: Heading,
 };
 
-const Template = (args) => <Heading {...args}>Hello, World</Heading>;
+const Template = (args) => <Heading {...args}>Hello, World!</Heading>;
 
 export const Normal = Template.bind({});
 Normal.args = {
