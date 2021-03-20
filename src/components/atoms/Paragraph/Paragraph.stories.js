@@ -5,7 +5,7 @@ export default {
   component: Paragraph,
 };
 
-export const Normal = () => <Paragraph>Hello, World!</Paragraph>;
-Normal.parameters = {
+export const Default = () => <Paragraph>Hello, World!</Paragraph>;
+Default.parameters = {
   controls: { hideNoControlsWarning: true },
 };
