@@ -1,4 +1,6 @@
+import { Provider } from 'react-redux';
 import styled from 'styled-components';
+import store from 'store';
 import Card from './Card';
 
 const CardWrapper = styled.div`
@@ -16,6 +18,11 @@ export default {
        trumpeter, bandleader, and composer.`,
   },
   decorators: [
+    (Story) => (
+      <Provider store={store}>
+        <Story />
+      </Provider>
+    ),
     (Story) => (
       <CardWrapper>
         <Story style={{ zIndex: 2 }} />
