@@ -35,16 +35,13 @@ export default {
 const Template = (args) => <Card {...args} />;
 
 export const Note = Template.bind({});
-Note.args = {
-  cardType: 'notes',
-};
+Note.args = {};
 Note.parameters = {
   pageContext: 'notes',
 };
 
 export const Twitter = Template.bind({});
 Twitter.args = {
-  cardType: 'twitters',
   twitterName: 'hello_romans',
 };
 Twitter.parameters = {
@@ -53,7 +50,6 @@ Twitter.parameters = {
 
 export const Article = Template.bind({});
 Article.args = {
-  cardType: 'articles',
   articleUrl: 'https://youtube.com/helloroman',
 };
 Article.parameters = {
