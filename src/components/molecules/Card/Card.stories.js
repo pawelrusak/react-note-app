@@ -38,15 +38,24 @@ export const Note = Template.bind({});
 Note.args = {
   cardType: 'notes',
 };
+Note.parameters = {
+  pageContext: 'notes',
+};
 
 export const Twitter = Template.bind({});
 Twitter.args = {
   cardType: 'twitters',
   twitterName: 'hello_romans',
 };
+Twitter.parameters = {
+  pageContext: 'twitters',
+};
 
 export const Article = Template.bind({});
 Article.args = {
   cardType: 'articles',
   articleUrl: 'https://youtube.com/helloroman',
+};
+Article.parameters = {
+  pageContext: 'articles',
 };
