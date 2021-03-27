@@ -1,10 +1,11 @@
+import StoryRouter from 'storybook-react-router';
 import Card from './Card';
 import { StoreDecorator, CardWrapperDecorator } from '../../../../.storybook/decorators';
 
 export default {
   title: 'Molecules/Card',
   component: Card,
-  decorators: [StoreDecorator, CardWrapperDecorator],
+  decorators: [StoryRouter(), StoreDecorator, CardWrapperDecorator],
 };
 
 const Template = (args) => <Card {...args} />;
