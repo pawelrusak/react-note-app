@@ -10,3 +10,18 @@ export default {
 const Template = (args) => <Sidebar {...args} />;
 
 export const Default = Template.bind({});
+
+export const Note = Template.bind({});
+Note.parameters = {
+  pageContext: 'notes',
+};
+
+export const Twitter = Template.bind({});
+Twitter.parameters = {
+  pageContext: 'twitters',
+};
+
+export const Article = Template.bind({});
+Article.parameters = {
+  pageContext: 'articles',
+};
