@@ -1,7 +1,8 @@
 import { linkTo } from '@storybook/addon-links';
+import { routes } from '../src/routes';
 
 export const sidebarLinks = {
-  '/notes': linkTo('Organisms/Sidebar', 'Note'),
-  '/articles': linkTo('Organisms/Sidebar', 'Article'),
-  '/twitters': linkTo('Organisms/Sidebar', 'Twitter'),
+  [routes.notes]: linkTo('Organisms/Sidebar', 'Note'),
+  [routes.articles]: linkTo('Organisms/Sidebar', 'Article'),
+  [routes.twitters]: linkTo('Organisms/Sidebar', 'Twitter'),
 };
