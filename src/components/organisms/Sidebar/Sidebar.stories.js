@@ -9,4 +9,4 @@ export default {
 
 const Template = (args) => <Sidebar {...args} />;
 
-export const Normal = Template.bind({});
+export const Default = Template.bind({});
