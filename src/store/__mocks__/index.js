@@ -23,6 +23,12 @@ const initialState = {
       articleUrl: 'https://youtube.com/helloroman',
     },
   ],
+  twitters: [
+    {
+      ...sampleNote,
+      twitterName: 'hello_romans',
+    },
+  ],
 };
 const store = mockStore(initialState);
 
