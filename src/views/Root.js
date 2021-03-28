@@ -1,7 +1,7 @@
 import MainTemplate from 'templates/MainTemplate';
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 import Notes from 'views/Notes';
-import Articles from 'views/Articles';
+import Articles from 'views/Articles/Articles';
 import Twitters from 'views/Twitters';
 import { routes } from 'routes';
 import { Provider } from 'react-redux';
