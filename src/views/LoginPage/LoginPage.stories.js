@@ -6,9 +6,6 @@ export default {
   title: 'Views/LoginPage',
   component: LoginPage,
   decorators: [StoryRouter(), StoreDecorator],
-  parameters: {
-    controls: { hideNoControlsWarning: true },
-  },
 };
 
 const Template = (args) => <LoginPage {...args} />;

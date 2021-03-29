@@ -15,7 +15,6 @@ export default {
   decorators: [StoryRouter(itemsPageLinks, { initialEntries: [routes.notes] }), StoreDecorator],
   parameters: {
     pageContext: 'notes',
-    controls: { hideNoControlsWarning: true },
   },
 };
 

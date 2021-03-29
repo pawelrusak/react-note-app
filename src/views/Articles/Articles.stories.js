@@ -15,7 +15,6 @@ export default {
   decorators: [StoryRouter(itemsPageLinks, { initialEntries: [routes.articles] }), StoreDecorator],
   parameters: {
     pageContext: 'articles',
-    controls: { hideNoControlsWarning: true },
   },
 };
 

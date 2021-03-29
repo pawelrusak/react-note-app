@@ -6,6 +6,3 @@ export default {
 };
 
 export const Default = () => <Paragraph>Hello, World!</Paragraph>;
-Default.parameters = {
-  controls: { hideNoControlsWarning: true },
-};
