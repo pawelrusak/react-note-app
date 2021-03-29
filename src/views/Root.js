@@ -6,7 +6,7 @@ import store from 'store';
 import Notes from './Notes/Notes';
 import Articles from './Articles/Articles';
 import Twitters from './Twitters/Twitters';
-import DetailsPage from './DetailsPage';
+import DetailsPage from './DetailsPage/DetailsPage';
 import LoginPage from './LoginPage/LoginPage';
 import RegisterPage from './RegisterPage/RegisterPage';
 
