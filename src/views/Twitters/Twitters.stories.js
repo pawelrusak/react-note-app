@@ -1,6 +1,8 @@
 import StoryRouter from 'storybook-react-router';
+import { routes } from 'routes';
 import Twitters from './Twitters';
 import { StoreDecorator } from '../../../.storybook/decorators';
+import { itemsPageLinks } from '../../../.storybook/links';
 
 export default {
   title: 'Views/Twitters',
@@ -10,7 +12,7 @@ export default {
       control: null,
     },
   },
-  decorators: [StoryRouter(), StoreDecorator],
+  decorators: [StoryRouter(itemsPageLinks, { initialEntries: [routes.twitters] }), StoreDecorator],
   parameters: {
     pageContext: 'twitters',
     controls: { hideNoControlsWarning: true },

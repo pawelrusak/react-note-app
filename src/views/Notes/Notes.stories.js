@@ -1,6 +1,8 @@
 import StoryRouter from 'storybook-react-router';
+import { routes } from 'routes';
 import Notes from './Notes';
 import { StoreDecorator } from '../../../.storybook/decorators';
+import { itemsPageLinks } from '../../../.storybook/links';
 
 export default {
   title: 'Views/Notes',
@@ -10,7 +12,7 @@ export default {
       control: null,
     },
   },
-  decorators: [StoryRouter(), StoreDecorator],
+  decorators: [StoryRouter(itemsPageLinks, { initialEntries: [routes.notes] }), StoreDecorator],
   parameters: {
     pageContext: 'notes',
     controls: { hideNoControlsWarning: true },
