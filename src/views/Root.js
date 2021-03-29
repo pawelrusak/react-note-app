@@ -8,7 +8,7 @@ import Articles from './Articles/Articles';
 import Twitters from './Twitters/Twitters';
 import DetailsPage from './DetailsPage';
 import LoginPage from './LoginPage/LoginPage';
-import RegisterPage from './RegisterPage';
+import RegisterPage from './RegisterPage/RegisterPage';
 
 const Root = () => (
   <Provider store={store}>
