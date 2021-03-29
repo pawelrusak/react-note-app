@@ -1,11 +1,11 @@
 import MainTemplate from 'templates/MainTemplate';
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
-import Notes from 'views/Notes/Notes';
-import Articles from 'views/Articles/Articles';
-import Twitters from 'views/Twitters/Twitters';
 import { routes } from 'routes';
 import { Provider } from 'react-redux';
 import store from 'store';
+import Notes from './Notes/Notes';
+import Articles from './Articles/Articles';
+import Twitters from './Twitters/Twitters';
 import DetailsPage from './DetailsPage';
 import LoginPage from './LoginPage/LoginPage';
 import RegisterPage from './RegisterPage';
