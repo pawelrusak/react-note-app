@@ -6,3 +6,9 @@ export const sidebarLinks = {
   [routes.articles]: linkTo('Organisms/Sidebar', 'Article'),
   [routes.twitters]: linkTo('Organisms/Sidebar', 'Twitter'),
 };
+
+export const itemsPageLinks = {
+  [routes.notes]: linkTo('Views/Notes'),
+  [routes.articles]: linkTo('Views/Articles'),
+  [routes.twitters]: linkTo('Views/Twitters'),
+};
