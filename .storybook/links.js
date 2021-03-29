@@ -11,4 +11,5 @@ export const itemsPageLinks = {
   [routes.notes]: linkTo('Views/Notes'),
   [routes.articles]: linkTo('Views/Articles'),
   [routes.twitters]: linkTo('Views/Twitters'),
+  [routes.login]: linkTo('Views/LoginPage'),
 };
