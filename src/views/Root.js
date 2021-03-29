@@ -7,7 +7,7 @@ import { routes } from 'routes';
 import { Provider } from 'react-redux';
 import store from 'store';
 import DetailsPage from './DetailsPage';
-import LoginPage from './LoginPage';
+import LoginPage from './LoginPage/LoginPage';
 import RegisterPage from './RegisterPage';
 
 const Root = () => (
