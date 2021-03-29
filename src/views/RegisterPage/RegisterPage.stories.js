@@ -1,11 +1,12 @@
 import StoryRouter from 'storybook-react-router';
 import RegisterPage from './RegisterPage';
 import { StoreDecorator } from '../../../.storybook/decorators';
+import { authPageLinks } from '../../../.storybook/links';
 
 export default {
   title: 'Views/RegisterPage',
   component: RegisterPage,
-  decorators: [StoryRouter(), StoreDecorator],
+  decorators: [StoryRouter(authPageLinks), StoreDecorator],
 };
 
 const Template = (args) => <RegisterPage {...args} />;

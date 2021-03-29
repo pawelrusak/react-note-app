@@ -13,3 +13,8 @@ export const itemsPageLinks = {
   [routes.twitters]: linkTo('Views/Twitters'),
   [routes.login]: linkTo('Views/LoginPage'),
 };
+
+export const authPageLinks = {
+  [routes.login]: linkTo('Views/LoginPage'),
+  [routes.register]: linkTo('Views/RegisterPage'),
+};
