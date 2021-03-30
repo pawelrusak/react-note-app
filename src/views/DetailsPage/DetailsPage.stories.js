@@ -17,14 +17,21 @@ export default {
   title: 'Views/DetailsPage',
   component: DetailsPage,
   decorators: [StoryRouter(), StoreDecorator],
+  argTypes: {
+    pathname: {
+      table: {
+        disable: true,
+      },
+    },
+  },
 };
 
-const Template = ({ route }) => <Route path={route} component={DetailsPage} />;
+const Template = ({ pathname }) => <Route path={pathname} component={DetailsPage} />;
 
 export const Note = Template.bind({});
 Note.decorators = [StoryRouter(itemsPageLinks, { initialEntries: [detailsPageNotePath] })];
 Note.args = {
-  route: routes.note,
+  pathname: routes.note,
 };
 Note.parameters = {
   pageContext: 'notes',
@@ -33,7 +40,7 @@ Note.parameters = {
 export const Twitter = Template.bind({});
 Twitter.decorators = [StoryRouter(itemsPageLinks, { initialEntries: [detailsPageTwitterPath] })];
 Twitter.args = {
-  route: routes.twitter,
+  pathname: routes.twitter,
 };
 Twitter.parameters = {
   pageContext: 'twitters',
@@ -42,7 +49,7 @@ Twitter.parameters = {
 export const Article = Template.bind({});
 Article.decorators = [StoryRouter(itemsPageLinks, { initialEntries: [detailsPageArticlePath] })];
 Article.args = {
-  route: routes.article,
+  pathname: routes.article,
 };
 Article.parameters = {
   pageContext: 'articles',
