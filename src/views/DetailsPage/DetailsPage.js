@@ -1,5 +1,5 @@
 import { Component } from 'react';
-import DetailsTemplate from 'templates/DetailsTemplate';
+import DetailsTemplate from 'templates/DetailsTemplate/DetailsTemplate';
 import withContext from 'hoc/withContext';
 import { connect } from 'react-redux';
 import { fetchItem } from 'api';
