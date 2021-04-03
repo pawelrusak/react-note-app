@@ -18,3 +18,10 @@ export const authPageLinks = {
   [routes.login]: linkTo('Views/LoginPage'),
   [routes.register]: linkTo('Views/RegisterPage'),
 };
+
+export const gridTemplateLinks = {
+  [routes.notes]: linkTo('Templates/GridTemplate', 'Note'),
+  [routes.twitters]: linkTo('Templates/GridTemplate', 'Twitter'),
+  [routes.articles]: linkTo('Templates/GridTemplate', 'Article'),
+  [routes.login]: linkTo('Templates/AuthTemplate'),
+};
