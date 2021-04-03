@@ -1,4 +1,4 @@
-import MainTemplate from 'templates/MainTemplate';
+import MainTemplate from 'templates/MainTemplate/MainTemplate';
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 import { routes } from 'routes';
 import { Provider } from 'react-redux';
