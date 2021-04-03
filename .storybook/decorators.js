@@ -4,7 +4,7 @@ import PageContext from '../src/context';
 import { Provider } from 'react-redux';
 import store from 'store';
 import StoryRouter from 'storybook-react-router';
-import { itemsPageLinks, gridTemplateLinks } from './links';
+import { itemsPageLinks, gridTemplateLinks, userPageTemplateLinks } from './links';
 
 const CardWrapper = styled.div`
   max-width: 45.5rem;
@@ -48,4 +48,8 @@ export const GridTemplateRouterDecorator = (templateGridPathname) => {
   const routerProps =
     templateGridPathname === null ? {} : { initialEntries: [templateGridPathname] };
   return StoryRouter(gridTemplateLinks, routerProps);
+};
+
+export const UserPageTemplateRouterDecorator = (userPagePathname) => {
+  return StoryRouter(userPageTemplateLinks, { initialEntries: [userPagePathname] });
 };
