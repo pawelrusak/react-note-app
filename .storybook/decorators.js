@@ -44,12 +44,10 @@ export const DetailsPageRouterDecorator = (detailsPagePathname) => {
   return StoryRouter(itemsPageLinks, { initialEntries: [detailsPagePath] });
 };
 
-export const GridTemplateRouterDecorator = (templateGridPathname) => {
-  const routerProps =
-    templateGridPathname === null ? {} : { initialEntries: [templateGridPathname] };
-  return StoryRouter(gridTemplateLinks, routerProps);
+export const GridTemplateRouterDecorator = (currentPathname) => {
+  return StoryRouter(gridTemplateLinks, { initialEntries: [currentPathname] });
 };
 
-export const UserPageTemplateRouterDecorator = (userPagePathname) => {
-  return StoryRouter(userPageTemplateLinks, { initialEntries: [userPagePathname] });
+export const UserPageTemplateRouterDecorator = (currentPathname) => {
+  return StoryRouter(userPageTemplateLinks, { initialEntries: [currentPathname] });
 };
