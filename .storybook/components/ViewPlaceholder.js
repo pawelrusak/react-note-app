@@ -15,8 +15,8 @@ const StyledChessboard = styled.div`
     linear-gradient(135deg, ${secondSquareColor} 75%, ${firstSquareColor} 75%);
   background-size: ${squareSize * 2}px ${squareSize * 2}px;
   background-position: 0 0, ${squareSize}px 0, ${squareSize}px -${squareSize}px, 0px ${squareSize}px;
-  height: 100%;
-  width: 100%;
+  min-height: 100%;
+  min-width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
