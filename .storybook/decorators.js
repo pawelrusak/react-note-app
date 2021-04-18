@@ -5,6 +5,7 @@ import { Provider } from 'react-redux';
 import store from 'store';
 import StoryRouter from 'storybook-react-router';
 import { itemsPageLinks, gridTemplateLinks, userPageTemplateLinks } from './links';
+import GlobalStyle from '../src/theme/GlobalStyle';
 
 const CardWrapper = styled.div`
   max-width: 45.5rem;
@@ -14,6 +15,13 @@ export const ThemeDecorator = (Story) => (
   <ThemeProvider theme={theme}>
     <Story />
   </ThemeProvider>
+);
+
+export const GlobalStyleDecorator = (Story) => (
+  <>
+    <GlobalStyle />
+    <Story />
+  </>
 );
 
 export const PageContextDecorator = (Story, { parameters: { pageContext } }) => (
