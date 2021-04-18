@@ -7,8 +7,8 @@ export default {
 
 const Template = (args) => <Input {...args} />;
 
-export const Normal = Template.bind({});
-Normal.args = {
+export const Default = Template.bind({});
+Default.args = {
   placeholder: 'login',
   search: false,
 };

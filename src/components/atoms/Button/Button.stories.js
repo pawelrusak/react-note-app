@@ -1,51 +1,42 @@
 import Button from './Button';
 
-const colors = {
-  Primary: 'hsl(49, 100%, 58%)',
-  Secondary: 'hsl(196, 83%, 75%)',
-  Tertiary: 'hsl(106, 47%, 64%)',
-};
-
 export default {
   title: 'Atoms/Button',
   component: Button,
+  args: {
+    secondary: false,
+  },
   argTypes: {
-    color: {
+    activeColor: {
       control: {
-        type: 'select',
-        options: Object.keys(colors),
+        type: 'inline-radio',
+        options: ['notes', 'twitters', 'articles'],
       },
     },
     secondary: {
-      table: {
-        disable: true,
-      },
+      control: { type: 'boolean' },
     },
   },
 };
 
-const Template = ({ color, ...args }) => {
-  const selectedColor = colors[color];
-  return (
-    <Button color={selectedColor} {...args}>
-      Hello World
-    </Button>
-  );
+const Template = (args) => <Button {...args}>Hello, World!</Button>;
+
+export const Note = Template.bind({});
+Note.args = {
+  activeColor: 'notes',
 };
 
-export const Primary = Template.bind({});
-Primary.args = {
-  secondary: false,
+export const Twitter = Template.bind({});
+Twitter.args = {
+  activeColor: 'twitters',
+};
+
+export const Article = Template.bind({});
+Article.args = {
+  activeColor: 'articles',
 };
 
 export const Secondary = Template.bind({});
 Secondary.args = {
   secondary: true,
-};
-Secondary.argTypes = {
-  color: {
-    table: {
-      disable: true,
-    },
-  },
 };

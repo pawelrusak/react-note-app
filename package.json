@@ -1,6 +1,6 @@
 {
   "name": "react-note-app",
-  "version": "0.15.0",
+  "version": "0.15.1",
   "private": true,
   "description": "Simple React serverless application to manage your notes.",
   "keywords": [
@@ -97,6 +97,7 @@
     "prettier": "^2.2.1",
     "react-redux": "^7.2.2",
     "redux": "^4.0.5",
+    "redux-mock-store": "^1.5.4",
     "storybook-react-router": "^1.0.8"
   }
 }

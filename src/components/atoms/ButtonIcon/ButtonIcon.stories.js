@@ -5,7 +5,13 @@ import plusIcon from 'assets/icons/plus.svg';
 import twitterIcon from 'assets/icons/twitter.svg';
 import ButtonIcon from './ButtonIcon';
 
-const icons = { bulbIcon, logoutIcon, penIcon, plusIcon, twitterIcon };
+const icons = {
+  Bulb: bulbIcon,
+  Logout: logoutIcon,
+  Pen: penIcon,
+  Plus: plusIcon,
+  Twitter: twitterIcon,
+};
 
 export default {
   title: 'Atoms/ButtonIcon',
@@ -13,11 +19,11 @@ export default {
   parameters: {
     layout: 'centered',
     backgrounds: {
-      default: 'Primary',
+      default: 'Note',
       values: [
-        { name: 'Primary', value: 'hsl(49, 100%, 58%)' },
-        { name: 'Secondary', value: 'hsl(196, 83%, 75%)' },
-        { name: 'Tertiary', value: 'hsl(106, 47%, 64%)' },
+        { name: 'Note', value: 'hsl(49, 100%, 58%)' },
+        { name: 'Twitter', value: 'hsl(196, 83%, 75%)' },
+        { name: 'Article', value: 'hsl(106, 47%, 64%)' },
       ],
     },
   },
@@ -27,39 +33,39 @@ export default {
   argTypes: {
     icon: {
       control: {
-        type: 'select',
+        type: 'inline-radio',
         options: Object.keys(icons),
       },
     },
   },
 };
 
-const Template = ({ icon, ...args }) => {
+const Template = ({ icon, active, ...args }) => {
   const selectedIcon = icons[icon];
-  return <ButtonIcon icon={selectedIcon} {...args} />;
+  return <ButtonIcon className={active && 'active'} icon={selectedIcon} {...args} />;
 };
 
 export const Bulb = Template.bind({});
 Bulb.args = {
-  icon: 'bulbIcon',
+  icon: 'Bulb',
 };
 
 export const Logout = Template.bind({});
 Logout.args = {
-  icon: 'logoutIcon',
+  icon: 'Logout',
 };
 
 export const Pen = Template.bind({});
 Pen.args = {
-  icon: 'penIcon',
+  icon: 'Pen',
 };
 
 export const Plus = Template.bind({});
 Plus.args = {
-  icon: 'plusIcon',
+  icon: 'Plus',
 };
 
 export const Twitter = Template.bind({});
 Twitter.args = {
-  icon: 'twitterIcon',
+  icon: 'Twitter',
 };

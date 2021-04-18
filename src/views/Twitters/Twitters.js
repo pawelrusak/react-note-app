@@ -1,5 +1,5 @@
 import { Component } from 'react';
-import GridTemplate from 'templates/GridTemplate';
+import GridTemplate from 'templates/GridTemplate/GridTemplate';
 import Card from 'components/molecules/Card/Card';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';

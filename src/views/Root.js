@@ -1,14 +1,14 @@
-import MainTemplate from 'templates/MainTemplate';
+import MainTemplate from 'templates/MainTemplate/MainTemplate';
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
-import Notes from 'views/Notes';
-import Articles from 'views/Articles';
-import Twitters from 'views/Twitters';
 import { routes } from 'routes';
 import { Provider } from 'react-redux';
 import store from 'store';
-import DetailsPage from './DetailsPage';
-import LoginPage from './LoginPage';
-import RegisterPage from './RegisterPage';
+import Notes from './Notes/Notes';
+import Articles from './Articles/Articles';
+import Twitters from './Twitters/Twitters';
+import DetailsPage from './DetailsPage/DetailsPage';
+import LoginPage from './LoginPage/LoginPage';
+import RegisterPage from './RegisterPage/RegisterPage';
 
 const Root = () => (
   <Provider store={store}>

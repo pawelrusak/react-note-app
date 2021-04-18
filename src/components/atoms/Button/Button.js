@@ -9,7 +9,7 @@ const Button = styled.button`
   padding: 0;
   background-color: ${({ activeColor, theme }) => theme[activeColor]};
   width: 220px;
-  min-height: 47px;
+  height: 47px;
   border: none;
   border-radius: 50px;
   font-family: 'Montserrat';
