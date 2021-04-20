@@ -62,9 +62,17 @@ const DetailsTemplate = ({ pageContext, title, created, content, articleUrl, twi
         <StyledParagraph>{created}</StyledParagraph>
       </StyledPageHeader>
       <Paragraph>{content}</Paragraph>
-      {pageContext === 'articles' && <StyledLink href={articleUrl}>Open article</StyledLink>}
+      {pageContext === 'articles' && (
+        <StyledLink data-testid="article-link" href={articleUrl}>
+          Open article
+        </StyledLink>
+      )}
       {pageContext === 'twitters' && (
-        <StyledImage alt={title} src={`https://unavatar.now.sh/twitter/${twitterName}`} />
+        <StyledImage
+          data-testid="avatar"
+          alt={title}
+          src={`https://unavatar.now.sh/twitter/${twitterName}`}
+        />
       )}
       <Button as={Link} to={`/${pageContext}`} activeColor={pageContext}>
         save / close
