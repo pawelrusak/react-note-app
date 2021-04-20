@@ -15,6 +15,21 @@ const getPairOfPathsAndPageTypes = () => [
   [routes.articles, stripSlashPrefix(routes.articles)],
 ];
 
+const renderWithRouter = (ui, { path = '/', ...renderOptions } = {}) => {
+  window.history.pushState({}, 'Test page', path);
+
+  const Wrapper = ({ children }) => <BrowserRouter>{children}</BrowserRouter>;
+
+  Wrapper.propTypes = {
+    children: PropTypes.node.isRequired,
+  };
+
+  return rtlRender(ui, {
+    wrapper: Wrapper,
+    ...renderOptions,
+  });
+};
+
 const render = (ui, { path = '/', pageType = 'notes', ...renderOptions } = {}) => {
   window.history.pushState({}, 'Test page', path);
 
@@ -43,4 +58,4 @@ const render = (ui, { path = '/', pageType = 'notes', ...renderOptions } = {}) =
 
 export { default as userEvent } from '@testing-library/user-event';
 export * from '@testing-library/react';
-export { render, rtlRender, getPairOfPathsAndPageTypes };
+export { render, rtlRender, renderWithRouter, getPairOfPathsAndPageTypes };
