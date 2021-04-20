@@ -1,31 +1,22 @@
-import { render, screen } from '@testing-library/react';
-import { Router } from 'react-router-dom';
-import { createMemoryHistory } from 'history';
-import { routes } from 'routes';
+import { renderWithRouter, screen, getPairOfPathsAndPageTypes } from 'testUtils';
 import PageContext from 'context';
-import { stripSlashPrefix } from 'utils';
 import MainTemplate from '../MainTemplate/MainTemplate';
 
-const pathsAndPageTypesPair = [
-  [routes.notes, stripSlashPrefix(routes.notes)],
-  [routes.twitters, stripSlashPrefix(routes.twitters)],
-  [routes.articles, stripSlashPrefix(routes.articles)],
-];
+const TestPageContextComponent = () => (
+  <PageContext.Consumer>
+    {(value) => <span data-testid="page-context">{value}</span>}
+  </PageContext.Consumer>
+);
 
 describe('<MainTemplate />', () => {
-  it.each(pathsAndPageTypesPair)(
+  it.each(getPairOfPathsAndPageTypes())(
     'parse the %s URL path and pass "%s" value to the page context consumer',
     (path, pageType) => {
-      const history = createMemoryHistory({ initialEntries: [path] });
-
-      render(
-        <Router history={history}>
-          <MainTemplate>
-            <PageContext.Consumer>
-              {(value) => <span data-testid="page-context">{value}</span>}
-            </PageContext.Consumer>
-          </MainTemplate>
-        </Router>,
+      renderWithRouter(
+        <MainTemplate>
+          <TestPageContextComponent />
+        </MainTemplate>,
+        { path },
       );
 
       expect(screen.getByTestId('page-context').textContent).toBe(pageType);
