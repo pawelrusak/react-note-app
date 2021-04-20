@@ -6,6 +6,14 @@ import PropTypes from 'prop-types';
 import PageContext from 'context';
 import { ThemeProvider } from 'styled-components';
 import { theme } from 'theme/mainTheme';
+import { routes } from 'routes';
+import { stripSlashPrefix } from 'utils';
+
+const getPairOfPathsAndPageTypes = () => [
+  [routes.notes, stripSlashPrefix(routes.notes)],
+  [routes.twitters, stripSlashPrefix(routes.twitters)],
+  [routes.articles, stripSlashPrefix(routes.articles)],
+];
 
 const render = (ui, { path = '/', pageType = 'notes', ...renderOptions } = {}) => {
   window.history.pushState({}, 'Test page', path);
@@ -35,4 +43,4 @@ const render = (ui, { path = '/', pageType = 'notes', ...renderOptions } = {}) =
 
 export { default as userEvent } from '@testing-library/user-event';
 export * from '@testing-library/react';
-export { render, rtlRender };
+export { render, rtlRender, getPairOfPathsAndPageTypes };
