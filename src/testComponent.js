@@ -6,20 +6,27 @@ class TestComponentBuilder {
 
   #componentRender = null;
 
+  #toHave = true;
+
   constructor(name, render) {
     this.#componentName = name;
     this.#componentRender = render;
   }
 
   toBeInTheDocument = (name, element) => {
-    this.#tests.push([true, name, element]);
+    this.#tests.push([this.#toHave, name, element]);
     return this;
   };
 
   NotToBeInTheDocument = (name, element) => {
-    this.#tests.push([false, name, element]);
+    this.#tests.push([!this.#toHave, name, element]);
     return this;
   };
+
+  get not() {
+    this.#toHave = !this.#toHave;
+    return this;
+  }
 
   start = () => {
     this.#tests.forEach(([testToHave, name, element]) => {
