@@ -18,11 +18,6 @@ class TestComponentBuilder {
     return this;
   };
 
-  NotToBeInTheDocument = (name, element) => {
-    this.#tests.push([!this.#toHave, name, element]);
-    return this;
-  };
-
   get not() {
     this.#toHave = !this.#toHave;
     return this;
