@@ -1,40 +1,42 @@
 class TestComponentBuilder {
-  // [toHaveFlag, name, element]
+  // [isInDocument, name, element]
   #tests = [];
 
   #componentName = null;
 
-  #componentRender = null;
+  #renderComponent = null;
 
-  #toHave = true;
+  #isInDocument = false;
 
   constructor(name, render) {
     this.#componentName = name;
-    this.#componentRender = render;
+    this.#renderComponent = render;
   }
 
   toBeInTheDocument = (name, element) => {
-    this.#tests.push([this.#toHave, name, element]);
+    this.#tests.push([!this.#isInDocument, name, element]);
+    this.#isInDocument = false;
     return this;
   };
 
   get not() {
-    this.#toHave = !this.#toHave;
+    this.#isInDocument = !this.#isInDocument;
     return this;
   }
 
   start = () => {
-    this.#tests.forEach(([testToHave, name, element]) => {
-      test(`${this.#componentName} ${testToHave ? 'have' : 'not have'} ${name}`, () => {
-        this.#componentRender();
-        const expectElement = expect(element());
+    this.#tests.forEach(([isInDocument, name, element]) => {
+      test(`${this.#componentName} ${isInDocument ? 'have' : 'not have'} ${name}`, () => {
+        this.#renderComponent();
+        const testedElement = expect(element());
 
-        (testToHave ? expectElement : expectElement.not).toBeInTheDocument();
+        (isInDocument ? testedElement : testedElement.not).toBeInTheDocument();
       });
     });
   };
 }
 
-const testComponent = (name, render) => new TestComponentBuilder(name, render);
+const testComponent = (componentName, renderComponent) =>
+  new TestComponentBuilder(componentName, renderComponent);
 
 export default testComponent;
