@@ -1,5 +1,7 @@
+import TestSet from './testSet';
+
 class TestComponentBuilder {
-  // [isInDocument, name, element]
+  /** @type {TestSet[]} */
   #tests = [];
 
   #componentName = null;
@@ -13,8 +15,18 @@ class TestComponentBuilder {
     this.#renderComponent = render;
   }
 
+  #createTestSet = ({ name, element, isInDocument = this.#isInDocument }) =>
+    new TestSet({
+      name,
+      element,
+      isInDocument,
+    });
+
   toBeInTheDocument = (name, element) => {
-    this.#tests.push([!this.#isInDocument, name, element]);
+    const testSet = this.#createTestSet({ name, element });
+
+    this.#tests.push(testSet);
+
     this.#isInDocument = false;
     return this;
   };
@@ -25,7 +37,7 @@ class TestComponentBuilder {
   }
 
   start = () => {
-    this.#tests.forEach(([isInDocument, name, element]) => {
+    this.#tests.forEach(({ isInDocument, name, element }) => {
       test(`${this.#componentName} ${isInDocument ? 'have' : 'not have'} ${name}`, () => {
         this.#renderComponent();
         const testedElement = expect(element());
