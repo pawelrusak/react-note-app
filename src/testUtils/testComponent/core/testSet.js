@@ -9,6 +9,9 @@ class TestSet {
     this.isInDocument = isInDocument;
     this.name = name;
     this.element = element;
+    /** @type {AttributeTestSet[]} */
+    this.elementAttributeTests = [];
+
     Object.freeze(this);
   }
 }

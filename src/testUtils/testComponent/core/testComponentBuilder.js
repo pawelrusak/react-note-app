@@ -1,4 +1,5 @@
 import TestSet from './testSet';
+import AttributeTestSet from './attributeTestSet';
 
 class TestComponentBuilder {
   /** @type {TestSet[]} */
@@ -15,12 +16,32 @@ class TestComponentBuilder {
     this.#renderComponent = render;
   }
 
-  #createTestSet = ({ name, element, isInDocument = this.#isInDocument }) =>
+  #createTestSet = ({ name, element, isInDocument = !this.#isInDocument }) =>
     new TestSet({
       name,
       element,
       isInDocument,
     });
+
+  #createAttributeTestSet = ({ attr, value }) => new AttributeTestSet({ attr, value });
+
+  #addAttributesTestSetToCurrentElement = ({ attr, value }) => {
+    const lastTestSet = this.#tests[this.#tests.length - 1];
+
+    // add the attribute test set only when the element is in DOM
+    if (lastTestSet.isInDocument) {
+      const lastTestSetElementAttributeTestSetsReference = lastTestSet.elementAttributeTests;
+      const attributeTestSet = this.#createAttributeTestSet({ attr, value });
+
+      lastTestSetElementAttributeTestSetsReference.push(attributeTestSet);
+    }
+  };
+
+  withAttribute = (attr, value) => {
+    this.#addAttributesTestSetToCurrentElement({ attr, value });
+
+    return this;
+  };
 
   toBeInTheDocument = (name, element) => {
     const testSet = this.#createTestSet({ name, element });
