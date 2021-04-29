@@ -58,13 +58,28 @@ class TestComponentBuilder {
   }
 
   start = () => {
-    this.#tests.forEach(({ isInDocument, name, element }) => {
-      test(`${this.#componentName} ${isInDocument ? 'have' : 'not have'} ${name}`, () => {
-        this.#renderComponent();
-        const testedElement = expect(element());
+    this.#tests.forEach(({ isInDocument, name, element, elementAttributeTests }) => {
+      // check if test sets have the attribute tests
+      if (elementAttributeTests.length) {
+        elementAttributeTests.forEach(({ attr, value }) => {
+          test(`${this.#componentName} ${
+            isInDocument ? 'have' : 'not have'
+          } ${name}, with attribute: ${attr}="${value}"`, () => {
+            this.#renderComponent();
+            const testedElement = expect(element());
 
-        (isInDocument ? testedElement : testedElement.not).toBeInTheDocument();
-      });
+            testedElement.toBeInTheDocument();
+            testedElement.toHaveAttribute(attr, value);
+          });
+        });
+      } else {
+        test(`${this.#componentName} ${isInDocument ? 'have' : 'not have'} ${name}`, () => {
+          this.#renderComponent();
+          const testedElement = expect(element());
+
+          (isInDocument ? testedElement : testedElement.not).toBeInTheDocument();
+        });
+      }
     });
   };
 }
