@@ -5,14 +5,11 @@ class TestComponentBuilder {
   /** @type {TestSet[]} */
   #tests = [];
 
-  #componentName = null;
-
   #renderComponent = null;
 
   #isInDocument = false;
 
-  constructor(name, render) {
-    this.#componentName = name;
+  constructor(render) {
     this.#renderComponent = render;
   }
 
@@ -62,9 +59,10 @@ class TestComponentBuilder {
       // check if test sets have the attribute tests
       if (elementAttributeTests.length) {
         elementAttributeTests.forEach(({ attr, value }) => {
-          test(`${this.#componentName} ${
-            isInDocument ? 'have' : 'not have'
-          } ${name}, with attribute: ${attr}="${value}"`, () => {
+          test(`
+           ${
+             isInDocument ? 'have' : 'not have'
+           } ${name}, with attribute: ${attr}="${value}"`, () => {
             this.#renderComponent();
             const testedElement = expect(element());
 
@@ -73,7 +71,8 @@ class TestComponentBuilder {
           });
         });
       } else {
-        test(`${this.#componentName} ${isInDocument ? 'have' : 'not have'} ${name}`, () => {
+        test(`
+        ${isInDocument ? 'have' : 'not have'} ${name}`, () => {
           this.#renderComponent();
           const testedElement = expect(element());
 
