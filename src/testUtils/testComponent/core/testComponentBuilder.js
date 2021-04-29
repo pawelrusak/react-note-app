@@ -36,7 +36,4 @@ class TestComponentBuilder {
   };
 }
 
-const testComponent = (componentName, renderComponent) =>
-  new TestComponentBuilder(componentName, renderComponent);
-
-export default testComponent;
+export default TestComponentBuilder;
