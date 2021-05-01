@@ -23,7 +23,7 @@
     },
     {
       "files": ["src/**/__tests__/**/*.js", "src/**/?(*.)+(spec|test).js"],
-      "extends": ["plugin:jest/style", "plugin:testing-library/react", "plugin:jest-dom/recommended"],
+      "extends": ["plugin:jest/style", "plugin:jest-formatting/strict", "plugin:testing-library/react", "plugin:jest-dom/recommended"],
       "rules": {
           "react/jsx-props-no-spreading": 0
       }
