@@ -20,6 +20,13 @@
           "react/prop-types": 0,
           "react/jsx-props-no-spreading": 0
       }
+    },
+    {
+      "files": ["src/**/__tests__/**/*.js", "src/**/?(*.)+(spec|test).js"],
+      "extends": ["plugin:jest/style", "plugin:testing-library/react", "plugin:jest-dom/recommended"],
+      "rules": {
+          "react/jsx-props-no-spreading": 0
+      }
     }
   ],
   "rules": {
