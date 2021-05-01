@@ -53,6 +53,10 @@ class TestComponentBuilder {
     this.#isInDocument = !this.#isInDocument;
     return this;
   }
+
+  get = () => this.#tests;
+
+  getRenderComponent = () => this.#renderComponent();
 }
 
 export default TestComponentBuilder;
