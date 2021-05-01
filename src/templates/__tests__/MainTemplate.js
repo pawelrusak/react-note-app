@@ -19,7 +19,7 @@ describe('<MainTemplate />', () => {
         { path },
       );
 
-      expect(screen.getByTestId('page-context').textContent).toBe(pageType);
+      expect(screen.getByTestId('page-context')).toHaveTextContent(pageType);
     },
   );
 });

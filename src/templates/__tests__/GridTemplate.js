@@ -48,9 +48,13 @@ describe('<GridTemplate />', () => {
     const openBarButton = screen.getAllByRole('button')[0];
 
     expect(newItemBar).not.toBeVisible();
+
     userEvent.click(openBarButton);
+
     expect(newItemBar).toBeVisible();
+
     userEvent.click(openBarButton);
+
     expect(newItemBar).not.toBeVisible();
   });
 
@@ -68,9 +72,13 @@ describe('<GridTemplate />', () => {
     const openBarButton = screen.getAllByRole('button')[0];
 
     expect(newItemBar).toHaveStyle('transform: translate(100%)');
+
     userEvent.click(openBarButton);
+
     expect(newItemBar).toHaveStyle('transform: translate(0)');
+
     userEvent.click(openBarButton);
+
     expect(newItemBar).toHaveStyle('transform: translate(100%)');
   });
 

@@ -6,7 +6,6 @@ const getDetailsTemplateElements = () => ({
   avatar: screen.queryByTestId('avatar'),
 });
 
-/* eslint-disable react/jsx-props-no-spreading */
 describe('<DetailsTemplate />', () => {
   afterEach(cleanup);
 
@@ -29,7 +28,6 @@ describe('<DetailsTemplate />', () => {
     const { articleLink, avatar } = getDetailsTemplateElements();
 
     expect(articleLink).toBeInTheDocument();
-
     expect(articleLink).toHaveAttribute('href', DetailsTemplateStories.Article.args.articleUrl);
     expect(avatar).not.toBeInTheDocument();
   });
