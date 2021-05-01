@@ -25,7 +25,7 @@ class TestComponentBuilder {
   #addAttributesTestSetToCurrentElement = ({ attr, value }) => {
     const lastTestSet = this.#tests[this.#tests.length - 1];
 
-    // add the attribute test set only when the element is in DOM
+    // add the attribute test set only when the element is in the DOM
     if (lastTestSet.isInDocument) {
       const lastTestSetElementAttributeTestSetsReference = lastTestSet.elementAttributeTests;
       const attributeTestSet = this.#createAttributeTestSet({ attr, value });
@@ -53,34 +53,6 @@ class TestComponentBuilder {
     this.#isInDocument = !this.#isInDocument;
     return this;
   }
-
-  start = () => {
-    this.#tests.forEach(({ isInDocument, name, element, elementAttributeTests }) => {
-      // check if test sets have the attribute tests
-      if (elementAttributeTests.length) {
-        elementAttributeTests.forEach(({ attr, value }) => {
-          test(`
-           ${
-             isInDocument ? 'have' : 'not have'
-           } ${name}, with attribute: ${attr}="${value}"`, () => {
-            this.#renderComponent();
-            const testedElement = expect(element());
-
-            testedElement.toBeInTheDocument();
-            testedElement.toHaveAttribute(attr, value);
-          });
-        });
-      } else {
-        test(`
-        ${isInDocument ? 'have' : 'not have'} ${name}`, () => {
-          this.#renderComponent();
-          const testedElement = expect(element());
-
-          (isInDocument ? testedElement : testedElement.not).toBeInTheDocument();
-        });
-      }
-    });
-  };
 }
 
 export default TestComponentBuilder;
