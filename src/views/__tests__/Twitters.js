@@ -14,7 +14,7 @@ const renderTwitters = () =>
     store: createStore(rootReducer),
   });
 
-const MocksFetchItems = () =>
+const mocksFetchItems = () =>
   jest.spyOn(actions, 'fetchItems').mockImplementation((itemType) => ({
     type: 'FETCH_SUCCESS',
     payload: {
@@ -23,7 +23,7 @@ const MocksFetchItems = () =>
     },
   }));
 
-const MocksRemoveItems = () =>
+const mocksRemoveItems = () =>
   jest.spyOn(actions, 'removeItem').mockImplementation((itemType, id) => ({
     type: 'REMOVE_ITEM_SUCCESS',
     payload: {
@@ -39,7 +39,7 @@ const getAllByRemoveButtons = () => screen.getAllByRole('button', { name: /remov
 
 describe('<Twitters />', () => {
   it('display the cards with data from store', () => {
-    const mockFetchItems = MocksFetchItems();
+    const mockFetchItems = mocksFetchItems();
 
     renderTwitters();
 
@@ -54,8 +54,8 @@ describe('<Twitters />', () => {
   });
 
   it('delete the first tab after clicking the first remove button', () => {
-    MocksFetchItems();
-    MocksRemoveItems();
+    mocksFetchItems();
+    mocksRemoveItems();
 
     renderTwitters();
 
