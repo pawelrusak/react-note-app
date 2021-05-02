@@ -1,13 +1,23 @@
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
-import store from 'store';
 import PropTypes from 'prop-types';
 import PageContext from 'context';
 import { ThemeProvider } from 'styled-components';
 import { theme } from 'theme/mainTheme';
 import { render as rtlRender } from '@testing-library/react';
+import { createStore, applyMiddleware } from 'redux';
+import thunk from 'redux-thunk';
+import rootReducer from 'reducers';
 
-export const render = (ui, { path = '/', pageType = 'notes', ...renderOptions } = {}) => {
+export const render = (
+  ui,
+  {
+    path = '/',
+    pageType = 'notes',
+    store = createStore(rootReducer, applyMiddleware(thunk)),
+    ...renderOptions
+  } = {},
+) => {
   window.history.pushState({}, 'Test page', path);
 
   const Wrapper = ({ children }) => (
