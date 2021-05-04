@@ -62,6 +62,11 @@ describe('<DetailsPage />', () => {
     expect(queryByNoteItemContentText()).toBeInTheDocument();
   });
 
+  testComponent(() => renderDetailsPage('note'), { suffixTestNames: 'when is note page' })
+    .not.toBeInTheDocument(articleLinkTestName, queryByArticleLink)
+    .not.toBeInTheDocument(twitterAvatarTestName, queryByAvatar)
+    .run();
+
   testComponent(() => renderDetailsPage('article'), { suffixTestNames: 'when is article page' })
     .toBeInTheDocument(articleLinkTestName, queryByArticleLink)
     .withAttribute('href', articleItem.articleUrl)
