@@ -1,24 +1,37 @@
 import { render, screen, userEvent, testComponent } from 'testUtils';
-import { Route } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import { routes } from 'routes';
 import { cleanup } from '@testing-library/react';
 import * as actions from 'actions';
+import PropTypes from 'prop-types';
 import Card from '../Card/Card';
 import * as CardStories from '../Card/Card.stories';
 
-const renderCardByType = (cardType) => {
+const getFakeDetailsPageText = (cardType, cardId) => `${cardType} page with ${cardId}`;
+
+const FakeDetailsPage = ({ cardType, cardId }) => (
+  <div data-testid="fake-details-page">{getFakeDetailsPageText(cardType, cardId)}</div>
+);
+
+FakeDetailsPage.propTypes = {
+  cardId: PropTypes.string.isRequired,
+  cardType: PropTypes.oneOf(['Note', 'Twitter', 'Article']).isRequired,
+};
+
+const renderCard = (cardType) => {
   const cardData = CardStories[cardType]?.args;
   const itemType = cardType.toLowerCase();
   const pageType = `${itemType}s`;
+  const detailsPagePath = routes[itemType].replace(':id', cardData.id);
+
+  const FakeDetailsDataPage = () => <FakeDetailsPage cardType={cardType} cardId={cardData.id} />;
 
   return {
     ...render(
-      <>
-        <Card {...cardData} />
-        <Route path={routes[itemType]}>
-          {cardType} page with {cardData.id}
-        </Route>
-      </>,
+      <Switch>
+        <Route exact path={routes[pageType]} render={() => <Card {...cardData} />} />
+        <Route exact path={detailsPagePath} component={FakeDetailsDataPage} />
+      </Switch>,
       {
         path: routes[pageType],
         pageType,
@@ -28,53 +41,66 @@ const renderCardByType = (cardType) => {
   };
 };
 
+const getByButtonRole = () => screen.getByRole('button');
+const getByCardHeading = () => screen.getByTestId('card-heading-bar');
+const queryByImgRole = () => screen.queryByRole('img');
+const queryByCardArticleLink = () => screen.queryByTestId('card-article-link');
+const queryByFakeDetailsPage = () => screen.queryByTestId('fake-details-page');
+
+const mockRemoveItemAction = () =>
+  jest.spyOn(actions, 'removeItem').mockImplementation(() => ({
+    type: 'TEST',
+  }));
+
 describe('<Card />', () => {
   beforeEach(cleanup);
 
   it.each(['Note', 'Twitter', 'Article'])(
     'redirect to %s details page after click on the card heading',
-    (cardType) => {
-      const { container, cardData } = renderCardByType(cardType);
-      const text = `${cardType} page with ${cardData.id}`;
-      const headingBar = screen.getByTestId('card-heading-bar');
+    async (cardType) => {
+      const { cardData } = renderCard(cardType);
 
-      expect(container).not.toHaveTextContent(text);
+      expect(queryByFakeDetailsPage()).not.toBeInTheDocument();
 
-      userEvent.click(headingBar);
+      userEvent.click(getByCardHeading());
 
-      expect(container).toHaveTextContent(text);
+      expect(queryByFakeDetailsPage()).toBeInTheDocument();
+      expect(queryByFakeDetailsPage()).toHaveTextContent(
+        getFakeDetailsPageText(cardType, cardData.id),
+      );
     },
   );
 
+  /**
+   * @deprecated remove this after write the test for <Notes />, <Twitters />, <Articles />, because they are more complex
+   */
   it('trigger removeItem action with the data of card  when the remove button was clicked', () => {
-    renderCardByType('Note');
+    renderCard('Note');
 
-    const removeItemButton = screen.getByRole('button');
-    const mockRemoveItemReduxAction = jest.spyOn(actions, 'removeItem').mockImplementation(() => ({
-      type: 'TEST',
-    }));
+    const removeItemButton = getByButtonRole();
+    const mockRemoveItem = mockRemoveItemAction();
 
     userEvent.click(removeItemButton);
 
-    expect(mockRemoveItemReduxAction.mock.calls[0]).toMatchInlineSnapshot(`
+    expect(mockRemoveItem.mock.calls[0]).toMatchInlineSnapshot(`
       Array [
         "notes",
         "8885d2d6-b081-4342-8232-e889affa9d93",
       ]
     `);
 
-    mockRemoveItemReduxAction.mockRestore();
+    mockRemoveItem.mockRestore();
   });
 
-  testComponent(() => renderCardByType('Twitter'), { suffixTestNames: 'when is twitter page' })
-    .toBeInTheDocument('avatar', () => screen.queryByRole('img'))
+  testComponent(() => renderCard('Twitter'), { suffixTestNames: 'when is twitter page' })
+    .toBeInTheDocument('avatar', queryByImgRole)
     .withAttribute('src', expect.stringContaining(CardStories.Twitter.args.twitterName))
-    .not.toBeInTheDocument('article link', () => screen.queryByTestId('card-article-link'))
+    .not.toBeInTheDocument('article link', queryByCardArticleLink)
     .run();
 
-  testComponent(() => renderCardByType('Article'), { suffixTestNames: 'when is article page' })
-    .toBeInTheDocument('article link', () => screen.queryByTestId('card-article-link'))
+  testComponent(() => renderCard('Article'), { suffixTestNames: 'when is article page' })
+    .toBeInTheDocument('article link', queryByCardArticleLink)
     .withAttribute('href', CardStories.Article.args.articleUrl)
-    .not.toBeInTheDocument('avatar', () => screen.queryByRole('img'))
+    .not.toBeInTheDocument('avatar', queryByImgRole)
     .run();
 });
