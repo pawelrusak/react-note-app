@@ -47,6 +47,9 @@ const queryByImgRole = () => screen.queryByRole('img');
 const queryByCardArticleLink = () => screen.queryByTestId('card-article-link');
 const queryByFakeDetailsPage = () => screen.queryByTestId('fake-details-page');
 
+const twitterAvatarTestName = 'twitter avatar';
+const articleLinkTestName = 'article link';
+
 const mockRemoveItemAction = () =>
   jest.spyOn(actions, 'removeItem').mockImplementation(() => ({
     type: 'TEST',
@@ -92,15 +95,20 @@ describe('<Card />', () => {
     mockRemoveItem.mockRestore();
   });
 
+  testComponent(() => renderCard('Note'), { suffixTestNames: 'when is note page' })
+    .not.toBeInTheDocument(twitterAvatarTestName, queryByImgRole)
+    .not.toBeInTheDocument(articleLinkTestName, queryByCardArticleLink)
+    .run();
+
   testComponent(() => renderCard('Twitter'), { suffixTestNames: 'when is twitter page' })
-    .toBeInTheDocument('avatar', queryByImgRole)
+    .toBeInTheDocument(twitterAvatarTestName, queryByImgRole)
     .withAttribute('src', expect.stringContaining(CardStories.Twitter.args.twitterName))
-    .not.toBeInTheDocument('article link', queryByCardArticleLink)
+    .not.toBeInTheDocument(articleLinkTestName, queryByCardArticleLink)
     .run();
 
   testComponent(() => renderCard('Article'), { suffixTestNames: 'when is article page' })
-    .toBeInTheDocument('article link', queryByCardArticleLink)
+    .toBeInTheDocument(articleLinkTestName, queryByCardArticleLink)
     .withAttribute('href', CardStories.Article.args.articleUrl)
-    .not.toBeInTheDocument('avatar', queryByImgRole)
+    .not.toBeInTheDocument(twitterAvatarTestName, queryByImgRole)
     .run();
 });
