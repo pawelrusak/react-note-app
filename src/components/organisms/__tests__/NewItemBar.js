@@ -59,9 +59,6 @@ describe('<NewItemBar />', () => {
     .not.toBeInTheDocument(articleLinkInputTestName, queryByLinkPlaceholderText)
     .run();
 
-  /**
-   * @todo rename NewItemBarStories.Articles to NewItemBarStories.Article
-   */
   testComponent(() => renderNewItemBar(routes.articles), {
     suffixTestNames: 'when is article page',
   })
