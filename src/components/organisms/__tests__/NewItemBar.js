@@ -42,6 +42,13 @@ describe('<NewItemBar />', () => {
     expect(mockHandleClose).toHaveBeenCalledTimes(1);
   });
 
+  testComponent(() => renderNewItemBar(routes.notes), {
+    suffixTestNames: 'when is note page',
+  })
+    .not.toBeInTheDocument('twitter name input', queryByTwitterPlaceholderText)
+    .not.toBeInTheDocument('article link input', queryByLinkPlaceholderText)
+    .run();
+
   testComponent(() => renderNewItemBar(routes.twitters), {
     suffixTestNames: 'when is twitter page',
   })
