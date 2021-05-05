@@ -18,6 +18,9 @@ const queryByLinkPlaceholderText = () => screen.queryByPlaceholderText(/link/i);
 const queryAllByButtonRole = () => screen.queryAllByRole('button');
 const getAllByHeadingRole = () => screen.getAllByRole('heading');
 
+const twitterUsernameInputTestName = 'twitter username input';
+const articleLinkInputTestName = 'twitter username input';
+
 describe('<NewItemBar />', () => {
   afterEach(cleanup);
 
@@ -45,15 +48,15 @@ describe('<NewItemBar />', () => {
   testComponent(() => renderNewItemBar(routes.notes), {
     suffixTestNames: 'when is note page',
   })
-    .not.toBeInTheDocument('twitter name input', queryByTwitterPlaceholderText)
-    .not.toBeInTheDocument('article link input', queryByLinkPlaceholderText)
+    .not.toBeInTheDocument(twitterUsernameInputTestName, queryByTwitterPlaceholderText)
+    .not.toBeInTheDocument(articleLinkInputTestName, queryByLinkPlaceholderText)
     .run();
 
   testComponent(() => renderNewItemBar(routes.twitters), {
     suffixTestNames: 'when is twitter page',
   })
-    .toBeInTheDocument('twitter name input', queryByTwitterPlaceholderText)
-    .not.toBeInTheDocument('article link input', queryByLinkPlaceholderText)
+    .toBeInTheDocument(twitterUsernameInputTestName, queryByTwitterPlaceholderText)
+    .not.toBeInTheDocument(articleLinkInputTestName, queryByLinkPlaceholderText)
     .run();
 
   /**
@@ -62,7 +65,7 @@ describe('<NewItemBar />', () => {
   testComponent(() => renderNewItemBar(routes.articles), {
     suffixTestNames: 'when is article page',
   })
-    .toBeInTheDocument('article link input', queryByLinkPlaceholderText)
-    .not.toBeInTheDocument('twitter name input', queryByTwitterPlaceholderText)
+    .toBeInTheDocument(articleLinkInputTestName, queryByLinkPlaceholderText)
+    .not.toBeInTheDocument(twitterUsernameInputTestName, queryByTwitterPlaceholderText)
     .run();
 });
