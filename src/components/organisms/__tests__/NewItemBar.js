@@ -7,19 +7,25 @@ import * as NewItemBarStories from '../NewItemBar/NewItemBar.stories';
 const exampleProps = {
   ...NewItemBarStories.Default.args,
 };
-const getTwitterInput = () => screen.queryByPlaceholderText(/twitter/i);
-const getArticleLinkInput = () => screen.queryByPlaceholderText(/link/i);
+
+const renderNewItemBar = (pageTypeOrPath, handleCloseProp = exampleProps.handleClose) =>
+  render(<NewItemBar {...exampleProps} handleClose={handleCloseProp} />, {
+    pageType: stripSlashPrefix(pageTypeOrPath),
+  });
+
+const queryByTwitterPlaceholderText = () => screen.queryByPlaceholderText(/twitter/i);
+const queryByLinkPlaceholderText = () => screen.queryByPlaceholderText(/link/i);
+const queryAllByButtonRole = () => screen.queryAllByRole('button');
+const getAllByHeadingRole = () => screen.getAllByRole('heading');
 
 describe('<NewItemBar />', () => {
   afterEach(cleanup);
 
   it.each([['notes'], ['twitters'], ['articles']])('display correctly heading', (pageType) => {
-    render(<NewItemBar {...exampleProps} />, {
-      pageType,
-    });
+    renderNewItemBar(pageType);
 
     const newItemBarHeadingContent = pageType;
-    const newBarItemHeading = screen.getByRole('heading');
+    const [newBarItemHeading] = getAllByHeadingRole();
 
     expect(newBarItemHeading).toHaveTextContent(newItemBarHeadingContent);
   });
@@ -27,43 +33,29 @@ describe('<NewItemBar />', () => {
   it('trigger the handleClose prop after submit the form', async () => {
     const mockHandleClose = jest.fn(() => ({}));
 
-    render(<NewItemBar {...exampleProps} handleClose={mockHandleClose} />, {
-      pageType: stripSlashPrefix(routes.notes),
-    });
+    renderNewItemBar(routes.notes, mockHandleClose);
 
-    const submitButton = screen.queryByRole('button');
+    const [submitButton] = queryAllByButtonRole();
 
     await waitFor(() => userEvent.click(submitButton));
 
     expect(mockHandleClose).toHaveBeenCalledTimes(1);
   });
 
-  testComponent(
-    () =>
-      render(<NewItemBar {...exampleProps} />, {
-        pageType: stripSlashPrefix(routes.twitters),
-      }),
-    {
-      suffixTestNames: 'when is twitter page',
-    },
-  )
-    .toBeInTheDocument('twitter name input', () => getTwitterInput())
-    .not.toBeInTheDocument('article link input', () => getArticleLinkInput())
+  testComponent(() => renderNewItemBar(routes.twitters), {
+    suffixTestNames: 'when is twitter page',
+  })
+    .toBeInTheDocument('twitter name input', queryByTwitterPlaceholderText)
+    .not.toBeInTheDocument('article link input', queryByLinkPlaceholderText)
     .run();
 
   /**
    * @todo rename NewItemBarStories.Articles to NewItemBarStories.Article
    */
-  testComponent(
-    () =>
-      render(<NewItemBar {...exampleProps} />, {
-        pageType: stripSlashPrefix(routes.articles),
-      }),
-    {
-      suffixTestNames: 'when is article page',
-    },
-  )
-    .toBeInTheDocument('article link input', () => getArticleLinkInput())
-    .not.toBeInTheDocument('twitter name input', () => getTwitterInput())
+  testComponent(() => renderNewItemBar(routes.articles), {
+    suffixTestNames: 'when is article page',
+  })
+    .toBeInTheDocument('article link input', queryByLinkPlaceholderText)
+    .not.toBeInTheDocument('twitter name input', queryByTwitterPlaceholderText)
     .run();
 });
