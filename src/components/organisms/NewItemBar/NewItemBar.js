@@ -85,6 +85,7 @@ const NewItemBar = ({ pageContext, isVisible, addItem, handleClose }) => (
           <StyledTextArea
             name="content"
             as="textarea"
+            data-testid="new-item-bar-content-textarea"
             onChange={handleChange}
             onBlur={handleBlur}
             value={values.content}
