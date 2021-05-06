@@ -9,3 +9,8 @@ export const convertQuerySnapshotItem = (item) => {
 
 export const convertQuerySnapshot = (querySnapshot) =>
   querySnapshot.docs.map(convertQuerySnapshotItem);
+
+export const stripPrefix = (str, prefix) =>
+  str.startsWith(prefix) ? str.slice(prefix.length) : str;
+
+export const stripSlashPrefix = (str) => stripPrefix(str, '/');

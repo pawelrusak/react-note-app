@@ -98,13 +98,19 @@ class Card extends Component {
 
     return (
       <StyledWrapper>
-        <InnerWrapper onClick={this.handleCardClick} activeColor={pageContext}>
+        <InnerWrapper
+          data-testid="card-heading-bar"
+          onClick={this.handleCardClick}
+          activeColor={pageContext}
+        >
           <StyledHeading>{title}</StyledHeading>
           <DateInfo>{created}</DateInfo>
           {pageContext === 'twitters' && (
             <StyledAvatar src={`https://unavatar.now.sh/twitter/${twitterName}`} />
           )}
-          {pageContext === 'articles' && <StyledLinkButton href={articleUrl} />}
+          {pageContext === 'articles' && (
+            <StyledLinkButton data-testid="card-article-link" href={articleUrl} />
+          )}
         </InnerWrapper>
         <InnerWrapper flex>
           <Paragraph>{content}</Paragraph>

@@ -43,7 +43,7 @@ const StyledInput = styled(Input)`
 `;
 
 const NewItemBar = ({ pageContext, isVisible, addItem, handleClose }) => (
-  <StyledWrapper isVisible={isVisible} activecolor={pageContext}>
+  <StyledWrapper data-testid="new-item-bar" isVisible={isVisible} activecolor={pageContext}>
     <Heading big>Create new {pageContext}</Heading>
     <Formik
       initialValues={{ title: '', content: '', articleUrl: '', twitterName: '', created: '' }}

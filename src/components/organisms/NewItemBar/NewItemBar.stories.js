@@ -11,12 +11,13 @@ const Template = (args) => <NewItemBar {...args} />;
 
 export const Default = Template.bind({});
 Default.args = {
+  handleClose: () => ({}),
   isVisible: true,
 };
 
 export const Note = Template.bind({});
 Note.args = {
-  isVisible: true,
+  ...Default.args,
 };
 Note.parameters = {
   pageContext: 'notes',
@@ -24,7 +25,7 @@ Note.parameters = {
 
 export const Twitter = Template.bind({});
 Twitter.args = {
-  isVisible: true,
+  ...Default.args,
 };
 Twitter.parameters = {
   pageContext: 'twitters',
@@ -32,7 +33,7 @@ Twitter.parameters = {
 
 export const Articles = Template.bind({});
 Articles.args = {
-  isVisible: true,
+  ...Default.args,
 };
 Articles.parameters = {
   pageContext: 'articles',
