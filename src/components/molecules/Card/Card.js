@@ -4,8 +4,7 @@ import Paragraph from 'components/atoms/Paragraph/Paragraph';
 import Heading from 'components/atoms/Heading/Heading';
 import Button from 'components/atoms/Button/Button';
 import LinkIcon from 'assets/icons/link.svg';
-import withContext from 'hoc/withContext';
-import { useHistoryPush, useRemoveItemAction } from 'hooks';
+import { useHistoryPush, useRemoveItemAction, usePageTypeContext } from 'hooks';
 
 const StyledWrapper = styled.div`
   min-height: 380px;
@@ -69,25 +68,26 @@ const StyledLinkButton = styled.a`
   transform: translateY(-50%);
 `;
 
-const Card = ({ id, pageContext, title, created, twitterName, articleUrl, content }) => {
-  const historyPush = useHistoryPush(`${pageContext}/${id}`);
+const Card = ({ id, title, created, twitterName, articleUrl, content }) => {
+  const itemType = usePageTypeContext();
+  const historyPush = useHistoryPush(`${itemType}/${id}`);
   const removeItem = useRemoveItemAction();
 
   return (
     <StyledWrapper>
-      <InnerWrapper data-testid="card-heading-bar" onClick={historyPush} activeColor={pageContext}>
+      <InnerWrapper data-testid="card-heading-bar" onClick={historyPush} activeColor={itemType}>
         <StyledHeading>{title}</StyledHeading>
         <DateInfo>{created}</DateInfo>
-        {pageContext === 'twitters' && (
+        {itemType === 'twitters' && (
           <StyledAvatar src={`https://unavatar.now.sh/twitter/${twitterName}`} />
         )}
-        {pageContext === 'articles' && (
+        {itemType === 'articles' && (
           <StyledLinkButton data-testid="card-article-link" href={articleUrl} />
         )}
       </InnerWrapper>
       <InnerWrapper flex>
         <Paragraph>{content}</Paragraph>
-        <Button onClick={() => removeItem(pageContext, id)} secondary>
+        <Button onClick={() => removeItem(itemType, id)} secondary>
           REMOVE
         </Button>
       </InnerWrapper>
@@ -97,7 +97,6 @@ const Card = ({ id, pageContext, title, created, twitterName, articleUrl, conten
 
 Card.propTypes = {
   id: PropTypes.string.isRequired,
-  pageContext: PropTypes.oneOf(['notes', 'twitters', 'articles']),
   title: PropTypes.string.isRequired,
   created: PropTypes.string.isRequired,
   twitterName: PropTypes.string,
@@ -106,9 +105,8 @@ Card.propTypes = {
 };
 
 Card.defaultProps = {
-  pageContext: 'notes',
   twitterName: null,
   articleUrl: null,
 };
 
-export default withContext(Card);
+export default Card;
