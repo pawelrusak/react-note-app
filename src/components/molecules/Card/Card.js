@@ -1,4 +1,4 @@
-import { Component } from 'react';
+import { useState } from 'react';
 import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 import Paragraph from 'components/atoms/Paragraph/Paragraph';
@@ -72,56 +72,49 @@ const StyledLinkButton = styled.a`
   transform: translateY(-50%);
 `;
 
-class Card extends Component {
-  state = {
-    redirect: false,
-  };
+const Card = ({
+  id,
+  pageContext,
+  title,
+  created,
+  twitterName,
+  articleUrl,
+  content,
+  removeItem,
+}) => {
+  const [redirect, setRedirect] = useState(false);
 
-  handleCardClick = () => this.setState({ redirect: true });
+  const handleCardClick = () => setRedirect(true);
 
-  render() {
-    const {
-      id,
-      pageContext,
-      title,
-      created,
-      twitterName,
-      articleUrl,
-      content,
-      removeItem,
-    } = this.props;
-    const { redirect } = this.state;
-
-    if (redirect) {
-      return <Redirect to={`${pageContext}/${id}`} />;
-    }
-
-    return (
-      <StyledWrapper>
-        <InnerWrapper
-          data-testid="card-heading-bar"
-          onClick={this.handleCardClick}
-          activeColor={pageContext}
-        >
-          <StyledHeading>{title}</StyledHeading>
-          <DateInfo>{created}</DateInfo>
-          {pageContext === 'twitters' && (
-            <StyledAvatar src={`https://unavatar.now.sh/twitter/${twitterName}`} />
-          )}
-          {pageContext === 'articles' && (
-            <StyledLinkButton data-testid="card-article-link" href={articleUrl} />
-          )}
-        </InnerWrapper>
-        <InnerWrapper flex>
-          <Paragraph>{content}</Paragraph>
-          <Button onClick={() => removeItem(pageContext, id)} secondary>
-            REMOVE
-          </Button>
-        </InnerWrapper>
-      </StyledWrapper>
-    );
+  if (redirect) {
+    return <Redirect to={`${pageContext}/${id}`} />;
   }
-}
+
+  return (
+    <StyledWrapper>
+      <InnerWrapper
+        data-testid="card-heading-bar"
+        onClick={handleCardClick}
+        activeColor={pageContext}
+      >
+        <StyledHeading>{title}</StyledHeading>
+        <DateInfo>{created}</DateInfo>
+        {pageContext === 'twitters' && (
+          <StyledAvatar src={`https://unavatar.now.sh/twitter/${twitterName}`} />
+        )}
+        {pageContext === 'articles' && (
+          <StyledLinkButton data-testid="card-article-link" href={articleUrl} />
+        )}
+      </InnerWrapper>
+      <InnerWrapper flex>
+        <Paragraph>{content}</Paragraph>
+        <Button onClick={() => removeItem(pageContext, id)} secondary>
+          REMOVE
+        </Button>
+      </InnerWrapper>
+    </StyledWrapper>
+  );
+};
 
 Card.propTypes = {
   id: PropTypes.string.isRequired,
