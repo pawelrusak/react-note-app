@@ -95,7 +95,7 @@ class GridTemplate extends Component {
 
 GridTemplate.propTypes = {
   pageContext: PropTypes.oneOf(['notes', 'twitters', 'articles']),
-  children: PropTypes.element.isRequired,
+  children: PropTypes.arrayOf(PropTypes.elementType).isRequired,
 };
 
 GridTemplate.defaultProps = {

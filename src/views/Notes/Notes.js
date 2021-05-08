@@ -5,11 +5,9 @@ import PropTypes from 'prop-types';
 
 const Notes = ({ notes }) => (
   <GridTemplate>
-    <>
-      {notes.map(({ id, title, content, created }) => (
-        <Card id={id} cardType="notes" title={title} content={content} created={created} key={id} />
-      ))}
-    </>
+    {notes.map(({ id, title, content, created }) => (
+      <Card id={id} cardType="notes" title={title} content={content} created={created} key={id} />
+    ))}
   </GridTemplate>
 );
 

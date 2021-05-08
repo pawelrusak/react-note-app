@@ -17,19 +17,17 @@ class Twitters extends Component {
 
     return (
       <GridTemplate>
-        <>
-          {twitters.map(({ id, title, content, twitterName, created }) => (
-            <Card
-              id={id}
-              cardType="twitters"
-              title={title}
-              content={content}
-              twitterName={twitterName}
-              created={created}
-              key={id}
-            />
-          ))}
-        </>
+        {twitters.map(({ id, title, content, twitterName, created }) => (
+          <Card
+            id={id}
+            cardType="twitters"
+            title={title}
+            content={content}
+            twitterName={twitterName}
+            created={created}
+            key={id}
+          />
+        ))}
       </GridTemplate>
     );
   }

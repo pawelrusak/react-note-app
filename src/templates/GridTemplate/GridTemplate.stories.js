@@ -10,11 +10,7 @@ export default {
   decorators: [StoreDecorator],
 };
 
-const Template = () => (
-  <GridTemplate>
-    <ViewPlaceholder />
-  </GridTemplate>
-);
+const Template = () => <GridTemplate>{[<ViewPlaceholder />]}</GridTemplate>;
 
 export const Default = Template.bind({});
 Default.decorators = [StoryRouter()];
