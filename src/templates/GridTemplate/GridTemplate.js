@@ -1,4 +1,3 @@
-import { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Input from 'components/atoms/Input/Input';
@@ -9,6 +8,7 @@ import ButtonIcon from 'components/atoms/ButtonIcon/ButtonIcon';
 import NewItemBar from 'components/organisms/NewItemBar/NewItemBar';
 import plusIcon from 'assets/icons/plus.svg';
 import withContext from 'hoc/withContext';
+import { useToggle } from 'hooks';
 
 const StyledWrapper = styled.div`
   position: relative;
@@ -57,41 +57,30 @@ const StyledButtonIcon = styled(ButtonIcon)`
   z-index: 10000;
 `;
 
-class GridTemplate extends Component {
-  state = {
-    isNewItemBarVisible: false,
-  };
+const GridTemplate = ({ children, pageContext }) => {
+  const [newItemBarVisible, toggleNewItemBarVisible] = useToggle();
 
-  toggleNewItemBar = () => {
-    this.setState((prevState) => ({ isNewItemBarVisible: !prevState.isNewItemBarVisible }));
-  };
-
-  render() {
-    const { children, pageContext } = this.props;
-    const { isNewItemBarVisible } = this.state;
-
-    return (
-      <UserPageTemplate>
-        <StyledWrapper>
-          <StyledPageHeader>
-            <Input search placeholder="Search" />
-            <StyledHeading big as="h1">
-              {pageContext}
-            </StyledHeading>
-            <StyledParagraph>6 {pageContext}</StyledParagraph>
-          </StyledPageHeader>
-          <StyledGrid>{children}</StyledGrid>
-          <StyledButtonIcon
-            onClick={this.toggleNewItemBar}
-            icon={plusIcon}
-            activeColor={pageContext}
-          />
-          <NewItemBar handleClose={this.toggleNewItemBar} isVisible={isNewItemBarVisible} />
-        </StyledWrapper>
-      </UserPageTemplate>
-    );
-  }
-}
+  return (
+    <UserPageTemplate>
+      <StyledWrapper>
+        <StyledPageHeader>
+          <Input search placeholder="Search" />
+          <StyledHeading big as="h1">
+            {pageContext}
+          </StyledHeading>
+          <StyledParagraph>6 {pageContext}</StyledParagraph>
+        </StyledPageHeader>
+        <StyledGrid>{children}</StyledGrid>
+        <StyledButtonIcon
+          onClick={toggleNewItemBarVisible}
+          icon={plusIcon}
+          activeColor={pageContext}
+        />
+        <NewItemBar handleClose={toggleNewItemBarVisible} isVisible={newItemBarVisible} />
+      </StyledWrapper>
+    </UserPageTemplate>
+  );
+};
 
 GridTemplate.propTypes = {
   pageContext: PropTypes.oneOf(['notes', 'twitters', 'articles']),
