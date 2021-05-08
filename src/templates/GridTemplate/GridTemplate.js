@@ -84,7 +84,7 @@ const GridTemplate = ({ children, pageContext }) => {
 
 GridTemplate.propTypes = {
   pageContext: PropTypes.oneOf(['notes', 'twitters', 'articles']),
-  children: PropTypes.arrayOf(PropTypes.elementType).isRequired,
+  children: PropTypes.node.isRequired,
 };
 
 GridTemplate.defaultProps = {
