@@ -4,10 +4,8 @@ import Paragraph from 'components/atoms/Paragraph/Paragraph';
 import Heading from 'components/atoms/Heading/Heading';
 import Button from 'components/atoms/Button/Button';
 import LinkIcon from 'assets/icons/link.svg';
-import { connect } from 'react-redux';
-import { removeItem as removeItemAction } from 'actions';
 import withContext from 'hoc/withContext';
-import { useHistoryPush } from 'hooks';
+import { useHistoryPush, useRemoveItemAction } from 'hooks';
 
 const StyledWrapper = styled.div`
   min-height: 380px;
@@ -71,17 +69,9 @@ const StyledLinkButton = styled.a`
   transform: translateY(-50%);
 `;
 
-const Card = ({
-  id,
-  pageContext,
-  title,
-  created,
-  twitterName,
-  articleUrl,
-  content,
-  removeItem,
-}) => {
+const Card = ({ id, pageContext, title, created, twitterName, articleUrl, content }) => {
   const historyPush = useHistoryPush(`${pageContext}/${id}`);
+  const removeItem = useRemoveItemAction();
 
   return (
     <StyledWrapper>
@@ -113,7 +103,6 @@ Card.propTypes = {
   twitterName: PropTypes.string,
   articleUrl: PropTypes.string,
   content: PropTypes.string.isRequired,
-  removeItem: PropTypes.func.isRequired,
 };
 
 Card.defaultProps = {
@@ -122,8 +111,4 @@ Card.defaultProps = {
   articleUrl: null,
 };
 
-const mapDispatchToProps = (dispatch) => ({
-  removeItem: (itemType, id) => dispatch(removeItemAction(itemType, id)),
-});
-
-export default connect(null, mapDispatchToProps)(withContext(Card));
+export default withContext(Card);
