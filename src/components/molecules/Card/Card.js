@@ -1,14 +1,10 @@
-import { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 import Paragraph from 'components/atoms/Paragraph/Paragraph';
 import Heading from 'components/atoms/Heading/Heading';
 import Button from 'components/atoms/Button/Button';
 import LinkIcon from 'assets/icons/link.svg';
-import { Redirect } from 'react-router-dom';
-import { connect } from 'react-redux';
-import { removeItem as removeItemAction } from 'actions';
-import withContext from 'hoc/withContext';
+import { useHistoryPush, useRemoveItemAction, usePageTypeContext } from 'hooks';
 
 const StyledWrapper = styled.div`
   min-height: 380px;
@@ -72,76 +68,45 @@ const StyledLinkButton = styled.a`
   transform: translateY(-50%);
 `;
 
-class Card extends Component {
-  state = {
-    redirect: false,
-  };
+const Card = ({ id, title, created, twitterName, articleUrl, content }) => {
+  const itemType = usePageTypeContext();
+  const historyPush = useHistoryPush(`${itemType}/${id}`);
+  const removeItem = useRemoveItemAction();
 
-  handleCardClick = () => this.setState({ redirect: true });
-
-  render() {
-    const {
-      id,
-      pageContext,
-      title,
-      created,
-      twitterName,
-      articleUrl,
-      content,
-      removeItem,
-    } = this.props;
-    const { redirect } = this.state;
-
-    if (redirect) {
-      return <Redirect to={`${pageContext}/${id}`} />;
-    }
-
-    return (
-      <StyledWrapper>
-        <InnerWrapper
-          data-testid="card-heading-bar"
-          onClick={this.handleCardClick}
-          activeColor={pageContext}
-        >
-          <StyledHeading>{title}</StyledHeading>
-          <DateInfo>{created}</DateInfo>
-          {pageContext === 'twitters' && (
-            <StyledAvatar src={`https://unavatar.now.sh/twitter/${twitterName}`} />
-          )}
-          {pageContext === 'articles' && (
-            <StyledLinkButton data-testid="card-article-link" href={articleUrl} />
-          )}
-        </InnerWrapper>
-        <InnerWrapper flex>
-          <Paragraph>{content}</Paragraph>
-          <Button onClick={() => removeItem(pageContext, id)} secondary>
-            REMOVE
-          </Button>
-        </InnerWrapper>
-      </StyledWrapper>
-    );
-  }
-}
+  return (
+    <StyledWrapper>
+      <InnerWrapper data-testid="card-heading-bar" onClick={historyPush} activeColor={itemType}>
+        <StyledHeading>{title}</StyledHeading>
+        <DateInfo>{created}</DateInfo>
+        {itemType === 'twitters' && (
+          <StyledAvatar src={`https://unavatar.now.sh/twitter/${twitterName}`} />
+        )}
+        {itemType === 'articles' && (
+          <StyledLinkButton data-testid="card-article-link" href={articleUrl} />
+        )}
+      </InnerWrapper>
+      <InnerWrapper flex>
+        <Paragraph>{content}</Paragraph>
+        <Button onClick={() => removeItem(itemType, id)} secondary>
+          REMOVE
+        </Button>
+      </InnerWrapper>
+    </StyledWrapper>
+  );
+};
 
 Card.propTypes = {
   id: PropTypes.string.isRequired,
-  pageContext: PropTypes.oneOf(['notes', 'twitters', 'articles']),
   title: PropTypes.string.isRequired,
   created: PropTypes.string.isRequired,
   twitterName: PropTypes.string,
   articleUrl: PropTypes.string,
   content: PropTypes.string.isRequired,
-  removeItem: PropTypes.func.isRequired,
 };
 
 Card.defaultProps = {
-  pageContext: 'notes',
   twitterName: null,
   articleUrl: null,
 };
 
-const mapDispatchToProps = (dispatch) => ({
-  removeItem: (itemType, id) => dispatch(removeItemAction(itemType, id)),
-});
-
-export default connect(null, mapDispatchToProps)(withContext(Card));
+export default Card;
