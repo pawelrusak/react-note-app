@@ -7,8 +7,7 @@ import UserPageTemplate from 'templates/UserPageTemplate/UserPageTemplate';
 import ButtonIcon from 'components/atoms/ButtonIcon/ButtonIcon';
 import NewItemBar from 'components/organisms/NewItemBar/NewItemBar';
 import plusIcon from 'assets/icons/plus.svg';
-import withContext from 'hoc/withContext';
-import { useToggle } from 'hooks';
+import { useToggle, usePageTypeContext } from 'hooks';
 
 const StyledWrapper = styled.div`
   position: relative;
@@ -57,8 +56,9 @@ const StyledButtonIcon = styled(ButtonIcon)`
   z-index: 10000;
 `;
 
-const GridTemplate = ({ children, pageContext }) => {
+const GridTemplate = ({ children }) => {
   const [newItemBarVisible, toggleNewItemBarVisible] = useToggle();
+  const pageType = usePageTypeContext();
 
   return (
     <UserPageTemplate>
@@ -66,15 +66,15 @@ const GridTemplate = ({ children, pageContext }) => {
         <StyledPageHeader>
           <Input search placeholder="Search" />
           <StyledHeading big as="h1">
-            {pageContext}
+            {pageType}
           </StyledHeading>
-          <StyledParagraph>6 {pageContext}</StyledParagraph>
+          <StyledParagraph>6 {pageType}</StyledParagraph>
         </StyledPageHeader>
         <StyledGrid>{children}</StyledGrid>
         <StyledButtonIcon
           onClick={toggleNewItemBarVisible}
           icon={plusIcon}
-          activeColor={pageContext}
+          activeColor={pageType}
         />
         <NewItemBar handleClose={toggleNewItemBarVisible} isVisible={newItemBarVisible} />
       </StyledWrapper>
@@ -83,12 +83,7 @@ const GridTemplate = ({ children, pageContext }) => {
 };
 
 GridTemplate.propTypes = {
-  pageContext: PropTypes.oneOf(['notes', 'twitters', 'articles']),
   children: PropTypes.node.isRequired,
 };
 
-GridTemplate.defaultProps = {
-  pageContext: 'notes',
-};
-
-export default withContext(GridTemplate);
+export default GridTemplate;
