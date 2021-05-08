@@ -5,19 +5,17 @@ import PropTypes from 'prop-types';
 
 const Articles = ({ articles }) => (
   <GridTemplate>
-    <>
-      {articles.map(({ id, title, content, articleUrl, created }) => (
-        <Card
-          id={id}
-          cardType="articles"
-          title={title}
-          content={content}
-          articleUrl={articleUrl}
-          created={created}
-          key={id}
-        />
-      ))}
-    </>
+    {articles.map(({ id, title, content, articleUrl, created }) => (
+      <Card
+        id={id}
+        cardType="articles"
+        title={title}
+        content={content}
+        articleUrl={articleUrl}
+        created={created}
+        key={id}
+      />
+    ))}
   </GridTemplate>
 );
 
