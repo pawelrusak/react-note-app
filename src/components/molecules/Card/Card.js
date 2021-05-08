@@ -1,14 +1,13 @@
-import { useState } from 'react';
 import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 import Paragraph from 'components/atoms/Paragraph/Paragraph';
 import Heading from 'components/atoms/Heading/Heading';
 import Button from 'components/atoms/Button/Button';
 import LinkIcon from 'assets/icons/link.svg';
-import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { removeItem as removeItemAction } from 'actions';
 import withContext from 'hoc/withContext';
+import { useHistoryPush } from 'hooks';
 
 const StyledWrapper = styled.div`
   min-height: 380px;
@@ -82,21 +81,11 @@ const Card = ({
   content,
   removeItem,
 }) => {
-  const [redirect, setRedirect] = useState(false);
-
-  const handleCardClick = () => setRedirect(true);
-
-  if (redirect) {
-    return <Redirect to={`${pageContext}/${id}`} />;
-  }
+  const historyPush = useHistoryPush(`${pageContext}/${id}`);
 
   return (
     <StyledWrapper>
-      <InnerWrapper
-        data-testid="card-heading-bar"
-        onClick={handleCardClick}
-        activeColor={pageContext}
-      >
+      <InnerWrapper data-testid="card-heading-bar" onClick={historyPush} activeColor={pageContext}>
         <StyledHeading>{title}</StyledHeading>
         <DateInfo>{created}</DateInfo>
         {pageContext === 'twitters' && (
