@@ -7,7 +7,6 @@ import { fetchItems } from 'actions';
 
 class Twitters extends Component {
   componentDidMount() {
-    // eslint-disable-next-line
     const { fetchTwitters } = this.props;
     fetchTwitters();
   }
@@ -43,6 +42,7 @@ Twitters.propTypes = {
       created: PropTypes.string.isRequired,
     }),
   ),
+  fetchTwitters: PropTypes.func.isRequired,
 };
 
 Twitters.defaultProps = {
