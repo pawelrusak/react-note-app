@@ -1,16 +1,19 @@
 import { useEffect } from 'react';
 import GridTemplate from 'templates/GridTemplate/GridTemplate';
 import Card from 'components/molecules/Card/Card';
-import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
+import { useDispatch, useSelector } from 'react-redux';
 import { fetchItems } from 'actions';
 
-const Twitters = ({ twitters, fetchTwitters }) => {
+const Twitters = () => {
+  const twitters = useSelector((state) => state.twitters ?? []);
+  const dispatch = useDispatch();
+
   useEffect(() => {
-    const fetchItemsData = async () => {
-      await fetchTwitters();
+    const fetchTwitters = async () => {
+      await dispatch(fetchItems('twitters'));
     };
-    fetchItemsData();
+
+    fetchTwitters();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -31,30 +34,4 @@ const Twitters = ({ twitters, fetchTwitters }) => {
   );
 };
 
-Twitters.propTypes = {
-  twitters: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      title: PropTypes.string.isRequired,
-      content: PropTypes.string.isRequired,
-      twitterName: PropTypes.string.isRequired,
-      created: PropTypes.string.isRequired,
-    }),
-  ),
-  fetchTwitters: PropTypes.func.isRequired,
-};
-
-Twitters.defaultProps = {
-  twitters: [],
-};
-
-const mapStateToProps = (state) => {
-  const { twitters } = state;
-  return { twitters };
-};
-
-const mapDispatchToProps = (dispatch) => ({
-  fetchTwitters: () => dispatch(fetchItems('twitters')),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(Twitters);
+export default Twitters;
