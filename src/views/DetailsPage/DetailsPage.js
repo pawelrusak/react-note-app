@@ -1,54 +1,49 @@
-import { Component } from 'react';
+import { useEffect, useState } from 'react';
 import DetailsTemplate from 'templates/DetailsTemplate/DetailsTemplate';
 import withContext from 'hoc/withContext';
 import { connect } from 'react-redux';
 import { fetchItem } from 'api';
 import PropTypes from 'prop-types';
 
-class DetailsPage extends Component {
-  state = {
-    activeItem: {
-      title: '',
-      content: '',
-      articleUrl: '',
-      twitterName: '',
-    },
-  };
+const DetailsPage = ({
+  activeItem: storeActiveItem,
+  match: {
+    params: { id: itemID },
+  },
+}) => {
+  const [activeItem, setActiveItem] = useState({
+    title: '',
+    content: '',
+    created: '',
+    articleUrl: '',
+    twitterName: '',
+  });
 
-  componentDidMount() {
-    const { activeItem } = this.props;
-    if (activeItem) {
-      const [item] = activeItem;
-      this.setState({ activeItem: item });
+  useEffect(() => {
+    if (storeActiveItem) {
+      const [item] = storeActiveItem;
+      setActiveItem({ ...item });
     } else {
-      const {
-        match: {
-          params: { id },
-        },
-      } = this.props;
-      fetchItem(id)
-        .then(({ data }) => {
-          this.setState({ activeItem: data });
+      fetchItem(itemID)
+        .then(({ data: item }) => {
+          setActiveItem({ ...item });
         })
         // eslint-disable-next-line no-console
         .catch((err) => console.log(err));
     }
-  }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
-  render() {
-    const { activeItem } = this.state;
-
-    return (
-      <DetailsTemplate
-        title={activeItem.title}
-        created={activeItem.created}
-        content={activeItem.content}
-        articleUrl={activeItem.articleUrl}
-        twitterName={activeItem.twitterName}
-      />
-    );
-  }
-}
+  return (
+    <DetailsTemplate
+      title={activeItem.title}
+      created={activeItem.created}
+      content={activeItem.content}
+      articleUrl={activeItem.articleUrl}
+      twitterName={activeItem.twitterName}
+    />
+  );
+};
 
 DetailsPage.propTypes = {
   // eslint-disable-next-line react/require-default-props
