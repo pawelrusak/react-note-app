@@ -1,21 +1,9 @@
-import { useEffect } from 'react';
 import GridTemplate from 'templates/GridTemplate/GridTemplate';
 import Card from 'components/molecules/Card/Card';
-import { useDispatch, useSelector } from 'react-redux';
-import { fetchItems } from 'actions';
+import { useFetchItems } from 'hooks';
 
 const Twitters = () => {
-  const twitters = useSelector((state) => state.twitters ?? []);
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    const fetchTwitters = async () => {
-      await dispatch(fetchItems('twitters'));
-    };
-
-    fetchTwitters();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  const twitters = useFetchItems('twitters');
 
   return (
     <GridTemplate>
