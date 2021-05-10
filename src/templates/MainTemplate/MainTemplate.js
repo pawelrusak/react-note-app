@@ -1,13 +1,14 @@
 import { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { withRouter } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
 import GlobalStyle from 'theme/GlobalStyle';
 import PageContext from 'context';
 import { theme } from 'theme/mainTheme';
+import { useLocation } from 'react-router-dom';
 
-const MainTemplate = ({ children, location: { pathname } }) => {
+const MainTemplate = ({ children }) => {
   const [pageType, setPageType] = useState('notes');
+  const { pathname } = useLocation();
 
   useEffect(() => {
     // set current page type
@@ -30,9 +31,6 @@ const MainTemplate = ({ children, location: { pathname } }) => {
 
 MainTemplate.propTypes = {
   children: PropTypes.element.isRequired,
-  location: PropTypes.shape({
-    pathname: PropTypes.string.isRequired,
-  }).isRequired,
 };
 
-export default withRouter(MainTemplate);
+export default MainTemplate;
