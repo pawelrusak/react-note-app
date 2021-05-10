@@ -1,36 +1,35 @@
-import { Component } from 'react';
+import { useEffect } from 'react';
 import GridTemplate from 'templates/GridTemplate/GridTemplate';
 import Card from 'components/molecules/Card/Card';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { fetchItems } from 'actions';
 
-class Twitters extends Component {
-  componentDidMount() {
-    const { fetchTwitters } = this.props;
-    fetchTwitters();
-  }
+const Twitters = ({ twitters, fetchTwitters }) => {
+  useEffect(() => {
+    const fetchItemsData = async () => {
+      await fetchTwitters();
+    };
+    fetchItemsData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
-  render() {
-    const { twitters } = this.props;
-
-    return (
-      <GridTemplate>
-        {twitters.map(({ id, title, content, twitterName, created }) => (
-          <Card
-            id={id}
-            cardType="twitters"
-            title={title}
-            content={content}
-            twitterName={twitterName}
-            created={created}
-            key={id}
-          />
-        ))}
-      </GridTemplate>
-    );
-  }
-}
+  return (
+    <GridTemplate>
+      {twitters.map(({ id, title, content, twitterName, created }) => (
+        <Card
+          id={id}
+          cardType="twitters"
+          title={title}
+          content={content}
+          twitterName={twitterName}
+          created={created}
+          key={id}
+        />
+      ))}
+    </GridTemplate>
+  );
+};
 
 Twitters.propTypes = {
   twitters: PropTypes.arrayOf(
