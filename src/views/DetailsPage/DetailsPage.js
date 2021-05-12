@@ -1,16 +1,16 @@
 import { useEffect, useState } from 'react';
 import DetailsTemplate from 'templates/DetailsTemplate/DetailsTemplate';
-import withContext from 'hoc/withContext';
-import { connect } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { fetchItem } from 'api';
-import PropTypes from 'prop-types';
+import { useParams } from 'react-router-dom';
+import { usePageTypeContext } from 'hooks';
 
-const DetailsPage = ({
-  activeItem: storeActiveItem,
-  match: {
-    params: { id: itemID },
-  },
-}) => {
+const DetailsPage = () => {
+  const pageType = usePageTypeContext();
+  const { id: itemID } = useParams();
+  const storeActiveItem = useSelector((store) =>
+    store?.[pageType]?.find((item) => item.id === itemID),
+  );
   const [activeItem, setActiveItem] = useState({
     title: '',
     content: '',
@@ -21,8 +21,7 @@ const DetailsPage = ({
 
   useEffect(() => {
     if (storeActiveItem) {
-      const [item] = storeActiveItem;
-      setActiveItem({ ...item });
+      setActiveItem({ ...storeActiveItem });
     } else {
       fetchItem(itemID)
         .then(({ data: item }) => {
@@ -45,37 +44,4 @@ const DetailsPage = ({
   );
 };
 
-DetailsPage.propTypes = {
-  // eslint-disable-next-line react/require-default-props
-  activeItem: PropTypes.arrayOf(
-    PropTypes.shape({
-      title: PropTypes.string.isRequired,
-      created: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
-      content: PropTypes.string.isRequired,
-      articleUrl: PropTypes.string,
-      twitterName: PropTypes.string,
-    }),
-  ),
-  match: PropTypes.shape({
-    params: PropTypes.shape({
-      id: PropTypes.string.isRequired,
-    }).isRequired,
-  }).isRequired,
-};
-
-DetailsPage.default = {
-  activeItem: null,
-};
-
-const mapStateToProps = (state, ownProps) => {
-  if (state[ownProps.pageContext]) {
-    return {
-      activeItem: state[ownProps.pageContext].filter(
-        (item) => item.id === ownProps.match.params.id,
-      ),
-    };
-  }
-  return {};
-};
-
-export default withContext(connect(mapStateToProps)(DetailsPage));
+export default DetailsPage;
