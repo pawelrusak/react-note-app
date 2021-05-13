@@ -5,7 +5,7 @@ import UserPageTemplate from 'templates/UserPageTemplate/UserPageTemplate';
 import Heading from 'components/atoms/Heading/Heading';
 import Paragraph from 'components/atoms/Paragraph/Paragraph';
 import Button from 'components/atoms/Button/Button';
-import withContext from 'hoc/withContext';
+import { usePageTypeContext } from 'hooks';
 
 const StyledWrapper = styled.div`
   padding: 25px 150px 25px 70px;
@@ -52,37 +52,40 @@ const StyledImage = styled.img`
   border-radius: 50%;
 `;
 
-const DetailsTemplate = ({ pageContext, title, created, content, articleUrl, twitterName }) => (
-  <UserPageTemplate>
-    <StyledWrapper>
-      <StyledPageHeader>
-        <StyledHeading big as="h1">
-          {title}
-        </StyledHeading>
-        <StyledParagraph>{created}</StyledParagraph>
-      </StyledPageHeader>
-      <Paragraph>{content}</Paragraph>
-      {pageContext === 'articles' && (
-        <StyledLink data-testid="article-link" href={articleUrl}>
-          Open article
-        </StyledLink>
-      )}
-      {pageContext === 'twitters' && (
-        <StyledImage
-          data-testid="avatar"
-          alt={title}
-          src={`https://unavatar.now.sh/twitter/${twitterName}`}
-        />
-      )}
-      <Button as={Link} to={`/${pageContext}`} activeColor={pageContext}>
-        save / close
-      </Button>
-    </StyledWrapper>
-  </UserPageTemplate>
-);
+const DetailsTemplate = ({ title, created, content, articleUrl, twitterName }) => {
+  const pageContext = usePageTypeContext();
+
+  return (
+    <UserPageTemplate>
+      <StyledWrapper>
+        <StyledPageHeader>
+          <StyledHeading big as="h1">
+            {title}
+          </StyledHeading>
+          <StyledParagraph>{created}</StyledParagraph>
+        </StyledPageHeader>
+        <Paragraph>{content}</Paragraph>
+        {pageContext === 'articles' && (
+          <StyledLink data-testid="article-link" href={articleUrl}>
+            Open article
+          </StyledLink>
+        )}
+        {pageContext === 'twitters' && (
+          <StyledImage
+            data-testid="avatar"
+            alt={title}
+            src={`https://unavatar.now.sh/twitter/${twitterName}`}
+          />
+        )}
+        <Button as={Link} to={`/${pageContext}`} activeColor={pageContext}>
+          save / close
+        </Button>
+      </StyledWrapper>
+    </UserPageTemplate>
+  );
+};
 
 DetailsTemplate.propTypes = {
-  pageContext: PropTypes.oneOf(['notes', 'twitters', 'articles']).isRequired,
   title: PropTypes.string,
   created: PropTypes.string,
   content: PropTypes.string,
@@ -98,4 +101,4 @@ DetailsTemplate.defaultProps = {
   twitterName: '',
 };
 
-export default withContext(DetailsTemplate);
+export default DetailsTemplate;
