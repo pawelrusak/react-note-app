@@ -5,6 +5,7 @@ import Heading from 'components/atoms/Heading/Heading';
 import Button from 'components/atoms/Button/Button';
 import LinkIcon from 'assets/icons/link.svg';
 import { useHistoryPush, useRemoveItemAction, usePageTypeContext } from 'hooks';
+import { activecolor } from 'theme/mixins';
 
 const StyledWrapper = styled.div`
   min-height: 380px;
@@ -16,14 +17,18 @@ const StyledWrapper = styled.div`
   grid-template-rows: 0.25fr 1fr;
 `;
 
-const InnerWrapper = styled.div`
+const HeaderWrapper = styled.div`
   position: relative;
   padding: 17px 30px;
-  background-color: ${({ activeColor, theme }) => (activeColor ? theme[activeColor] : 'white')};
+  ${activecolor}
 
   :first-of-type {
     z-index: 9999;
   }
+`;
+
+const ContentWrapper = styled(HeaderWrapper)`
+  background-color: white;
 
   ${({ flex }) =>
     flex &&
@@ -75,7 +80,7 @@ const Card = ({ id, title, created, twitterName, articleUrl, content }) => {
 
   return (
     <StyledWrapper>
-      <InnerWrapper data-testid="card-heading-bar" onClick={historyPush} activeColor={itemType}>
+      <HeaderWrapper data-testid="card-heading-bar" onClick={historyPush} activecolor={itemType}>
         <StyledHeading>{title}</StyledHeading>
         <DateInfo>{created}</DateInfo>
         {itemType === 'twitters' && (
@@ -84,13 +89,13 @@ const Card = ({ id, title, created, twitterName, articleUrl, content }) => {
         {itemType === 'articles' && (
           <StyledLinkButton data-testid="card-article-link" href={articleUrl} />
         )}
-      </InnerWrapper>
-      <InnerWrapper flex>
+      </HeaderWrapper>
+      <ContentWrapper flex>
         <Paragraph>{content}</Paragraph>
         <Button onClick={() => removeItem(itemType, id)} secondary>
           REMOVE
         </Button>
-      </InnerWrapper>
+      </ContentWrapper>
     </StyledWrapper>
   );
 };
