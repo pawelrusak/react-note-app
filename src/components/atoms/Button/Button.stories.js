@@ -7,7 +7,7 @@ export default {
     secondary: false,
   },
   argTypes: {
-    activeColor: {
+    activecolor: {
       control: {
         type: 'inline-radio',
         options: ['notes', 'twitters', 'articles'],
@@ -23,17 +23,17 @@ const Template = (args) => <Button {...args}>Hello, World!</Button>;
 
 export const Note = Template.bind({});
 Note.args = {
-  activeColor: 'notes',
+  activecolor: 'notes',
 };
 
 export const Twitter = Template.bind({});
 Twitter.args = {
-  activeColor: 'twitters',
+  activecolor: 'twitters',
 };
 
 export const Article = Template.bind({});
 Article.args = {
-  activeColor: 'articles',
+  activecolor: 'articles',
 };
 
 export const Secondary = Template.bind({});

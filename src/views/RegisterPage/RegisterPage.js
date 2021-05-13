@@ -59,7 +59,7 @@ const RegisterPage = () => (
               onBlur={handleBlur}
               value={values.title}
             />
-            <Button activeColor="notes" type="submit">
+            <Button activecolor="notes" type="submit">
               register
             </Button>
           </StyledForm>
