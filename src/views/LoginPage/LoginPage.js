@@ -54,7 +54,7 @@ const LoginPage = ({ userID, authenticate }) => (
             <Heading>Sign in</Heading>
             <StyledForm>
               <StyledInput
-                type="text"
+                type="email"
                 name="email"
                 placeholder="Login"
                 onChange={handleChange}
