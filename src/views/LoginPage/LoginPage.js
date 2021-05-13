@@ -32,10 +32,6 @@ const StyledLink = styled(Link)`
   margin: 20px 0 50px;
 `;
 
-/**
- * @todo Change name and type of the username field after finish the course.
- */
-// eslint-disable-next-line react/prop-types
 const LoginPage = () => {
   const userID = useSelector(userIDSelector);
   const dispatch = useDispatch();
@@ -48,9 +44,7 @@ const LoginPage = () => {
     <AuthTemplate>
       <Formik
         initialValues={{ email: '', password: '' }}
-        // eslint-disable-next-line no-unused-vars
         onSubmit={({ email, password }) => {
-          // eslint-disable-next-line no-console
           authenticate(email, password);
         }}
       >
