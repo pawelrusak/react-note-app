@@ -8,6 +8,7 @@ import ButtonIcon from 'components/atoms/ButtonIcon/ButtonIcon';
 import NewItemBar from 'components/organisms/NewItemBar/NewItemBar';
 import plusIcon from 'assets/icons/plus.svg';
 import { useToggle, usePageTypeContext } from 'hooks';
+import { activecolor } from 'theme/mixins';
 
 const StyledWrapper = styled.div`
   position: relative;
@@ -50,7 +51,7 @@ const StyledButtonIcon = styled(ButtonIcon)`
   position: fixed;
   bottom: 40px;
   right: 40px;
-  background-color: ${({ activeColor, theme }) => theme[activeColor]};
+  ${activecolor}
   background-size: 35%;
   border-radius: 50px;
   z-index: 10000;
@@ -74,7 +75,7 @@ const GridTemplate = ({ children }) => {
         <StyledButtonIcon
           onClick={toggleNewItemBarVisible}
           icon={plusIcon}
-          activeColor={pageType}
+          activecolor={pageType}
         />
         <NewItemBar handleClose={toggleNewItemBarVisible} isVisible={newItemBarVisible} />
       </StyledWrapper>
