@@ -38,11 +38,11 @@ const StyledLink = styled(Link)`
 const LoginPage = ({ userID, authenticate }) => (
   <AuthTemplate>
     <Formik
-      initialValues={{ username: '', password: '' }}
+      initialValues={{ email: '', password: '' }}
       // eslint-disable-next-line no-unused-vars
-      onSubmit={({ username, password }) => {
+      onSubmit={({ email, password }) => {
         // eslint-disable-next-line no-console
-        authenticate(username, password);
+        authenticate(email, password);
       }}
     >
       {({ handleChange, handleBlur, values }) => {
@@ -55,7 +55,7 @@ const LoginPage = ({ userID, authenticate }) => (
             <StyledForm>
               <StyledInput
                 type="text"
-                name="username"
+                name="email"
                 placeholder="Login"
                 onChange={handleChange}
                 onBlur={handleBlur}
@@ -84,7 +84,7 @@ const LoginPage = ({ userID, authenticate }) => (
 const mapStateToProps = ({ userID = null }) => ({ userID });
 
 const mapDispatchToProps = (dispatch) => ({
-  authenticate: (username, password) => dispatch(authenticateAction(username, password)),
+  authenticate: (email, password) => dispatch(authenticateAction(email, password)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(LoginPage);
