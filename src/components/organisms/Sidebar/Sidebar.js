@@ -8,6 +8,7 @@ import penIcon from 'assets/icons/pen.svg';
 import twitterIcon from 'assets/icons/twitter.svg';
 import logoIcon from 'assets/icons/logo.svg';
 import { usePageTypeContext } from 'hooks';
+import { activecolor } from 'theme/mixins';
 
 const StyledWrapper = styled.nav`
   position: fixed;
@@ -16,7 +17,7 @@ const StyledWrapper = styled.nav`
   padding: 25px 0;
   width: 150px;
   height: 100vh;
-  background-color: ${({ activeColor, theme }) => (activeColor ? theme[activeColor] : theme.notes)};
+  ${activecolor}
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -49,7 +50,7 @@ const Sidebar = () => {
   const pageContext = usePageTypeContext();
 
   return (
-    <StyledWrapper activeColor={pageContext}>
+    <StyledWrapper activecolor={pageContext}>
       <StyledLogoLink to="/" />
       <StyledLinksList>
         <li>

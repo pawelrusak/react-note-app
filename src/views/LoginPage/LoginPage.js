@@ -69,7 +69,7 @@ const LoginPage = ({ userID, authenticate }) => (
                 onBlur={handleBlur}
                 value={values.title}
               />
-              <Button activeColor="notes" type="submit">
+              <Button activecolor="notes" type="submit">
                 sign in
               </Button>
             </StyledForm>
