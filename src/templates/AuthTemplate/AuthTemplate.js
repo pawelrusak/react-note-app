@@ -31,7 +31,6 @@ const StyledAuthCard = styled.div`
   justify-content: center;
 `;
 
-// eslint-disable-next-line react/prop-types
 const AuthTemplate = ({ children }) => (
   <StyledWrapper>
     <StyledLogo src={logoImg} alt="" />
