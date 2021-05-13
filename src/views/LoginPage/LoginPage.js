@@ -6,9 +6,7 @@ import Input from 'components/atoms/Input/Input';
 import Button from 'components/atoms/Button/Button';
 import { Link, Redirect } from 'react-router-dom';
 import { routes } from 'routes';
-import { useSelector, useDispatch } from 'react-redux';
-import { authenticate as authenticateAction } from 'actions';
-import { userIDSelector } from 'selectors';
+import { useAuth } from 'hooks';
 
 const StyledForm = styled(Form)`
   display: flex;
@@ -33,12 +31,7 @@ const StyledLink = styled(Link)`
 `;
 
 const LoginPage = () => {
-  const userID = useSelector(userIDSelector);
-  const dispatch = useDispatch();
-
-  const authenticate = (email, password) => {
-    dispatch(authenticateAction(email, password));
-  };
+  const { userID, authenticate } = useAuth();
 
   return (
     <AuthTemplate>
