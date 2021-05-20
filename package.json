@@ -33,14 +33,11 @@
     "start": "react-scripts start",
     "test": "react-scripts test",
     "storybook": "start-storybook -p 6006 -s public",
-    "build-storybook": "build-storybook -s public"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged",
-      "pre-push": "npm test -- --watchAll=false",
-      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
-    }
+    "build-storybook": "build-storybook -s public",
+    "prepare": "husky install",
+    "pre-commit": "lint-staged",
+    "pre-push": "npm test -- --watchAll=false",
+    "commit-msg": "npx commitlint --edit \"$1\""
   },
   "commitlint": {
     "extends": [
