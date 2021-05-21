@@ -87,6 +87,7 @@
     "react/react-in-jsx-scope": 0,
     "react/state-in-constructor": [2, "never"]
   },
+  "ignorePatterns": [".eslintrc"],
   "settings": {
     "import/parsers": {
       "@typescript-eslint/parser": [".ts", ".tsx"]
