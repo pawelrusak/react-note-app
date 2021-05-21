@@ -1,10 +1,17 @@
 {
-  "parser": "babel-eslint",
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "project": "./tsconfig.json",
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
+  "plugins": ["@typescript-eslint"],
   "extends": [
     "airbnb", 
     "airbnb/hooks",
     "prettier",
-    "prettier/react"
+    "plugin:prettier/recommended"
   ],
   "env": {
     "jest": true
@@ -15,39 +22,83 @@
   },
   "overrides": [
     {
-      "files": ["*.stories.js"],
+      "files": [
+        "*.stories.js", 
+        "*.stories.ts?(x)"
+      ],
       "rules": {
           "react/prop-types": 0,
           "react/jsx-props-no-spreading": 0
       }
     },
     {
-      "files": ["src/**/__tests__/**/*.js", "src/**/?(*.)+(spec|test).js"],
-      "extends": ["plugin:jest/style", "plugin:jest-formatting/strict", "plugin:testing-library/react", "plugin:jest-dom/recommended"],
+      "files": [
+        "src/**/__tests__/**/*.js",
+        "src/**/?(*.)+(spec|test).js",
+        "src/**/__tests__/**/*.ts?(x)",
+        "src/**/?(*.)+(spec|test).ts?(x)"
+      ],
+      "extends": [
+        "plugin:jest/style", 
+        "plugin:jest-formatting/strict", 
+        "plugin:testing-library/react", 
+        "plugin:jest-dom/recommended"
+      ],
       "rules": {
           "react/jsx-props-no-spreading": 0
       }
+    },
+    {
+      "files": [
+        "src/**/*.ts", 
+        "src/**/*.tsx"
+      ],
+      "extends": [
+        "plugin:@typescript-eslint/recommended",
+        "plugin:@typescript-eslint/recommended-requiring-type-checking"
+      ],
+      "rules": {
+        "no-unused-vars": "off",
+        "@typescript-eslint/no-unused-vars": ["error"]
+      } 
     }
   ],
   "rules": {
+    "import/extensions": [
+      2,
+      "ignorePackages",
+      {
+        "js": "never",
+        "ts": "never",
+        "tsx": "never"
+      }
+    ],
     "import/no-extraneous-dependencies": 0,
     "import/prefer-default-export": 0,
     "react/jsx-filename-extension": [
       1, 
       { 
         "extensions": [
-          ".js"
+          ".js", 
+          ".tsx"
         ] 
       }
     ],
     "react/react-in-jsx-scope": 0,
     "react/state-in-constructor": [2, "never"]
   },
+  "ignorePatterns": [".eslintrc"],
   "settings": {
+    "import/parsers": {
+      "@typescript-eslint/parser": [".ts", ".tsx"]
+    },
     "import/resolver": {
+      "typescript": {
+        "project": "./tsconfig.json"
+      },
       "node": {
         "paths": ["src"],
-        "extensions": [".js", ".jsx", ".ts", ".tsx"]
+        "extensions": [".js", ".jsx"]
       }
     }
   }
