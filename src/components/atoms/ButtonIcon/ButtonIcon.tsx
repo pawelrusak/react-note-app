@@ -1,6 +1,11 @@
 import styled from 'styled-components';
 
-const ButtonIcon = styled.button`
+export type ButtonIconProps = {
+  readonly className?: 'active';
+  readonly icon: string;
+};
+
+const ButtonIcon = styled.button<ButtonIconProps>`
   display: block;
   width: 67px;
   height: 67px;
