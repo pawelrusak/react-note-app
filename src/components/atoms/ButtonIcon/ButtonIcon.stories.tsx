@@ -1,9 +1,10 @@
+import { Meta, Story } from '@storybook/react';
 import bulbIcon from 'assets/icons/bulb.svg';
 import logoutIcon from 'assets/icons/logout.svg';
 import penIcon from 'assets/icons/pen.svg';
 import plusIcon from 'assets/icons/plus.svg';
 import twitterIcon from 'assets/icons/twitter.svg';
-import ButtonIcon from './ButtonIcon';
+import ButtonIcon, { ButtonIconProps } from './ButtonIcon';
 
 const icons = {
   Bulb: bulbIcon,
@@ -11,7 +12,7 @@ const icons = {
   Pen: penIcon,
   Plus: plusIcon,
   Twitter: twitterIcon,
-};
+} as const;
 
 export default {
   title: 'Atoms/ButtonIcon',
@@ -38,11 +39,17 @@ export default {
       },
     },
   },
-};
+} as Meta;
 
-const Template = ({ icon, active, ...args }) => {
-  const selectedIcon = icons[icon];
-  return <ButtonIcon className={active && 'active'} icon={selectedIcon} {...args} />;
+const Template: Story<ButtonIconProps & { readonly active?: boolean }> = ({
+  icon,
+  active,
+  ...args
+}) => {
+  type IconVariants = 'Bulb' | 'Logout' | 'Pen' | 'Plus' | 'Twitter';
+
+  const selectedIcon: string = icons[icon as IconVariants];
+  return <ButtonIcon className={active ? 'active' : undefined} icon={selectedIcon} {...args} />;
 };
 
 export const Bulb = Template.bind({});
