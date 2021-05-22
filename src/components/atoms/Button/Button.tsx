@@ -1,14 +1,19 @@
 import styled, { css } from 'styled-components';
-import { activecolor } from 'theme/mixins';
+import { activecolor as activecolorMixin } from 'theme/mixins';
+import { ItemVariants } from 'commonTypes';
 
-const Button = styled.button`
+export type ButtonProps =
+  | { readonly activecolor?: never; readonly secondary: true }
+  | { readonly activecolor: ItemVariants; readonly secondary?: never };
+
+const Button = styled.button<ButtonProps>`
   display: flex;
   justify-content: center;
   align-items: center;
   color: black;
   text-decoration: none;
   padding: 0;
-  ${activecolor}
+  ${activecolorMixin}
   width: 220px;
   height: 47px;
   border: none;
