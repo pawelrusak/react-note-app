@@ -1,4 +1,5 @@
-import Button from './Button';
+import { Meta, Story } from '@storybook/react';
+import Button, { ButtonProps } from './Button';
 
 export default {
   title: 'Atoms/Button',
@@ -17,9 +18,9 @@ export default {
       control: { type: 'boolean' },
     },
   },
-};
+} as Meta;
 
-const Template = (args) => <Button {...args}>Hello, World!</Button>;
+const Template: Story<ButtonProps> = (args) => <Button {...args}>Hello, World!</Button>;
 
 export const Note = Template.bind({});
 Note.args = {
