@@ -1,13 +1,14 @@
-import NewItemBar from './NewItemBar';
+import { Meta, Story } from '@storybook/react';
+import NewItemBar, { OwnProps as NewItemBarOwnProps } from './NewItemBar';
 import { StoreDecorator } from '../../../../.storybook/decorators';
 
 export default {
   title: 'Organisms/NewItemBar',
   component: NewItemBar,
   decorators: [StoreDecorator],
-};
+} as Meta;
 
-const Template = (args) => <NewItemBar {...args} />;
+const Template: Story<NewItemBarOwnProps> = (args) => <NewItemBar {...args} />;
 
 export const Default = Template.bind({});
 Default.args = {
