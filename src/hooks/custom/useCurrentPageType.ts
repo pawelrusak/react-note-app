@@ -1,12 +1,13 @@
 import { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
+import { ItemVariants } from 'commonTypes';
 
 export const useCurrentPageType = () => {
-  const [pageType, setPageType] = useState('notes');
+  const [pageType, setPageType] = useState<ItemVariants | undefined>('notes');
   const { pathname } = useLocation();
 
   useEffect(() => {
-    const pageTypes = ['twitters', 'articles', 'notes'];
+    const pageTypes = ['twitters', 'articles', 'notes'] as const;
 
     const [currentPage] = pageTypes.filter((page) => pathname.includes(page));
 

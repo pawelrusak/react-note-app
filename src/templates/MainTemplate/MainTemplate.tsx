@@ -1,11 +1,14 @@
-import PropTypes from 'prop-types';
 import { ThemeProvider } from 'styled-components';
 import GlobalStyle from 'theme/GlobalStyle';
 import PageContext from 'context';
 import { theme } from 'theme/mainTheme';
 import { useCurrentPageType } from 'hooks';
 
-const MainTemplate = ({ children }) => {
+export type MainTemplateProps = {
+  readonly children: JSX.Element;
+};
+
+const MainTemplate = ({ children }: MainTemplateProps) => {
   const currentPageType = useCurrentPageType();
 
   return (
@@ -16,10 +19,6 @@ const MainTemplate = ({ children }) => {
       </PageContext.Provider>
     </div>
   );
-};
-
-MainTemplate.propTypes = {
-  children: PropTypes.element.isRequired,
 };
 
 export default MainTemplate;

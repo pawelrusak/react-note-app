@@ -1,5 +1,6 @@
 import { renderWithRouter, screen, getPairOfPathsAndPageTypes } from 'testUtils';
 import PageContext from 'context';
+import { RoutesPaths } from 'routes';
 import MainTemplate from '../MainTemplate/MainTemplate';
 
 const FakeContextPage = () => (
@@ -8,7 +9,7 @@ const FakeContextPage = () => (
   </PageContext.Consumer>
 );
 
-const renderMainTemplate = (path) =>
+const renderMainTemplate = (path: RoutesPaths) =>
   renderWithRouter(
     <MainTemplate>
       <FakeContextPage />
