@@ -1,27 +1,34 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 import { render, screen, userEvent, testComponent } from 'testUtils';
 import { Route, Switch } from 'react-router-dom';
 import { routes } from 'routes';
 import { cleanup } from '@testing-library/react';
 import * as actions from 'actions';
-import PropTypes from 'prop-types';
-import Card from '../Card/Card';
+import { Item, ItemVariants } from 'commonTypes';
+import Card, { CardProps } from '../Card/Card';
 import * as CardStories from '../Card/Card.stories';
 
-const getFakeDetailsPageText = (cardType, cardId) => `${cardType} page with ${cardId}`;
+type CardType = 'Note' | 'Twitter' | 'Article';
 
-const FakeDetailsPage = ({ cardType, cardId }) => (
+const getFakeDetailsPageText = (cardType: CardType, cardId: string) =>
+  `${cardType} page with ${cardId}`;
+
+type FakeDetailsPageProps = {
+  readonly cardId: string;
+  readonly cardType: CardType;
+};
+
+const FakeDetailsPage = ({ cardType, cardId }: FakeDetailsPageProps) => (
   <div data-testid="fake-details-page">{getFakeDetailsPageText(cardType, cardId)}</div>
 );
 
-FakeDetailsPage.propTypes = {
-  cardId: PropTypes.string.isRequired,
-  cardType: PropTypes.oneOf(['Note', 'Twitter', 'Article']).isRequired,
-};
+const { twitterName: twitterNameCardArgs } = CardStories.Twitter.args as CardProps;
+const { articleUrl: articleUrlCardArgs } = CardStories.Article.args as CardProps;
 
-const renderCard = (cardType) => {
-  const cardData = CardStories[cardType]?.args;
-  const itemType = cardType.toLowerCase();
-  const pageType = `${itemType}s`;
+const renderCard = (cardType: CardType) => {
+  const cardData = CardStories[cardType]?.args as Item;
+  const itemType = cardType.toLowerCase() as 'note' | 'twitter' | 'article';
+  const pageType = `${itemType}s` as ItemVariants;
   const detailsPagePath = routes[itemType].replace(':id', cardData.id);
 
   const FakeDetailsDataPage = () => <FakeDetailsPage cardType={cardType} cardId={cardData.id} />;
@@ -50,18 +57,20 @@ const queryByFakeDetailsPage = () => screen.queryByTestId('fake-details-page');
 const twitterAvatarTestName = 'twitter avatar';
 const articleLinkTestName = 'article link';
 
-const mockRemoveItemAction = () =>
-  jest.spyOn(actions, 'removeItem').mockImplementation(() => ({
+const mockRemoveItemAction = () => {
+  // @ts-ignore
+  return jest.spyOn(actions, 'removeItem').mockImplementation(() => ({
     type: 'TEST',
   }));
+};
 
 describe('<Card />', () => {
   beforeEach(cleanup);
 
   it.each(['Note', 'Twitter', 'Article'])(
     'redirect to %s details page after click on the card heading',
-    async (cardType) => {
-      const { cardData } = renderCard(cardType);
+    (cardType) => {
+      const { cardData } = renderCard(cardType as CardType);
 
       expect(queryByFakeDetailsPage()).not.toBeInTheDocument();
 
@@ -69,7 +78,7 @@ describe('<Card />', () => {
 
       expect(queryByFakeDetailsPage()).toBeInTheDocument();
       expect(queryByFakeDetailsPage()).toHaveTextContent(
-        getFakeDetailsPageText(cardType, cardData.id),
+        getFakeDetailsPageText(cardType as CardType, cardData.id),
       );
     },
   );
@@ -102,13 +111,13 @@ describe('<Card />', () => {
 
   testComponent(() => renderCard('Twitter'), { suffixTestNames: 'when is twitter page' })
     .toBeInTheDocument(twitterAvatarTestName, queryByImgRole)
-    .withAttribute('src', expect.stringContaining(CardStories.Twitter.args.twitterName))
+    .withAttribute('src', expect.stringContaining(twitterNameCardArgs as string))
     .not.toBeInTheDocument(articleLinkTestName, queryByCardArticleLink)
     .run();
 
   testComponent(() => renderCard('Article'), { suffixTestNames: 'when is article page' })
     .toBeInTheDocument(articleLinkTestName, queryByCardArticleLink)
-    .withAttribute('href', CardStories.Article.args.articleUrl)
+    .withAttribute('href', articleUrlCardArgs)
     .not.toBeInTheDocument(twitterAvatarTestName, queryByImgRole)
     .run();
 });

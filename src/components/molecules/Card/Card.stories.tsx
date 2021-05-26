@@ -1,14 +1,15 @@
+import { Meta, Story } from '@storybook/react';
 import StoryRouter from 'storybook-react-router';
-import Card from './Card';
+import Card, { CardProps } from './Card';
 import { StoreDecorator, CardWrapperDecorator } from '../../../../.storybook/decorators';
 
 export default {
   title: 'Molecules/Card',
   component: Card,
   decorators: [StoryRouter(), StoreDecorator, CardWrapperDecorator],
-};
+} as Meta;
 
-const Template = (args) => <Card {...args} />;
+const Template: Story<CardProps> = (args) => <Card {...args} />;
 
 export const Default = Template.bind({});
 Default.args = {
@@ -31,7 +32,7 @@ export const Twitter = Template.bind({});
 Twitter.args = {
   ...Default.args,
   twitterName: 'hello_romans',
-};
+} as CardProps;
 Twitter.parameters = {
   pageContext: 'twitters',
 };
@@ -40,7 +41,7 @@ export const Article = Template.bind({});
 Article.args = {
   ...Default.args,
   articleUrl: 'https://youtube.com/helloroman',
-};
+} as CardProps;
 Article.parameters = {
   pageContext: 'articles',
 };

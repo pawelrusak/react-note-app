@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 import Paragraph from 'components/atoms/Paragraph/Paragraph';
 import Heading from 'components/atoms/Heading/Heading';
@@ -6,6 +5,7 @@ import Button from 'components/atoms/Button/Button';
 import LinkIcon from 'assets/icons/link.svg';
 import { useHistoryPush, useRemoveItemAction, usePageTypeContext } from 'hooks';
 import { activecolor } from 'theme/mixins';
+import { ItemVariants, Item } from 'commonTypes';
 
 const StyledWrapper = styled.div`
   min-height: 380px;
@@ -17,7 +17,11 @@ const StyledWrapper = styled.div`
   grid-template-rows: 0.25fr 1fr;
 `;
 
-const HeaderWrapper = styled.div`
+type HeaderWrapperProps = {
+  readonly activecolor?: ItemVariants;
+};
+
+const HeaderWrapper = styled.div<HeaderWrapperProps>`
   position: relative;
   padding: 17px 30px;
   ${activecolor}
@@ -27,7 +31,11 @@ const HeaderWrapper = styled.div`
   }
 `;
 
-const ContentWrapper = styled(HeaderWrapper)`
+type ContentWrapperProps = {
+  readonly flex: boolean;
+};
+
+const ContentWrapper = styled(HeaderWrapper)<ContentWrapperProps>`
   background-color: white;
 
   ${({ flex }) =>
@@ -73,7 +81,14 @@ const StyledLinkButton = styled.a`
   transform: translateY(-50%);
 `;
 
-const Card = ({ id, title, created, twitterName, articleUrl, content }) => {
+export type CardProps = Item;
+
+const defaultCardProps = {
+  twitterName: null,
+  articleUrl: null,
+};
+
+const Card = ({ id, title, created, twitterName, articleUrl, content }: CardProps) => {
   const itemType = usePageTypeContext();
   const historyPush = useHistoryPush(`${itemType}/${id}`);
   const removeItem = useRemoveItemAction();
@@ -84,10 +99,10 @@ const Card = ({ id, title, created, twitterName, articleUrl, content }) => {
         <StyledHeading>{title}</StyledHeading>
         <DateInfo>{created}</DateInfo>
         {itemType === 'twitters' && (
-          <StyledAvatar src={`https://unavatar.now.sh/twitter/${twitterName}`} />
+          <StyledAvatar src={`https://unavatar.now.sh/twitter/${twitterName || ''}`} />
         )}
         {itemType === 'articles' && (
-          <StyledLinkButton data-testid="card-article-link" href={articleUrl} />
+          <StyledLinkButton data-testid="card-article-link" href={articleUrl || ''} />
         )}
       </HeaderWrapper>
       <ContentWrapper flex>
@@ -100,18 +115,6 @@ const Card = ({ id, title, created, twitterName, articleUrl, content }) => {
   );
 };
 
-Card.propTypes = {
-  id: PropTypes.string.isRequired,
-  title: PropTypes.string.isRequired,
-  created: PropTypes.string.isRequired,
-  twitterName: PropTypes.string,
-  articleUrl: PropTypes.string,
-  content: PropTypes.string.isRequired,
-};
-
-Card.defaultProps = {
-  twitterName: null,
-  articleUrl: null,
-};
+Card.defaultProps = defaultCardProps;
 
 export default Card;
