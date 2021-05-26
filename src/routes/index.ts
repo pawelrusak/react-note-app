@@ -8,4 +8,8 @@ export const routes = {
   article: '/articles/:id',
   login: '/login',
   register: '/register',
-};
+} as const;
+
+export type RoutesKeys = keyof typeof routes;
+
+export type RoutesPaths = typeof routes[RoutesKeys];

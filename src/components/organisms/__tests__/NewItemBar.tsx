@@ -1,16 +1,20 @@
 import { testComponent, render, screen, userEvent, waitFor, cleanup } from 'testUtils';
 import { stripSlashPrefix } from 'utils';
-import { routes } from 'routes';
-import NewItemBar from '../NewItemBar/NewItemBar';
+import { routes, RoutesPaths } from 'routes';
+import { ItemVariants } from 'commonTypes';
+import NewItemBar, { OwnProps as NewItemBarOwnProps } from '../NewItemBar/NewItemBar';
 import * as NewItemBarStories from '../NewItemBar/NewItemBar.stories';
 
 const exampleProps = {
   ...NewItemBarStories.Default.args,
-};
+} as NewItemBarOwnProps;
 
-const renderNewItemBar = (pageTypeOrPath, handleCloseProp = exampleProps.handleClose) =>
+const renderNewItemBar = (
+  pageTypeOrPath: ItemVariants | RoutesPaths,
+  handleCloseProp = exampleProps.handleClose,
+) =>
   render(<NewItemBar {...exampleProps} handleClose={handleCloseProp} />, {
-    pageType: stripSlashPrefix(pageTypeOrPath),
+    pageType: stripSlashPrefix(pageTypeOrPath) as ItemVariants,
   });
 
 const queryByTwitterPlaceholderText = () => screen.queryByPlaceholderText(/twitter/i);
@@ -25,7 +29,7 @@ describe('<NewItemBar />', () => {
   afterEach(cleanup);
 
   it.each([['notes'], ['twitters'], ['articles']])('display correctly heading', (pageType) => {
-    renderNewItemBar(pageType);
+    renderNewItemBar(pageType as ItemVariants);
 
     const newItemBarHeadingContent = pageType;
     const [newBarItemHeading] = getAllByHeadingRole();
