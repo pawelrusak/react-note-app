@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Input from 'components/atoms/Input/Input';
 import Button from 'components/atoms/Button/Button';
@@ -7,8 +6,13 @@ import { connect } from 'react-redux';
 import { addItem as addItemAction } from 'actions';
 import { Formik, Form } from 'formik';
 import { usePageTypeContext } from 'hooks';
+import { ActiveColorArgs } from 'theme/mixins';
+import { Item } from 'commonTypes';
 
-const StyledWrapper = styled.div`
+type IsVisible = { readonly isVisible: boolean };
+type StyledWrapperProps = Required<ActiveColorArgs> & IsVisible;
+
+const StyledWrapper = styled.div<StyledWrapperProps>`
   border-left: 10px solid ${({ theme, activecolor }) => theme[activecolor]};
   z-index: 9999;
   position: fixed;
@@ -42,7 +46,16 @@ const StyledInput = styled(Input)`
   margin-top: 30px;
 `;
 
-const NewItemBar = ({ isVisible, addItem, handleClose }) => {
+type DispatchProps = {
+  addItem: (itemType: string, itemContent: Omit<Item, 'id'>) => void;
+};
+
+// export for StoryBook use
+export type OwnProps = IsVisible & { readonly handleClose: () => void };
+
+export type NewItemBarProps = DispatchProps & OwnProps;
+
+const NewItemBar = ({ isVisible, addItem, handleClose }: NewItemBarProps) => {
   const pageContext = usePageTypeContext();
 
   return (
@@ -103,18 +116,12 @@ const NewItemBar = ({ isVisible, addItem, handleClose }) => {
   );
 };
 
-NewItemBar.propTypes = {
-  isVisible: PropTypes.bool,
-  addItem: PropTypes.func.isRequired,
-  handleClose: PropTypes.func.isRequired,
-};
-
 NewItemBar.defaultProps = {
   isVisible: false,
 };
 
-const mapDispatchToProps = (dispatch) => ({
-  addItem: (itemType, itemContent) => dispatch(addItemAction(itemType, itemContent)),
-});
+const mapDispatch: DispatchProps = {
+  addItem: (itemType, itemContent) => addItemAction(itemType, itemContent),
+};
 
-export default connect(null, mapDispatchToProps)(NewItemBar);
+export default connect<null, DispatchProps, OwnProps>(null, mapDispatch)(NewItemBar);
