@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 import Heading from 'components/atoms/Heading/Heading';
 import logoImg from 'assets/icons/logo.svg';
-import PropTypes from 'prop-types';
 
 const StyledWrapper = styled.div`
   width: 100%;
@@ -30,16 +29,16 @@ const StyledAuthCard = styled.div`
   justify-content: center;
 `;
 
-const AuthTemplate = ({ children }) => (
+export type AuthTemplateProps = {
+  children: JSX.Element;
+};
+
+const AuthTemplate = ({ children }: AuthTemplateProps) => (
   <StyledWrapper>
     <StyledLogo src={logoImg} alt="" />
     <Heading>Your new favorite online notes experience</Heading>
     <StyledAuthCard>{children}</StyledAuthCard>
   </StyledWrapper>
 );
-
-AuthTemplate.propTypes = {
-  children: PropTypes.element.isRequired,
-};
 
 export default AuthTemplate;
