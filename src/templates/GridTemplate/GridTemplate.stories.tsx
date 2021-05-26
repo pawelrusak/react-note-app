@@ -1,6 +1,7 @@
+import { Meta, Story } from '@storybook/react';
 import StoryRouter from 'storybook-react-router';
 import { routes } from 'routes';
-import GridTemplate from './GridTemplate';
+import GridTemplate, { GridTemplateProps } from './GridTemplate';
 import { StoreDecorator, GridTemplateRouterDecorator } from '../../../.storybook/decorators';
 import ViewPlaceholder from '../../../.storybook/components/ViewPlaceholder';
 
@@ -8,9 +9,9 @@ export default {
   title: 'Templates/GridTemplate',
   component: GridTemplate,
   decorators: [StoreDecorator],
-};
+} as Meta;
 
-const Template = () => (
+const Template: Story<GridTemplateProps> = () => (
   <GridTemplate>
     <ViewPlaceholder />
   </GridTemplate>
