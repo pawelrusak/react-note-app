@@ -1,14 +1,15 @@
+import { Meta, Story } from '@storybook/react';
 import StoryRouter from 'storybook-react-router';
 import * as CardStories from 'components/molecules/Card/Card.stories';
-import DetailsTemplate from './DetailsTemplate';
+import DetailsTemplate, { DetailsTemplateProps } from './DetailsTemplate';
 
 export default {
   title: 'Templates/DetailsTemplate',
   component: DetailsTemplate,
   decorators: [StoryRouter()],
-};
+} as Meta;
 
-const Template = (args) => <DetailsTemplate {...args} />;
+const Template: Story<DetailsTemplateProps> = (args) => <DetailsTemplate {...args} />;
 
 export const Note = Template.bind({});
 Note.args = {
