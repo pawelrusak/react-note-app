@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Input from 'components/atoms/Input/Input';
 import Heading from 'components/atoms/Heading/Heading';
@@ -57,8 +56,12 @@ const StyledButtonIcon = styled(ButtonIcon)`
   z-index: 10000;
 `;
 
-const GridTemplate = ({ children }) => {
-  const [newItemBarVisible, toggleNewItemBarVisible] = useToggle();
+export type GridTemplateProps = {
+  readonly children: React.ReactNode;
+};
+
+const GridTemplate = ({ children }: GridTemplateProps) => {
+  const [newItemBarVisible, toggleNewItemBarVisible] = useToggle(false);
   const pageType = usePageTypeContext();
 
   return (
@@ -81,10 +84,6 @@ const GridTemplate = ({ children }) => {
       </StyledWrapper>
     </UserPageTemplate>
   );
-};
-
-GridTemplate.propTypes = {
-  children: PropTypes.node.isRequired,
 };
 
 export default GridTemplate;
