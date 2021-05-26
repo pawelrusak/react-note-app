@@ -1,11 +1,11 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import PropTypes from 'prop-types';
 import UserPageTemplate from 'templates/UserPageTemplate/UserPageTemplate';
 import Heading from 'components/atoms/Heading/Heading';
 import Paragraph from 'components/atoms/Paragraph/Paragraph';
 import Button from 'components/atoms/Button/Button';
 import { usePageTypeContext } from 'hooks';
+import { Item } from 'commonTypes';
 
 const StyledWrapper = styled.div`
   padding: 25px 150px 25px 70px;
@@ -52,7 +52,15 @@ const StyledImage = styled.img`
   border-radius: 50%;
 `;
 
-const DetailsTemplate = ({ title, created, content, articleUrl, twitterName }) => {
+export type DetailsTemplateProps = Partial<Omit<Item, 'id'>>;
+
+const DetailsTemplate = ({
+  title,
+  created,
+  content,
+  articleUrl,
+  twitterName,
+}: DetailsTemplateProps) => {
   const pageContext = usePageTypeContext();
 
   return (
@@ -66,7 +74,7 @@ const DetailsTemplate = ({ title, created, content, articleUrl, twitterName }) =
         </StyledPageHeader>
         <Paragraph>{content}</Paragraph>
         {pageContext === 'articles' && (
-          <StyledLink data-testid="article-link" href={articleUrl}>
+          <StyledLink data-testid="article-link" href={articleUrl as string}>
             Open article
           </StyledLink>
         )}
@@ -74,7 +82,7 @@ const DetailsTemplate = ({ title, created, content, articleUrl, twitterName }) =
           <StyledImage
             data-testid="avatar"
             alt={title}
-            src={`https://unavatar.now.sh/twitter/${twitterName}`}
+            src={`https://unavatar.now.sh/twitter/${twitterName as string}`}
           />
         )}
         <Button as={Link} to={`/${pageContext}`} activecolor={pageContext}>
@@ -83,14 +91,6 @@ const DetailsTemplate = ({ title, created, content, articleUrl, twitterName }) =
       </StyledWrapper>
     </UserPageTemplate>
   );
-};
-
-DetailsTemplate.propTypes = {
-  title: PropTypes.string,
-  created: PropTypes.string,
-  content: PropTypes.string,
-  articleUrl: PropTypes.string,
-  twitterName: PropTypes.string,
 };
 
 DetailsTemplate.defaultProps = {
