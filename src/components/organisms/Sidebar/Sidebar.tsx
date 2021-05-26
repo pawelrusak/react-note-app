@@ -7,9 +7,9 @@ import penIcon from 'assets/icons/pen.svg';
 import twitterIcon from 'assets/icons/twitter.svg';
 import logoIcon from 'assets/icons/logo.svg';
 import { usePageTypeContext } from 'hooks';
-import { activecolor } from 'theme/mixins';
+import { activecolor, ActiveColorArgs } from 'theme/mixins';
 
-const StyledWrapper = styled.nav`
+const StyledWrapper = styled.nav<Required<ActiveColorArgs>>`
   position: fixed;
   left: 0;
   top: 0;
@@ -53,13 +53,13 @@ const Sidebar = () => {
       <StyledLogoLink to="/" />
       <StyledLinksList>
         <li>
-          <ButtonIcon as={NavLink} to="/notes" icon={penIcon} activeclass="active" />
+          <ButtonIcon as={NavLink} to="/notes" icon={penIcon} activeClassName="active" />
         </li>
         <li>
-          <ButtonIcon as={NavLink} to="/twitters" icon={twitterIcon} activeclass="active" />
+          <ButtonIcon as={NavLink} to="/twitters" icon={twitterIcon} activeClassName="active" />
         </li>
         <li>
-          <ButtonIcon as={NavLink} to="/articles" icon={bulbIcon} activeclass="active" />
+          <ButtonIcon as={NavLink} to="/articles" icon={bulbIcon} activeClassName="active" />
         </li>
       </StyledLinksList>
       <StyledLogoutButton as={NavLink} to="/login" icon={logoutIcon} />
