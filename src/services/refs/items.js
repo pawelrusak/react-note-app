@@ -1,5 +1,5 @@
 import { db } from '../firebase';
 
-export const notesCollectionRef = db.collection('notes');
+export const getNotesCollectionRef = () => db.collection('notes');
 
-export const getNoteDocumentRefById = (id) => notesCollectionRef.doc(id);
+export const getNoteDocumentRefById = (id) => getNotesCollectionRef().doc(id);
