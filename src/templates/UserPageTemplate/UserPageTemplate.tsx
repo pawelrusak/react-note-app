@@ -1,20 +1,19 @@
 import styled from 'styled-components';
-import PropTypes from 'prop-types';
 import Sidebar from 'components/organisms/Sidebar/Sidebar';
 
 const StyledWrapper = styled.div`
   padding-left: 150px;
 `;
 
-const UserPageTemplate = ({ children }) => (
+export type UserPageTemplateProps = {
+  readonly children: React.ReactNode;
+};
+
+const UserPageTemplate = ({ children }: UserPageTemplateProps) => (
   <StyledWrapper>
     <Sidebar />
     {children}
   </StyledWrapper>
 );
-
-UserPageTemplate.propTypes = {
-  children: PropTypes.oneOfType([PropTypes.element, PropTypes.node]).isRequired,
-};
 
 export default UserPageTemplate;
