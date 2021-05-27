@@ -1,7 +1,7 @@
 import { convertQuerySnapshot, convertQuerySnapshotItem } from './converters';
 import {
-  queryItemsByTypeAndUserID,
-  queryItemByID,
+  queryGetItemsByTypeAndUserID,
+  queryGetItemByID,
   queryRemoveItemByID,
   queryAddItem,
 } from './queries/items';
@@ -12,7 +12,7 @@ export const authenticateUser = (email, password) =>
 
 export const fetchItems = async ({ type, userID } = {}) => {
   try {
-    const querySnapshotResponse = await queryItemsByTypeAndUserID(type, userID);
+    const querySnapshotResponse = await queryGetItemsByTypeAndUserID(type, userID);
     const data = convertQuerySnapshot(querySnapshotResponse);
 
     return Promise.resolve({ data });
@@ -23,7 +23,7 @@ export const fetchItems = async ({ type, userID } = {}) => {
 
 export const fetchItem = async (id) => {
   try {
-    const querySnapshotResponse = await queryItemByID(id);
+    const querySnapshotResponse = await queryGetItemByID(id);
     const data = convertQuerySnapshotItem(querySnapshotResponse);
 
     return Promise.resolve({ data });
