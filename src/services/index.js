@@ -1,4 +1,4 @@
-import { convertQuerySnapshot, convertQuerySnapshotItem } from 'utils';
+import { convertQuerySnapshot, convertQuerySnapshotItem } from './converters';
 import {
   queryItemsByTypeAndUserID,
   queryItemByID,
