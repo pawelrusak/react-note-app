@@ -3,7 +3,7 @@ import {
   fetchItems as fetchRemoteItems,
   removeItem as removeRemoteItems,
   addItem as addRemoteItems,
-} from 'api';
+} from 'services';
 
 export const ADD_ITEM_REQUEST = 'ADD_ITEM_REQUEST';
 export const ADD_ITEM_SUCCESS = 'ADD_ITEM_SUCCESS';

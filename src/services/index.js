@@ -1,18 +1,18 @@
-import { convertQuerySnapshot, convertQuerySnapshotItem } from 'utils';
+import { convertQuerySnapshot, convertQuerySnapshotItem } from './converters/items';
 import {
-  queryItemsByTypeAndUserID,
-  queryItemByID,
+  queryGetItemsByTypeAndUserID,
+  queryGetItemByID,
   queryRemoveItemByID,
   queryAddItem,
-} from './queries';
-import { auth } from './firebase';
+} from './queries/items';
+import { auth } from './core';
 
 export const authenticateUser = (email, password) =>
   auth.signInWithEmailAndPassword(email, password);
 
 export const fetchItems = async ({ type, userID } = {}) => {
   try {
-    const querySnapshotResponse = await queryItemsByTypeAndUserID(type, userID);
+    const querySnapshotResponse = await queryGetItemsByTypeAndUserID(type, userID);
     const data = convertQuerySnapshot(querySnapshotResponse);
 
     return Promise.resolve({ data });
@@ -23,7 +23,7 @@ export const fetchItems = async ({ type, userID } = {}) => {
 
 export const fetchItem = async (id) => {
   try {
-    const querySnapshotResponse = await queryItemByID(id);
+    const querySnapshotResponse = await queryGetItemByID(id);
     const data = convertQuerySnapshotItem(querySnapshotResponse);
 
     return Promise.resolve({ data });

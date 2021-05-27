@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { fetchItem } from 'api';
+import { fetchItem } from 'services';
 import { useParams } from 'react-router-dom';
 import { usePageTypeContext } from './usePageTypeContext';
 import { useItemSelector } from './useItemSelector';

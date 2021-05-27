@@ -4,7 +4,7 @@ import { fakeItemsData } from 'testUtils/fakers';
 import { createStore } from 'redux';
 import rootReducer from 'reducers';
 import { Route } from 'react-router-dom';
-import * as api from 'api';
+import * as services from 'services';
 import DetailsPage from '../DetailsPage/DetailsPage';
 
 const renderDetailsPage = (itemType, store = createStore(rootReducer, fakeItemsData)) => {
@@ -34,7 +34,8 @@ const queryByAvatar = () => screen.queryByTestId('avatar');
 const noteResolveData = {
   data: noteItem,
 };
-const mocksFetchItem = () => jest.spyOn(api, 'fetchItem').mockResolvedValueOnce(noteResolveData);
+const mocksFetchItem = () =>
+  jest.spyOn(services, 'fetchItem').mockResolvedValueOnce(noteResolveData);
 
 describe('<DetailsPage />', () => {
   afterEach(cleanup);
