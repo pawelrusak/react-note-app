@@ -1,4 +1,4 @@
-import { db } from '../firebase';
+import { db } from '../core';
 
 export const getNotesCollectionRef = () => db.collection('notes');
 

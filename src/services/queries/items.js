@@ -1,4 +1,4 @@
-import { serverTimestamp } from '../firebase';
+import { serverTimestamp } from '../core';
 import { getNotesCollectionRef, getNoteDocumentRefById } from '../refs/items';
 
 export const queryGetItemsByTypeAndUserID = (type, userID = null) =>

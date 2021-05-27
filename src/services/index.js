@@ -5,7 +5,7 @@ import {
   queryRemoveItemByID,
   queryAddItem,
 } from './queries/items';
-import { auth } from './firebase';
+import { auth } from './core';
 
 export const authenticateUser = (email, password) =>
   auth.signInWithEmailAndPassword(email, password);
