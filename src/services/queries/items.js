@@ -1,5 +1,5 @@
-import { serverTimestamp } from './firebase';
-import { getNotesCollectionRef, getNoteDocumentRefById } from './refs/items';
+import { serverTimestamp } from '../firebase';
+import { getNotesCollectionRef, getNoteDocumentRefById } from '../refs/items';
 
 export const queryItemsByTypeAndUserID = (type, userID = null) =>
   getNotesCollectionRef().where('userID', '==', userID).where('type', '==', type).get();

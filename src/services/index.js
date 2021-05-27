@@ -4,7 +4,7 @@ import {
   queryItemByID,
   queryRemoveItemByID,
   queryAddItem,
-} from './queries';
+} from './queries/items';
 import { auth } from './firebase';
 
 export const authenticateUser = (email, password) =>
