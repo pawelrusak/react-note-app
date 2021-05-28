@@ -1,15 +1,16 @@
-/* eslint-disable  */
+import { Item } from 'commonTypes';
+import { QueryDocumentSnapshot, Timestamp, QuerySnapshot, ServiceItem } from '../servicesTypes';
 
-// @ts-ignore
-export const convertQuerySnapshotItem = (item) => {
-  const { userID, created, ...rest } = item.data();
+export const convertQuerySnapshotItem = (item: QueryDocumentSnapshot) => {
+  const { created, ...rest } = item.data() as Partial<ServiceItem>;
+
+  delete rest.userID;
   return {
-    id: item.id,
-    created: new Date(created.seconds).getTime(),
     ...rest,
-  };
+    id: item.id,
+    created: (created as Timestamp).toMillis(),
+  } as Item;
 };
 
-// @ts-ignore
-export const convertQuerySnapshot = (querySnapshot) =>
+export const convertQuerySnapshot = (querySnapshot: QuerySnapshot): Item[] =>
   querySnapshot.docs.map(convertQuerySnapshotItem);
