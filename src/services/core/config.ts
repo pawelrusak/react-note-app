@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/restrict-template-expressions */
 /**
  * Firebase config objects.
  * @see {@link https://firebase.google.com/docs/projects/learn-more#config-files-objects}
