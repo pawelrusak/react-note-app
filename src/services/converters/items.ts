@@ -8,7 +8,7 @@ export const convertQuerySnapshotItem = (item: QueryDocumentSnapshot) => {
   return {
     ...rest,
     id: item.id,
-    created: (created as Timestamp).toMillis(),
+    created: (created as Timestamp).toDate(),
   } as Item;
 };
 
