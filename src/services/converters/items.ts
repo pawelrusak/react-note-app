@@ -1,3 +1,6 @@
+/* eslint-disable  */
+
+// @ts-ignore
 export const convertQuerySnapshotItem = (item) => {
   const { userID, created, ...rest } = item.data();
   return {
@@ -7,5 +10,6 @@ export const convertQuerySnapshotItem = (item) => {
   };
 };
 
+// @ts-ignore
 export const convertQuerySnapshot = (querySnapshot) =>
   querySnapshot.docs.map(convertQuerySnapshotItem);
