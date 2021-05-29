@@ -8,10 +8,8 @@ export type ServiceItem = {
 
 export type ServiceAddItem = Omit<ServiceItem, 'created'>;
 
-export type ServiceItemVariants = ItemVariants;
-
 export type DocumentItem = Partial<{
-  type: ServiceItemVariants;
+  type: ItemVariants;
   userID: null | string;
 }> &
   Modify<Writeable<Item>, { created: firebase.firestore.Timestamp | Date }>;

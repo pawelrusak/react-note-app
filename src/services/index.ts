@@ -1,4 +1,4 @@
-import { Item } from 'commonTypes';
+import { Item, ItemVariants } from 'commonTypes';
 import {
   queryGetItemsByTypeAndUserID,
   queryGetItemByID,
@@ -6,13 +6,13 @@ import {
   queryAddItem,
 } from './queries/items';
 import { auth } from './core';
-import { ServiceItemVariants, ServiceAddItem } from './servicesTypes';
+import { ServiceAddItem } from './servicesTypes';
 
 export const authenticateUser = (email: string, password: string) =>
   auth.signInWithEmailAndPassword(email, password);
 
 type FetchItemsArgs = {
-  readonly type: ServiceItemVariants;
+  readonly type: ItemVariants;
   readonly userID: string;
 };
 

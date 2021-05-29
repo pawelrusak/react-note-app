@@ -1,11 +1,9 @@
-import { ServiceItemVariants, ServiceAddItem, DocumentItem } from '../servicesTypes';
+import { ItemVariants } from 'commonTypes';
+import { ServiceAddItem, DocumentItem } from '../servicesTypes';
 import { getNotesCollectionRef, getNoteDocumentRefById } from '../refs/items';
 import { itemConverter } from '../converters/items';
 
-export const queryGetItemsByTypeAndUserID = (
-  type: ServiceItemVariants,
-  userID: null | string = null,
-) =>
+export const queryGetItemsByTypeAndUserID = (type: ItemVariants, userID: null | string = null) =>
   getNotesCollectionRef()
     .where('userID', '==', userID)
     .where('type', '==', type)
