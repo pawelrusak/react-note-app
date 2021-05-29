@@ -1,6 +1,21 @@
-import { Item, Modify } from 'commonTypes';
+import firebase from 'firebase/app';
+import { Item, Modify, Writeable } from 'commonTypes';
 import { isArticleItem, isTwitterItem } from 'utils/guards';
-import { QueryDocumentSnapshot, Timestamp, QuerySnapshot, ServiceItem } from '../servicesTypes';
+import {
+  QueryDocumentSnapshot,
+  Timestamp,
+  QuerySnapshot,
+  ServiceItem,
+  ServiceAddItem,
+  ServiceItemVariants,
+} from '../servicesTypes';
+import { serverTimestamp } from '../core';
+
+type DocumentItem = Partial<{
+  type: ServiceItemVariants;
+  userID: null | string;
+}> &
+  Modify<Writeable<Item>, { created: Timestamp | Date }>;
 
 type RestItemData =
   | { articleUrl: string; twitterName: never }
@@ -29,3 +44,37 @@ export const convertQuerySnapshotItem = (item: QueryDocumentSnapshot): Item => {
 
 export const convertQuerySnapshot = (querySnapshot: QuerySnapshot): Item[] =>
   querySnapshot.docs.map(convertQuerySnapshotItem);
+
+export const itemConverter = {
+  toFirestore(data: DocumentItem): firebase.firestore.DocumentData {
+    return {
+      ...data,
+      userID: data.userID,
+      type: data.type,
+      created: serverTimestamp(),
+    } as ServiceAddItem;
+  },
+
+  fromFirestore(
+    snapshot: firebase.firestore.QueryDocumentSnapshot,
+    options: firebase.firestore.SnapshotOptions,
+  ): DocumentItem {
+    const data = snapshot.data(options) as Modify<ServiceItem, { created: Timestamp }>;
+
+    const dataItem: RestItemData = {} as RestItemData;
+
+    if (isArticleItem(data)) {
+      dataItem.articleUrl = data.articleUrl as string;
+    } else if (isTwitterItem(data)) {
+      dataItem.twitterName = data.twitterName as string;
+    }
+
+    return {
+      id: snapshot.id,
+      title: data.title,
+      content: data.content,
+      created: data.created.toDate(),
+      ...dataItem,
+    };
+  },
+};
