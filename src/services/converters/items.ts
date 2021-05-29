@@ -54,20 +54,19 @@ export const itemConverter = {
   ): DocumentItem {
     const data = snapshot.data(options) as Modify<ServiceItem, { created: Timestamp }>;
 
-    const dataItem: RestItemData = {} as RestItemData;
-
-    if (isArticleItem(data)) {
-      dataItem.articleUrl = data.articleUrl as string;
-    } else if (isTwitterItem(data)) {
-      dataItem.twitterName = data.twitterName as string;
-    }
-
-    return {
+    const documentItem: DocumentItem = {
       id: snapshot.id,
       title: data.title,
       content: data.content,
       created: data.created.toDate(),
-      ...dataItem,
     };
+
+    if (isArticleItem(data)) {
+      documentItem.articleUrl = data.articleUrl;
+    } else if (isTwitterItem(data)) {
+      documentItem.twitterName = data.twitterName;
+    }
+
+    return documentItem;
   },
 };
