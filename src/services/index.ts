@@ -1,4 +1,4 @@
-import { Item, ItemVariants } from 'commonTypes';
+import { Item } from 'commonTypes';
 import {
   queryGetItemsByTypeAndUserID,
   queryGetItemByID,
@@ -6,17 +6,12 @@ import {
   queryAddItem,
 } from './queries/items';
 import { auth } from './core';
-import { ServiceAddItem } from './servicesTypes';
+import { DocumentItem, DocumentItemQueryArgs } from './servicesTypes';
 
 export const authenticateUser = (email: string, password: string) =>
   auth.signInWithEmailAndPassword(email, password);
 
-type FetchItemsArgs = {
-  readonly type: ItemVariants;
-  readonly userID: string;
-};
-
-export const fetchItems = async ({ type, userID }: FetchItemsArgs) => {
+export const fetchItems = async ({ type, userID }: DocumentItemQueryArgs) => {
   try {
     const itemsSnap = await queryGetItemsByTypeAndUserID(type, userID);
     const data = itemsSnap.docs.map((item) => item.data()) as Item[];
@@ -48,7 +43,7 @@ export const removeItem = async (id: string) => {
   }
 };
 
-export const addItem = async ({ userID, type, ...itemContent }: ServiceAddItem) => {
+export const addItem = async ({ userID, type, ...itemContent }: DocumentItem) => {
   try {
     const documentReference = await queryAddItem({ userID, type, ...itemContent });
     const { data } = await fetchItem(documentReference.id);

@@ -1,5 +1,5 @@
 import { ItemVariants } from 'commonTypes';
-import { ServiceAddItem, DocumentItem } from '../servicesTypes';
+import { DocumentItem } from '../servicesTypes';
 import { getNotesCollectionRef, getNoteDocumentRefById } from '../refs/items';
 import { itemConverter } from '../converters/items';
 
@@ -15,7 +15,5 @@ export const queryGetItemByID = (id: string) =>
 
 export const queryRemoveItemByID = (id: string) => getNoteDocumentRefById(id).delete();
 
-export const queryAddItem = (serviceItem: ServiceAddItem) =>
-  getNotesCollectionRef()
-    .withConverter(itemConverter)
-    .add(serviceItem as DocumentItem);
+export const queryAddItem = (serviceItem: DocumentItem) =>
+  getNotesCollectionRef().withConverter(itemConverter).add(serviceItem);
