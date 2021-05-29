@@ -10,14 +10,8 @@ export type ServiceAddItem = Omit<ServiceItem, 'created'>;
 
 export type ServiceItemVariants = ItemVariants;
 
-export type QueryDocumentSnapshot = firebase.firestore.QueryDocumentSnapshot;
-
-export type Timestamp = firebase.firestore.Timestamp;
-
-export type QuerySnapshot = firebase.firestore.QuerySnapshot;
-
 export type DocumentItem = Partial<{
   type: ServiceItemVariants;
   userID: null | string;
 }> &
-  Modify<Writeable<Item>, { created: Timestamp | Date }>;
+  Modify<Writeable<Item>, { created: firebase.firestore.Timestamp | Date }>;
