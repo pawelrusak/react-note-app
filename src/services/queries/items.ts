@@ -1,6 +1,6 @@
-import { ServiceItemVariants, ServiceAddItem, ServiceItem } from '../servicesTypes';
-import { serverTimestamp } from '../core';
+import { ServiceItemVariants, ServiceAddItem, DocumentItem } from '../servicesTypes';
 import { getNotesCollectionRef, getNoteDocumentRefById } from '../refs/items';
+import { itemConverter } from '../converters/items';
 
 export const queryGetItemsByTypeAndUserID = (
   type: ServiceItemVariants,
@@ -11,10 +11,7 @@ export const queryGetItemByID = (id: string) => getNoteDocumentRefById(id).get()
 
 export const queryRemoveItemByID = (id: string) => getNoteDocumentRefById(id).delete();
 
-export const queryAddItem = ({ userID, type, ...itemContent }: ServiceAddItem) =>
-  getNotesCollectionRef().add({
-    userID,
-    type,
-    ...itemContent,
-    created: serverTimestamp(),
-  } as ServiceItem);
+export const queryAddItem = (serviceItem: ServiceAddItem) =>
+  getNotesCollectionRef()
+    .withConverter(itemConverter)
+    .add(serviceItem as DocumentItem);
