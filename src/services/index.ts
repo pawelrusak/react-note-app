@@ -1,4 +1,5 @@
-import { convertQuerySnapshot, convertQuerySnapshotItem } from './converters/items';
+import { Item } from 'commonTypes';
+import { convertQuerySnapshotItem } from './converters/items';
 import {
   queryGetItemsByTypeAndUserID,
   queryGetItemByID,
@@ -18,8 +19,8 @@ type FetchItemsArgs = {
 
 export const fetchItems = async ({ type, userID }: FetchItemsArgs) => {
   try {
-    const querySnapshotResponse = await queryGetItemsByTypeAndUserID(type, userID);
-    const data = convertQuerySnapshot(querySnapshotResponse);
+    const itemsSnap = await queryGetItemsByTypeAndUserID(type, userID);
+    const data = itemsSnap.docs.map((item) => item.data()) as Item[];
 
     return Promise.resolve({ data });
   } catch (error) {
