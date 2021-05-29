@@ -12,7 +12,8 @@ export const queryGetItemsByTypeAndUserID = (
     .withConverter(itemConverter)
     .get();
 
-export const queryGetItemByID = (id: string) => getNoteDocumentRefById(id).get();
+export const queryGetItemByID = (id: string) =>
+  getNoteDocumentRefById(id).withConverter(itemConverter).get();
 
 export const queryRemoveItemByID = (id: string) => getNoteDocumentRefById(id).delete();
 

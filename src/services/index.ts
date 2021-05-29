@@ -1,5 +1,4 @@
 import { Item } from 'commonTypes';
-import { convertQuerySnapshotItem } from './converters/items';
 import {
   queryGetItemsByTypeAndUserID,
   queryGetItemByID,
@@ -7,7 +6,7 @@ import {
   queryAddItem,
 } from './queries/items';
 import { auth } from './core';
-import { ServiceItemVariants, ServiceAddItem, QueryDocumentSnapshot } from './servicesTypes';
+import { ServiceItemVariants, ServiceAddItem } from './servicesTypes';
 
 export const authenticateUser = (email: string, password: string) =>
   auth.signInWithEmailAndPassword(email, password);
@@ -30,11 +29,8 @@ export const fetchItems = async ({ type, userID }: FetchItemsArgs) => {
 
 export const fetchItem = async (id: string) => {
   try {
-    const querySnapshotResponse = await queryGetItemByID(id);
-    /**
-     * @todo check type of convertQuerySnapshotItem argument
-     */
-    const data = convertQuerySnapshotItem(querySnapshotResponse as QueryDocumentSnapshot);
+    const itemSnap = await queryGetItemByID(id);
+    const data = itemSnap.data();
 
     return Promise.resolve({ data });
   } catch (error) {
