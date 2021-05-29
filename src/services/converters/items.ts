@@ -1,21 +1,14 @@
 import firebase from 'firebase/app';
-import { Item, Modify, Writeable } from 'commonTypes';
+import { Item, Modify } from 'commonTypes';
 import { isArticleItem, isTwitterItem } from 'utils/guards';
 import {
   QueryDocumentSnapshot,
   Timestamp,
   QuerySnapshot,
   ServiceItem,
-  ServiceAddItem,
-  ServiceItemVariants,
+  DocumentItem,
 } from '../servicesTypes';
 import { serverTimestamp } from '../core';
-
-type DocumentItem = Partial<{
-  type: ServiceItemVariants;
-  userID: null | string;
-}> &
-  Modify<Writeable<Item>, { created: Timestamp | Date }>;
 
 type RestItemData =
   | { articleUrl: string; twitterName: never }
@@ -52,7 +45,7 @@ export const itemConverter = {
       userID: data.userID,
       type: data.type,
       created: serverTimestamp(),
-    } as ServiceAddItem;
+    } as DocumentItem;
   },
 
   fromFirestore(
