@@ -1,20 +1,19 @@
-import { ServiceItemVariants, ServiceAddItem, ServiceItem } from '../servicesTypes';
-import { serverTimestamp } from '../core';
+import { ItemVariants } from 'commonTypes';
+import { DocumentItem } from '../servicesTypes';
 import { getNotesCollectionRef, getNoteDocumentRefById } from '../refs/items';
+import { itemConverter } from '../converters/items';
 
-export const queryGetItemsByTypeAndUserID = (
-  type: ServiceItemVariants,
-  userID: null | string = null,
-) => getNotesCollectionRef().where('userID', '==', userID).where('type', '==', type).get();
+export const queryGetItemsByTypeAndUserID = (type: ItemVariants, userID: null | string = null) =>
+  getNotesCollectionRef()
+    .where('userID', '==', userID)
+    .where('type', '==', type)
+    .withConverter(itemConverter)
+    .get();
 
-export const queryGetItemByID = (id: string) => getNoteDocumentRefById(id).get();
+export const queryGetItemByID = (id: string) =>
+  getNoteDocumentRefById(id).withConverter(itemConverter).get();
 
 export const queryRemoveItemByID = (id: string) => getNoteDocumentRefById(id).delete();
 
-export const queryAddItem = ({ userID, type, ...itemContent }: ServiceAddItem) =>
-  getNotesCollectionRef().add({
-    userID,
-    type,
-    ...itemContent,
-    created: serverTimestamp(),
-  } as ServiceItem);
+export const queryAddItem = (serviceItem: DocumentItem) =>
+  getNotesCollectionRef().withConverter(itemConverter).add(serviceItem);

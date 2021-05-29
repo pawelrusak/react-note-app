@@ -1,4 +1,4 @@
-import { convertQuerySnapshot, convertQuerySnapshotItem } from './converters/items';
+import { Item } from 'commonTypes';
 import {
   queryGetItemsByTypeAndUserID,
   queryGetItemByID,
@@ -6,20 +6,15 @@ import {
   queryAddItem,
 } from './queries/items';
 import { auth } from './core';
-import { ServiceItemVariants, ServiceAddItem, QueryDocumentSnapshot } from './servicesTypes';
+import { DocumentItem, DocumentItemQueryArgs } from './servicesTypes';
 
 export const authenticateUser = (email: string, password: string) =>
   auth.signInWithEmailAndPassword(email, password);
 
-type FetchItemsArgs = {
-  readonly type: ServiceItemVariants;
-  readonly userID: string;
-};
-
-export const fetchItems = async ({ type, userID }: FetchItemsArgs) => {
+export const fetchItems = async ({ type, userID }: DocumentItemQueryArgs) => {
   try {
-    const querySnapshotResponse = await queryGetItemsByTypeAndUserID(type, userID);
-    const data = convertQuerySnapshot(querySnapshotResponse);
+    const itemsSnap = await queryGetItemsByTypeAndUserID(type, userID);
+    const data = itemsSnap.docs.map((item) => item.data()) as Item[];
 
     return Promise.resolve({ data });
   } catch (error) {
@@ -29,11 +24,8 @@ export const fetchItems = async ({ type, userID }: FetchItemsArgs) => {
 
 export const fetchItem = async (id: string) => {
   try {
-    const querySnapshotResponse = await queryGetItemByID(id);
-    /**
-     * @todo check type of convertQuerySnapshotItem argument
-     */
-    const data = convertQuerySnapshotItem(querySnapshotResponse as QueryDocumentSnapshot);
+    const itemSnap = await queryGetItemByID(id);
+    const data = itemSnap.data();
 
     return Promise.resolve({ data });
   } catch (error) {
@@ -51,7 +43,7 @@ export const removeItem = async (id: string) => {
   }
 };
 
-export const addItem = async ({ userID, type, ...itemContent }: ServiceAddItem) => {
+export const addItem = async ({ userID, type, ...itemContent }: DocumentItem) => {
   try {
     const documentReference = await queryAddItem({ userID, type, ...itemContent });
     const { data } = await fetchItem(documentReference.id);

@@ -5,6 +5,13 @@
  */
 export type Modify<T, R> = Omit<T, keyof R> & R;
 
+/**
+ * {@link https://stackoverflow.com/a/43001581 code source}
+ */
+export type Writeable<T> = { -readonly [P in keyof T]: T[P] };
+
+export type DeepWriteable<T> = { -readonly [P in keyof T]: DeepWriteable<T[P]> };
+
 /*
  *
  * VARIANTS
