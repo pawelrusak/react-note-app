@@ -1,14 +1,16 @@
 import GridTemplate from 'templates/GridTemplate/GridTemplate';
 import Card from 'components/molecules/Card/Card';
 import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
+import { ArticleItem } from 'commonTypes';
+import { RootState } from 'reducers';
 
-const Articles = ({ articles }) => (
+export type ArticlesProps = { readonly articles: ArticleItem[] };
+
+const Articles = ({ articles }: ArticlesProps) => (
   <GridTemplate>
     {articles.map(({ id, title, content, articleUrl, created }) => (
       <Card
         id={id}
-        cardType="articles"
         title={title}
         content={content}
         articleUrl={articleUrl}
@@ -19,23 +21,7 @@ const Articles = ({ articles }) => (
   </GridTemplate>
 );
 
-Articles.propTypes = {
-  articles: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      title: PropTypes.string.isRequired,
-      content: PropTypes.string.isRequired,
-      articleUrl: PropTypes.string.isRequired,
-      created: PropTypes.string.isRequired,
-    }),
-  ),
-};
-
-Articles.defaultProps = {
-  articles: [],
-};
-
-const mapStateToProps = (state) => {
+const mapStateToProps = (state: RootState) => {
   const { articles } = state;
   return { articles };
 };
