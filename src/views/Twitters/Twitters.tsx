@@ -7,17 +7,17 @@ const Twitters = () => {
 
   return (
     <GridTemplate>
-      {twitters.map(({ id, title, content, twitterName, created }) => (
-        <Card
-          id={id}
-          cardType="twitters"
-          title={title}
-          content={content}
-          twitterName={twitterName}
-          created={created}
-          key={id}
-        />
-      ))}
+      {twitters.length > 0 &&
+        twitters.map(({ id, title, content, twitterName, created }) => (
+          <Card
+            id={id}
+            title={title}
+            content={content}
+            twitterName={twitterName}
+            created={created}
+            key={id}
+          />
+        ))}
     </GridTemplate>
   );
 };
