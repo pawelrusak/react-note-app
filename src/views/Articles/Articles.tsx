@@ -4,7 +4,9 @@ import { connect } from 'react-redux';
 import { ArticleItem } from 'commonTypes';
 import { RootState } from 'reducers';
 
-export type ArticlesProps = { readonly articles: ArticleItem[] };
+export type ArticlesProps = {
+  readonly articles: ArticleItem[];
+};
 
 const Articles = ({ articles }: ArticlesProps) => (
   <GridTemplate>
@@ -21,9 +23,6 @@ const Articles = ({ articles }: ArticlesProps) => (
   </GridTemplate>
 );
 
-const mapStateToProps = (state: RootState) => {
-  const { articles } = state;
-  return { articles };
-};
+const mapStateToProps = ({ articles }: RootState) => ({ articles });
 
 export default connect(mapStateToProps)(Articles);
