@@ -1,3 +1,4 @@
+import { Item, NoteItem, ArticleItem, TwitterItem } from 'commonTypes';
 import {
   ADD_ITEM_SUCCESS,
   // REMOVE_ITEM_REQUEST,
@@ -7,9 +8,28 @@ import {
   FETCH_SUCCESS,
   // eslint-disable-next-line
   FETCH_FAILURE,
+} from 'actions/actionTypes';
+import type {
+  FetchRequestAction,
+  FetchSuccessAction,
+  FetchFailureAction,
+  RemoveItemSuccessAction,
+  AddItemSuccessAction,
+  AuthSuccessAction,
 } from 'actions';
 
+export type RootState = {
+  readonly notes: NoteItem[];
+  readonly twitters: TwitterItem[];
+  readonly articles: ArticleItem[];
+  readonly userID: string | null;
+  readonly isLoading: boolean;
+};
+
 const initialState = {
+  notes: [],
+  twitters: [],
+  articles: [],
   /**
    * You can find the original code of the course in the link below.
    *
@@ -17,11 +37,19 @@ const initialState = {
    *
    * @see {@link https://github.com/eduwebpl/kurs-react-w-praktyce/blob/ce05514413ce0d022623870c7327ca4fe7dea0d5/06/src/reducers/index.js#L4}
    */
-  userID: process.env.REACT_APP_TEMPORARY_USER_ID,
+  userID: process.env.REACT_APP_TEMPORARY_USER_ID as string,
   isLoading: false,
 };
 
-const rootReducer = (state = initialState, action) => {
+type RootAction =
+  | FetchRequestAction
+  | FetchSuccessAction
+  | FetchFailureAction
+  | RemoveItemSuccessAction
+  | AddItemSuccessAction
+  | AuthSuccessAction;
+
+const rootReducer = (state: RootState = initialState, action: RootAction) => {
   switch (action.type) {
     case FETCH_REQUEST:
       return {
@@ -42,7 +70,7 @@ const rootReducer = (state = initialState, action) => {
     case AUTH_SUCCESS:
       return {
         ...state,
-        userID: action.payload.user.uid,
+        userID: action.payload.user?.uid ?? null,
       };
     case ADD_ITEM_SUCCESS:
       return {
@@ -53,7 +81,9 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         [action.payload.itemType]: [
-          ...state[action.payload.itemType].filter((item) => item.id !== action.payload.id),
+          ...(state[action.payload.itemType] as Item[]).filter(
+            (item) => item.id !== action.payload.id,
+          ),
         ],
       };
     default:

@@ -25,7 +25,7 @@ export const fetchItems = async ({ type, userID }: DocumentItemQueryArgs) => {
 export const fetchItem = async (id: string) => {
   try {
     const itemSnap = await queryGetItemByID(id);
-    const data = itemSnap.data();
+    const data = itemSnap.data() as Item;
 
     return Promise.resolve({ data });
   } catch (error) {
