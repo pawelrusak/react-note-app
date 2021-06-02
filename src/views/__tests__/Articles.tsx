@@ -1,3 +1,5 @@
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
 describe('<Articles />', () => {
   it.todo('display the cards with data from store');
 
