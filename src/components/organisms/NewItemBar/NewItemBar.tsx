@@ -7,7 +7,7 @@ import { addItem as addItemAction } from 'actions';
 import { Formik, Form } from 'formik';
 import { usePageTypeContext } from 'hooks';
 import { ActiveColorArgs } from 'theme/mixins';
-import { Item } from 'commonTypes';
+import { Item, ItemVariants } from 'commonTypes';
 
 type IsVisible = { readonly isVisible: boolean };
 type StyledWrapperProps = Required<ActiveColorArgs> & IsVisible;
@@ -47,7 +47,7 @@ const StyledInput = styled(Input)`
 `;
 
 type DispatchProps = {
-  addItem: (itemType: string, itemContent: Omit<Item, 'id'>) => void;
+  addItem: (itemType: ItemVariants, itemContent: Item) => void;
 };
 
 // export for StoryBook use
@@ -64,6 +64,8 @@ const NewItemBar = ({ isVisible, addItem, handleClose }: NewItemBarProps) => {
       <Formik
         initialValues={{ title: '', content: '', articleUrl: '', twitterName: '', created: '' }}
         onSubmit={(values) => {
+          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+          // @ts-ignore
           addItem(pageContext, values);
           handleClose();
         }}
@@ -121,6 +123,8 @@ NewItemBar.defaultProps = {
 };
 
 const mapDispatch: DispatchProps = {
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
   addItem: (itemType, itemContent) => addItemAction(itemType, itemContent),
 };
 
