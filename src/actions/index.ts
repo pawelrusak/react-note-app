@@ -26,15 +26,15 @@ import {
 
 type AppThunk<A extends Action, S = RootState, R = void, E = unknown> = ThunkAction<R, S, E, A>;
 
-type FetchRequestAction = { type: FETCH_REQUEST };
-type FetchSuccessAction = {
+export type FetchRequestAction = { type: FETCH_REQUEST };
+export type FetchSuccessAction = {
   type: FETCH_SUCCESS;
   payload: {
     itemType: ItemVariants;
     data: Item[];
   };
 };
-type FetchFailureAction = { type: FETCH_FAILURE };
+export type FetchFailureAction = { type: FETCH_FAILURE };
 type ThunkFetchItemsAction = AppThunk<FetchRequestAction | FetchSuccessAction | FetchFailureAction>;
 
 /**
@@ -62,15 +62,15 @@ export const fetchItems =
       });
   };
 
-type RemoveItemRequestAction = { type: REMOVE_ITEM_REQUEST };
-type RemoveItemSuccessAction = {
+export type RemoveItemRequestAction = { type: REMOVE_ITEM_REQUEST };
+export type RemoveItemSuccessAction = {
   type: REMOVE_ITEM_SUCCESS;
   payload: {
     itemType: ItemVariants;
     id: string;
   };
 };
-type RemoveItemFailureAction = { type: REMOVE_ITEM_FAILURE };
+export type RemoveItemFailureAction = { type: REMOVE_ITEM_FAILURE };
 type ThunkRemoveItemAction = AppThunk<
   RemoveItemRequestAction | RemoveItemSuccessAction | RemoveItemFailureAction
 >;
@@ -93,15 +93,15 @@ export const removeItem =
       .catch(() => dispatch({ type: REMOVE_ITEM_FAILURE }));
   };
 
-type AddItemRequestAction = { type: ADD_ITEM_REQUEST };
-type AddItemSuccessAction = {
+export type AddItemRequestAction = { type: ADD_ITEM_REQUEST };
+export type AddItemSuccessAction = {
   type: ADD_ITEM_SUCCESS;
   payload: {
     itemType: ItemVariants;
     data: Item;
   };
 };
-type AddItemFailureAction = { type: ADD_ITEM_FAILURE };
+export type AddItemFailureAction = { type: ADD_ITEM_FAILURE };
 type ThunkAddItemAction = AppThunk<
   AddItemRequestAction | AddItemSuccessAction | AddItemFailureAction
 >;
@@ -135,12 +135,12 @@ export const addItem =
       });
   };
 
-type AuthRequestAction = { type: AUTH_REQUEST };
-type AuthSuccessAction = {
+export type AuthRequestAction = { type: AUTH_REQUEST };
+export type AuthSuccessAction = {
   type: AUTH_SUCCESS;
   payload: firebase.auth.UserCredential;
 };
-type AuthFailureAction = { type: AUTH_FAILURE };
+export type AuthFailureAction = { type: AUTH_FAILURE };
 type ThunkAuthAction = AppThunk<AuthRequestAction | AuthSuccessAction | AuthFailureAction>;
 /**
  * Simulate original course code by Firebase

@@ -1,5 +1,4 @@
-import firebase from 'firebase/app';
-import { Item, NoteItem, ArticleItem, TwitterItem, ItemVariants } from 'commonTypes';
+import { Item, NoteItem, ArticleItem, TwitterItem } from 'commonTypes';
 import {
   ADD_ITEM_SUCCESS,
   // REMOVE_ITEM_REQUEST,
@@ -10,6 +9,14 @@ import {
   // eslint-disable-next-line
   FETCH_FAILURE,
 } from 'actions/actionTypes';
+import type {
+  FetchRequestAction,
+  FetchSuccessAction,
+  FetchFailureAction,
+  RemoveItemSuccessAction,
+  AddItemSuccessAction,
+  AuthSuccessAction,
+} from 'actions';
 
 export type RootState = {
   readonly notes: NoteItem[];
@@ -35,12 +42,12 @@ const initialState = {
 };
 
 type RootAction =
-  | { type: typeof FETCH_REQUEST }
-  | { type: typeof FETCH_SUCCESS; payload: { itemType: ItemVariants; data: Item[] } }
-  | { type: typeof FETCH_FAILURE }
-  | { type: typeof REMOVE_ITEM_SUCCESS; payload: { itemType: ItemVariants; id: string } }
-  | { type: typeof ADD_ITEM_SUCCESS; payload: { itemType: ItemVariants; data: Item } }
-  | { type: typeof AUTH_SUCCESS; payload: firebase.auth.UserCredential };
+  | FetchRequestAction
+  | FetchSuccessAction
+  | FetchFailureAction
+  | RemoveItemSuccessAction
+  | AddItemSuccessAction
+  | AuthSuccessAction;
 
 const rootReducer = (state: RootState = initialState, action: RootAction) => {
   switch (action.type) {
