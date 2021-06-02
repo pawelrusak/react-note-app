@@ -1,6 +1,7 @@
+import { Meta, Story } from '@storybook/react';
 import StoryRouter from 'storybook-react-router';
 import { routes } from 'routes';
-import Articles from './Articles';
+import Articles, { ArticlesProps } from './Articles';
 import { StoreDecorator } from '../../../.storybook/decorators';
 import { itemsPageLinks } from '../../../.storybook/links';
 
@@ -16,8 +17,8 @@ export default {
   parameters: {
     pageContext: 'articles',
   },
-};
+} as Meta;
 
-const Template = (args) => <Articles {...args} />;
+const Template: Story<ArticlesProps> = (args) => <Articles {...args} />;
 
 export const Default = Template.bind({});
