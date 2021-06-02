@@ -10,27 +10,39 @@ import Twitters from '../Twitters/Twitters';
 const renderTwitters = () =>
   render(<Twitters />, {
     path: routes.twitters,
-    pageType: stripSlashPrefix(routes.twitters),
+    pageType: stripSlashPrefix(routes.twitters) as 'twitters',
     store: createStore(rootReducer),
   });
 
-const mocksFetchItems = () =>
-  jest.spyOn(actions, 'fetchItems').mockImplementation((itemType) => ({
+/**
+ * @todo try to mock firebase not actions creators
+ */
+const mocksFetchItems = () => {
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
+  return jest.spyOn(actions, 'fetchItems').mockImplementation((itemType) => ({
     type: 'FETCH_SUCCESS',
     payload: {
       data: fakeItemsData[itemType],
       itemType,
     },
   }));
+};
 
-const mocksRemoveItems = () =>
-  jest.spyOn(actions, 'removeItem').mockImplementation((itemType, id) => ({
+/**
+ * @todo try to mock firebase not actions creators
+ */
+const mocksRemoveItems = () => {
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
+  return jest.spyOn(actions, 'removeItem').mockImplementation((itemType, id) => ({
     type: 'REMOVE_ITEM_SUCCESS',
     payload: {
       itemType,
       id,
     },
   }));
+};
 
 const { twitters } = fakeItemsData;
 const getAllByCardHeadings = () => screen.getAllByTestId('card-heading-bar');
