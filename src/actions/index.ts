@@ -1,8 +1,6 @@
 import firebase from 'firebase/app';
 import { ThunkAction } from 'redux-thunk';
 import { Action } from 'redux';
-// eslint-disable-next-line import/no-cycle
-import { RootState } from 'reducers';
 import { ItemVariants, Item, Modify } from 'commonTypes';
 import {
   authenticateUser,
@@ -10,6 +8,7 @@ import {
   removeItem as removeRemoteItems,
   addItem as addRemoteItems,
 } from 'services';
+import type { RootState } from 'reducers';
 import {
   ADD_ITEM_REQUEST,
   ADD_ITEM_SUCCESS,
