@@ -29,7 +29,10 @@ type AppThunk<A extends Action, S = RootState, R = void, E = unknown> = ThunkAct
 type FetchRequestAction = { type: FETCH_REQUEST };
 type FetchSuccessAction = {
   type: FETCH_SUCCESS;
-  payload: { itemType: ItemVariants; data: Item[] };
+  payload: {
+    itemType: ItemVariants;
+    data: Item[];
+  };
 };
 type FetchFailureAction = { type: FETCH_FAILURE };
 type ThunkFetchItemsAction = AppThunk<FetchRequestAction | FetchSuccessAction | FetchFailureAction>;
@@ -62,7 +65,10 @@ export const fetchItems =
 type RemoveItemRequestAction = { type: REMOVE_ITEM_REQUEST };
 type RemoveItemSuccessAction = {
   type: REMOVE_ITEM_SUCCESS;
-  payload: { itemType: ItemVariants; id: string };
+  payload: {
+    itemType: ItemVariants;
+    id: string;
+  };
 };
 type RemoveItemFailureAction = { type: REMOVE_ITEM_FAILURE };
 type ThunkRemoveItemAction = AppThunk<
@@ -90,7 +96,10 @@ export const removeItem =
 type AddItemRequestAction = { type: ADD_ITEM_REQUEST };
 type AddItemSuccessAction = {
   type: ADD_ITEM_SUCCESS;
-  payload: { itemType: ItemVariants; data: Item };
+  payload: {
+    itemType: ItemVariants;
+    data: Item;
+  };
 };
 type AddItemFailureAction = { type: ADD_ITEM_FAILURE };
 type ThunkAddItemAction = AppThunk<
@@ -127,7 +136,10 @@ export const addItem =
   };
 
 type AuthRequestAction = { type: AUTH_REQUEST };
-type AuthSuccessAction = { type: AUTH_SUCCESS; payload: firebase.auth.UserCredential };
+type AuthSuccessAction = {
+  type: AUTH_SUCCESS;
+  payload: firebase.auth.UserCredential;
+};
 type AuthFailureAction = { type: AUTH_FAILURE };
 type ThunkAuthAction = AppThunk<AuthRequestAction | AuthSuccessAction | AuthFailureAction>;
 /**
