@@ -9,7 +9,7 @@ import {
   FETCH_SUCCESS,
   // eslint-disable-next-line
   FETCH_FAILURE,
-} from 'actions';
+} from 'actions/actionTypes';
 
 export type RootState = {
   readonly notes: NoteItem[];
