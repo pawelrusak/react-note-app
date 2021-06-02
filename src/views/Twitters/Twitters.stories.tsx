@@ -1,3 +1,4 @@
+import { Meta, Story } from '@storybook/react';
 import StoryRouter from 'storybook-react-router';
 import { routes } from 'routes';
 import Twitters from './Twitters';
@@ -16,8 +17,8 @@ export default {
   parameters: {
     pageContext: 'twitters',
   },
-};
+} as Meta;
 
-const Template = (args) => <Twitters {...args} />;
+const Template: Story = (args) => <Twitters {...args} />;
 
 export const Default = Template.bind({});
