@@ -42,3 +42,12 @@ export type TwitterItem = Modify<NoteItem, { readonly twitterName: string | null
 export type ArticleItem = Modify<NoteItem, { readonly articleUrl: string | null }>;
 
 export type Item = NoteItem | TwitterItem | ArticleItem;
+
+/*
+ *
+ * Other
+ *
+ */
+export type URLParams = {
+  id: string;
+};
