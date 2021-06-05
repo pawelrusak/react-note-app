@@ -1,15 +1,21 @@
 import { render, screen, waitFor, cleanup, testComponent } from 'testUtils';
 import { routes } from 'routes';
-import { fakeItemsData } from 'testUtils/fakers';
+import { fakeStateWithData, fakeStateWithoutData } from 'testUtils/fakers';
 import { createStore } from 'redux';
 import rootReducer from 'reducers';
 import { Route } from 'react-router-dom';
 import * as services from 'services';
 import DetailsPage from '../DetailsPage/DetailsPage';
+import type { ItemVariants } from 'commonTypes';
 
-const renderDetailsPage = (itemType, store = createStore(rootReducer, fakeItemsData)) => {
+type ItemName = 'note' | 'article' | 'twitter';
+
+const renderDetailsPage = (
+  itemType: ItemName,
+  store = createStore(rootReducer, fakeStateWithData),
+) => {
   const pluralItemTypeName = `${itemType}s`;
-  const [item] = fakeItemsData[pluralItemTypeName];
+  const [item] = fakeStateWithData[pluralItemTypeName as ItemVariants];
   const itemPath = routes[itemType].replace(':id', item.id);
 
   return render(<Route path={routes[itemType]} component={DetailsPage} />, {
@@ -19,9 +25,9 @@ const renderDetailsPage = (itemType, store = createStore(rootReducer, fakeItemsD
   });
 };
 
-const [noteItem] = fakeItemsData.notes;
-const [articleItem] = fakeItemsData.articles;
-const [twitterItem] = fakeItemsData.twitters;
+const [noteItem] = fakeStateWithData.notes;
+const [articleItem] = fakeStateWithData.articles;
+const [twitterItem] = fakeStateWithData.twitters;
 
 const twitterAvatarTestName = 'twitter avatar';
 const articleLinkTestName = 'article link';
@@ -43,7 +49,7 @@ describe('<DetailsPage />', () => {
   it('send a request to service if there is no item in store and display him', async () => {
     const mockFetchItem = mocksFetchItem();
 
-    renderDetailsPage('note', createStore(rootReducer, {}));
+    renderDetailsPage('note', createStore(rootReducer, fakeStateWithoutData));
 
     expect(mockFetchItem).toHaveBeenCalledTimes(1);
     expect(mockFetchItem).toHaveBeenCalledWith(noteItem.id);
@@ -76,7 +82,7 @@ describe('<DetailsPage />', () => {
 
   testComponent(() => renderDetailsPage('twitter'), { suffixTestNames: 'when is twitter page' })
     .toBeInTheDocument(twitterAvatarTestName, queryByAvatar)
-    .withAttribute('src', expect.stringContaining(twitterItem.twitterName))
+    .withAttribute('src', expect.stringContaining(twitterItem.twitterName as string))
     .not.toBeInTheDocument(articleLinkTestName, queryByArticleLink)
     .run();
 });

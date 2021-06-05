@@ -3,8 +3,11 @@ import { fetchItem } from 'services';
 import { useParams } from 'react-router-dom';
 import { usePageTypeContext } from './usePageTypeContext';
 import { useItemSelector } from './useItemSelector';
+import type { Item, URLParams } from 'commonTypes';
 
-const emptyItem = {
+type DetailsItem = Omit<Item, 'id'> | Item;
+
+const emptyItem: DetailsItem = {
   title: '',
   content: '',
   created: '',
@@ -13,9 +16,9 @@ const emptyItem = {
 };
 
 export const useActiveItem = () => {
-  const [activeItem, setActiveItem] = useState(emptyItem);
+  const [activeItem, setActiveItem] = useState<DetailsItem>(emptyItem);
   const pageType = usePageTypeContext();
-  const { id: itemID } = useParams();
+  const { id: itemID } = useParams<URLParams>();
   const storeActiveItem = useItemSelector(pageType, itemID);
 
   useEffect(() => {
@@ -29,7 +32,7 @@ export const useActiveItem = () => {
       }
     };
 
-    // eslint-disable-next-line no-unused-expressions
+    // eslint-disable-next-line no-unused-expressions, @typescript-eslint/no-floating-promises
     storeActiveItem ? setActiveItem({ ...storeActiveItem }) : fetchDataItem();
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
