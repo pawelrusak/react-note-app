@@ -1,3 +1,5 @@
+import type { RootState } from 'reducers';
+
 export const fakeItemsData = {
   twitters: [
     {
@@ -97,4 +99,18 @@ export const fakeItemsData = {
       created: '10 days',
     },
   ],
+};
+
+export const fakeStateWithData: RootState = {
+  ...fakeItemsData,
+  userID: null,
+  isLoading: false,
+};
+
+export const fakeStateWithoutData: RootState = {
+  notes: [],
+  twitters: [],
+  articles: [],
+  userID: null,
+  isLoading: false,
 };
