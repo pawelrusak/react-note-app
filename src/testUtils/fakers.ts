@@ -114,3 +114,5 @@ export const fakeStateWithoutData: RootState = {
   userID: null,
   isLoading: false,
 };
+
+export const fakeStateWithNotLoggedInUser = fakeStateWithoutData;
