@@ -6,7 +6,7 @@ export const useAuth = () => {
   const userID = useSelector(userIDSelector);
   const dispatch = useDispatch();
 
-  const authenticate = (email, password) => {
+  const authenticate = (email: string, password: string) => {
     dispatch(authenticateAction(email, password));
   };
 
