@@ -1,3 +1,4 @@
+import { Meta, Story } from '@storybook/react';
 import StoryRouter from 'storybook-react-router';
 import { routes } from 'routes';
 import { Route } from 'react-router-dom';
@@ -15,9 +16,13 @@ export default {
       },
     },
   },
-};
+} as Meta;
 
-const Template = ({ pathname }) => <Route path={pathname} component={DetailsPage} />;
+type DetailsPagePaths = typeof routes.note | typeof routes.twitter | typeof routes.article;
+
+const Template: Story = ({ pathname }) => (
+  <Route path={pathname as DetailsPagePaths} component={DetailsPage} />
+);
 
 export const Note = Template.bind({});
 Note.decorators = [DetailsPageRouterDecorator(routes.note)];
