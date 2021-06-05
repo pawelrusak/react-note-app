@@ -33,7 +33,7 @@ const RegisterPage = () => (
   <AuthTemplate>
     <Formik
       initialValues={{ username: '', password: '' }}
-      // eslint-disable-next-line no-unused-vars
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       onSubmit={({ username, password }) => {
         // eslint-disable-next-line no-console
         console.log('hello');
@@ -49,7 +49,7 @@ const RegisterPage = () => (
               placeholder="Login"
               onChange={handleChange}
               onBlur={handleBlur}
-              value={values.title}
+              value={values.username}
             />
             <StyledInput
               type="password"
@@ -57,7 +57,7 @@ const RegisterPage = () => (
               placeholder="Password"
               onChange={handleChange}
               onBlur={handleBlur}
-              value={values.title}
+              value={values.password}
             />
             <Button activecolor="notes" type="submit">
               register

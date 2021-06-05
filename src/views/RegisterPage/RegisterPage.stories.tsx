@@ -1,3 +1,4 @@
+import { Meta, Story } from '@storybook/react';
 import StoryRouter from 'storybook-react-router';
 import RegisterPage from './RegisterPage';
 import { StoreDecorator } from '../../../.storybook/decorators';
@@ -7,8 +8,8 @@ export default {
   title: 'Views/RegisterPage',
   component: RegisterPage,
   decorators: [StoryRouter(authPageLinks), StoreDecorator],
-};
+} as Meta;
 
-const Template = (args) => <RegisterPage {...args} />;
+const Template: Story = (args) => <RegisterPage {...args} />;
 
 export const Default = Template.bind({});
