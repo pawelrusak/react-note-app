@@ -55,7 +55,7 @@ const LoginPage = () => {
                   placeholder="Login"
                   onChange={handleChange}
                   onBlur={handleBlur}
-                  value={values.title}
+                  value={values.email}
                 />
                 <StyledInput
                   type="password"
@@ -63,7 +63,7 @@ const LoginPage = () => {
                   placeholder="Password"
                   onChange={handleChange}
                   onBlur={handleBlur}
-                  value={values.title}
+                  value={values.password}
                 />
                 <Button activecolor="notes" type="submit">
                   sign in

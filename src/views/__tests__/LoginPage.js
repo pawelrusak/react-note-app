@@ -52,8 +52,8 @@ describe('<LoginPage />', () => {
 
     expect(queryByFakeHomePage()).not.toBeInTheDocument();
 
-    await waitFor(() => userEvent.type(getByLoginPlaceholderText(), fakeLoginData.username));
-    await waitFor(() => userEvent.type(getByPasswordPlaceholderText(), fakeLoginData.password));
+    userEvent.type(getByLoginPlaceholderText(), fakeLoginData.username);
+    userEvent.type(getByPasswordPlaceholderText(), fakeLoginData.password);
 
     // submit form
     await waitFor(() => userEvent.click(getByLoginButton()));
