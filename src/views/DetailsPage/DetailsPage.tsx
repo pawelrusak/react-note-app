@@ -7,7 +7,14 @@ const DetailsPage = () => {
   return (
     <DetailsTemplate
       title={activeItem.title}
-      created={activeItem.created}
+      /**
+       * @todo simplified this line after change type of "created" property
+       */
+      created={
+        activeItem.created !== null && activeItem.created !== undefined
+          ? (activeItem.created as Date)
+          : null
+      }
       content={activeItem.content}
       articleUrl={activeItem.articleUrl}
       twitterName={activeItem.twitterName}

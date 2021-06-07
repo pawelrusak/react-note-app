@@ -5,7 +5,7 @@ import Heading from 'components/atoms/Heading/Heading';
 import Paragraph from 'components/atoms/Paragraph/Paragraph';
 import Button from 'components/atoms/Button/Button';
 import { usePageTypeContext } from 'hooks';
-import { Item } from 'commonTypes';
+import type { Item, Modify } from 'commonTypes';
 
 const StyledWrapper = styled.div`
   padding: 25px 150px 25px 70px;
@@ -52,7 +52,12 @@ const StyledImage = styled.img`
   border-radius: 50%;
 `;
 
-export type DetailsTemplateProps = Partial<Omit<Item, 'id'>>;
+export type DetailsTemplateProps = Modify<
+  Omit<Item, 'id'>,
+  {
+    created: Date | null;
+  }
+>;
 
 const DetailsTemplate = ({
   title,
@@ -82,7 +87,7 @@ const DetailsTemplate = ({
           <StyledImage
             data-testid="avatar"
             alt={title}
-            src={`https://unavatar.now.sh/twitter/${twitterName as string}`}
+            src={`https://unavatar.now.sh/twitter/${twitterName as string}  `}
           />
         )}
         <Button as={Link} to={`/${pageContext}`} activecolor={pageContext}>
@@ -95,7 +100,7 @@ const DetailsTemplate = ({
 
 DetailsTemplate.defaultProps = {
   title: '',
-  created: '',
+  created: null,
   content: '',
   articleUrl: '',
   twitterName: '',
