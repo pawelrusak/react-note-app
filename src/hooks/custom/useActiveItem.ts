@@ -3,14 +3,21 @@ import { fetchItem } from 'services';
 import { useParams } from 'react-router-dom';
 import { usePageTypeContext } from './usePageTypeContext';
 import { useItemSelector } from './useItemSelector';
-import type { Item, URLParams } from 'commonTypes';
+import type { Item, URLParams, Modify } from 'commonTypes';
 
-type DetailsItem = Omit<Item, 'id'> | Item;
+type DetailsItem =
+  | Item
+  | Modify<
+      Omit<Item, 'id'>,
+      {
+        created: Date | null;
+      }
+    >;
 
 const emptyItem: DetailsItem = {
   title: '',
   content: '',
-  created: '',
+  created: null,
   articleUrl: '',
   twitterName: '',
 };
