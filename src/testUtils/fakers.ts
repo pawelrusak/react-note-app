@@ -1,4 +1,9 @@
+import { getEarlierDateOfDay } from 'utils';
 import type { RootState } from 'reducers';
+
+const dayEarlier = getEarlierDateOfDay(1);
+const fiveDaysEarlier = getEarlierDateOfDay(5);
+const tenDaysEarlier = getEarlierDateOfDay(10);
 
 export const fakeItemsData = {
   twitters: [
@@ -7,7 +12,7 @@ export const fakeItemsData = {
       title: 'Hello Roman',
       content:
         'Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus, tempora quibusdam natus modi tempore esse adipisci, dolore odit animi',
-      created: '1 day',
+      created: dayEarlier,
       twitterName: 'hello_roman',
     },
     {
@@ -15,7 +20,7 @@ export const fakeItemsData = {
       title: 'Redux guy',
       content:
         'Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus, tempora quibusdam natus modi tempore esse adipisci, dolore odit animi',
-      created: '1 day',
+      created: dayEarlier,
       twitterName: 'dan_abramov',
     },
     {
@@ -23,7 +28,7 @@ export const fakeItemsData = {
       title: 'React router stuff',
       content:
         'Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus, tempora quibusdam natus modi tempore esse adipisci, dolore odit animi',
-      created: '5 days',
+      created: fiveDaysEarlier,
       twitterName: 'mjackson',
     },
     {
@@ -31,7 +36,7 @@ export const fakeItemsData = {
       title: 'Super animacje!',
       content:
         'Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus, tempora quibusdam natus modi tempore esse adipisci, dolore odit animi',
-      created: '10 days',
+      created: tenDaysEarlier,
       twitterName: 'sarah_edo',
     },
   ],
@@ -42,7 +47,7 @@ export const fakeItemsData = {
       content:
         'Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus, tempora quibusdam natus modi tempore esse adipisci, dolore odit animi',
       articleUrl: 'https://youtube.com/helloroman',
-      created: '1 day',
+      created: dayEarlier,
     },
     {
       id: '2',
@@ -50,7 +55,7 @@ export const fakeItemsData = {
       content:
         'Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus, tempora quibusdam natus modi tempore esse adipisci, dolore odit animi',
       articleUrl: 'https://youtube.com/helloroman',
-      created: '1 day',
+      created: dayEarlier,
     },
     {
       id: '3',
@@ -58,7 +63,7 @@ export const fakeItemsData = {
       content:
         'Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus, tempora quibusdam natus modi tempore esse adipisci, dolore odit animi',
       articleUrl: 'https://youtube.com/helloroman',
-      created: '5 days',
+      created: fiveDaysEarlier,
     },
     {
       id: '4',
@@ -66,7 +71,7 @@ export const fakeItemsData = {
       content:
         'Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus, tempora quibusdam natus modi tempore esse adipisci, dolore odit animi',
       articleUrl: 'https://youtube.com/helloroman',
-      created: '10 days',
+      created: tenDaysEarlier,
     },
   ],
   notes: [
@@ -75,28 +80,28 @@ export const fakeItemsData = {
       title: 'Wake me up when Vue ends',
       content:
         'Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus, tempora quibusdam natus modi tempore esse adipisci, dolore odit animi',
-      created: '1 day',
+      created: dayEarlier,
     },
     {
       id: '2',
       title: 'Como es An Gular?',
       content:
         'Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus, tempora quibusdam natus modi tempore esse adipisci, dolore odit animi',
-      created: '1 day',
+      created: dayEarlier,
     },
     {
       id: '3',
       title: 'Du bist Reactish',
       content:
         'Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus, tempora quibusdam natus modi tempore esse adipisci, dolore odit animi',
-      created: '5 days',
+      created: fiveDaysEarlier,
     },
     {
       id: '4',
       title: 'Reactuj się kto moze!',
       content:
         'Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus, tempora quibusdam natus modi tempore esse adipisci, dolore odit animi',
-      created: '10 days',
+      created: tenDaysEarlier,
     },
   ],
 };
