@@ -6,16 +6,15 @@ import rootReducer from 'reducers';
 import { Route } from 'react-router-dom';
 import * as services from 'services';
 import DetailsPage from '../DetailsPage/DetailsPage';
-import type { ItemVariants } from 'commonTypes';
 
-type ItemName = 'note' | 'article' | 'twitter';
+type ItemType = 'note' | 'article' | 'twitter';
 
 const renderDetailsPage = (
-  itemType: ItemName,
+  itemType: ItemType,
   store = createStore(rootReducer, fakeStateWithData),
 ) => {
-  const pluralItemTypeName = `${itemType}s`;
-  const [item] = fakeStateWithData[pluralItemTypeName as ItemVariants];
+  const pluralItemTypeName = `${itemType}s` as `${ItemType}s`;
+  const [item] = fakeStateWithData[pluralItemTypeName];
   const itemPath = routes[itemType].replace(':id', item.id);
 
   return render(<Route path={routes[itemType]} component={DetailsPage} />, {
