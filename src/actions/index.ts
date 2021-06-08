@@ -1,13 +1,13 @@
 import firebase from 'firebase/app';
 import { ThunkAction } from 'redux-thunk';
 import { Action } from 'redux';
-import { ItemVariants, Item, Modify } from 'commonTypes';
 import {
   authenticateUser,
   fetchItems as fetchRemoteItems,
   removeItem as removeRemoteItems,
   addItem as addRemoteItems,
 } from 'services';
+import type { ItemVariants, Item, NewItem } from 'commonTypes';
 import type { RootState } from 'reducers';
 import {
   ADD_ITEM_REQUEST,
@@ -112,7 +112,7 @@ type ThunkAddItemAction = AppThunk<
  * @see {@link https://github.com/eduwebpl/kurs-react-w-praktyce/blob/1144f53bbb0014406bb97cc03801b0bcf4a3ed97/06/src/actions/index.js#L82-L104}
  */
 export const addItem =
-  (itemType: ItemVariants, itemContent: Modify<Item, { created: undefined }>): ThunkAddItemAction =>
+  (itemType: ItemVariants, itemContent: NewItem): ThunkAddItemAction =>
   (dispatch, getState) => {
     dispatch({ type: ADD_ITEM_REQUEST });
 
