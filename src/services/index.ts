@@ -1,4 +1,4 @@
-import { Item } from 'commonTypes';
+import type { Item } from 'commonTypes';
 import {
   queryGetItemsByTypeAndUserID,
   queryGetItemByID,
@@ -6,7 +6,7 @@ import {
   queryAddItem,
 } from './queries/items';
 import { auth } from './core';
-import { DocumentItem, DocumentItemQueryArgs } from './servicesTypes';
+import type { NewDocumentItem, DocumentItemQueryArgs } from './servicesTypes';
 
 export const authenticateUser = (email: string, password: string) =>
   auth.signInWithEmailAndPassword(email, password);
@@ -43,7 +43,7 @@ export const removeItem = async (id: string) => {
   }
 };
 
-export const addItem = async ({ userID, type, ...itemContent }: DocumentItem) => {
+export const addItem = async ({ userID, type, ...itemContent }: NewDocumentItem) => {
   try {
     const documentReference = await queryAddItem({ userID, type, ...itemContent });
     const { data } = await fetchItem(documentReference.id);
