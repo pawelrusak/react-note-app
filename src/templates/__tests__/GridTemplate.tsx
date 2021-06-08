@@ -43,7 +43,7 @@ const mockAddItemAction = () =>
       type: 'ADD_ITEM_SUCCESS',
       payload: {
         itemType,
-        data: { ...fakeNewNoteData, ...itemContent },
+        data: { ...fakeNewNoteData, ...itemContent, created: new Date() },
       },
     }));
 
@@ -54,12 +54,6 @@ const fakeNoteItemInputs = {
   title: 'test note title',
   content: 'test note content',
 };
-
-type Store = {
-  getState: () => Partial<typeof fakeItemsData>;
-};
-
-const getState = (store: Store, itemType: ItemVariants) => () => store.getState()[itemType];
 
 describe('<GridTemplate />', () => {
   it.each(getPairOfPathsAndPageTypes())(
@@ -129,13 +123,7 @@ describe('<GridTemplate />', () => {
 
     const { store } = renderGridTemplate();
 
-    /**
-     * @todo remove this comments after add types to the Store
-     */
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    expect(store.getState().notes!).toHaveLength(4);
+    expect(store.getState().notes).toHaveLength(4);
 
     // open sidebar form
     const [toggleNewItemBarButton] = getAllByButtonRole();
@@ -148,21 +136,14 @@ describe('<GridTemplate />', () => {
     // submit the note form
     await waitFor(() => userEvent.click(getByAddNoteTextButton()));
 
-    /**
-     * @todo remove this comments after add types to the Store
-     */
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
-    const getStateNotes = getState(store, 'notes');
-
-    expect(getStateNotes()).toHaveLength(5);
-    expect(getStateNotes()).toEqual(
+    expect(store.getState().notes).toHaveLength(5);
+    expect(store.getState().notes).toEqual(
       expect.arrayContaining([
         expect.objectContaining({
           ...fakeNewNoteData,
           ...fakeNoteItemInputs,
           articleUrl: expect.any(String) as string,
-          created: expect.any(String) as string,
+          created: expect.any(Date) as Date,
           twitterName: expect.any(String) as string,
         }),
       ]),
