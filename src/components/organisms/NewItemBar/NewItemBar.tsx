@@ -124,4 +124,4 @@ const mapDispatch: DispatchProps = {
   addItem: (itemType, itemContent) => addItemAction(itemType, itemContent),
 };
 
-export default connect<null, DispatchProps, OwnProps>(null, mapDispatch)(NewItemBar);
+export default connect(null, mapDispatch)(NewItemBar);
