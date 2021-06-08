@@ -7,7 +7,7 @@ import { addItem as addItemAction } from 'actions';
 import { Formik, Form } from 'formik';
 import { usePageTypeContext } from 'hooks';
 import { ActiveColorArgs } from 'theme/mixins';
-import { Item, ItemVariants } from 'commonTypes';
+import type { ItemVariants, NewItem } from 'commonTypes';
 
 type IsVisible = { readonly isVisible: boolean };
 type StyledWrapperProps = Required<ActiveColorArgs> & IsVisible;
@@ -47,7 +47,7 @@ const StyledInput = styled(Input)`
 `;
 
 type DispatchProps = {
-  addItem: (itemType: ItemVariants, itemContent: Item) => void;
+  addItem: (itemType: ItemVariants, itemContent: NewItem) => void;
 };
 
 // export for StoryBook use
@@ -62,10 +62,8 @@ const NewItemBar = ({ isVisible, addItem, handleClose }: NewItemBarProps) => {
     <StyledWrapper data-testid="new-item-bar" isVisible={isVisible} activecolor={pageContext}>
       <Heading big>Create new {pageContext}</Heading>
       <Formik
-        initialValues={{ title: '', content: '', articleUrl: '', twitterName: '', created: '' }}
+        initialValues={{ title: '', content: '', articleUrl: '', twitterName: '' }}
         onSubmit={(values) => {
-          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-          // @ts-ignore
           addItem(pageContext, values);
           handleClose();
         }}
@@ -123,9 +121,7 @@ NewItemBar.defaultProps = {
 };
 
 const mapDispatch: DispatchProps = {
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-ignore
   addItem: (itemType, itemContent) => addItemAction(itemType, itemContent),
 };
 
-export default connect<null, DispatchProps, OwnProps>(null, mapDispatch)(NewItemBar);
+export default connect(null, mapDispatch)(NewItemBar);
