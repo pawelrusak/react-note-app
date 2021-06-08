@@ -42,6 +42,8 @@ export type ArticleItem = Modify<NoteItem, { readonly articleUrl: string | null 
 
 export type Item = NoteItem | TwitterItem | ArticleItem;
 
+export type NewItem = Omit<Item, 'id' | 'created'>;
+
 /*
  *
  * Other
