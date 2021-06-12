@@ -14,7 +14,7 @@ type TestCase = Omit<TestConfig, 'element'> & AttributeTestConfig;
 
 export const testRunnerMixin = <Base extends GConstructor<BuildTestable>>(base: Base) =>
   // @ts-expect-error
-  class extends base implements Runnable {
+  class TestRunner extends base implements Runnable {
     private suffixTestNames;
 
     constructor(renderComponent: LikeRender, { suffixTestNames = '' } = {}) {

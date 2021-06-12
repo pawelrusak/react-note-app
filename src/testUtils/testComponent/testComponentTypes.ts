@@ -32,4 +32,9 @@ export interface Runnable {
   run(): void;
 }
 
-export interface BuildTestable extends Renderable, Getable {}
+export interface BuildTestable
+  extends Renderable,
+    Getable,
+    Negotiable,
+    BeInTheDocumentMatchable,
+    AttributeTestable {}
