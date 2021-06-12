@@ -1,5 +1,5 @@
 import AttributeTestSet from './attributeTestSet';
-import { TestQueries } from '../testComponentTypes';
+import type { TestQueries } from '../testComponentTypes';
 
 export type TestConfig = {
   isInDocument: boolean;
@@ -10,7 +10,7 @@ export type TestConfig = {
 class TestSet {
   readonly isInDocument: boolean;
   readonly name: string;
-  readonly element: () => void;
+  readonly element: TestQueries;
   readonly elementAttributeTests: Array<AttributeTestSet>;
 
   constructor({ isInDocument, name, element }: TestConfig) {
