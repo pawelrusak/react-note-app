@@ -35,7 +35,7 @@
     "storybook": "start-storybook -p 6006 -s public",
     "build-storybook": "build-storybook -s public",
     "prepare": "husky install",
-    "pre-commit": "lint-staged",
+    "pre-commit": "tsc && lint-staged",
     "pre-push": "npm test -- --watchAll=false",
     "commit-msg": "npx commitlint --edit \"$1\""
   },
@@ -45,7 +45,7 @@
     ]
   },
   "lint-staged": {
-    "*.js": [
+    "*.{js,ts,tsx}": [
       "prettier --config .prettierrc --write",
       "eslint --fix"
     ]
