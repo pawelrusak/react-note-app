@@ -1,6 +1,8 @@
-import configureStore from 'redux-mock-store';
-import thunk from 'redux-thunk';
+import createMockStore from 'redux-mock-store';
+import thunk, { ThunkDispatch } from 'redux-thunk';
 import { getEarlierDateOfDay } from 'utils';
+import type { AnyAction } from 'redux';
+import type { RootState } from 'reducers';
 
 const sampleNote = {
   id: '8885d2d6-b081-4342-8232-e889affa9d93',
@@ -10,9 +12,12 @@ const sampleNote = {
     'Miles Dewey Davis III (May 26, 1926 - September 28, 1991) was an American jazz trumpeter, bandleader, and composer.',
 };
 
+type DispatchExts = ThunkDispatch<RootState, void, AnyAction>;
+
 const middlewares = [thunk];
-const mockStore = configureStore(middlewares);
-const initialState = {
+
+const mockStore = createMockStore<RootState, DispatchExts>(middlewares);
+const initialState: RootState = {
   notes: [
     {
       ...sampleNote,
@@ -30,7 +35,10 @@ const initialState = {
       twitterName: 'hello_romans',
     },
   ],
+  userID: null,
+  isLoading: false,
 };
+
 const store = mockStore(initialState);
 
 export default store;
