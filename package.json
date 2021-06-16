@@ -28,10 +28,10 @@
     }
   ],
   "scripts": {
-    "build": "react-scripts build",
+    "build": "craco build",
     "eject": "react-scripts eject",
-    "start": "react-scripts start",
-    "test": "react-scripts test",
+    "start": "craco start",
+    "test": "craco test",
     "storybook": "start-storybook -p 6006 -s public",
     "build-storybook": "build-storybook -s public",
     "prepare": "husky install",
