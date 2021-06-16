@@ -1,5 +1,5 @@
 import firebase from 'firebase/app';
-import { isArticleItem, isTwitterItem } from 'utils/guards';
+import { isArticleItem, isTwitterItem } from '~/utils/guards';
 import type { DocumentItem, NewDocumentItem, FirestoreDocumentItem } from '../servicesTypes';
 import { serverTimestamp } from '../core';
 
@@ -10,7 +10,7 @@ export const itemConverter = {
       userID: data.userID,
       type: data.type,
       created: serverTimestamp(),
-    } as DocumentItem;
+    };
   },
 
   fromFirestore(

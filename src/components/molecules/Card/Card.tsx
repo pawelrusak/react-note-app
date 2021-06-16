@@ -1,11 +1,11 @@
 import styled, { css } from 'styled-components';
-import Paragraph from 'components/atoms/Paragraph/Paragraph';
-import Heading from 'components/atoms/Heading/Heading';
-import Button from 'components/atoms/Button/Button';
-import LinkIcon from 'assets/icons/link.svg';
-import { useHistoryPush, useRemoveItemAction, usePageTypeContext } from 'hooks';
-import { activecolor } from 'theme/mixins';
-import { ItemVariants, Item } from 'commonTypes';
+import Paragraph from '~/components/atoms/Paragraph/Paragraph';
+import Heading from '~/components/atoms/Heading/Heading';
+import Button from '~/components/atoms/Button/Button';
+import LinkIcon from '~/assets/icons/link.svg';
+import { useHistoryPush, useRemoveItemAction, usePageTypeContext } from '~/hooks';
+import { activecolor } from '~/theme/mixins';
+import { ItemVariants, Item } from '~/commonTypes';
 
 const StyledWrapper = styled.div`
   min-height: 380px;

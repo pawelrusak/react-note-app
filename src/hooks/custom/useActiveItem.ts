@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
-import { fetchItem } from 'services';
 import { useParams } from 'react-router-dom';
+import { fetchItem } from '~/services';
 import { usePageTypeContext } from './usePageTypeContext';
 import { useItemSelector } from './useItemSelector';
-import type { Item, URLParams, Modify } from 'commonTypes';
+import type { Item, URLParams, Modify } from '~/commonTypes';
 
 type DetailsItem =
   | Item

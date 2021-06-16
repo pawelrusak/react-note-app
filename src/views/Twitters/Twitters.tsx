@@ -1,6 +1,6 @@
-import GridTemplate from 'templates/GridTemplate/GridTemplate';
-import Card from 'components/molecules/Card/Card';
-import { useFetchItems } from 'hooks';
+import GridTemplate from '~/templates/GridTemplate/GridTemplate';
+import Card from '~/components/molecules/Card/Card';
+import { useFetchItems } from '~/hooks';
 
 const Twitters = () => {
   const twitters = useFetchItems('twitters');

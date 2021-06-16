@@ -1,8 +1,8 @@
 import createMockStore from 'redux-mock-store';
 import thunk, { ThunkDispatch } from 'redux-thunk';
-import { getEarlierDateOfDay } from 'utils';
 import type { AnyAction } from 'redux';
-import type { RootState } from 'reducers';
+import { getEarlierDateOfDay } from '~/utils';
+import type { RootState } from '~/reducers';
 
 const sampleNote = {
   id: '8885d2d6-b081-4342-8232-e889affa9d93',

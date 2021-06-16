@@ -1,8 +1,8 @@
-import MainTemplate from 'templates/MainTemplate/MainTemplate';
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
-import { routes } from 'routes';
 import { Provider } from 'react-redux';
-import store from 'store';
+import store from '~/store';
+import { routes } from '~/routes';
+import MainTemplate from '~/templates/MainTemplate/MainTemplate';
 import Notes from './Notes/Notes';
 import Articles from './Articles/Articles';
 import Twitters from './Twitters/Twitters';

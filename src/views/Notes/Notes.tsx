@@ -1,8 +1,8 @@
-import GridTemplate from 'templates/GridTemplate/GridTemplate';
-import Card from 'components/molecules/Card/Card';
 import { connect } from 'react-redux';
-import { NoteItem } from 'commonTypes';
-import { RootState } from 'reducers';
+import GridTemplate from '~/templates/GridTemplate/GridTemplate';
+import Card from '~/components/molecules/Card/Card';
+import { NoteItem } from '~/commonTypes';
+import { RootState } from '~/reducers';
 
 export type NotesProps = {
   readonly notes: NoteItem[];

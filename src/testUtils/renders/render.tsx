@@ -1,16 +1,16 @@
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import PageContext from 'context';
 import { ThemeProvider } from 'styled-components';
-import { theme } from 'theme/mainTheme';
 import { render as rtlRender } from '@testing-library/react';
 import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
-import rootReducer from 'reducers';
 import type { RenderOptions as RtlRenderOptions } from '@testing-library/react';
-import type { ItemVariants } from 'commonTypes';
 import type { Store } from 'redux';
+import { theme } from '~/theme/mainTheme';
+import rootReducer from '~/reducers';
+import PageContext from '~/context';
+import type { ItemVariants } from '~/commonTypes';
 
 type RenderOptions = {
   path?: string;

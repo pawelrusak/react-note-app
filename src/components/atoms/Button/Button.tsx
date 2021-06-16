@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
-import { activecolor as activecolorMixin } from 'theme/mixins';
-import { ItemVariants } from 'commonTypes';
+import { activecolor as activecolorMixin } from '~/theme/mixins';
+import { ItemVariants } from '~/commonTypes';
 
 export type ButtonProps =
   | { readonly activecolor?: never; readonly secondary: true }

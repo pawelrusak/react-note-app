@@ -1,11 +1,11 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import UserPageTemplate from 'templates/UserPageTemplate/UserPageTemplate';
-import Heading from 'components/atoms/Heading/Heading';
-import Paragraph from 'components/atoms/Paragraph/Paragraph';
-import Button from 'components/atoms/Button/Button';
-import { usePageTypeContext } from 'hooks';
-import type { Item, Modify } from 'commonTypes';
+import UserPageTemplate from '~/templates/UserPageTemplate/UserPageTemplate';
+import Heading from '~/components/atoms/Heading/Heading';
+import Paragraph from '~/components/atoms/Paragraph/Paragraph';
+import Button from '~/components/atoms/Button/Button';
+import { usePageTypeContext } from '~/hooks';
+import type { Item, Modify } from '~/commonTypes';
 
 const StyledWrapper = styled.div`
   padding: 25px 150px 25px 70px;

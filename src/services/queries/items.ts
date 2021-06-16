@@ -1,4 +1,4 @@
-import { ItemVariants } from 'commonTypes';
+import { ItemVariants } from '~/commonTypes';
 import type { NewDocumentItem } from '../servicesTypes';
 import { getNotesCollectionRef, getNoteDocumentRefById } from '../refs/items';
 import { itemConverter } from '../converters/items';

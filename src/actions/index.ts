@@ -6,9 +6,9 @@ import {
   fetchItems as fetchRemoteItems,
   removeItem as removeRemoteItems,
   addItem as addRemoteItems,
-} from 'services';
-import type { ItemVariants, Item, NewItem } from 'commonTypes';
-import type { RootState } from 'reducers';
+} from '~/services';
+import type { ItemVariants, Item, NewItem } from '~/commonTypes';
+import type { RootState } from '~/reducers';
 import {
   ADD_ITEM_REQUEST,
   ADD_ITEM_SUCCESS,

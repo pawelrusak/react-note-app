@@ -1,4 +1,4 @@
-import type { Item } from 'commonTypes';
+import type { Item } from '~/commonTypes';
 import {
   queryGetItemsByTypeAndUserID,
   queryGetItemByID,

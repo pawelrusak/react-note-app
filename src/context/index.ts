@@ -1,5 +1,5 @@
 import React from 'react';
-import { ItemVariants } from 'commonTypes';
+import { ItemVariants } from '~/commonTypes';
 
 const PageContext = React.createContext<ItemVariants | undefined>('notes');
 

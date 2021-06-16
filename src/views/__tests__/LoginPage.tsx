@@ -1,10 +1,10 @@
 import { render, screen, waitFor, userEvent } from 'testUtils';
-import * as actions from 'actions';
 import { createStore } from 'redux';
-import rootReducer from 'reducers';
 import { Route, Switch } from 'react-router-dom';
-import { routes } from 'routes';
 import { fakeStateWithNotLoggedInUser } from 'testUtils/fakers';
+import * as actions from '~/actions';
+import rootReducer from '~/reducers';
+import { routes } from '~/routes';
 import LoginPage from '../LoginPage/LoginPage';
 
 const getByLoginPlaceholderText = () => screen.getByPlaceholderText(/login/i);
