@@ -1,6 +1,6 @@
 import { Meta, Story } from '@storybook/react';
 import StoryRouter from 'storybook-react-router';
-import { routes } from 'routes';
+import { routes } from '~/routes';
 import Twitters from './Twitters';
 import { StoreDecorator } from '../../../.storybook/decorators';
 import { itemsPageLinks } from '../../../.storybook/links';

@@ -1,6 +1,6 @@
 import { Meta, Story } from '@storybook/react';
 import StoryRouter from 'storybook-react-router';
-import * as CardStories from 'components/molecules/Card/Card.stories';
+import * as CardStories from '~/components/molecules/Card/Card.stories';
 import DetailsTemplate, { DetailsTemplateProps } from './DetailsTemplate';
 
 export default {
