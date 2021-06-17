@@ -1,11 +1,12 @@
-import { render, screen, userEvent } from 'testUtils';
-import { routes } from 'routes';
-import { stripSlashPrefix } from 'utils';
-import * as actions from 'actions';
-import { fakeItemsData } from 'testUtils/fakers';
 import { createStore } from 'redux';
-import rootReducer from 'reducers';
+import { render, screen, userEvent } from 'testUtils';
+import { fakeItemsData } from 'testUtils/fakers';
+
 import Twitters from '../Twitters/Twitters';
+import * as actions from '~/actions';
+import rootReducer from '~/reducers';
+import { routes } from '~/routes';
+import { stripSlashPrefix } from '~/utils';
 
 const renderTwitters = () =>
   render(<Twitters />, {

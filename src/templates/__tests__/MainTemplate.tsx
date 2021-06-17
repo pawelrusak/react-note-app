@@ -1,7 +1,8 @@
 import { renderWithRouter, screen, getPairOfPathsAndPageTypes } from 'testUtils';
-import PageContext from 'context';
-import { RoutesPaths } from 'routes';
+
 import MainTemplate from '../MainTemplate/MainTemplate';
+import PageContext from '~/context';
+import { RoutesPaths } from '~/routes';
 
 const FakeContextPage = () => (
   <PageContext.Consumer>

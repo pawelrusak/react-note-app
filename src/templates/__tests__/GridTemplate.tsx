@@ -1,11 +1,13 @@
-import { render, screen, userEvent, getPairOfPathsAndPageTypes, waitFor } from 'testUtils';
 import { createStore } from 'redux';
-import rootReducer from 'reducers';
+import { render, screen, userEvent, getPairOfPathsAndPageTypes, waitFor } from 'testUtils';
 import { fakeItemsData } from 'testUtils/fakers';
-import * as actions from 'actions';
-import { ItemVariants, Item } from 'commonTypes';
-import { RoutesPaths } from 'routes';
+
 import GridTemplate from '../GridTemplate/GridTemplate';
+import * as actions from '~/actions';
+import { ItemVariants, Item } from '~/commonTypes';
+import rootReducer from '~/reducers';
+
+import type { RoutesPaths } from '~/routes';
 
 const fakeStore = createStore(rootReducer, {
   userID: 'fake-id',

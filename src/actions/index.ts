@@ -1,14 +1,3 @@
-import firebase from 'firebase/app';
-import { ThunkAction } from 'redux-thunk';
-import { Action } from 'redux';
-import {
-  authenticateUser,
-  fetchItems as fetchRemoteItems,
-  removeItem as removeRemoteItems,
-  addItem as addRemoteItems,
-} from 'services';
-import type { ItemVariants, Item, NewItem } from 'commonTypes';
-import type { RootState } from 'reducers';
 import {
   ADD_ITEM_REQUEST,
   ADD_ITEM_SUCCESS,
@@ -23,6 +12,18 @@ import {
   FETCH_SUCCESS,
   FETCH_FAILURE,
 } from './actionTypes';
+import {
+  authenticateUser,
+  fetchItems as fetchRemoteItems,
+  removeItem as removeRemoteItems,
+  addItem as addRemoteItems,
+} from '~/services';
+
+import type firebase from 'firebase/app';
+import type { Action } from 'redux';
+import type { ThunkAction } from 'redux-thunk';
+import type { ItemVariants, Item, NewItem } from '~/commonTypes';
+import type { RootState } from '~/reducers';
 
 type AppThunk<A extends Action, S = RootState, R = void, E = unknown> = ThunkAction<R, S, E, A>;
 

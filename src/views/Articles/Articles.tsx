@@ -1,8 +1,10 @@
-import GridTemplate from 'templates/GridTemplate/GridTemplate';
-import Card from 'components/molecules/Card/Card';
 import { connect } from 'react-redux';
-import { ArticleItem } from 'commonTypes';
-import { RootState } from 'reducers';
+
+import Card from '~/components/molecules/Card/Card';
+import GridTemplate from '~/templates/GridTemplate/GridTemplate';
+
+import type { ArticleItem } from '~/commonTypes';
+import type { RootState } from '~/reducers';
 
 export type ArticlesProps = {
   readonly articles: ArticleItem[];

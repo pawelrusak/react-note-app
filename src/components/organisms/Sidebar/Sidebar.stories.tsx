@@ -1,8 +1,10 @@
-import { Meta, Story } from '@storybook/react';
 import StoryRouter from 'storybook-react-router';
-import { routes } from 'routes';
+
 import { sidebarLinks } from '../../../../.storybook/links';
 import Sidebar from './Sidebar';
+import { routes } from '~/routes';
+
+import type { Meta, Story } from '@storybook/react';
 
 export default {
   title: 'Organisms/Sidebar',

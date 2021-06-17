@@ -1,5 +1,5 @@
-import DetailsTemplate from 'templates/DetailsTemplate/DetailsTemplate';
-import { useActiveItem } from 'hooks';
+import { useActiveItem } from '~/hooks';
+import DetailsTemplate from '~/templates/DetailsTemplate/DetailsTemplate';
 
 const DetailsPage = () => {
   const activeItem = useActiveItem();

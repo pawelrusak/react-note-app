@@ -1,4 +1,3 @@
-import { Item, NoteItem, ArticleItem, TwitterItem } from 'commonTypes';
 import {
   ADD_ITEM_SUCCESS,
   // REMOVE_ITEM_REQUEST,
@@ -8,7 +7,8 @@ import {
   FETCH_SUCCESS,
   // eslint-disable-next-line
   FETCH_FAILURE,
-} from 'actions/actionTypes';
+} from '~/actions/actionTypes';
+
 import type {
   FetchRequestAction,
   FetchSuccessAction,
@@ -16,7 +16,8 @@ import type {
   RemoveItemSuccessAction,
   AddItemSuccessAction,
   AuthSuccessAction,
-} from 'actions';
+} from '~/actions';
+import type { Item, NoteItem, ArticleItem, TwitterItem } from '~/commonTypes';
 
 export type RootState = {
   readonly notes: NoteItem[];

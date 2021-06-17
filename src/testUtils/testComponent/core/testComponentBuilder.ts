@@ -1,5 +1,6 @@
-import TestSet, { TestConfig } from './testSet';
 import AttributeTestSet, { AttributeTestConfig } from './attributeTestSet';
+import TestSet, { TestConfig } from './testSet';
+
 import type {
   TestQueries,
   LikeRender,
@@ -9,7 +10,7 @@ import type {
   Getable,
   Renderable,
 } from '../testComponentTypes';
-import type { Optional } from 'commonTypes';
+import type { Optional } from '~/commonTypes';
 
 class TestComponentBuilder
   implements Negotiable, BeInTheDocumentMatchable, AttributeTestable, Getable, Renderable

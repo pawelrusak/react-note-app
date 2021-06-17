@@ -1,5 +1,5 @@
-import type { RenderResult } from '@testing-library/react';
 import type TestSet from './core/testSet';
+import type { RenderResult } from '@testing-library/react';
 
 export type TestQueries = () => HTMLElement | null;
 

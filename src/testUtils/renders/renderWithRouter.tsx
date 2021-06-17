@@ -1,6 +1,7 @@
-import { BrowserRouter } from 'react-router-dom';
-import PropTypes from 'prop-types';
 import { render as rtlRender } from '@testing-library/react';
+import PropTypes from 'prop-types';
+import { BrowserRouter } from 'react-router-dom';
+
 import type { RenderOptions as RtlRenderOptions } from '@testing-library/react';
 
 type RenderOptions = { path?: string } & RtlRenderOptions;

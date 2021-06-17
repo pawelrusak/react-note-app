@@ -1,8 +1,10 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchItems } from 'actions';
-import { ItemVariants } from 'commonTypes';
-import { RootState } from 'reducers';
+
+import { fetchItems } from '~/actions';
+import { ItemVariants } from '~/commonTypes';
+
+import type { RootState } from '~/reducers';
 
 export const useFetchItems = <T extends ItemVariants>(itemType: T): RootState[T] => {
   const items = useSelector((state: RootState) => state[itemType]);

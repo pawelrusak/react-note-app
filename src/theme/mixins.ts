@@ -1,5 +1,6 @@
 import { css } from 'styled-components';
-import { ItemVariants } from 'commonTypes';
+
+import type { ItemVariants } from '~/commonTypes';
 
 export type ActiveColorArgs = { readonly activecolor?: ItemVariants };
 

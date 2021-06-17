@@ -1,4 +1,5 @@
 import AttributeTestSet from './attributeTestSet';
+
 import type { TestQueries } from '../testComponentTypes';
 
 export type TestConfig = {

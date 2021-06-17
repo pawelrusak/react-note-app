@@ -2,7 +2,7 @@ import styled, { ThemeProvider } from 'styled-components';
 import { theme } from '../src/theme/mainTheme';
 import PageContext from '../src/context';
 import { Provider } from 'react-redux';
-import store from 'store';
+import store from '../src/store';
 import StoryRouter from 'storybook-react-router';
 import { itemsPageLinks, gridTemplateLinks, userPageTemplateLinks } from './links';
 import GlobalStyle from '../src/theme/GlobalStyle';

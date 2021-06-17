@@ -1,9 +1,11 @@
-import { Meta, Story } from '@storybook/react';
 import StoryRouter from 'storybook-react-router';
-import { routes } from 'routes';
-import GridTemplate, { GridTemplateProps } from './GridTemplate';
-import { StoreDecorator, GridTemplateRouterDecorator } from '../../../.storybook/decorators';
+
 import ViewPlaceholder from '../../../.storybook/components/ViewPlaceholder';
+import { StoreDecorator, GridTemplateRouterDecorator } from '../../../.storybook/decorators';
+import GridTemplate, { GridTemplateProps } from './GridTemplate';
+import { routes } from '~/routes';
+
+import type { Meta, Story } from '@storybook/react';
 
 export default {
   title: 'Templates/GridTemplate',

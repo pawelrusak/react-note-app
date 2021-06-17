@@ -1,9 +1,11 @@
-import { Meta, Story } from '@storybook/react';
 import StoryRouter from 'storybook-react-router';
-import { routes } from 'routes';
-import Notes, { NotesProps } from './Notes';
+
 import { StoreDecorator } from '../../../.storybook/decorators';
 import { itemsPageLinks } from '../../../.storybook/links';
+import Notes, { NotesProps } from './Notes';
+import { routes } from '~/routes';
+
+import type { Meta, Story } from '@storybook/react';
 
 export default {
   title: 'Views/Notes',

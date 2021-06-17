@@ -1,11 +1,12 @@
-import { render, screen, waitFor, cleanup, testComponent } from 'testUtils';
-import { routes } from 'routes';
-import { fakeStateWithData, fakeStateWithoutData } from 'testUtils/fakers';
-import { createStore } from 'redux';
-import rootReducer from 'reducers';
 import { Route } from 'react-router-dom';
-import * as services from 'services';
+import { createStore } from 'redux';
+import { render, screen, waitFor, cleanup, testComponent } from 'testUtils';
+import { fakeStateWithData, fakeStateWithoutData } from 'testUtils/fakers';
+
 import DetailsPage from '../DetailsPage/DetailsPage';
+import rootReducer from '~/reducers';
+import { routes } from '~/routes';
+import * as services from '~/services';
 
 type ItemType = 'note' | 'article' | 'twitter';
 
@@ -13,7 +14,7 @@ const renderDetailsPage = (
   itemType: ItemType,
   store = createStore(rootReducer, fakeStateWithData),
 ) => {
-  const pluralItemTypeName = `${itemType}s` as `${ItemType}s`;
+  const pluralItemTypeName = `${itemType}s` as const;
   const [item] = fakeStateWithData[pluralItemTypeName];
   const itemPath = routes[itemType].replace(':id', item.id);
 

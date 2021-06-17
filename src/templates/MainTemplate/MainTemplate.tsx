@@ -1,8 +1,9 @@
 import { ThemeProvider } from 'styled-components';
-import GlobalStyle from 'theme/GlobalStyle';
-import PageContext from 'context';
-import { theme } from 'theme/mainTheme';
-import { useCurrentPageType } from 'hooks';
+
+import PageContext from '~/context';
+import { useCurrentPageType } from '~/hooks';
+import GlobalStyle from '~/theme/GlobalStyle';
+import { theme } from '~/theme/mainTheme';
 
 export type MainTemplateProps = {
   readonly children: JSX.Element;

@@ -1,4 +1,4 @@
-import { DefaultTheme } from 'styled-components';
+import type { DefaultTheme } from 'styled-components';
 
 export const theme: DefaultTheme = {
   notes: 'hsl(49, 100%, 58%)',

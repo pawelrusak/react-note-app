@@ -1,10 +1,11 @@
-import { Meta, Story } from '@storybook/react';
-import bulbIcon from 'assets/icons/bulb.svg';
-import logoutIcon from 'assets/icons/logout.svg';
-import penIcon from 'assets/icons/pen.svg';
-import plusIcon from 'assets/icons/plus.svg';
-import twitterIcon from 'assets/icons/twitter.svg';
 import ButtonIcon, { ButtonIconProps } from './ButtonIcon';
+import bulbIcon from '~/assets/icons/bulb.svg';
+import logoutIcon from '~/assets/icons/logout.svg';
+import penIcon from '~/assets/icons/pen.svg';
+import plusIcon from '~/assets/icons/plus.svg';
+import twitterIcon from '~/assets/icons/twitter.svg';
+
+import type { Meta, Story } from '@storybook/react';
 
 const icons = {
   Bulb: bulbIcon,

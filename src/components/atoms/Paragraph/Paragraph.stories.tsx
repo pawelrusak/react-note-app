@@ -1,5 +1,6 @@
-import { Meta, Story } from '@storybook/react';
 import Paragraph from './Paragraph';
+
+import type { Meta, Story } from '@storybook/react';
 
 export default {
   title: 'Atoms/Paragraph',

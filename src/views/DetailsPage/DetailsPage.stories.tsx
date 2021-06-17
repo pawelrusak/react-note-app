@@ -1,9 +1,11 @@
-import { Meta, Story } from '@storybook/react';
-import StoryRouter from 'storybook-react-router';
-import { routes } from 'routes';
 import { Route } from 'react-router-dom';
-import DetailsPage from './DetailsPage';
+import StoryRouter from 'storybook-react-router';
+
 import { StoreDecorator, DetailsPageRouterDecorator } from '../../../.storybook/decorators';
+import DetailsPage from './DetailsPage';
+import { routes } from '~/routes';
+
+import type { Meta, Story } from '@storybook/react';
 
 export default {
   title: 'Views/DetailsPage',

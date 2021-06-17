@@ -1,13 +1,14 @@
 import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
-import ButtonIcon from 'components/atoms/ButtonIcon/ButtonIcon';
-import bulbIcon from 'assets/icons/bulb.svg';
-import logoutIcon from 'assets/icons/logout.svg';
-import penIcon from 'assets/icons/pen.svg';
-import twitterIcon from 'assets/icons/twitter.svg';
-import logoIcon from 'assets/icons/logo.svg';
-import { usePageTypeContext } from 'hooks';
-import { activecolor, ActiveColorArgs } from 'theme/mixins';
+
+import bulbIcon from '~/assets/icons/bulb.svg';
+import logoIcon from '~/assets/icons/logo.svg';
+import logoutIcon from '~/assets/icons/logout.svg';
+import penIcon from '~/assets/icons/pen.svg';
+import twitterIcon from '~/assets/icons/twitter.svg';
+import ButtonIcon from '~/components/atoms/ButtonIcon/ButtonIcon';
+import { usePageTypeContext } from '~/hooks';
+import { activecolor, ActiveColorArgs } from '~/theme/mixins';
 
 const StyledWrapper = styled.nav<Required<ActiveColorArgs>>`
   position: fixed;

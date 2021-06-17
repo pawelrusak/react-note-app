@@ -1,5 +1,6 @@
 import styled from 'styled-components';
-import Sidebar from 'components/organisms/Sidebar/Sidebar';
+
+import Sidebar from '~/components/organisms/Sidebar/Sidebar';
 
 const StyledWrapper = styled.div`
   padding-left: 150px;

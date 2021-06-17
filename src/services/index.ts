@@ -1,12 +1,13 @@
-import type { Item } from 'commonTypes';
+import { auth } from './core';
 import {
   queryGetItemsByTypeAndUserID,
   queryGetItemByID,
   queryRemoveItemByID,
   queryAddItem,
 } from './queries/items';
-import { auth } from './core';
+
 import type { NewDocumentItem, DocumentItemQueryArgs } from './servicesTypes';
+import type { Item } from '~/commonTypes';
 
 export const authenticateUser = (email: string, password: string) =>
   auth.signInWithEmailAndPassword(email, password);

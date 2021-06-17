@@ -1,8 +1,10 @@
-import { Meta, Story } from '@storybook/react';
 import StoryRouter from 'storybook-react-router';
-import RegisterPage from './RegisterPage';
+
 import { StoreDecorator } from '../../../.storybook/decorators';
 import { authPageLinks } from '../../../.storybook/links';
+import RegisterPage from './RegisterPage';
+
+import type { Meta, Story } from '@storybook/react';
 
 export default {
   title: 'Views/RegisterPage',
