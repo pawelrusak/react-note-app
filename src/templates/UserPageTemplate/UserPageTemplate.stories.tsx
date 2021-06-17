@@ -1,9 +1,11 @@
-import { Meta, Story } from '@storybook/react';
 import StoryRouter from 'storybook-react-router';
-import { routes } from '~/routes';
-import UserPageTemplate, { UserPageTemplateProps } from './UserPageTemplate';
+
 import ViewPlaceholder from '../../../.storybook/components/ViewPlaceholder';
 import { UserPageTemplateRouterDecorator } from '../../../.storybook/decorators';
+import UserPageTemplate, { UserPageTemplateProps } from './UserPageTemplate';
+import { routes } from '~/routes';
+
+import type { Meta, Story } from '@storybook/react';
 
 export default {
   title: 'Templates/UserPageTemplate',

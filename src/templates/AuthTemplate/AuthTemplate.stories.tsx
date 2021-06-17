@@ -1,7 +1,9 @@
-import { Meta, Story } from '@storybook/react';
 import StoryRouter from 'storybook-react-router';
-import AuthTemplate from './AuthTemplate';
+
 import ViewPlaceholder from '../../../.storybook/components/ViewPlaceholder';
+import AuthTemplate from './AuthTemplate';
+
+import type { Meta, Story } from '@storybook/react';
 
 export default {
   title: 'Templates/AuthTemplate',

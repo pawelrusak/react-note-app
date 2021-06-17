@@ -1,12 +1,13 @@
-import styled from 'styled-components';
 import { Formik, Form } from 'formik';
 import { Link, Redirect } from 'react-router-dom';
-import AuthTemplate from '~/templates/AuthTemplate/AuthTemplate';
+import styled from 'styled-components';
+
+import Button from '~/components/atoms/Button/Button';
 import Heading from '~/components/atoms/Heading/Heading';
 import Input from '~/components/atoms/Input/Input';
-import Button from '~/components/atoms/Button/Button';
-import { routes } from '~/routes';
 import { useAuth } from '~/hooks';
+import { routes } from '~/routes';
+import AuthTemplate from '~/templates/AuthTemplate/AuthTemplate';
 
 const StyledForm = styled(Form)`
   display: flex;

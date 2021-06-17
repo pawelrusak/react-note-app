@@ -1,7 +1,9 @@
-import { Meta, Story } from '@storybook/react';
 import StoryRouter from 'storybook-react-router';
-import MainTemplate from './MainTemplate';
+
 import ViewPlaceholder from '../../../.storybook/components/ViewPlaceholder';
+import MainTemplate from './MainTemplate';
+
+import type { Meta, Story } from '@storybook/react';
 
 export default {
   title: 'Templates/MainTemplate',

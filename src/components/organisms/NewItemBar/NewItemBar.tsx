@@ -1,13 +1,15 @@
-import styled from 'styled-components';
-import { connect } from 'react-redux';
 import { Formik, Form } from 'formik';
-import Input from '~/components/atoms/Input/Input';
+import { connect } from 'react-redux';
+import styled from 'styled-components';
+
+import { addItem as addItemAction } from '~/actions';
 import Button from '~/components/atoms/Button/Button';
 import Heading from '~/components/atoms/Heading/Heading';
-import { addItem as addItemAction } from '~/actions';
+import Input from '~/components/atoms/Input/Input';
 import { usePageTypeContext } from '~/hooks';
-import { ActiveColorArgs } from '~/theme/mixins';
+
 import type { ItemVariants, NewItem } from '~/commonTypes';
+import type { ActiveColorArgs } from '~/theme/mixins';
 
 type IsVisible = { readonly isVisible: boolean };
 type StyledWrapperProps = Required<ActiveColorArgs> & IsVisible;

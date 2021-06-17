@@ -1,4 +1,6 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
+import TestSet, { TestConfig } from './testSet';
+
 import type {
   BuildTestable,
   LikeRender,
@@ -7,7 +9,6 @@ import type {
   GConstructor,
 } from '../testComponentTypes';
 import type { AttributeTestConfig } from './attributeTestSet';
-import TestSet, { TestConfig } from './testSet';
 import type { Modify } from 'commonTypes';
 
 type TestCase = Omit<TestConfig, 'element'> & AttributeTestConfig;

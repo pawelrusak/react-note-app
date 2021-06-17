@@ -1,5 +1,5 @@
-import { Item, ArticleItem, TwitterItem } from 'commonTypes';
-import { DocumentItem } from '../services/servicesTypes';
+import type { Item, ArticleItem, TwitterItem } from '~/commonTypes';
+import type { DocumentItem } from '~/services/servicesTypes';
 
 export const isArticleItem = (obj: Item | DocumentItem): obj is ArticleItem => {
   return typeof obj === 'object' && Boolean(obj.articleUrl) && !obj.twitterName;

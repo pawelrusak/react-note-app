@@ -1,8 +1,10 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { fetchItem } from '~/services';
-import { usePageTypeContext } from './usePageTypeContext';
+
 import { useItemSelector } from './useItemSelector';
+import { usePageTypeContext } from './usePageTypeContext';
+import { fetchItem } from '~/services';
+
 import type { Item, URLParams, Modify } from '~/commonTypes';
 
 type DetailsItem =

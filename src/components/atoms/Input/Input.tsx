@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components';
+
 import magnifierIcon from '~/assets/icons/magnifier.svg';
 
 export type InputProps = { readonly search?: boolean };

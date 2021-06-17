@@ -1,9 +1,10 @@
 import { Meta, Story } from '@storybook/react';
 import StoryRouter from 'storybook-react-router';
-import { routes } from '~/routes';
-import Articles, { ArticlesProps } from './Articles';
+
 import { StoreDecorator } from '../../../.storybook/decorators';
 import { itemsPageLinks } from '../../../.storybook/links';
+import Articles, { ArticlesProps } from './Articles';
+import { routes } from '~/routes';
 
 export default {
   title: 'Views/Articles',

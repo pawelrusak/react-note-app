@@ -1,4 +1,5 @@
 import { getEarlierDateOfDay } from '~/utils';
+
 import type { RootState } from '~/reducers';
 
 const dayEarlier = getEarlierDateOfDay(1);

@@ -1,8 +1,10 @@
-import { Meta, Story } from '@storybook/react';
 import StoryRouter from 'storybook-react-router';
-import { getEarlierDateOfDay } from '~/utils';
-import Card, { CardProps } from './Card';
+
 import { StoreDecorator, CardWrapperDecorator } from '../../../../.storybook/decorators';
+import Card, { CardProps } from './Card';
+import { getEarlierDateOfDay } from '~/utils';
+
+import type { Meta, Story } from '@storybook/react';
 
 export default {
   title: 'Molecules/Card',

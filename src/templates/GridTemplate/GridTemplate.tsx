@@ -1,12 +1,13 @@
 import styled from 'styled-components';
-import Input from '~/components/atoms/Input/Input';
-import Heading from '~/components/atoms/Heading/Heading';
-import Paragraph from '~/components/atoms/Paragraph/Paragraph';
-import UserPageTemplate from '~/templates/UserPageTemplate/UserPageTemplate';
-import ButtonIcon from '~/components/atoms/ButtonIcon/ButtonIcon';
-import NewItemBar from '~/components/organisms/NewItemBar/NewItemBar';
+
 import plusIcon from '~/assets/icons/plus.svg';
+import ButtonIcon from '~/components/atoms/ButtonIcon/ButtonIcon';
+import Heading from '~/components/atoms/Heading/Heading';
+import Input from '~/components/atoms/Input/Input';
+import Paragraph from '~/components/atoms/Paragraph/Paragraph';
+import NewItemBar from '~/components/organisms/NewItemBar/NewItemBar';
 import { useToggle, usePageTypeContext } from '~/hooks';
+import UserPageTemplate from '~/templates/UserPageTemplate/UserPageTemplate';
 import { activecolor } from '~/theme/mixins';
 
 const StyledWrapper = styled.div`

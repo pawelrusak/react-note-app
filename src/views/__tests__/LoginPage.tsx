@@ -1,11 +1,12 @@
-import { render, screen, waitFor, userEvent } from 'testUtils';
-import { createStore } from 'redux';
 import { Route, Switch } from 'react-router-dom';
+import { createStore } from 'redux';
+import { render, screen, waitFor, userEvent } from 'testUtils';
 import { fakeStateWithNotLoggedInUser } from 'testUtils/fakers';
+
+import LoginPage from '../LoginPage/LoginPage';
 import * as actions from '~/actions';
 import rootReducer from '~/reducers';
 import { routes } from '~/routes';
-import LoginPage from '../LoginPage/LoginPage';
 
 const getByLoginPlaceholderText = () => screen.getByPlaceholderText(/login/i);
 const getByPasswordPlaceholderText = () => screen.getByPlaceholderText(/password/i);

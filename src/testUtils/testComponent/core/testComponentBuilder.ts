@@ -1,5 +1,6 @@
-import TestSet, { TestConfig } from './testSet';
 import AttributeTestSet, { AttributeTestConfig } from './attributeTestSet';
+import TestSet, { TestConfig } from './testSet';
+
 import type {
   TestQueries,
   LikeRender,

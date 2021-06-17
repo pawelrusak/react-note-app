@@ -1,10 +1,12 @@
-import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import UserPageTemplate from '~/templates/UserPageTemplate/UserPageTemplate';
+import styled from 'styled-components';
+
+import Button from '~/components/atoms/Button/Button';
 import Heading from '~/components/atoms/Heading/Heading';
 import Paragraph from '~/components/atoms/Paragraph/Paragraph';
-import Button from '~/components/atoms/Button/Button';
 import { usePageTypeContext } from '~/hooks';
+import UserPageTemplate from '~/templates/UserPageTemplate/UserPageTemplate';
+
 import type { Item, Modify } from '~/commonTypes';
 
 const StyledWrapper = styled.div`

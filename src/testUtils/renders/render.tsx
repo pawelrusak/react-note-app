@@ -1,15 +1,18 @@
+import { render as rtlRender } from '@testing-library/react';
+import PropTypes from 'prop-types';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
-import PropTypes from 'prop-types';
-import { ThemeProvider } from 'styled-components';
-import { render as rtlRender } from '@testing-library/react';
 import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
+import { ThemeProvider } from 'styled-components';
+
+import PageContext from '~/context';
+import rootReducer from '~/reducers';
+import { theme } from '~/theme/mainTheme';
+
 import type { RenderOptions as RtlRenderOptions } from '@testing-library/react';
 import type { Store } from 'redux';
-import { theme } from '~/theme/mainTheme';
-import rootReducer from '~/reducers';
-import PageContext from '~/context';
+
 import type { ItemVariants } from '~/commonTypes';
 
 type RenderOptions = {

@@ -1,5 +1,6 @@
-import { Meta, Story } from '@storybook/react';
 import Input, { InputProps } from './Input';
+
+import type { Meta, Story } from '@storybook/react';
 
 export default {
   title: 'Atoms/Input',

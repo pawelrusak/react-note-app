@@ -1,7 +1,8 @@
-import { ItemVariants } from '~/commonTypes';
-import type { NewDocumentItem } from '../servicesTypes';
-import { getNotesCollectionRef, getNoteDocumentRefById } from '../refs/items';
 import { itemConverter } from '../converters/items';
+import { getNotesCollectionRef, getNoteDocumentRefById } from '../refs/items';
+
+import type { NewDocumentItem } from '../servicesTypes';
+import type { ItemVariants } from '~/commonTypes';
 
 export const queryGetItemsByTypeAndUserID = (type: ItemVariants, userID: null | string = null) =>
   getNotesCollectionRef()

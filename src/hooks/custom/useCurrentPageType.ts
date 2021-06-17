@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
-import { ItemVariants } from '~/commonTypes';
+
+import type { ItemVariants } from '~/commonTypes';
 
 export const useCurrentPageType = () => {
   const [pageType, setPageType] = useState<ItemVariants | undefined>('notes');
