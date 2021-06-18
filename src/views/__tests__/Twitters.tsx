@@ -3,7 +3,7 @@ import { render, screen, userEvent } from 'testUtils';
 import { fakeItemsData } from 'testUtils/fakers';
 
 import Twitters from '../Twitters/Twitters';
-import * as actions from '~/actions';
+import * as actions from '~/actions/items';
 import rootReducer from '~/reducers';
 import { routes } from '~/routes';
 import { stripSlashPrefix } from '~/utils';

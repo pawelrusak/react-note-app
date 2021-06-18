@@ -5,7 +5,7 @@ import { render, screen, userEvent, testComponent } from 'testUtils';
 
 import Card, { CardProps } from '../Card/Card';
 import * as CardStories from '../Card/Card.stories';
-import * as actions from '~/actions';
+import * as actions from '~/actions/items';
 import { routes } from '~/routes';
 
 import type { Item, ItemVariants } from '~/commonTypes';

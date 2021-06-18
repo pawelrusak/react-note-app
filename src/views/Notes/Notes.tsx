@@ -18,9 +18,6 @@ const Notes = ({ notes }: NotesProps) => (
   </GridTemplate>
 );
 
-const mapStateToProps = (state: RootState) => {
-  const { notes } = state;
-  return { notes };
-};
+const mapStateToProps = ({ items }: RootState) => ({ notes: items.notes });
 
 export default connect(mapStateToProps)(Notes);

@@ -17,6 +17,15 @@ export type DeepWriteable<T> = { -readonly [P in keyof T]: DeepWriteable<T[P]> }
  */
 export type Optional<T, K extends keyof T> = Pick<Partial<T>, K> & Omit<T, K>;
 
+type BaseReducerMap<S> = {
+  [K in keyof S]: (state: S[K], action: unknown) => S;
+};
+
+// eslint-disable-next-line no-use-before-define
+export type InferRootState<ReducerMap extends BaseReducerMap<S>, S = unknown> = {
+  [K in keyof ReducerMap]: ReturnType<ReducerMap[K]>;
+};
+
 /*
  *
  * VARIANTS

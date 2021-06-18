@@ -15,7 +15,7 @@ const renderDetailsPage = (
   store = createStore(rootReducer, fakeStateWithData),
 ) => {
   const pluralItemTypeName = `${itemType}s` as const;
-  const [item] = fakeStateWithData[pluralItemTypeName];
+  const [item] = fakeStateWithData.items[pluralItemTypeName];
   const itemPath = routes[itemType].replace(':id', item.id);
 
   return render(<Route path={routes[itemType]} component={DetailsPage} />, {
@@ -25,9 +25,9 @@ const renderDetailsPage = (
   });
 };
 
-const [noteItem] = fakeStateWithData.notes;
-const [articleItem] = fakeStateWithData.articles;
-const [twitterItem] = fakeStateWithData.twitters;
+const [noteItem] = fakeStateWithData.items.notes;
+const [articleItem] = fakeStateWithData.items.articles;
+const [twitterItem] = fakeStateWithData.items.twitters;
 
 const twitterAvatarTestName = 'twitter avatar';
 const articleLinkTestName = 'article link';
