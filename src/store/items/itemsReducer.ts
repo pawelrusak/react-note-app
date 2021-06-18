@@ -11,7 +11,7 @@ import type {
   FetchFailureAction,
   RemoveItemSuccessAction,
   AddItemSuccessAction,
-} from '~/actions';
+} from './itemsActions';
 import type { Item, NoteItem, ArticleItem, TwitterItem } from '~/commonTypes';
 
 export type ItemsState = {

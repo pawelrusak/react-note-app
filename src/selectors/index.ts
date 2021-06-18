@@ -1,2 +1,2 @@
 export * from '~/store/auth/authActions';
-export * from './items';
+export * from '~/store/items/itemsSelector';

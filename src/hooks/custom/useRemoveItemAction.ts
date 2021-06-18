@@ -1,6 +1,6 @@
 import { useDispatch } from 'react-redux';
 
-import { removeItem } from '~/actions';
+import { removeItem } from '~/store/items/itemsActions';
 
 import type { ItemVariants } from '~/commonTypes';
 
