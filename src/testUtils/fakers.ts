@@ -108,17 +108,27 @@ export const fakeItemsData = {
 };
 
 export const fakeStateWithData: RootState = {
-  ...fakeItemsData,
-  userID: null,
-  isLoading: false,
+  items: {
+    ...fakeItemsData,
+    isLoading: false,
+  },
+  auth: {
+    userID: null,
+    isLoading: false,
+  },
 };
 
 export const fakeStateWithoutData: RootState = {
-  notes: [],
-  twitters: [],
-  articles: [],
-  userID: null,
-  isLoading: false,
+  items: {
+    notes: [],
+    twitters: [],
+    articles: [],
+    isLoading: false,
+  },
+  auth: {
+    userID: null,
+    isLoading: false,
+  },
 };
 
 export const fakeStateWithNotLoggedInUser = fakeStateWithoutData;

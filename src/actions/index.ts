@@ -48,7 +48,7 @@ export const fetchItems =
   (dispatch, getState) => {
     dispatch({ type: FETCH_REQUEST });
 
-    return fetchRemoteItems({ type: itemType, userID: getState().userID })
+    return fetchRemoteItems({ type: itemType, userID: getState().auth.userID })
       .then(({ data }) => {
         dispatch({
           type: FETCH_SUCCESS,
@@ -119,7 +119,7 @@ export const addItem =
 
     addRemoteItems({
       type: itemType,
-      userID: getState().userID,
+      userID: getState().auth.userID,
       ...itemContent,
     })
       .then(({ data }) => {

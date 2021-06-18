@@ -20,25 +20,30 @@ const middlewares = [thunk];
 
 const mockStore = createMockStore<RootState, DispatchExts>(middlewares);
 const initialState: RootState = {
-  notes: [
-    {
-      ...sampleNote,
-    },
-  ],
-  articles: [
-    {
-      ...sampleNote,
-      articleUrl: 'https://youtube.com/helloroman',
-    },
-  ],
-  twitters: [
-    {
-      ...sampleNote,
-      twitterName: 'hello_romans',
-    },
-  ],
-  userID: null,
-  isLoading: false,
+  items: {
+    notes: [
+      {
+        ...sampleNote,
+      },
+    ],
+    articles: [
+      {
+        ...sampleNote,
+        articleUrl: 'https://youtube.com/helloroman',
+      },
+    ],
+    twitters: [
+      {
+        ...sampleNote,
+        twitterName: 'hello_romans',
+      },
+    ],
+    isLoading: false,
+  },
+  auth: {
+    userID: null,
+    isLoading: false,
+  },
 };
 
 const store = mockStore(initialState);

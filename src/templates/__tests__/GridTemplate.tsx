@@ -10,9 +10,14 @@ import rootReducer from '~/reducers';
 import type { RoutesPaths } from '~/routes';
 
 const fakeStore = createStore(rootReducer, {
-  userID: 'fake-id',
-  isLoading: false,
-  ...fakeItemsData,
+  auth: {
+    userID: 'fake-id',
+    isLoading: false,
+  },
+  items: {
+    ...fakeItemsData,
+    isLoading: false,
+  },
 });
 
 const renderGridTemplate = (path?: RoutesPaths, pageType?: ItemVariants) =>
@@ -125,7 +130,7 @@ describe('<GridTemplate />', () => {
 
     const { store } = renderGridTemplate();
 
-    expect(store.getState().notes).toHaveLength(4);
+    expect(store.getState().items.notes).toHaveLength(4);
 
     // open sidebar form
     const [toggleNewItemBarButton] = getAllByButtonRole();
@@ -138,8 +143,8 @@ describe('<GridTemplate />', () => {
     // submit the note form
     await waitFor(() => userEvent.click(getByAddNoteTextButton()));
 
-    expect(store.getState().notes).toHaveLength(5);
-    expect(store.getState().notes).toEqual(
+    expect(store.getState().items.notes).toHaveLength(5);
+    expect(store.getState().items.notes).toEqual(
       expect.arrayContaining([
         expect.objectContaining({
           ...fakeNewNoteData,

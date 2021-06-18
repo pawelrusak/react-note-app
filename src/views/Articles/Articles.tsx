@@ -25,6 +25,6 @@ const Articles = ({ articles }: ArticlesProps) => (
   </GridTemplate>
 );
 
-const mapStateToProps = ({ articles }: RootState) => ({ articles });
+const mapStateToProps = ({ items }: RootState) => ({ articles: items.articles });
 
 export default connect(mapStateToProps)(Articles);
