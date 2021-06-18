@@ -20,12 +20,8 @@ import {
 } from '~/services';
 
 import type firebase from 'firebase/app';
-import type { Action } from 'redux';
-import type { ThunkAction } from 'redux-thunk';
+import type { AppThunk } from 'redux-thunk';
 import type { ItemVariants, Item, NewItem } from '~/commonTypes';
-import type { RootState } from '~/reducers';
-
-type AppThunk<A extends Action, S = RootState, R = void, E = unknown> = ThunkAction<R, S, E, A>;
 
 export type FetchRequestAction = { type: FETCH_REQUEST };
 export type FetchSuccessAction = {
