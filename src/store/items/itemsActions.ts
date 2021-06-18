@@ -8,7 +8,7 @@ import {
   FETCH_REQUEST,
   FETCH_SUCCESS,
   FETCH_FAILURE,
-} from '~/actions/actionTypes';
+} from '~/constants/actionTypes';
 import {
   fetchItems as fetchRemoteItems,
   removeItem as removeRemoteItems,

@@ -3,7 +3,7 @@ import {
   REMOVE_ITEM_SUCCESS,
   FETCH_REQUEST,
   FETCH_SUCCESS,
-} from '~/actions/actionTypes';
+} from '~/constants/actionTypes';
 
 import type {
   FetchRequestAction,
