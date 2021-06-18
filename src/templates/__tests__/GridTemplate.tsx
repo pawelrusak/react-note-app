@@ -3,7 +3,7 @@ import { render, screen, userEvent, getPairOfPathsAndPageTypes, waitFor } from '
 import { fakeItemsData } from 'testUtils/fakers';
 
 import GridTemplate from '../GridTemplate/GridTemplate';
-import * as actions from '~/actions';
+import * as actions from '~/actions/items';
 import { ItemVariants, Item } from '~/commonTypes';
 import rootReducer from '~/reducers';
 

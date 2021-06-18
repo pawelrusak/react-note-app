@@ -4,7 +4,7 @@ import { render, screen, waitFor, userEvent } from 'testUtils';
 import { fakeStateWithNotLoggedInUser } from 'testUtils/fakers';
 
 import LoginPage from '../LoginPage/LoginPage';
-import * as actions from '~/actions';
+import * as actions from '~/actions/auth';
 import rootReducer from '~/reducers';
 import { routes } from '~/routes';
 
