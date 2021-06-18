@@ -1,7 +1,7 @@
 import { useSelector, useDispatch } from 'react-redux';
 
-import { authenticate as authenticateAction } from '~/actions';
-import { userIDSelector } from '~/selectors';
+import { authenticate as authenticateAction } from '~/store/auth/authActions';
+import { userIDSelector } from '~/store/auth/authSelectors';
 
 export const useAuth = () => {
   const userID = useSelector(userIDSelector);

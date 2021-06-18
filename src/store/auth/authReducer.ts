@@ -1,6 +1,6 @@
 import { AUTH_SUCCESS } from '~/actions/actionTypes';
 
-import type { AuthSuccessAction } from '~/actions';
+import type { AuthSuccessAction } from './authActions';
 
 export type AuthState = {
   readonly userID: string | null;

@@ -4,9 +4,9 @@ import { render, screen, waitFor, userEvent } from 'testUtils';
 import { fakeStateWithNotLoggedInUser } from 'testUtils/fakers';
 
 import LoginPage from '../LoginPage/LoginPage';
-import * as actions from '~/actions/auth';
 import rootReducer from '~/reducers';
 import { routes } from '~/routes';
+import * as actions from '~/store/auth/authActions';
 
 const getByLoginPlaceholderText = () => screen.getByPlaceholderText(/login/i);
 const getByPasswordPlaceholderText = () => screen.getByPlaceholderText(/password/i);

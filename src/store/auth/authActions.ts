@@ -1,4 +1,4 @@
-import { AUTH_REQUEST, AUTH_SUCCESS, AUTH_FAILURE } from './actionTypes';
+import { AUTH_REQUEST, AUTH_SUCCESS, AUTH_FAILURE } from '~/actions/actionTypes';
 import { authenticateUser } from '~/services';
 
 import type firebase from 'firebase/app';
