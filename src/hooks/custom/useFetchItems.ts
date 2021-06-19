@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { ItemVariants } from '~/commonTypes';
 import { fetchItems } from '~/store/items/itemsActions';
 
-import type { RootState, ItemsState } from '~/store/reducers';
+import type { RootState, ItemsState } from '~/store';
 
 export const useFetchItems = <T extends ItemVariants>(itemType: T): ItemsState[T] => {
   const items = useSelector((state: RootState) => state.items[itemType]);

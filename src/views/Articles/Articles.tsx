@@ -4,7 +4,7 @@ import Card from '~/components/molecules/Card/Card';
 import GridTemplate from '~/templates/GridTemplate/GridTemplate';
 
 import type { ArticleItem } from '~/commonTypes';
-import type { RootState } from '~/store/reducers';
+import type { RootState } from '~/store';
 
 export type ArticlesProps = {
   readonly articles: ArticleItem[];
