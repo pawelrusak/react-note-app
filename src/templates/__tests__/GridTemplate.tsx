@@ -4,8 +4,8 @@ import { fakeItemsData } from 'testUtils/fakers';
 
 import GridTemplate from '../GridTemplate/GridTemplate';
 import { ItemVariants, Item } from '~/commonTypes';
-import rootReducer from '~/reducers';
 import * as actions from '~/store/items/itemsActions';
+import rootReducer from '~/store/reducers';
 
 import type { RoutesPaths } from '~/routes';
 

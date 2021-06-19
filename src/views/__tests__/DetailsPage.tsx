@@ -4,9 +4,9 @@ import { render, screen, waitFor, cleanup, testComponent } from 'testUtils';
 import { fakeStateWithData, fakeStateWithoutData } from 'testUtils/fakers';
 
 import DetailsPage from '../DetailsPage/DetailsPage';
-import rootReducer from '~/reducers';
 import { routes } from '~/routes';
 import * as services from '~/services';
+import rootReducer from '~/store/reducers';
 
 type ItemType = 'note' | 'article' | 'twitter';
 

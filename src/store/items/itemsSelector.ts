@@ -1,5 +1,5 @@
 import type { ItemVariants, Item } from '~/commonTypes';
-import type { RootState } from '~/reducers';
+import type { RootState } from '~/store/reducers';
 
 export const itemByTypeAndIDSelector =
   <T extends ItemVariants>(itemType: T, itemID: string) =>

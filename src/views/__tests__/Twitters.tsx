@@ -3,9 +3,9 @@ import { render, screen, userEvent } from 'testUtils';
 import { fakeItemsData } from 'testUtils/fakers';
 
 import Twitters from '../Twitters/Twitters';
-import rootReducer from '~/reducers';
 import { routes } from '~/routes';
 import * as actions from '~/store/items/itemsActions';
+import rootReducer from '~/store/reducers';
 import { stripSlashPrefix } from '~/utils';
 
 const renderTwitters = () =>
