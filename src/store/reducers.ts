@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
 
-import auth from './auth';
-import items from './items';
+import auth from './auth/authReducer';
+import items from './items/itemsReducer';
 
 import type { InferRootState } from '~/commonTypes';
 
@@ -12,10 +12,8 @@ const reducers = {
 
 const rootReducer = combineReducers(reducers);
 
-export type test = ReturnType<typeof rootReducer>;
-
 export default rootReducer;
 
 export type RootState = InferRootState<typeof reducers>;
-export type { AuthState } from './auth';
-export type { ItemsState } from './items';
+export type { AuthState } from './auth/authReducer';
+export type { ItemsState } from './items/itemsReducer';

@@ -3,7 +3,7 @@ import {
   REMOVE_ITEM_SUCCESS,
   FETCH_REQUEST,
   FETCH_SUCCESS,
-} from '~/actions/actionTypes';
+} from '~/constants/actionTypes';
 
 import type {
   FetchRequestAction,
@@ -11,7 +11,7 @@ import type {
   FetchFailureAction,
   RemoveItemSuccessAction,
   AddItemSuccessAction,
-} from '~/actions';
+} from './itemsActions';
 import type { Item, NoteItem, ArticleItem, TwitterItem } from '~/commonTypes';
 
 export type ItemsState = {

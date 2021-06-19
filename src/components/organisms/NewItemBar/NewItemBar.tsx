@@ -2,11 +2,11 @@ import { Formik, Form } from 'formik';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 
-import { addItem as addItemAction } from '~/actions';
 import Button from '~/components/atoms/Button/Button';
 import Heading from '~/components/atoms/Heading/Heading';
 import Input from '~/components/atoms/Input/Input';
 import { usePageTypeContext } from '~/hooks';
+import { addItem as addItemAction } from '~/store/items/itemsActions';
 
 import type { ItemVariants, NewItem } from '~/commonTypes';
 import type { ActiveColorArgs } from '~/theme/mixins';

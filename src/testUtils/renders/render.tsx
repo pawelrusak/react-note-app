@@ -7,7 +7,7 @@ import thunk from 'redux-thunk';
 import { ThemeProvider } from 'styled-components';
 
 import PageContext from '~/context';
-import rootReducer from '~/reducers';
+import rootReducer from '~/store/reducers';
 import { theme } from '~/theme/mainTheme';
 
 import type { RenderOptions as RtlRenderOptions } from '@testing-library/react';
