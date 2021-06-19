@@ -1,3 +1,3 @@
-import type { RootState } from '~/store/reducers';
+import type { RootState } from '~/store';
 
 export const userIDSelector = ({ auth }: RootState) => auth.userID;
