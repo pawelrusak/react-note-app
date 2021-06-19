@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux';
 
-import { itemByTypeAndIDSelector } from '~/selectors';
+import { itemByTypeAndIDSelector } from '~/store/items/itemsSelector';
 
 import type { ItemVariants } from '~/commonTypes';
 
