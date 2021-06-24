@@ -1,32 +1,14 @@
-import { createStore, applyMiddleware } from 'redux';
-import thunk from 'redux-thunk';
 import { render, screen, userEvent, getPairOfPathsAndPageTypes, waitFor } from 'testUtils';
-import { fakeItemsData } from 'testUtils/fakers';
+import { fakeStateWithDataAndLoggedInUser } from 'testUtils/fakers';
 
 import GridTemplate from '../GridTemplate/GridTemplate';
 import { ItemVariants } from '~/commonTypes';
 
 import { TEST_FAKE_NEW_NOTE_DATA_ID } from '~/constants/test';
-import rootReducer from '~/store/reducers';
 
 import type { RoutesPaths } from '~/routes';
 
 jest.mock('~/services');
-
-const fakeStore = createStore(
-  rootReducer,
-  {
-    auth: {
-      userID: 'fake-id',
-      isLoading: false,
-    },
-    items: {
-      ...fakeItemsData,
-      isLoading: false,
-    },
-  },
-  applyMiddleware(thunk),
-);
 
 const renderGridTemplate = (path?: RoutesPaths, pageType?: ItemVariants) =>
   render(
@@ -36,7 +18,7 @@ const renderGridTemplate = (path?: RoutesPaths, pageType?: ItemVariants) =>
     {
       path,
       pageType,
-      store: fakeStore,
+      initialState: fakeStateWithDataAndLoggedInUser,
     },
   );
 
