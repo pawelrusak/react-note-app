@@ -1,83 +1,51 @@
-import { createStore } from 'redux';
-import { render, screen, userEvent } from 'testUtils';
+import { render, screen, userEvent, waitFor } from 'testUtils';
 import { fakeItemsData } from 'testUtils/fakers';
 
 import Twitters from '../Twitters/Twitters';
 import { routes } from '~/routes';
-import * as actions from '~/store/items/itemsActions';
-import rootReducer from '~/store/reducers';
 import { stripSlashPrefix } from '~/utils';
+
+jest.mock('~/services');
 
 const renderTwitters = () =>
   render(<Twitters />, {
     path: routes.twitters,
     pageType: stripSlashPrefix(routes.twitters) as 'twitters',
-    store: createStore(rootReducer),
   });
 
-/**
- * @todo try to mock firebase not actions creators
- */
-const mocksFetchItems = () => {
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-ignore
-  return jest.spyOn(actions, 'fetchItems').mockImplementation((itemType) => ({
-    type: 'FETCH_SUCCESS',
-    payload: {
-      data: fakeItemsData[itemType],
-      itemType,
-    },
-  }));
-};
-
-/**
- * @todo try to mock firebase not actions creators
- */
-const mocksRemoveItems = () => {
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-ignore
-  return jest.spyOn(actions, 'removeItem').mockImplementation((itemType, id) => ({
-    type: 'REMOVE_ITEM_SUCCESS',
-    payload: {
-      itemType,
-      id,
-    },
-  }));
-};
-
 const { twitters } = fakeItemsData;
-const getAllByCardHeadings = () => screen.getAllByTestId('card-heading-bar');
-const getByFirstTwitterTitle = () => screen.queryByText(twitters[0].title);
-const getAllByRemoveButtons = () => screen.getAllByRole('button', { name: /remove/i });
+
+const firstTwitterTitle = twitters[0].title;
+const cardHeadingBarId = 'card-heading-bar';
+
+const getAllByCardHeadings = () => screen.getAllByTestId(cardHeadingBarId);
+const getByFirstTwitterTitle = () => screen.queryByText(firstTwitterTitle);
+const findAllByRemoveButtons = () => screen.findAllByRole('button', { name: /remove/i });
+const findAllByCardHeadings = () => screen.findAllByTestId(cardHeadingBarId);
+const findByFirstTwitterTitle = () => screen.findByText(firstTwitterTitle);
 
 describe('<Twitters />', () => {
-  it('display the cards with data from store', () => {
-    const mockFetchItems = mocksFetchItems();
-
+  it('display the cards with data from store', async () => {
     renderTwitters();
 
-    const cardsHeadings = getAllByCardHeadings();
+    const cardsHeadings = await findAllByCardHeadings();
 
     expect(cardsHeadings).toHaveLength(4);
-    expect(mockFetchItems).toHaveBeenCalledTimes(1);
 
     for (let i = 0; i < twitters.length; i += 1) {
       expect(cardsHeadings[i]).toHaveTextContent(twitters[i].title);
     }
   });
 
-  it('delete the first tab after clicking the first remove button', () => {
-    mocksFetchItems();
-    mocksRemoveItems();
-
+  it('delete first card after clicking its the "remove" button', async () => {
     renderTwitters();
 
-    expect(getAllByCardHeadings()).toHaveLength(4);
-    expect(getByFirstTwitterTitle()).toBeInTheDocument();
+    expect(await findAllByCardHeadings()).toHaveLength(4);
+    expect(await findByFirstTwitterTitle()).toBeInTheDocument();
 
-    const [firstCardItemRemoveButton] = getAllByRemoveButtons();
+    const [firstCardItemRemoveButton] = await findAllByRemoveButtons();
 
-    userEvent.click(firstCardItemRemoveButton);
+    await waitFor(() => userEvent.click(firstCardItemRemoveButton));
 
     expect(getAllByCardHeadings()).toHaveLength(3);
     expect(getByFirstTwitterTitle()).not.toBeInTheDocument();
