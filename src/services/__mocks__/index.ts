@@ -19,3 +19,14 @@ export const fetchItems = async ({ type }: { type: ItemVariants }) => {
     return Promise.reject(error);
   }
 };
+
+export const authenticateUser = async () => {
+  try {
+    const user = {
+      uid: 'testUid',
+    };
+    return Promise.resolve({ user });
+  } catch (error) {
+    return Promise.reject(error);
+  }
+};
