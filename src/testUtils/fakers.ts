@@ -1,3 +1,4 @@
+import { TEST_FAKE_AUTH_USER_ID } from '~/constants/test';
 import { getEarlierDateOfDay } from '~/utils';
 
 import type { RootState } from '~/store';
@@ -115,6 +116,14 @@ export const fakeStateWithData: RootState = {
   auth: {
     userID: null,
     isLoading: false,
+  },
+};
+
+export const fakeStateWithDataAndLoggedInUser: RootState = {
+  ...fakeStateWithData,
+  auth: {
+    ...fakeStateWithData.auth,
+    userID: TEST_FAKE_AUTH_USER_ID,
   },
 };
 
