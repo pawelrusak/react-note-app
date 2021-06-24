@@ -1,5 +1,7 @@
 import { fakeItemsData } from 'testUtils/fakers';
 
+import { TEST_FAKE_NEW_NOTE_DATA_ID } from '~/constants/test';
+
 import type { ItemVariants } from '~/commonTypes';
 
 export const removeItem = async () => {
@@ -13,6 +15,20 @@ export const removeItem = async () => {
 export const fetchItems = async ({ type }: { type: ItemVariants }) => {
   try {
     const data = fakeItemsData[type];
+
+    return Promise.resolve({ data });
+  } catch (error) {
+    return Promise.reject(error);
+  }
+};
+
+export const addItem = async ({ ...itemContent }) => {
+  try {
+    const data = {
+      id: TEST_FAKE_NEW_NOTE_DATA_ID,
+      created: new Date(),
+      ...itemContent,
+    };
 
     return Promise.resolve({ data });
   } catch (error) {
