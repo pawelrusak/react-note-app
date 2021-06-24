@@ -1,13 +1,12 @@
 import { Route } from 'react-router-dom';
-import { createStore, applyMiddleware } from 'redux';
-import thunk from 'redux-thunk';
 import { render, screen, waitFor, cleanup, testComponent } from 'testUtils';
 import { fakeStateWithData } from 'testUtils/fakers';
 
 import DetailsPage from '../DetailsPage/DetailsPage';
 import { routes } from '~/routes';
 import * as services from '~/services';
-import rootReducer from '~/store/reducers';
+
+import type { RootState } from '~/store';
 
 jest.mock('~/services');
 
@@ -15,14 +14,14 @@ type ItemType = 'note' | 'article' | 'twitter';
 
 const renderDetailsPage = (
   itemType: ItemType,
-  store = createStore(rootReducer, fakeStateWithData, applyMiddleware(thunk)),
+  initialState: RootState | null = fakeStateWithData,
 ) => {
   const pluralItemTypeName = `${itemType}s` as const;
   const [item] = fakeStateWithData.items[pluralItemTypeName];
   const itemPath = routes[itemType].replace(':id', item.id);
 
   return render(<Route path={routes[itemType]} component={DetailsPage} />, {
-    store,
+    initialState,
     path: itemPath,
     pageType: pluralItemTypeName,
   });
@@ -48,7 +47,7 @@ describe('<DetailsPage />', () => {
   it('send a request to service if there is no item in store and display him', async () => {
     const mockFetchItem = mocksFetchItem();
 
-    renderDetailsPage('note', createStore(rootReducer, applyMiddleware(thunk)));
+    renderDetailsPage('note', null);
 
     expect(mockFetchItem).toHaveBeenCalledTimes(1);
     expect(mockFetchItem).toHaveBeenCalledWith(noteItem.id);
