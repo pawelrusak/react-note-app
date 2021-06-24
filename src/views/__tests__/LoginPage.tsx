@@ -1,13 +1,10 @@
 import { Route, Switch } from 'react-router-dom';
-import { createStore, applyMiddleware } from 'redux';
-import thunk from 'redux-thunk';
 import { render, screen, waitFor, userEvent } from 'testUtils';
 import { fakeStateWithNotLoggedInUser } from 'testUtils/fakers';
 
 import LoginPage from '../LoginPage/LoginPage';
 import { routes } from '~/routes';
 import * as actions from '~/store/auth/authActions';
-import rootReducer from '~/store/reducers';
 
 jest.mock('~/services');
 
@@ -30,7 +27,7 @@ const renderLoginPage = () =>
       <Route exact path={routes.home} component={FakeHomePage} />
     </Switch>,
     {
-      store: createStore(rootReducer, fakeStateWithNotLoggedInUser, applyMiddleware(thunk)),
+      initialState: fakeStateWithNotLoggedInUser,
       path: routes.login,
     },
   );
