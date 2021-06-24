@@ -1,24 +1,32 @@
-import { createStore } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
+import thunk from 'redux-thunk';
 import { render, screen, userEvent, getPairOfPathsAndPageTypes, waitFor } from 'testUtils';
 import { fakeItemsData } from 'testUtils/fakers';
 
 import GridTemplate from '../GridTemplate/GridTemplate';
-import { ItemVariants, Item } from '~/commonTypes';
-import * as actions from '~/store/items/itemsActions';
+import { ItemVariants } from '~/commonTypes';
+
+import { TEST_FAKE_NEW_NOTE_DATA_ID } from '~/constants/test';
 import rootReducer from '~/store/reducers';
 
 import type { RoutesPaths } from '~/routes';
 
-const fakeStore = createStore(rootReducer, {
-  auth: {
-    userID: 'fake-id',
-    isLoading: false,
+jest.mock('~/services');
+
+const fakeStore = createStore(
+  rootReducer,
+  {
+    auth: {
+      userID: 'fake-id',
+      isLoading: false,
+    },
+    items: {
+      ...fakeItemsData,
+      isLoading: false,
+    },
   },
-  items: {
-    ...fakeItemsData,
-    isLoading: false,
-  },
-});
+  applyMiddleware(thunk),
+);
 
 const renderGridTemplate = (path?: RoutesPaths, pageType?: ItemVariants) =>
   render(
@@ -38,21 +46,6 @@ const getAllByButtonRole = () => screen.getAllByRole('button');
 const getByTitlePlaceholderText = () => screen.getByPlaceholderText(/title/i);
 const getByNewItemBarContentTextarea = () => screen.getByTestId('new-item-bar-content-textarea');
 const getByAddNoteTextButton = () => screen.getByRole('button', { name: /add note/i });
-
-const fakeNewNoteData = { id: 'fake-note-id' };
-
-const mockAddItemAction = () =>
-  jest
-    .spyOn(actions, 'addItem')
-    // eslint-disable-next-line
-    // @ts-ignore
-    .mockImplementation((itemType: ItemVariants, itemContent: Item) => ({
-      type: 'ADD_ITEM_SUCCESS',
-      payload: {
-        itemType,
-        data: { ...fakeNewNoteData, ...itemContent, created: new Date() },
-      },
-    }));
 
 const transformTranslateHundredPercent = 'transform: translate(100%)';
 const transformTranslateZero = 'transform: translate(0)';
@@ -126,8 +119,6 @@ describe('<GridTemplate />', () => {
   });
 
   it('add a new note to store that has been created by the form', async () => {
-    mockAddItemAction();
-
     const { store } = renderGridTemplate();
 
     expect(store.getState().items.notes).toHaveLength(4);
@@ -147,7 +138,7 @@ describe('<GridTemplate />', () => {
     expect(store.getState().items.notes).toEqual(
       expect.arrayContaining([
         expect.objectContaining({
-          ...fakeNewNoteData,
+          id: TEST_FAKE_NEW_NOTE_DATA_ID,
           ...fakeNoteItemInputs,
           articleUrl: expect.any(String) as string,
           created: expect.any(Date) as Date,
