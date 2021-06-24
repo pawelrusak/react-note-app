@@ -1,18 +1,21 @@
 import { Route } from 'react-router-dom';
-import { createStore } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
+import thunk from 'redux-thunk';
 import { render, screen, waitFor, cleanup, testComponent } from 'testUtils';
-import { fakeStateWithData, fakeStateWithoutData } from 'testUtils/fakers';
+import { fakeStateWithData } from 'testUtils/fakers';
 
 import DetailsPage from '../DetailsPage/DetailsPage';
 import { routes } from '~/routes';
 import * as services from '~/services';
 import rootReducer from '~/store/reducers';
 
+jest.mock('~/services');
+
 type ItemType = 'note' | 'article' | 'twitter';
 
 const renderDetailsPage = (
   itemType: ItemType,
-  store = createStore(rootReducer, fakeStateWithData),
+  store = createStore(rootReducer, fakeStateWithData, applyMiddleware(thunk)),
 ) => {
   const pluralItemTypeName = `${itemType}s` as const;
   const [item] = fakeStateWithData.items[pluralItemTypeName];
@@ -37,11 +40,7 @@ const queryByNoteItemContentText = () => screen.queryByText(noteItem.content);
 const queryByArticleLink = () => screen.queryByTestId('article-link');
 const queryByAvatar = () => screen.queryByTestId('avatar');
 
-const noteResolveData = {
-  data: noteItem,
-};
-const mocksFetchItem = () =>
-  jest.spyOn(services, 'fetchItem').mockResolvedValueOnce(noteResolveData);
+const mocksFetchItem = () => jest.spyOn(services, 'fetchItem');
 
 describe('<DetailsPage />', () => {
   afterEach(cleanup);
@@ -49,7 +48,7 @@ describe('<DetailsPage />', () => {
   it('send a request to service if there is no item in store and display him', async () => {
     const mockFetchItem = mocksFetchItem();
 
-    renderDetailsPage('note', createStore(rootReducer, fakeStateWithoutData));
+    renderDetailsPage('note', createStore(rootReducer, applyMiddleware(thunk)));
 
     expect(mockFetchItem).toHaveBeenCalledTimes(1);
     expect(mockFetchItem).toHaveBeenCalledWith(noteItem.id);

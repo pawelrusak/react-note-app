@@ -1,5 +1,4 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
-import { cleanup } from '@testing-library/react';
+import { cleanup, waitFor } from '@testing-library/react';
 import { Route, Switch } from 'react-router-dom';
 import { render, screen, userEvent, testComponent } from 'testUtils';
 
@@ -8,7 +7,9 @@ import * as CardStories from '../Card/Card.stories';
 import { routes } from '~/routes';
 import * as actions from '~/store/items/itemsActions';
 
-import type { Item, ItemVariants } from '~/commonTypes';
+import type { Item } from '~/commonTypes';
+
+jest.mock('~/services');
 
 type CardType = 'Note' | 'Twitter' | 'Article';
 
@@ -30,7 +31,7 @@ const { articleUrl: articleUrlCardArgs } = CardStories.Article.args as CardProps
 const renderCard = (cardType: CardType) => {
   const cardData = CardStories[cardType]?.args as Item;
   const itemType = cardType.toLowerCase() as 'note' | 'twitter' | 'article';
-  const pageType = `${itemType}s` as ItemVariants;
+  const pageType = `${itemType}s` as const;
   const detailsPagePath = routes[itemType].replace(':id', cardData.id);
 
   const FakeDetailsDataPage = () => <FakeDetailsPage cardType={cardType} cardId={cardData.id} />;
@@ -59,13 +60,6 @@ const queryByFakeDetailsPage = () => screen.queryByTestId('fake-details-page');
 const twitterAvatarTestName = 'twitter avatar';
 const articleLinkTestName = 'article link';
 
-const mockRemoveItemAction = () => {
-  // @ts-ignore
-  return jest.spyOn(actions, 'removeItem').mockImplementation(() => ({
-    type: 'TEST',
-  }));
-};
-
 describe('<Card />', () => {
   beforeEach(cleanup);
 
@@ -88,22 +82,23 @@ describe('<Card />', () => {
   /**
    * @deprecated remove this after write the test for <Notes />, <Twitters />, <Articles />, because they are more complex
    */
-  it('trigger removeItem action with the data of card  when the remove button was clicked', () => {
+  it('trigger removeItem action with the data of card  when the remove button was clicked', async () => {
+    const mockRemoveItemAction = jest.spyOn(actions, 'removeItem');
+
     renderCard('Note');
-
     const removeItemButton = getByButtonRole();
-    const mockRemoveItem = mockRemoveItemAction();
 
-    userEvent.click(removeItemButton);
+    await waitFor(() => userEvent.click(removeItemButton));
 
-    expect(mockRemoveItem.mock.calls[0]).toMatchInlineSnapshot(`
+    expect(mockRemoveItemAction).toHaveBeenCalledTimes(1);
+    expect(mockRemoveItemAction.mock.calls[0]).toMatchInlineSnapshot(`
       Array [
         "notes",
         "8885d2d6-b081-4342-8232-e889affa9d93",
       ]
     `);
 
-    mockRemoveItem.mockRestore();
+    mockRemoveItemAction.mockRestore();
   });
 
   testComponent(() => renderCard('Note'), { suffixTestNames: 'when is note page' })
