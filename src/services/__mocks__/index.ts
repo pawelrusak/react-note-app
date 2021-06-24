@@ -1,4 +1,4 @@
-import { fakeItemsData } from 'testUtils/fakers';
+import { fakeItemsData, fakeStateWithData } from 'testUtils/fakers';
 
 import { TEST_FAKE_NEW_NOTE_DATA_ID } from '~/constants/test';
 
@@ -15,6 +15,18 @@ export const removeItem = async () => {
 export const fetchItems = async ({ type }: { type: ItemVariants }) => {
   try {
     const data = fakeItemsData[type];
+
+    return Promise.resolve({ data });
+  } catch (error) {
+    return Promise.reject(error);
+  }
+};
+
+export const fetchItem = async (id: string) => {
+  try {
+    const { notes } = fakeStateWithData.items;
+
+    const data = notes.find((item) => item.id === id);
 
     return Promise.resolve({ data });
   } catch (error) {
