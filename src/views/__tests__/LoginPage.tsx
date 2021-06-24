@@ -1,5 +1,6 @@
 import { Route, Switch } from 'react-router-dom';
-import { createStore } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
+import thunk from 'redux-thunk';
 import { render, screen, waitFor, userEvent } from 'testUtils';
 import { fakeStateWithNotLoggedInUser } from 'testUtils/fakers';
 
@@ -7,6 +8,8 @@ import LoginPage from '../LoginPage/LoginPage';
 import { routes } from '~/routes';
 import * as actions from '~/store/auth/authActions';
 import rootReducer from '~/store/reducers';
+
+jest.mock('~/services');
 
 const getByLoginPlaceholderText = () => screen.getByPlaceholderText(/login/i);
 const getByPasswordPlaceholderText = () => screen.getByPlaceholderText(/password/i);
@@ -18,19 +21,6 @@ const fakeLoginData = {
   password: 'password', // the best password in the world
 };
 
-const mocksAuthenticate = () => {
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-expect-error
-  return jest.spyOn(actions, 'authenticate').mockImplementation(() => ({
-    type: 'AUTH_SUCCESS',
-    payload: {
-      user: {
-        uid: 'testUid',
-      },
-    },
-  }));
-};
-
 const FakeHomePage = () => <div data-testid="fake-home-Page">Home Page</div>;
 
 const renderLoginPage = () =>
@@ -40,14 +30,14 @@ const renderLoginPage = () =>
       <Route exact path={routes.home} component={FakeHomePage} />
     </Switch>,
     {
-      store: createStore(rootReducer, fakeStateWithNotLoggedInUser),
+      store: createStore(rootReducer, fakeStateWithNotLoggedInUser, applyMiddleware(thunk)),
       path: routes.login,
     },
   );
 
 describe('<LoginPage />', () => {
   it('submits correct values to authentication and redirect to the home page', async () => {
-    const mockAuthenticate = mocksAuthenticate();
+    const mockAuthenticate = jest.spyOn(actions, 'authenticate');
 
     renderLoginPage();
 
