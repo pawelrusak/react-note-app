@@ -28,14 +28,14 @@ const initialState = {
   isLoading: false,
 };
 
-type RootAction =
+export type ItemsAction =
   | FetchRequestAction
   | FetchSuccessAction
   | FetchFailureAction
   | RemoveItemSuccessAction
   | AddItemSuccessAction;
 
-const rootReducer = (state: ItemsState = initialState, action: RootAction) => {
+const rootReducer = (state: ItemsState = initialState, action: ItemsAction) => {
   switch (action.type) {
     case FETCH_REQUEST:
       return {

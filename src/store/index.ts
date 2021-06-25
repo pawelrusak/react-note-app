@@ -1,11 +1,21 @@
-import { createStore, applyMiddleware, compose } from 'redux';
-import thunk from 'redux-thunk';
+import { configureStore } from '@reduxjs/toolkit';
 
-import rootReducer from '~/store/reducers';
+import auth, { AuthAction } from './auth/authReducer';
+import items, { ItemsAction } from './items/itemsReducer';
 
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-
-const store = createStore(rootReducer, composeEnhancers(applyMiddleware(thunk)));
+// add explicit type to disable TypeScript error
+const store = configureStore<
+  {
+    auth: ReturnType<typeof auth>;
+    items: ReturnType<typeof items>;
+  },
+  AuthAction & ItemsAction
+>({
+  reducer: {
+    items,
+    auth,
+  },
+});
 
 export type RootState = ReturnType<typeof store.getState>;
 export type { AuthState } from './auth/authReducer';

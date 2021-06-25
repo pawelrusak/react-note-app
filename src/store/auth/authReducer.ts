@@ -19,7 +19,7 @@ const initialState = {
   isLoading: false,
 };
 
-type AuthAction = AuthSuccessAction;
+export type AuthAction = AuthSuccessAction;
 
 const rootReducer = (state: AuthState = initialState, action: AuthAction) => {
   switch (action.type) {
