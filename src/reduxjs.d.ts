@@ -1,4 +1,4 @@
-import { PayloadAction } from '@reduxjs/toolkit';
+import { PayloadAction, Action, ThunkAction } from '@reduxjs/toolkit';
 
 import auth, { AuthAction } from '~/store/auth/authReducer';
 import items, { ItemsAction } from '~/store/items/itemsReducer';
@@ -28,5 +28,12 @@ declare module '@reduxjs/toolkit' {
     T,
     M,
     E
+  >;
+
+  export type AppThunk<A extends Action, S = RootState, R = void, E = unknown> = ThunkAction<
+    R,
+    S,
+    E,
+    A
   >;
 }
