@@ -1,17 +1,9 @@
-import { configureStore } from '@reduxjs/toolkit';
+import { configureStore, RootState as AppState, RootAction } from '@reduxjs/toolkit';
 
-import auth, { AuthAction } from './auth/authReducer';
-import items, { ItemsAction } from './items/itemsReducer';
 import rootReducer from './reducers';
 
 // add explicit type to disable TypeScript error
-const store = configureStore<
-  {
-    auth: ReturnType<typeof auth>;
-    items: ReturnType<typeof items>;
-  },
-  AuthAction & ItemsAction
->({
+const store = configureStore<AppState, RootAction>({
   reducer: rootReducer,
 });
 
