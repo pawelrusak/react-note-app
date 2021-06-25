@@ -2,6 +2,7 @@ import { configureStore } from '@reduxjs/toolkit';
 
 import auth, { AuthAction } from './auth/authReducer';
 import items, { ItemsAction } from './items/itemsReducer';
+import rootReducer from './reducers';
 
 // add explicit type to disable TypeScript error
 const store = configureStore<
@@ -11,10 +12,7 @@ const store = configureStore<
   },
   AuthAction & ItemsAction
 >({
-  reducer: {
-    items,
-    auth,
-  },
+  reducer: rootReducer,
 });
 
 export type RootState = ReturnType<typeof store.getState>;
