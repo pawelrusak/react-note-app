@@ -6,18 +6,14 @@ import { BrowserRouter } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
 
 import PageContext from '~/context';
-import auth, { AuthAction } from '~/store/auth/authReducer';
-import items, { ItemsAction } from '~/store/items/itemsReducer';
+import rootReducer from '~/store/reducers';
 import { theme } from '~/theme/mainTheme';
 
 import type { RenderOptions as RtlRenderOptions } from '@testing-library/react';
 import type { ItemVariants } from '~/commonTypes';
 import type { RootState } from '~/store';
-
-const reducer = {
-  auth,
-  items,
-};
+import type { AuthAction } from '~/store/auth/authReducer';
+import type { ItemsAction } from '~/store/items/itemsReducer';
 
 type RenderOptions = {
   path?: string;
@@ -33,8 +29,8 @@ export const render = (
     pageType = 'notes',
     initialState,
     store = initialState === null || initialState === undefined
-      ? configureStore({ reducer })
-      : configureStore({ reducer, preloadedState: initialState }),
+      ? configureStore({ reducer: rootReducer })
+      : configureStore({ reducer: rootReducer, preloadedState: initialState }),
     ...renderOptions
   }: RenderOptions = {},
 ) => {
