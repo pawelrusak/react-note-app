@@ -1,15 +1,11 @@
 import { AUTH_REQUEST, AUTH_SUCCESS, AUTH_FAILURE } from '~/constants/actionTypes';
 import { authenticateUser } from '~/services';
 
+import type { Action, PayloadAction, AppThunk } from '@reduxjs/toolkit';
 import type firebase from 'firebase/app';
-import type { Action } from 'redux';
-import type { AppThunk } from 'redux-thunk';
 
 export type AuthRequestAction = Action<AUTH_REQUEST>;
-export type AuthSuccessAction = {
-  type: AUTH_SUCCESS;
-  payload: firebase.auth.UserCredential;
-};
+export type AuthSuccessAction = PayloadAction<firebase.auth.UserCredential, AUTH_SUCCESS>;
 export type AuthFailureAction = Action<AUTH_FAILURE>;
 type ThunkAuthAction = AppThunk<AuthRequestAction | AuthSuccessAction | AuthFailureAction>;
 /**

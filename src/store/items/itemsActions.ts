@@ -15,18 +15,11 @@ import {
   addItem as addRemoteItems,
 } from '~/services';
 
-import type { Action } from 'redux';
-import type { AppThunk } from 'redux-thunk';
+import type { Action, AppItemsPayloadAction, AppThunk } from '@reduxjs/toolkit';
 import type { ItemVariants, Item, NewItem } from '~/commonTypes';
 
 export type FetchRequestAction = Action<FETCH_REQUEST>;
-export type FetchSuccessAction = {
-  type: FETCH_SUCCESS;
-  payload: {
-    itemType: ItemVariants;
-    data: Item[];
-  };
-};
+export type FetchSuccessAction = AppItemsPayloadAction<{ data: Item[] }, FETCH_SUCCESS>;
 export type FetchFailureAction = Action<FETCH_FAILURE>;
 type ThunkFetchItemsAction = AppThunk<FetchRequestAction | FetchSuccessAction | FetchFailureAction>;
 
@@ -56,13 +49,7 @@ export const fetchItems =
   };
 
 export type RemoveItemRequestAction = Action<REMOVE_ITEM_REQUEST>;
-export type RemoveItemSuccessAction = {
-  type: REMOVE_ITEM_SUCCESS;
-  payload: {
-    itemType: ItemVariants;
-    id: string;
-  };
-};
+export type RemoveItemSuccessAction = AppItemsPayloadAction<{ id: string }, REMOVE_ITEM_SUCCESS>;
 export type RemoveItemFailureAction = Action<REMOVE_ITEM_FAILURE>;
 type ThunkRemoveItemAction = AppThunk<
   RemoveItemRequestAction | RemoveItemSuccessAction | RemoveItemFailureAction
@@ -87,13 +74,7 @@ export const removeItem =
   };
 
 export type AddItemRequestAction = Action<ADD_ITEM_REQUEST>;
-export type AddItemSuccessAction = {
-  type: ADD_ITEM_SUCCESS;
-  payload: {
-    itemType: ItemVariants;
-    data: Item;
-  };
-};
+export type AddItemSuccessAction = AppItemsPayloadAction<{ data: Item }, ADD_ITEM_SUCCESS>;
 export type AddItemFailureAction = Action<ADD_ITEM_FAILURE>;
 type ThunkAddItemAction = AppThunk<
   AddItemRequestAction | AddItemSuccessAction | AddItemFailureAction
