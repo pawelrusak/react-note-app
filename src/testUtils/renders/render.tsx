@@ -1,4 +1,4 @@
-import { configureStore, Store } from '@reduxjs/toolkit';
+import { configureStore, AppStore } from '@reduxjs/toolkit';
 import { render as rtlRender } from '@testing-library/react';
 import PropTypes from 'prop-types';
 import { Provider } from 'react-redux';
@@ -12,13 +12,11 @@ import { theme } from '~/theme/mainTheme';
 import type { RenderOptions as RtlRenderOptions } from '@testing-library/react';
 import type { ItemVariants } from '~/commonTypes';
 import type { RootState } from '~/store';
-import type { AuthAction } from '~/store/auth/authReducer';
-import type { ItemsAction } from '~/store/items/itemsReducer';
 
 type RenderOptions = {
   path?: string;
   pageType?: ItemVariants;
-  store?: Store<RootState, AuthAction & ItemsAction>;
+  store?: AppStore;
   initialState?: RootState | null;
 } & RtlRenderOptions;
 
