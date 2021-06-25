@@ -1,24 +1,28 @@
+import { configureStore, Store } from '@reduxjs/toolkit';
 import { render as rtlRender } from '@testing-library/react';
 import PropTypes from 'prop-types';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
-import { createStore, applyMiddleware } from 'redux';
-import thunk from 'redux-thunk';
 import { ThemeProvider } from 'styled-components';
 
 import PageContext from '~/context';
-import rootReducer from '~/store/reducers';
+import auth, { AuthAction } from '~/store/auth/authReducer';
+import items, { ItemsAction } from '~/store/items/itemsReducer';
 import { theme } from '~/theme/mainTheme';
 
 import type { RenderOptions as RtlRenderOptions } from '@testing-library/react';
-import type { Store } from 'redux';
 import type { ItemVariants } from '~/commonTypes';
 import type { RootState } from '~/store';
+
+const reducer = {
+  auth,
+  items,
+};
 
 type RenderOptions = {
   path?: string;
   pageType?: ItemVariants;
-  store?: Store;
+  store?: Store<RootState, AuthAction & ItemsAction>;
   initialState?: RootState | null;
 } & RtlRenderOptions;
 
@@ -29,8 +33,8 @@ export const render = (
     pageType = 'notes',
     initialState,
     store = initialState === null || initialState === undefined
-      ? createStore(rootReducer, applyMiddleware(thunk))
-      : createStore(rootReducer, initialState, applyMiddleware(thunk)),
+      ? configureStore({ reducer })
+      : configureStore({ reducer, preloadedState: initialState }),
     ...renderOptions
   }: RenderOptions = {},
 ) => {
