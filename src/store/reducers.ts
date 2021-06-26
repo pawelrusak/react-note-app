@@ -1,8 +1,9 @@
-import auth from './auth/authReducer';
+import authReducer from './auth/authSlice';
 import items from './items/itemsReducer';
+import { ACTION_DOMAINS } from '~/constants/actionDomains';
 
 const rootReducer = {
-  auth,
+  [ACTION_DOMAINS.AUTH]: authReducer,
   items,
 };
 
