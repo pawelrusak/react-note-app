@@ -6,7 +6,7 @@ import Button from '~/components/atoms/Button/Button';
 import Heading from '~/components/atoms/Heading/Heading';
 import Input from '~/components/atoms/Input/Input';
 import { usePageTypeContext } from '~/hooks';
-import { addItem as addItemAction } from '~/store/items/itemsActions';
+import { addItem as addItemAction } from '~/store/items/itemsSlice';
 
 import type { ItemVariants, NewItem } from '~/commonTypes';
 import type { ActiveColorArgs } from '~/theme/mixins';
@@ -123,7 +123,7 @@ NewItemBar.defaultProps = {
 };
 
 const mapDispatch: DispatchProps = {
-  addItem: (itemType, itemContent) => addItemAction(itemType, itemContent),
+  addItem: (itemVariant, itemContent) => addItemAction({ itemVariant, itemContent }),
 };
 
 export default connect(null, mapDispatch)(NewItemBar);
