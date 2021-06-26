@@ -3,7 +3,7 @@ import thunk, { ThunkDispatch } from 'redux-thunk';
 
 import { getEarlierDateOfDay } from '~/utils';
 
-import type { AnyAction } from 'redux';
+import type { AnyAction } from '@reduxjs/toolkit';
 import type { RootState } from '~/store';
 
 const sampleNote = {
