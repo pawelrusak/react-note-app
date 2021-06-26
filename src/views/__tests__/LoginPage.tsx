@@ -4,7 +4,7 @@ import { fakeStateWithNotLoggedInUser } from 'testUtils/fakers';
 
 import LoginPage from '../LoginPage/LoginPage';
 import { routes } from '~/routes';
-import * as actions from '~/store/auth/authActions';
+import * as actions from '~/store/auth/authSlice';
 
 jest.mock('~/services');
 
@@ -14,7 +14,7 @@ const getByLoginButton = () => screen.getByRole('button');
 const queryByFakeHomePage = () => screen.queryByTestId('fake-home-Page');
 
 const fakeLoginData = {
-  username: 'app@login.test',
+  email: 'app@login.test',
   password: 'password', // the best password in the world
 };
 
@@ -40,7 +40,7 @@ describe('<LoginPage />', () => {
 
     expect(queryByFakeHomePage()).not.toBeInTheDocument();
 
-    userEvent.type(getByLoginPlaceholderText(), fakeLoginData.username);
+    userEvent.type(getByLoginPlaceholderText(), fakeLoginData.email);
     userEvent.type(getByPasswordPlaceholderText(), fakeLoginData.password);
 
     // submit form
@@ -48,7 +48,7 @@ describe('<LoginPage />', () => {
 
     // submits correct values to authentication
     expect(mockAuthenticate).toHaveBeenCalledTimes(1);
-    expect(mockAuthenticate).toHaveBeenCalledWith(fakeLoginData.username, fakeLoginData.password);
+    expect(mockAuthenticate).toHaveBeenCalledWith(fakeLoginData);
 
     // redirect to the home page
     await waitFor(() => expect(queryByFakeHomePage()).toBeInTheDocument());
