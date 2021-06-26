@@ -36,4 +36,8 @@ declare module '@reduxjs/toolkit' {
     E,
     A
   >;
+
+  export type AppThunkConfig = {
+    state: RootState;
+  };
 }
