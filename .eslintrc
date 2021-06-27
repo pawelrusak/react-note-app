@@ -91,6 +91,20 @@
           "@typescript-eslint/no-unsafe-member-access": 0,
           "@typescript-eslint/no-unsafe-call": 0
       }
+    },
+    {
+      "files": [
+        "src/**/*Slice.ts"
+      ],
+      "rules": {
+        "no-param-reassign": [
+          2,
+          { 
+            "props": true, 
+            "ignorePropertyModificationsFor": ["state"]
+           }
+        ]
+      }
     }
   ],
   "rules": {

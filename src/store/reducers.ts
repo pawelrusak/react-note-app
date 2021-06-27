@@ -1,11 +1,10 @@
-import { combineReducers } from 'redux';
+import authReducer from './auth/authSlice';
+import itemsReducer from './items/itemsSlice';
+import { ACTION_DOMAINS } from '~/constants/actionDomains';
 
-import auth from './auth/authReducer';
-import items from './items/itemsReducer';
-
-const rootReducer = combineReducers({
-  auth,
-  items,
-});
+const rootReducer = {
+  [ACTION_DOMAINS.AUTH]: authReducer,
+  [ACTION_DOMAINS.ITEMS]: itemsReducer,
+};
 
 export default rootReducer;

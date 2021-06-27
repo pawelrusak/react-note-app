@@ -5,7 +5,7 @@ import { render, screen, userEvent, testComponent } from 'testUtils';
 import Card, { CardProps } from '../Card/Card';
 import * as CardStories from '../Card/Card.stories';
 import { routes } from '~/routes';
-import * as actions from '~/store/items/itemsActions';
+import * as actions from '~/store/items/itemsSlice';
 
 import type { Item } from '~/commonTypes';
 
@@ -93,8 +93,10 @@ describe('<Card />', () => {
     expect(mockRemoveItemAction).toHaveBeenCalledTimes(1);
     expect(mockRemoveItemAction.mock.calls[0]).toMatchInlineSnapshot(`
       Array [
-        "notes",
-        "8885d2d6-b081-4342-8232-e889affa9d93",
+        Object {
+          "id": "8885d2d6-b081-4342-8232-e889affa9d93",
+          "itemVariant": "notes",
+        },
       ]
     `);
 

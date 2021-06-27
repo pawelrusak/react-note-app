@@ -2,17 +2,17 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { ItemVariants } from '~/commonTypes';
-import { fetchItems } from '~/store/items/itemsActions';
+import { fetchItems } from '~/store/items/itemsSlice';
 
 import type { RootState, ItemsState } from '~/store';
 
-export const useFetchItems = <T extends ItemVariants>(itemType: T): ItemsState[T] => {
-  const items = useSelector((state: RootState) => state.items[itemType]);
+export const useFetchItems = <T extends ItemVariants>(itemVariant: T): ItemsState[T] => {
+  const items = useSelector((state: RootState) => state.items[itemVariant]);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchItems(itemType));
-  }, [dispatch, itemType]);
+    dispatch(fetchItems({ itemVariant }));
+  }, [dispatch, itemVariant]);
 
   return items;
 };
