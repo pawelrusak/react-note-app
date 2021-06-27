@@ -1,4 +1,4 @@
-import { createSlice, createAsyncThunk, RootState } from '@reduxjs/toolkit';
+import { createSlice, createAsyncThunk, AppThunkConfig } from '@reduxjs/toolkit';
 
 import { ACTION_DOMAINS } from '~/constants/actionDomains';
 import * as services from '~/services';
@@ -17,8 +17,6 @@ const initialState: AuthState = {
   userID: process.env.REACT_APP_TEMPORARY_USER_ID as string,
   isLoading: false,
 };
-
-type AppThunkConfig = { state: RootState };
 
 type AuthenticateReturn = firebase.auth.UserCredential;
 type AuthenticateArg = {
