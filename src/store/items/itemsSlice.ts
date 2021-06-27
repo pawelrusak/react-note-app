@@ -97,17 +97,17 @@ const itemsSlice = createSlice({
       })
       .addCase(fetchItems.fulfilled, (state, { payload }) => {
         state.isLoading = false;
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // eslint-disable-next-line
         // @ts-expect-error
-        state[payload.itemVariant] = payload.data;
+        state[payload.itemVariant] = [...payload.data];
       })
       .addCase(addItem.fulfilled, (state, action) => {
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // eslint-disable-next-line
         // @ts-expect-error
-        state[action.payload.itemVariant].push(action.payload.data);
+        state[action.payload.itemVariant].push({ ...action.payload.data });
       })
       .addCase(removeItem.fulfilled, (state, { payload }) => {
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // eslint-disable-next-line
         // @ts-expect-error
         state[payload.itemVariant] = (state[payload.itemVariant] as Item[]).filter(
           (item) => item.id !== payload.id,
