@@ -1,9 +1,8 @@
-import { configureStore, RootState as AppState, RootAction } from '@reduxjs/toolkit';
+import { configureStore } from '@reduxjs/toolkit';
 
 import rootReducer from './reducers';
 
-// add explicit type to disable TypeScript error
-const store = configureStore<AppState, RootAction>({
+const store = configureStore({
   reducer: rootReducer,
 });
 

@@ -1,20 +1,17 @@
 import { PayloadAction, Action, ThunkAction } from '@reduxjs/toolkit';
 
-import auth, { AuthAction } from '~/store/auth/authReducer';
-import items, { ItemsAction } from '~/store/items/itemsReducer';
-
 import type { Store } from '@reduxjs/toolkit';
 import type { ItemVariants } from '~/commonTypes';
+import type { AuthState } from '~/store/auth/authSlice';
+import type { ItemsState } from '~/store/items/itemsSlice';
 
 declare module '@reduxjs/toolkit' {
-  export type RootAction = AuthAction & ItemsAction;
-
   export type RootState = {
-    auth: ReturnType<typeof auth>;
-    items: ReturnType<typeof items>;
+    auth: AuthState;
+    items: ItemsState;
   };
 
-  export type AppStore = Store<RootState, RootAction>;
+  export type AppStore = Store<RootState>;
 
   export type AppItemsPayloadAction<
     P = void,
