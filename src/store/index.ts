@@ -7,7 +7,7 @@ const store = configureStore({
 });
 
 export type RootState = ReturnType<typeof store.getState>;
-export type { AuthState } from './auth/authReducer';
-export type { ItemsState } from './items/itemsReducer';
+export type { AuthState } from './auth/authSlice';
+export type { ItemsState } from './items/itemsSlice';
 
 export default store;
