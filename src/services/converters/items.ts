@@ -24,7 +24,7 @@ export const itemConverter = {
       id: snapshot.id,
       title: data.title,
       content: data.content,
-      created: data.created.toDate(),
+      created: data.created.toDate().toISOString(),
     };
 
     if (isArticleItem(data)) {
