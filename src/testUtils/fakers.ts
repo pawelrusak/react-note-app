@@ -3,9 +3,9 @@ import { getEarlierDateOfDay } from '~/utils';
 
 import type { RootState } from '~/store';
 
-const dayEarlier = getEarlierDateOfDay(1);
-const fiveDaysEarlier = getEarlierDateOfDay(5);
-const tenDaysEarlier = getEarlierDateOfDay(10);
+const dayEarlier = getEarlierDateOfDay(1).toISOString();
+const fiveDaysEarlier = getEarlierDateOfDay(5).toISOString();
+const tenDaysEarlier = getEarlierDateOfDay(10).toISOString();
 
 export const fakeItemsData = {
   twitters: [

@@ -5,21 +5,14 @@ import { useItemSelector } from './useItemSelector';
 import { usePageTypeContext } from './usePageTypeContext';
 import { fetchItem } from '~/services';
 
-import type { Item, URLParams, Modify } from '~/commonTypes';
+import type { Item, URLParams } from '~/commonTypes';
 
-type DetailsItem =
-  | Item
-  | Modify<
-      Omit<Item, 'id'>,
-      {
-        created: Date | null;
-      }
-    >;
+type DetailsItem = Omit<Item, 'id'>;
 
 const emptyItem: DetailsItem = {
   title: '',
   content: '',
-  created: null,
+  created: '',
   articleUrl: '',
   twitterName: '',
 };

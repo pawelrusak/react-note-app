@@ -38,7 +38,7 @@ export const addItem = async ({ ...itemContent }) => {
   try {
     const data = {
       id: TEST_FAKE_NEW_NOTE_DATA_ID,
-      created: new Date(),
+      created: new Date().toISOString(),
       ...itemContent,
     };
 

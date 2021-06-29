@@ -18,7 +18,7 @@ export const Default = Template.bind({});
 Default.args = {
   id: '8885d2d6-b081-4342-8232-e889affa9d93',
   title: 'My best note ever',
-  created: getEarlierDateOfDay(3),
+  created: getEarlierDateOfDay(3).toISOString(),
   content:
     'Miles Dewey Davis III (May 26, 1926 - September 28, 1991) was an American jazz trumpeter, bandleader, and composer.',
 };

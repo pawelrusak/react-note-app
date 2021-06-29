@@ -123,7 +123,7 @@ describe('<GridTemplate />', () => {
           id: TEST_FAKE_NEW_NOTE_DATA_ID,
           ...fakeNoteItemInputs,
           articleUrl: expect.any(String) as string,
-          created: expect.any(Date) as Date,
+          created: expect.any(String) as string,
           twitterName: expect.any(String) as string,
         }),
       ]),
