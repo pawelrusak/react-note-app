@@ -57,7 +57,7 @@ const StyledImage = styled.img`
 export type DetailsTemplateProps = Modify<
   Omit<Item, 'id'>,
   {
-    created: Date | null;
+    created: Date | string | null;
   }
 >;
 
