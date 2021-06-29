@@ -12,7 +12,7 @@ export type DocumentItem = Partial<DocumentItemQueryArgs> &
     Writeable<Item>,
     {
       id?: string;
-      created?: firebase.firestore.Timestamp | Date | string;
+      created?: firebase.firestore.Timestamp | string;
     }
   >;
 

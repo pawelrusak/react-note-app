@@ -36,7 +36,7 @@ export type NoteItem = {
   /**
    * @todo maybe rename from 'created' to 'createdAt'
    */
-  readonly created: Date | string;
+  readonly created: string;
   readonly twitterName?: never;
   readonly articleUrl?: never;
 };
