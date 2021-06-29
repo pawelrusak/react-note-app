@@ -77,7 +77,7 @@ const DetailsTemplate = ({
           <StyledHeading big as="h1">
             {title}
           </StyledHeading>
-          <StyledParagraph>{created?.toString()}</StyledParagraph>
+          <StyledParagraph>{created}</StyledParagraph>
         </StyledPageHeader>
         <Paragraph>{content}</Paragraph>
         {pageContext === 'articles' && (
