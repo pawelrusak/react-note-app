@@ -7,7 +7,7 @@ import Paragraph from '~/components/atoms/Paragraph/Paragraph';
 import { usePageTypeContext } from '~/hooks';
 import UserPageTemplate from '~/templates/UserPageTemplate/UserPageTemplate';
 
-import type { Item, Modify } from '~/commonTypes';
+import type { Item } from '~/commonTypes';
 
 const StyledWrapper = styled.div`
   padding: 25px 150px 25px 70px;
@@ -54,12 +54,7 @@ const StyledImage = styled.img`
   border-radius: 50%;
 `;
 
-export type DetailsTemplateProps = Modify<
-  Omit<Item, 'id'>,
-  {
-    created: Date | string | null;
-  }
->;
+export type DetailsTemplateProps = Omit<Item, 'id'>;
 
 const DetailsTemplate = ({
   title,
@@ -102,7 +97,7 @@ const DetailsTemplate = ({
 
 DetailsTemplate.defaultProps = {
   title: '',
-  created: null,
+  created: '',
   content: '',
   articleUrl: '',
   twitterName: '',
