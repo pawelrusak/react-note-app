@@ -33,9 +33,9 @@ const StyledLink = styled(Link)`
 const RegisterPage = () => (
   <AuthTemplate>
     <Formik
-      initialValues={{ username: '', password: '' }}
+      initialValues={{ email: '', password: '' }}
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      onSubmit={({ username, password }) => {
+      onSubmit={({ email, password }) => {
         // eslint-disable-next-line no-console
         console.log('hello');
       }}
@@ -46,11 +46,11 @@ const RegisterPage = () => (
           <StyledForm>
             <StyledInput
               type="text"
-              name="username"
+              name="email"
               placeholder="Login"
               onChange={handleChange}
               onBlur={handleBlur}
-              value={values.username}
+              value={values.email}
             />
             <StyledInput
               type="password"
