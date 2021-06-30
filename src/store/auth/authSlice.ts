@@ -18,11 +18,14 @@ const initialState: AuthState = {
   isLoading: false,
 };
 
-type AuthenticateReturn = firebase.auth.UserCredential;
-type AuthenticateArg = {
+type FirebaseReturnUserCredential = firebase.auth.UserCredential;
+type UserCredential = {
   email: string;
   password: string;
 };
+
+type AuthenticateReturn = FirebaseReturnUserCredential;
+type AuthenticateArg = UserCredential;
 
 export const authenticate = createAsyncThunk<AuthenticateReturn, AuthenticateArg, AppThunkConfig>(
   `${ACTION_DOMAINS.AUTH}/authenticate`,
@@ -36,14 +39,33 @@ export const authenticate = createAsyncThunk<AuthenticateReturn, AuthenticateArg
   },
 );
 
+type RegisterReturn = FirebaseReturnUserCredential;
+type RegisterArg = UserCredential;
+
+export const register = createAsyncThunk<RegisterReturn, RegisterArg, AppThunkConfig>(
+  `${ACTION_DOMAINS.AUTH}/register`,
+  async ({ email, password }, { rejectWithValue }) => {
+    try {
+      const response = await services.register(email, password);
+      return response;
+    } catch (error) {
+      return rejectWithValue(error);
+    }
+  },
+);
+
 const authSlice = createSlice({
   name: ACTION_DOMAINS.AUTH,
   initialState,
   reducers: {},
   extraReducers: (builder) =>
-    builder.addCase(authenticate.fulfilled, (state, action) => {
-      state.userID = action.payload.user?.uid ?? null;
-    }),
+    builder
+      .addCase(authenticate.fulfilled, (state, action) => {
+        state.userID = action.payload.user?.uid ?? null;
+      })
+      .addCase(register.fulfilled, (state, action) => {
+        state.userID = action.payload.user?.uid ?? null;
+      }),
 });
 
 export default authSlice.reducer;
