@@ -1,10 +1,11 @@
 import { Formik, Form } from 'formik';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import styled from 'styled-components';
 
 import Button from '~/components/atoms/Button/Button';
 import Heading from '~/components/atoms/Heading/Heading';
 import Input from '~/components/atoms/Input/Input';
+import { useAuth } from '~/hooks';
 import { routes } from '~/routes';
 import AuthTemplate from '~/templates/AuthTemplate/AuthTemplate';
 
@@ -30,45 +31,52 @@ const StyledLink = styled(Link)`
   margin: 20px 0 50px;
 `;
 
-const RegisterPage = () => (
-  <AuthTemplate>
-    <Formik
-      initialValues={{ username: '', password: '' }}
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      onSubmit={({ username, password }) => {
-        // eslint-disable-next-line no-console
-        console.log('hello');
-      }}
-    >
-      {({ handleChange, handleBlur, values }) => (
-        <>
-          <Heading>Sign up</Heading>
-          <StyledForm>
-            <StyledInput
-              type="text"
-              name="username"
-              placeholder="Login"
-              onChange={handleChange}
-              onBlur={handleBlur}
-              value={values.username}
-            />
-            <StyledInput
-              type="password"
-              name="password"
-              placeholder="Password"
-              onChange={handleChange}
-              onBlur={handleBlur}
-              value={values.password}
-            />
-            <Button activecolor="notes" type="submit">
-              register
-            </Button>
-          </StyledForm>
-          <StyledLink to={routes.login}>I want to log in!</StyledLink>
-        </>
-      )}
-    </Formik>
-  </AuthTemplate>
-);
+const RegisterPage = () => {
+  const { register, userID } = useAuth();
+
+  return (
+    <AuthTemplate>
+      <Formik
+        initialValues={{ email: '', password: '' }}
+        onSubmit={({ email, password }) => {
+          register(email, password);
+        }}
+      >
+        {({ handleChange, handleBlur, values }) => {
+          if (userID) {
+            return <Redirect to={routes.home} />;
+          }
+          return (
+            <>
+              <Heading>Sign up</Heading>
+              <StyledForm>
+                <StyledInput
+                  type="text"
+                  name="email"
+                  placeholder="Login"
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  value={values.email}
+                />
+                <StyledInput
+                  type="password"
+                  name="password"
+                  placeholder="Password"
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  value={values.password}
+                />
+                <Button activecolor="notes" type="submit">
+                  register
+                </Button>
+              </StyledForm>
+              <StyledLink to={routes.login}>I want to log in!</StyledLink>
+            </>
+          );
+        }}
+      </Formik>
+    </AuthTemplate>
+  );
+};
 
 export default RegisterPage;

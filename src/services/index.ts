@@ -12,6 +12,9 @@ import type { Item } from '~/commonTypes';
 export const authenticateUser = (email: string, password: string) =>
   auth.signInWithEmailAndPassword(email, password);
 
+export const register = (email: string, password: string) =>
+  auth.createUserWithEmailAndPassword(email, password);
+
 export const fetchItems = async ({ type, userID }: DocumentItemQueryArgs) => {
   try {
     const itemsSnap = await queryGetItemsByTypeAndUserID(type, userID);

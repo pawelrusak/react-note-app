@@ -1,6 +1,6 @@
 import { fakeItemsData, fakeStateWithData } from 'testUtils/fakers';
 
-import { TEST_FAKE_NEW_NOTE_DATA_ID } from '~/constants/test';
+import { TEST_FAKE_NEW_NOTE_DATA_ID, TEST_FAKE_AUTH_USER_ID } from '~/constants/test';
 
 import type { ItemVariants } from '~/commonTypes';
 
@@ -52,6 +52,17 @@ export const authenticateUser = async () => {
   try {
     const user = {
       uid: 'testUid',
+    };
+    return Promise.resolve({ user });
+  } catch (error) {
+    return Promise.reject(error);
+  }
+};
+
+export const register = async () => {
+  try {
+    const user = {
+      uid: TEST_FAKE_AUTH_USER_ID,
     };
     return Promise.resolve({ user });
   } catch (error) {
