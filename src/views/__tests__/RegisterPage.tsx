@@ -34,8 +34,6 @@ const renderRegisterPage = () =>
 
 describe('<RegisterPage />', () => {
   it('submits correct values to registration and redirect to the home page', async () => {
-    // eslint-disable-next-line
-    // @ts-expect-error
     const mockAuthenticate = jest.spyOn(actions, 'register');
 
     renderRegisterPage();
