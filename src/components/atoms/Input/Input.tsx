@@ -2,8 +2,13 @@ import styled, { css } from 'styled-components';
 
 import magnifierIcon from '~/assets/icons/magnifier.svg';
 
-export type InputProps = { readonly search?: boolean };
+export type InputProps =
+  | { readonly search: true; readonly invalid?: never }
+  | { readonly search?: false; readonly invalid?: boolean };
 
+/**
+ * @todo add custom outline when the input element is focus
+ */
 const Input = styled.input<InputProps>`
   padding: 15px 30px;
   font-size: ${({ theme }) => theme.fontSize.s};
@@ -11,6 +16,7 @@ const Input = styled.input<InputProps>`
   background-color: ${({ theme }) => theme.grey100};
   border: none;
   border-radius: 50px;
+  box-sizing: border-box;
 
   ::placeholder {
     text-transform: uppercase;
@@ -27,6 +33,16 @@ const Input = styled.input<InputProps>`
       background-size: 15px;
       background-position: 15px 50%;
       background-repeat: no-repeat;
+    `}
+
+  ${({ invalid }) =>
+    invalid &&
+    css`
+      background-color: ${({ theme }) => theme.red100};
+
+      ::placeholder {
+        color: ${({ theme }) => theme.red200};
+      }
     `}
 `;
 
