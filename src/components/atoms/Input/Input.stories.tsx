@@ -22,3 +22,9 @@ Search.args = {
   placeholder: 'search',
   search: true,
 };
+
+export const Invalid = Template.bind({});
+Invalid.args = {
+  placeholder: 'invalid',
+  invalid: true,
+};
