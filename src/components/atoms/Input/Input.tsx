@@ -1,6 +1,7 @@
 import styled, { css } from 'styled-components';
 
 import magnifierIcon from '~/assets/icons/magnifier.svg';
+import { shake } from '~/theme/keyframes';
 
 export type InputProps =
   | { readonly search: true; readonly invalid?: never }
@@ -39,6 +40,10 @@ const Input = styled.input<InputProps>`
     invalid &&
     css`
       background-color: ${({ theme }) => theme.red100};
+      animation: ${shake} 0.82s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+      transform: translate3d(0, 0, 0);
+      backface-visibility: hidden;
+      perspective: 1000px;
 
       ::placeholder {
         color: ${({ theme }) => theme.red200};
