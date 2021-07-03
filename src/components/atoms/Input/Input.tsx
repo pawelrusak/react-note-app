@@ -1,3 +1,4 @@
+import { lighten } from 'polished';
 import styled, { css } from 'styled-components';
 
 import magnifierIcon from '~/assets/icons/magnifier.svg';
@@ -20,6 +21,10 @@ const Input = styled.input<InputProps>`
     text-transform: uppercase;
     letter-spacing: 1px;
     color: ${({ theme }) => theme.grey300};
+  }
+
+  &:hover {
+    box-shadow: 0 0 0 1px ${({ theme }) => lighten(0.18, theme.grey300)};
   }
 
   &:focus {
@@ -56,8 +61,12 @@ const Input = styled.input<InputProps>`
       backface-visibility: hidden;
       perspective: 1000px;
 
-      ::placeholder {
+      &::placeholder {
         color: ${({ theme }) => theme.red200};
+      }
+
+      &:hover {
+        box-shadow: 0 0 0 1px ${({ theme }) => lighten(0.2, theme.red200)};
       }
 
       &:focus {
