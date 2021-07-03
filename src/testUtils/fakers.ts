@@ -1,4 +1,4 @@
-import { TEST_FAKE_AUTH_USER_ID } from '~/constants/test';
+import { TEST_FAKE_AUTH_USER_ID } from '~/constants/tests';
 import { getEarlierDateOfDay } from '~/utils';
 
 import type { RootState } from '~/store';

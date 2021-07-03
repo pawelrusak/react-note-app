@@ -4,7 +4,7 @@ import { fakeStateWithDataAndLoggedInUser } from 'testUtils/fakers';
 import GridTemplate from '../GridTemplate/GridTemplate';
 import { ItemVariants } from '~/commonTypes';
 
-import { TEST_FAKE_NEW_NOTE_DATA_ID } from '~/constants/test';
+import { TEST_FAKE_NEW_NOTE_DATA_ID } from '~/constants/tests';
 
 import type { RoutesPaths } from '~/routes';
 

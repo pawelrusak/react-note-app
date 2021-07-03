@@ -1,6 +1,6 @@
 import { fakeItemsData, fakeStateWithData } from 'testUtils/fakers';
 
-import { TEST_FAKE_NEW_NOTE_DATA_ID, TEST_FAKE_AUTH_USER_ID } from '~/constants/test';
+import { TEST_FAKE_NEW_NOTE_DATA_ID, TEST_FAKE_AUTH_USER_ID } from '~/constants/tests';
 
 import type { ItemVariants } from '~/commonTypes';
 
