@@ -7,11 +7,15 @@ export default {
   component: Button,
 } as Meta;
 
-const Template: Story<ButtonProps> = (args) => <Button {...args}>Hello, World!</Button>;
+type StoryButtonProps = ButtonProps & React.ComponentPropsWithoutRef<'button'>;
+
+const Template: Story<StoryButtonProps> = (args) => <Button {...args}>Hello, World!</Button>;
 
 export const Note = Template.bind({});
 Note.args = {
   activecolor: 'notes',
+  disabled: false,
+  loading: false,
 };
 Note.argTypes = {
   activecolor: {
@@ -29,6 +33,7 @@ Note.argTypes = {
 
 export const Twitter = Template.bind({});
 Twitter.args = {
+  ...Note.args,
   activecolor: 'twitters',
 };
 Twitter.argTypes = {
@@ -37,6 +42,7 @@ Twitter.argTypes = {
 
 export const Article = Template.bind({});
 Article.args = {
+  ...Note.args,
   activecolor: 'articles',
 };
 Article.argTypes = {

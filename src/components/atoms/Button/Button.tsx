@@ -1,12 +1,15 @@
 import styled, { css } from 'styled-components';
 
-import { activecolor as activecolorMixin } from '~/theme/mixins';
+import * as styledKeyframe from '~/theme/keyframes';
+import * as styledMixin from '~/theme/mixins';
 
 import type { ItemVariants } from '~/commonTypes';
 
+const SPINNER_HEIGHT = 18;
+
 export type ButtonProps =
-  | { readonly activecolor?: never; readonly secondary: true }
-  | { readonly activecolor: ItemVariants; readonly secondary?: never };
+  | { readonly activecolor?: never; readonly secondary: true; loading?: never }
+  | { readonly activecolor: ItemVariants; readonly secondary?: never; loading?: boolean };
 
 const Button = styled.button<ButtonProps>`
   display: flex;
@@ -15,7 +18,7 @@ const Button = styled.button<ButtonProps>`
   color: black;
   text-decoration: none;
   padding: 0;
-  ${activecolorMixin}
+  ${styledMixin.activecolor}
   width: 220px;
   height: 47px;
   border: none;
@@ -24,6 +27,7 @@ const Button = styled.button<ButtonProps>`
   font-weight: 600;
   font-size: 16px;
   text-transform: uppercase;
+  cursor: pointer;
 
   ${({ secondary }) =>
     secondary &&
@@ -32,6 +36,43 @@ const Button = styled.button<ButtonProps>`
       width: 105px;
       height: 30px;
       font-size: 10px;
+    `}
+
+  ${({ secondary }) =>
+    !secondary &&
+    css`
+      &:disabled {
+        ${styledMixin.lightenActiveColor};
+        ${styledMixin.lightenBlackText};
+        cursor: default;
+      }
+    `}
+
+  ${({ secondary, loading, disabled }) =>
+    !secondary &&
+    !disabled &&
+    loading &&
+    css`
+      ${styledMixin.lightenActiveColor}
+      color: transparent;
+      pointer-events: none;
+      position: relative;
+      cursor: default;
+
+      &::after {
+        animation: ${styledKeyframe.rotate} 0.5s infinite linear;
+        content: '';
+        display: block;
+        border: 2px solid ${styledMixin.lightenBlack};
+        border-radius: 100%;
+        border-top-color: transparent;
+        border-left-color: transparent;
+        position: absolute;
+        height: ${SPINNER_HEIGHT}px;
+        width: ${SPINNER_HEIGHT}px;
+        left: calc(50% - ${SPINNER_HEIGHT / 2}px);
+        top: calc(50% - ${SPINNER_HEIGHT / 2}px);
+      }
     `}
 `;
 
