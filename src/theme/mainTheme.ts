@@ -10,6 +10,7 @@ export const theme: DefaultTheme = {
   black: 'hsl(0, 0%, 0%)',
   red100: 'hsl(359, 100%, 95%)',
   red200: 'hsl(359, 100%, 65%)',
+  red300: 'hsl(359, 100%, 59%)',
   light: 300,
   bold: 600,
   fontSize: {
