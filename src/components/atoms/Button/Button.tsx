@@ -1,12 +1,15 @@
 import styled, { css } from 'styled-components';
 
+import * as styledKeyframe from '~/theme/keyframes';
 import * as styledMixin from '~/theme/mixins';
 
 import type { ItemVariants } from '~/commonTypes';
 
+const SPINNER_HEIGHT = 18;
+
 export type ButtonProps =
-  | { readonly activecolor?: never; readonly secondary: true }
-  | { readonly activecolor: ItemVariants; readonly secondary?: never };
+  | { readonly activecolor?: never; readonly secondary: true; loading?: never }
+  | { readonly activecolor: ItemVariants; readonly secondary?: never; loading?: boolean };
 
 const Button = styled.button<ButtonProps>`
   display: flex;
@@ -41,6 +44,32 @@ const Button = styled.button<ButtonProps>`
         ${styledMixin.lightenActiveColor};
         ${styledMixin.lightenBlackText};
         cursor: default;
+      }
+    `}
+
+  ${({ secondary, loading, disabled }) =>
+    !secondary &&
+    !disabled &&
+    loading &&
+    css`
+      ${styledMixin.lightenActiveColor}
+      color: transparent;
+      pointer-events: none;
+      position: relative;
+
+      &::after {
+        animation: ${styledKeyframe.rotate} 0.5s infinite linear;
+        content: '';
+        display: block;
+        border: 2px solid ${styledMixin.lightenBlack};
+        border-radius: 100%;
+        border-top-color: transparent;
+        border-left-color: transparent;
+        position: absolute;
+        height: ${SPINNER_HEIGHT}px;
+        width: ${SPINNER_HEIGHT}px;
+        left: calc(50% - ${SPINNER_HEIGHT / 2}px);
+        top: calc(50% - ${SPINNER_HEIGHT / 2}px);
       }
     `}
 `;
