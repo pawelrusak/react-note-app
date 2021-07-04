@@ -11,6 +11,7 @@ declare module 'styled-components' {
     black: string;
     red100: string;
     red200: string;
+    red300: string;
     light: number;
     bold: number;
     fontSize: {
