@@ -32,7 +32,7 @@ Note.argTypes = {
 
 export const Twitter = Template.bind({});
 Twitter.args = {
-  ...Note.argTypes,
+  ...Note.args,
   activecolor: 'twitters',
 };
 Twitter.argTypes = {
@@ -41,7 +41,7 @@ Twitter.argTypes = {
 
 export const Article = Template.bind({});
 Article.args = {
-  ...Note.argTypes,
+  ...Note.args,
   activecolor: 'articles',
 };
 Article.argTypes = {
