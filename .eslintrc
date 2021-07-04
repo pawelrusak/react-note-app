@@ -60,7 +60,10 @@
               "caseInsensitive": true
             }
           }
-        ]
+        ],
+        "react/jsx-props-no-spreading": [2, {
+          "exceptions": ["Component"]
+      }]
       } 
     },
     {
