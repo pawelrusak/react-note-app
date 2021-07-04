@@ -1,4 +1,5 @@
 import { lighten } from 'polished';
+// import { css, DefaultTheme } from 'styled-components';
 import { css } from 'styled-components';
 
 import type { ItemVariants } from '~/commonTypes';
@@ -17,6 +18,10 @@ export const lightenActiveColor = css<LightenActiveColorArgs>`
     lighten(0.1, props.activecolor ? props.theme[props.activecolor] : props.theme.notes)};
 `;
 
+export const lightenBlack = css`
+  ${({ theme }) => lighten(0.3, theme.black)}
+`;
+
 export const lightenBlackText = css`
-  color: ${({ theme }) => lighten(0.25, theme.black)};
+  color: ${lightenBlack};
 `;
