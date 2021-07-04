@@ -27,6 +27,7 @@ const Button = styled.button<ButtonProps>`
   font-weight: 600;
   font-size: 16px;
   text-transform: uppercase;
+  cursor: pointer;
 
   ${({ secondary }) =>
     secondary &&
@@ -56,6 +57,7 @@ const Button = styled.button<ButtonProps>`
       color: transparent;
       pointer-events: none;
       position: relative;
+      cursor: default;
 
       &::after {
         animation: ${styledKeyframe.rotate} 0.5s infinite linear;
