@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 
-import { activecolor as activecolorMixin } from '~/theme/mixins';
+import * as styledMixin from '~/theme/mixins';
 
 import type { ItemVariants } from '~/commonTypes';
 
@@ -15,7 +15,7 @@ const Button = styled.button<ButtonProps>`
   color: black;
   text-decoration: none;
   padding: 0;
-  ${activecolorMixin}
+  ${styledMixin.activecolor}
   width: 220px;
   height: 47px;
   border: none;
@@ -32,6 +32,16 @@ const Button = styled.button<ButtonProps>`
       width: 105px;
       height: 30px;
       font-size: 10px;
+    `}
+
+  ${({ secondary }) =>
+    !secondary &&
+    css`
+      &:disabled {
+        ${styledMixin.lightenActiveColor};
+        ${styledMixin.lightenBlackText};
+        cursor: default;
+      }
     `}
 `;
 
