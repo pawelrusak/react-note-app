@@ -52,7 +52,7 @@ const Button = styled.button<ButtonProps>`
       &:disabled {
         ${styledMixin.lightenActiveColor};
         ${styledMixin.lightenBlackText};
-        cursor: default;
+        cursor: not-allowed;
       }
     `}
 
@@ -60,11 +60,13 @@ const Button = styled.button<ButtonProps>`
     !secondary &&
     loading &&
     css`
-      ${styledMixin.lightenActiveColor}
-      color: transparent;
-      pointer-events: none;
-      position: relative;
-      cursor: default;
+      &,
+      &:hover {
+        ${styledMixin.lightenActiveColor}
+        color: transparent;
+        position: relative;
+        cursor: not-allowed;
+      }
 
       &:disabled {
         color: transparent;
