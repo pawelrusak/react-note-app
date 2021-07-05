@@ -1,5 +1,4 @@
-import { lighten } from 'polished';
-// import { css, DefaultTheme } from 'styled-components';
+import { lighten, darken } from 'polished';
 import { css } from 'styled-components';
 
 import type { ItemVariants } from '~/commonTypes';
@@ -16,6 +15,11 @@ export type LightenActiveColorArgs = ActiveColorArgs;
 export const lightenActiveColor = css<LightenActiveColorArgs>`
   background-color: ${(props) =>
     lighten(0.1, props.activecolor ? props.theme[props.activecolor] : props.theme.notes)};
+`;
+
+export const darkenActiveColor = css<LightenActiveColorArgs>`
+  background-color: ${(props) =>
+    darken(0.075, props.activecolor ? props.theme[props.activecolor] : props.theme.notes)};
 `;
 
 export const lightenBlack = css`
