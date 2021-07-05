@@ -48,9 +48,8 @@ const Button = styled.button<ButtonProps>`
       }
     `}
 
-  ${({ secondary, loading, disabled }) =>
+  ${({ secondary, loading }) =>
     !secondary &&
-    !disabled &&
     loading &&
     css`
       ${styledMixin.lightenActiveColor}
@@ -58,6 +57,10 @@ const Button = styled.button<ButtonProps>`
       pointer-events: none;
       position: relative;
       cursor: default;
+
+      &:disabled {
+        color: transparent;
+      }
 
       &::after {
         animation: ${styledKeyframe.rotate} 0.5s infinite linear;
