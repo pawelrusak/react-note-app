@@ -29,6 +29,10 @@ const Button = styled.button<ButtonProps>`
   text-transform: uppercase;
   cursor: pointer;
 
+  &:hover {
+    ${styledMixin.darkenActiveColor}
+  }
+
   ${({ secondary }) =>
     secondary &&
     css`
@@ -36,6 +40,10 @@ const Button = styled.button<ButtonProps>`
       width: 105px;
       height: 30px;
       font-size: 10px;
+
+      &:hover {
+        background-color: hsl(0, 0%, 90%);
+      }
     `}
 
   ${({ secondary }) =>
