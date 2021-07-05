@@ -29,6 +29,10 @@ const Button = styled.button<ButtonProps>`
   text-transform: uppercase;
   cursor: pointer;
 
+  &:hover {
+    ${styledMixin.darkenActiveColor}
+  }
+
   ${({ secondary }) =>
     secondary &&
     css`
@@ -36,6 +40,10 @@ const Button = styled.button<ButtonProps>`
       width: 105px;
       height: 30px;
       font-size: 10px;
+
+      &:hover {
+        background-color: hsl(0, 0%, 90%);
+      }
     `}
 
   ${({ secondary }) =>
@@ -44,20 +52,25 @@ const Button = styled.button<ButtonProps>`
       &:disabled {
         ${styledMixin.lightenActiveColor};
         ${styledMixin.lightenBlackText};
-        cursor: default;
+        cursor: not-allowed;
       }
     `}
 
-  ${({ secondary, loading, disabled }) =>
+  ${({ secondary, loading }) =>
     !secondary &&
-    !disabled &&
     loading &&
     css`
-      ${styledMixin.lightenActiveColor}
-      color: transparent;
-      pointer-events: none;
-      position: relative;
-      cursor: default;
+      &,
+      &:hover {
+        ${styledMixin.lightenActiveColor}
+        color: transparent;
+        position: relative;
+        cursor: not-allowed;
+      }
+
+      &:disabled {
+        color: transparent;
+      }
 
       &::after {
         animation: ${styledKeyframe.rotate} 0.5s infinite linear;
