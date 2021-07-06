@@ -8,8 +8,8 @@ import type { ItemVariants } from '~/commonTypes';
 const SPINNER_HEIGHT = 18;
 
 export type ButtonProps =
-  | { readonly activecolor?: never; readonly secondary: true; loading?: never }
-  | { readonly activecolor: ItemVariants; readonly secondary?: never; loading?: boolean };
+  | { readonly activecolor?: never; readonly secondary: true; pending?: never }
+  | { readonly activecolor: ItemVariants; readonly secondary?: never; pending?: boolean };
 
 const Button = styled.button<ButtonProps>`
   display: flex;
@@ -56,9 +56,9 @@ const Button = styled.button<ButtonProps>`
       }
     `}
 
-  ${({ secondary, loading }) =>
+  ${({ secondary, pending }) =>
     !secondary &&
-    loading &&
+    !!pending &&
     css`
       &,
       &:hover {
