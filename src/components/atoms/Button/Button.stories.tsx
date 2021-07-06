@@ -15,7 +15,7 @@ export const Note = Template.bind({});
 Note.args = {
   activecolor: 'notes',
   disabled: false,
-  loading: false,
+  pending: false,
 };
 Note.argTypes = {
   activecolor: {
