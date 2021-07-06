@@ -33,18 +33,31 @@ export type FieldProps = FieldHookConfig<string> & {
 
 /**
  * @todo improve the type for the "as" property
+ * @todo add floating label for input
  */
 const Field = ({ as: Component = StyledInput, ...props }: FieldProps) => {
   const [field, meta] = useField(props);
 
   const isInvalid = () => meta.touched && Boolean(meta.error);
 
+  const errorMessageId = `${props.id || props.name}-errormessage`;
+
   return (
     <StyledWrapper invalid={isInvalid()}>
-      {/* eslint-disable-next-line */}
-      {/* @ts-expect-error */}
-      <Component {...field} {...props} invalid={isInvalid()} />
-      {isInvalid() && <StyledErrorMessage>{meta.error}</StyledErrorMessage>}
+      <Component
+        {...field}
+        {...props}
+        // eslint-disable-next-line
+        // @ts-expect-error
+        invalid={isInvalid()}
+        aria-errormessage={errorMessageId}
+        aria-invalid={isInvalid()}
+      />
+      {isInvalid() && (
+        <StyledErrorMessage id={errorMessageId} aria-live="polite">
+          {meta.error}
+        </StyledErrorMessage>
+      )}
     </StyledWrapper>
   );
 };
