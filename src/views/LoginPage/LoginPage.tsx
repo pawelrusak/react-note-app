@@ -5,9 +5,11 @@ import styled from 'styled-components';
 import Button from '~/components/atoms/Button/Button';
 import Heading from '~/components/atoms/Heading/Heading';
 import Input from '~/components/atoms/Input/Input';
+import Field from '~/components/molecules/Field/Field';
 import { useAuth } from '~/hooks';
 import { routes } from '~/routes';
 import AuthTemplate from '~/templates/AuthTemplate/AuthTemplate';
+import * as validation from '~/validations';
 
 const StyledForm = styled(Form)`
   display: flex;
@@ -17,7 +19,6 @@ const StyledForm = styled(Form)`
 `;
 
 const StyledInput = styled(Input)`
-  margin: 0 0 30px 0;
   height: 40px;
   width: 300px;
 `;
@@ -37,36 +38,40 @@ const LoginPage = () => {
   return (
     <AuthTemplate>
       <Formik
+        validationSchema={validation.authSchema}
         initialValues={{ email: '', password: '' }}
         onSubmit={({ email, password }) => {
           authenticate(email, password);
         }}
       >
-        {({ handleChange, handleBlur, values }) => {
+        {({ isSubmitting, touched, isValid }) => {
           if (userID) {
             return <Redirect to={routes.home} />;
           }
           return (
             <>
-              <Heading>Sign in</Heading>
-              <StyledForm>
-                <StyledInput
-                  type="email"
+              <Heading id="login-page-form">Sign in</Heading>
+              <StyledForm aria-labelledby="login-page-form">
+                <Field
                   name="email"
+                  type="email"
                   placeholder="Login"
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  value={values.email}
+                  as={StyledInput}
+                  aria-required="true"
                 />
-                <StyledInput
-                  type="password"
+                <Field
                   name="password"
+                  type="password"
                   placeholder="Password"
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  value={values.password}
+                  as={StyledInput}
+                  aria-required="true"
                 />
-                <Button activecolor="notes" type="submit">
+                <Button
+                  activecolor="notes"
+                  type="submit"
+                  pending={isSubmitting}
+                  disabled={isSubmitting || (touched.email && touched.password && !isValid)}
+                >
                   sign in
                 </Button>
               </StyledForm>
