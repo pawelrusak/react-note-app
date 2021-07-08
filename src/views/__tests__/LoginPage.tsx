@@ -92,7 +92,21 @@ describe('<LoginPage />', () => {
     expect(getByLoginButton()).toBeDisabled();
     expect(getByLoginPlaceholderText()).toBeInvalid();
     expect(getByLoginPlaceholderText()).toHaveErrorMessage(AUTH_ERRORS.USER_NOT_FOUND.message);
+    expect(getByPasswordPlaceholderText()).toBeValid();
+  });
 
+  it('the email field should be invalid and have a server error message after a registered user tries to log in with an incorrect password', async () => {
+    renderLoginPage();
+
+    userEvent.type(getByLoginPlaceholderText(), VALID_USER_CREDENTIAL.email);
+    userEvent.type(getByPasswordPlaceholderText(), 'wrong.password');
+
+    // // submit form
+    await waitFor(() => userEvent.click(getByLoginButton()));
+
+    expect(getByLoginButton()).toBeDisabled();
+    expect(getByLoginPlaceholderText()).toBeInvalid();
+    expect(getByLoginPlaceholderText()).toHaveErrorMessage(AUTH_ERRORS.WRONG_PASSWORD.message);
     expect(getByPasswordPlaceholderText()).toBeValid();
   });
 });
