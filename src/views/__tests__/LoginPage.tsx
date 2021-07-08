@@ -3,7 +3,7 @@ import { render, screen, waitFor, userEvent } from 'testUtils';
 import { fakeStateWithNotLoggedInUser } from 'testUtils/fakers';
 
 import LoginPage from '../LoginPage/LoginPage';
-import { VALID_USER_CREDENTIAL, AUTH_ERRORS } from '~/constants/tests';
+import { REGISTERED_USER_CREDENTIALS, AUTH_ERRORS } from '~/constants/tests';
 import { routes } from '~/routes';
 
 jest.mock('~/services');
@@ -69,7 +69,7 @@ describe('<LoginPage />', () => {
 
     userEvent.type(getByLoginPlaceholderText(), 'unregister.user@email.com');
     // may have the same password as the registered
-    userEvent.type(getByPasswordPlaceholderText(), VALID_USER_CREDENTIAL.password);
+    userEvent.type(getByPasswordPlaceholderText(), REGISTERED_USER_CREDENTIALS.password);
 
     // // submit form
     await waitFor(() => userEvent.click(getByLoginButton()));
@@ -83,7 +83,7 @@ describe('<LoginPage />', () => {
   it('the password field should be invalid and have a server error message after a registered user tries to log in with an incorrect password', async () => {
     renderLoginPage();
 
-    userEvent.type(getByLoginPlaceholderText(), VALID_USER_CREDENTIAL.email);
+    userEvent.type(getByLoginPlaceholderText(), REGISTERED_USER_CREDENTIALS.email);
     userEvent.type(getByPasswordPlaceholderText(), 'wrong.password');
 
     // // submit form
@@ -100,8 +100,8 @@ describe('<LoginPage />', () => {
 
     expect(queryByFakeHomePage()).not.toBeInTheDocument();
 
-    userEvent.type(getByLoginPlaceholderText(), VALID_USER_CREDENTIAL.email);
-    userEvent.type(getByPasswordPlaceholderText(), VALID_USER_CREDENTIAL.password);
+    userEvent.type(getByLoginPlaceholderText(), REGISTERED_USER_CREDENTIALS.email);
+    userEvent.type(getByPasswordPlaceholderText(), REGISTERED_USER_CREDENTIALS.password);
 
     // submit forme
     await waitFor(() => userEvent.click(getByLoginButton()));

@@ -3,7 +3,7 @@ import { fakeItemsData, fakeStateWithData } from 'testUtils/fakers';
 import {
   TEST_FAKE_NEW_NOTE_DATA_ID,
   TEST_FAKE_AUTH_USER_ID,
-  VALID_USER_CREDENTIAL,
+  REGISTERED_USER_CREDENTIALS,
   AUTH_ERRORS,
 } from '~/constants/tests';
 
@@ -54,11 +54,11 @@ export const addItem = async ({ ...itemContent }) => {
 };
 
 const isEmailBelongsToRegisterUser = (email: string) => {
-  return VALID_USER_CREDENTIAL.email === email;
+  return REGISTERED_USER_CREDENTIALS.email === email;
 };
 
 const isRegisterUserButWithWrongPassword = (email: string, password: string) => {
-  return isEmailBelongsToRegisterUser(email) && VALID_USER_CREDENTIAL.password !== password;
+  return isEmailBelongsToRegisterUser(email) && REGISTERED_USER_CREDENTIALS.password !== password;
 };
 
 export const authenticateUser = async (email: string, password: string) => {
