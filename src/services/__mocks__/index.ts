@@ -57,7 +57,7 @@ const isEmailBelongsToRegisterUser = (email: string) => {
   return VALID_USER_CREDENTIAL.email === email;
 };
 
-const isCredentialBelongsToRegisterUser = (email: string, password: string) => {
+const isRegisterUserButWithWrongPassword = (email: string, password: string) => {
   return isEmailBelongsToRegisterUser(email) && VALID_USER_CREDENTIAL.password !== password;
 };
 
@@ -66,7 +66,7 @@ export const authenticateUser = async (email: string, password: string) => {
     if (!isEmailBelongsToRegisterUser(email)) {
       throw AUTH_ERRORS.USER_NOT_FOUND;
     }
-    if (isCredentialBelongsToRegisterUser(email, password)) {
+    if (isRegisterUserButWithWrongPassword(email, password)) {
       throw AUTH_ERRORS.WRONG_PASSWORD;
     }
 
