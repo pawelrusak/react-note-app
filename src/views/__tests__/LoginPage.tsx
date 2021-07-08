@@ -3,6 +3,7 @@ import { render, screen, waitFor, userEvent } from 'testUtils';
 import { fakeStateWithNotLoggedInUser } from 'testUtils/fakers';
 
 import LoginPage from '../LoginPage/LoginPage';
+import { VALID_USER_CREDENTIAL } from '~/constants/tests';
 import { routes } from '~/routes';
 import * as actions from '~/store/auth/authSlice';
 
@@ -12,11 +13,6 @@ const getByLoginPlaceholderText = () => screen.getByPlaceholderText(/login/i);
 const getByPasswordPlaceholderText = () => screen.getByPlaceholderText(/password/i);
 const getByLoginButton = () => screen.getByRole('button');
 const queryByFakeHomePage = () => screen.queryByTestId('fake-home-Page');
-
-const fakeLoginData = {
-  email: 'app@login.test',
-  password: 'password', // the best password in the world
-};
 
 const FakeHomePage = () => <div data-testid="fake-home-Page">Home Page</div>;
 
@@ -40,15 +36,15 @@ describe('<LoginPage />', () => {
 
     expect(queryByFakeHomePage()).not.toBeInTheDocument();
 
-    userEvent.type(getByLoginPlaceholderText(), fakeLoginData.email);
-    userEvent.type(getByPasswordPlaceholderText(), fakeLoginData.password);
+    userEvent.type(getByLoginPlaceholderText(), VALID_USER_CREDENTIAL.email);
+    userEvent.type(getByPasswordPlaceholderText(), VALID_USER_CREDENTIAL.password);
 
     // submit form
     await waitFor(() => userEvent.click(getByLoginButton()));
 
     // submits correct values to authentication
     expect(mockAuthenticate).toHaveBeenCalledTimes(1);
-    expect(mockAuthenticate).toHaveBeenCalledWith(fakeLoginData);
+    expect(mockAuthenticate).toHaveBeenCalledWith(VALID_USER_CREDENTIAL);
 
     // redirect to the home page
     await waitFor(() => expect(queryByFakeHomePage()).toBeInTheDocument());
