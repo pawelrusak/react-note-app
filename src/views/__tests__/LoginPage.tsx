@@ -28,21 +28,6 @@ const renderLoginPage = () =>
   );
 
 describe('<LoginPage />', () => {
-  it('submits correct values to authentication and redirect to the home page', async () => {
-    renderLoginPage();
-
-    expect(queryByFakeHomePage()).not.toBeInTheDocument();
-
-    userEvent.type(getByLoginPlaceholderText(), VALID_USER_CREDENTIAL.email);
-    userEvent.type(getByPasswordPlaceholderText(), VALID_USER_CREDENTIAL.password);
-
-    // submit forme
-    await waitFor(() => userEvent.click(getByLoginButton()));
-
-    // redirect to the home page
-    await waitFor(() => expect(queryByFakeHomePage()).toBeInTheDocument());
-  });
-
   it('initially, the form should not contain any errors and button should be enable', () => {
     renderLoginPage();
 
@@ -108,5 +93,20 @@ describe('<LoginPage />', () => {
     expect(getByLoginPlaceholderText()).toBeValid();
     expect(getByPasswordPlaceholderText()).toBeInvalid();
     expect(getByPasswordPlaceholderText()).toHaveErrorMessage(AUTH_ERRORS.WRONG_PASSWORD.message);
+  });
+
+  it('submits correct values to authentication and redirect to the home page', async () => {
+    renderLoginPage();
+
+    expect(queryByFakeHomePage()).not.toBeInTheDocument();
+
+    userEvent.type(getByLoginPlaceholderText(), VALID_USER_CREDENTIAL.email);
+    userEvent.type(getByPasswordPlaceholderText(), VALID_USER_CREDENTIAL.password);
+
+    // submit forme
+    await waitFor(() => userEvent.click(getByLoginButton()));
+
+    // redirect to the home page
+    await waitFor(() => expect(queryByFakeHomePage()).toBeInTheDocument());
   });
 });
