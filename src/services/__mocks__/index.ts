@@ -1,6 +1,11 @@
 import { fakeItemsData, fakeStateWithData } from 'testUtils/fakers';
 
-import { TEST_FAKE_NEW_NOTE_DATA_ID, TEST_FAKE_AUTH_USER_ID } from '~/constants/tests';
+import {
+  TEST_FAKE_NEW_NOTE_DATA_ID,
+  TEST_FAKE_AUTH_USER_ID,
+  REGISTERED_USER_CREDENTIALS,
+  AUTH_ERRORS,
+} from '~/constants/tests';
 
 import type { ItemVariants } from '~/commonTypes';
 
@@ -48,8 +53,23 @@ export const addItem = async ({ ...itemContent }) => {
   }
 };
 
-export const authenticateUser = async () => {
+const isEmailBelongsToRegisterUser = (email: string) => {
+  return REGISTERED_USER_CREDENTIALS.email === email;
+};
+
+const isRegisterUserButWithWrongPassword = (email: string, password: string) => {
+  return isEmailBelongsToRegisterUser(email) && REGISTERED_USER_CREDENTIALS.password !== password;
+};
+
+export const authenticateUser = async (email: string, password: string) => {
   try {
+    if (!isEmailBelongsToRegisterUser(email)) {
+      throw AUTH_ERRORS.USER_NOT_FOUND;
+    }
+    if (isRegisterUserButWithWrongPassword(email, password)) {
+      throw AUTH_ERRORS.WRONG_PASSWORD;
+    }
+
     const user = {
       uid: 'testUid',
     };

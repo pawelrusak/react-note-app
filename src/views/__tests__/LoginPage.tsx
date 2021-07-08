@@ -3,8 +3,8 @@ import { render, screen, waitFor, userEvent } from 'testUtils';
 import { fakeStateWithNotLoggedInUser } from 'testUtils/fakers';
 
 import LoginPage from '../LoginPage/LoginPage';
+import { REGISTERED_USER_CREDENTIALS, AUTH_ERRORS } from '~/constants/tests';
 import { routes } from '~/routes';
-import * as actions from '~/store/auth/authSlice';
 
 jest.mock('~/services');
 
@@ -12,11 +12,6 @@ const getByLoginPlaceholderText = () => screen.getByPlaceholderText(/login/i);
 const getByPasswordPlaceholderText = () => screen.getByPlaceholderText(/password/i);
 const getByLoginButton = () => screen.getByRole('button');
 const queryByFakeHomePage = () => screen.queryByTestId('fake-home-Page');
-
-const fakeLoginData = {
-  email: 'app@login.test',
-  password: 'password', // the best password in the world
-};
 
 const FakeHomePage = () => <div data-testid="fake-home-Page">Home Page</div>;
 
@@ -33,27 +28,6 @@ const renderLoginPage = () =>
   );
 
 describe('<LoginPage />', () => {
-  it('submits correct values to authentication and redirect to the home page', async () => {
-    const mockAuthenticate = jest.spyOn(actions, 'authenticate');
-
-    renderLoginPage();
-
-    expect(queryByFakeHomePage()).not.toBeInTheDocument();
-
-    userEvent.type(getByLoginPlaceholderText(), fakeLoginData.email);
-    userEvent.type(getByPasswordPlaceholderText(), fakeLoginData.password);
-
-    // submit form
-    await waitFor(() => userEvent.click(getByLoginButton()));
-
-    // submits correct values to authentication
-    expect(mockAuthenticate).toHaveBeenCalledTimes(1);
-    expect(mockAuthenticate).toHaveBeenCalledWith(fakeLoginData);
-
-    // redirect to the home page
-    await waitFor(() => expect(queryByFakeHomePage()).toBeInTheDocument());
-  });
-
   it('initially, the form should not contain any errors and button should be enable', () => {
     renderLoginPage();
 
@@ -88,5 +62,51 @@ describe('<LoginPage />', () => {
 
     expect(getByLoginPlaceholderText()).toBeValid();
     expect(getByPasswordPlaceholderText()).toBeValid();
+  });
+
+  it('the email field should be invalid and have an error message from the server when a unregistered user tries to log in', async () => {
+    renderLoginPage();
+
+    userEvent.type(getByLoginPlaceholderText(), 'unregister.user@email.com');
+    // may have the same password as the registered
+    userEvent.type(getByPasswordPlaceholderText(), REGISTERED_USER_CREDENTIALS.password);
+
+    // // submit form
+    await waitFor(() => userEvent.click(getByLoginButton()));
+
+    expect(getByLoginButton()).toBeDisabled();
+    expect(getByLoginPlaceholderText()).toBeInvalid();
+    expect(getByLoginPlaceholderText()).toHaveErrorMessage(AUTH_ERRORS.USER_NOT_FOUND.message);
+    expect(getByPasswordPlaceholderText()).toBeValid();
+  });
+
+  it('the password field should be invalid and have a server error message after a registered user tries to log in with an incorrect password', async () => {
+    renderLoginPage();
+
+    userEvent.type(getByLoginPlaceholderText(), REGISTERED_USER_CREDENTIALS.email);
+    userEvent.type(getByPasswordPlaceholderText(), 'wrong.password');
+
+    // // submit form
+    await waitFor(() => userEvent.click(getByLoginButton()));
+
+    expect(getByLoginButton()).toBeDisabled();
+    expect(getByLoginPlaceholderText()).toBeValid();
+    expect(getByPasswordPlaceholderText()).toBeInvalid();
+    expect(getByPasswordPlaceholderText()).toHaveErrorMessage(AUTH_ERRORS.WRONG_PASSWORD.message);
+  });
+
+  it('submits correct values to authentication and redirect to the home page', async () => {
+    renderLoginPage();
+
+    expect(queryByFakeHomePage()).not.toBeInTheDocument();
+
+    userEvent.type(getByLoginPlaceholderText(), REGISTERED_USER_CREDENTIALS.email);
+    userEvent.type(getByPasswordPlaceholderText(), REGISTERED_USER_CREDENTIALS.password);
+
+    // submit forme
+    await waitFor(() => userEvent.click(getByLoginButton()));
+
+    // redirect to the home page
+    await waitFor(() => expect(queryByFakeHomePage()).toBeInTheDocument());
   });
 });

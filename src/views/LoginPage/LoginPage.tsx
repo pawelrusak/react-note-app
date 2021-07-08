@@ -6,10 +6,13 @@ import Button from '~/components/atoms/Button/Button';
 import Heading from '~/components/atoms/Heading/Heading';
 import Input from '~/components/atoms/Input/Input';
 import Field from '~/components/molecules/Field/Field';
+import { AUTH_ERRORS_CODES } from '~/constants/auth';
 import { useAuth } from '~/hooks';
 import { routes } from '~/routes';
 import AuthTemplate from '~/templates/AuthTemplate/AuthTemplate';
 import * as validation from '~/validations';
+
+import type firebase from 'firebase';
 
 const StyledForm = styled(Form)`
   display: flex;
@@ -40,8 +43,18 @@ const LoginPage = () => {
       <Formik
         validationSchema={validation.authSchema}
         initialValues={{ email: '', password: '' }}
-        onSubmit={({ email, password }) => {
-          authenticate(email, password);
+        onSubmit={async ({ email, password }, actions) => {
+          try {
+            await authenticate(email, password);
+          } catch (error) {
+            const authError = error as firebase.auth.Error;
+
+            if (AUTH_ERRORS_CODES.WRONG_PASSWORD === authError.code) {
+              actions.setFieldError('password', authError.message);
+            } else {
+              actions.setFieldError('email', authError.message);
+            }
+          }
         }}
       >
         {({ isSubmitting, touched, isValid }) => {
@@ -66,6 +79,7 @@ const LoginPage = () => {
                   as={StyledInput}
                   aria-required="true"
                 />
+                <div>isSubmitting: {String(isSubmitting)}</div>
                 <Button
                   activecolor="notes"
                   type="submit"
