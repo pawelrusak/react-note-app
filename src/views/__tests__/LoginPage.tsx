@@ -3,7 +3,7 @@ import { render, screen, waitFor, userEvent } from 'testUtils';
 import { fakeStateWithNotLoggedInUser } from 'testUtils/fakers';
 
 import LoginPage from '../LoginPage/LoginPage';
-import { VALID_USER_CREDENTIAL } from '~/constants/tests';
+import { VALID_USER_CREDENTIAL, AUTH_ERRORS } from '~/constants/tests';
 import { routes } from '~/routes';
 
 jest.mock('~/services');
@@ -76,6 +76,23 @@ describe('<LoginPage />', () => {
     await waitFor(() => expect(getByLoginButton()).toBeEnabled());
 
     expect(getByLoginPlaceholderText()).toBeValid();
+    expect(getByPasswordPlaceholderText()).toBeValid();
+  });
+
+  it('the email field should be invalid and have an error message from the server when a unregistered user tries to log in', async () => {
+    renderLoginPage();
+
+    userEvent.type(getByLoginPlaceholderText(), 'unregister.user@email.com');
+    // may have the same password as the registered
+    userEvent.type(getByPasswordPlaceholderText(), VALID_USER_CREDENTIAL.password);
+
+    // // submit form
+    await waitFor(() => userEvent.click(getByLoginButton()));
+
+    expect(getByLoginButton()).toBeDisabled();
+    expect(getByLoginPlaceholderText()).toBeInvalid();
+    expect(getByLoginPlaceholderText()).toHaveErrorMessage(AUTH_ERRORS.USER_NOT_FOUND.message);
+
     expect(getByPasswordPlaceholderText()).toBeValid();
   });
 });
