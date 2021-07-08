@@ -26,6 +26,13 @@ const StyledInput = styled(Input)`
   width: 300px;
 `;
 
+/**
+ * I'm not not styling <Field /> because its "as" props have conflicts with "as" props in StyledComponents
+ */
+const StyledFieldWrapper = styled.div`
+  width: 300px;
+`;
+
 const StyledLink = styled(Link)`
   display: block;
   font-weight: ${({ theme }) => theme.bold};
@@ -65,21 +72,24 @@ const LoginPage = () => {
             <>
               <Heading id="login-page-form">Sign in</Heading>
               <StyledForm aria-labelledby="login-page-form">
-                <Field
-                  name="email"
-                  type="email"
-                  placeholder="Login"
-                  as={StyledInput}
-                  aria-required="true"
-                />
-                <Field
-                  name="password"
-                  type="password"
-                  placeholder="Password"
-                  as={StyledInput}
-                  aria-required="true"
-                />
-                <div>isSubmitting: {String(isSubmitting)}</div>
+                <StyledFieldWrapper>
+                  <Field
+                    name="email"
+                    type="email"
+                    placeholder="Login"
+                    as={StyledInput}
+                    aria-required="true"
+                  />
+                </StyledFieldWrapper>
+                <StyledFieldWrapper>
+                  <Field
+                    name="password"
+                    type="password"
+                    placeholder="Password"
+                    as={StyledInput}
+                    aria-required="true"
+                  />
+                </StyledFieldWrapper>
                 <Button
                   activecolor="notes"
                   type="submit"
