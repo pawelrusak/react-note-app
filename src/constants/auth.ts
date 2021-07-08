@@ -6,6 +6,6 @@
  * This constant can be shared between tests and the code base.
  */
 export const AUTH_ERRORS_CODES = {
-  WRONG_PASSWORD: 'auth/user-disabled',
+  WRONG_PASSWORD: 'auth/wrong-password',
   USER_NOT_FOUND: 'auth/user-not-found',
 } as const;
