@@ -33,7 +33,11 @@ export type FieldProps = FieldHookConfig<string> & {
 
 /**
  * @todo improve the type for the "as" property
+ *
  * @todo add floating label for input
+ *
+ * @todo Rename the "as" props because the current ones conflict with the StyledComponent when wrapped by it.
+ *       The property name "component" sounds nice.
  */
 const Field = ({ as: Component = StyledInput, ...props }: FieldProps) => {
   const [field, meta] = useField(props);
