@@ -5,7 +5,6 @@ import { fakeStateWithNotLoggedInUser } from 'testUtils/fakers';
 import LoginPage from '../LoginPage/LoginPage';
 import { VALID_USER_CREDENTIAL } from '~/constants/tests';
 import { routes } from '~/routes';
-import * as actions from '~/store/auth/authSlice';
 
 jest.mock('~/services');
 
@@ -30,8 +29,6 @@ const renderLoginPage = () =>
 
 describe('<LoginPage />', () => {
   it('submits correct values to authentication and redirect to the home page', async () => {
-    const mockAuthenticate = jest.spyOn(actions, 'authenticate');
-
     renderLoginPage();
 
     expect(queryByFakeHomePage()).not.toBeInTheDocument();
@@ -39,12 +36,8 @@ describe('<LoginPage />', () => {
     userEvent.type(getByLoginPlaceholderText(), VALID_USER_CREDENTIAL.email);
     userEvent.type(getByPasswordPlaceholderText(), VALID_USER_CREDENTIAL.password);
 
-    // submit form
+    // submit forme
     await waitFor(() => userEvent.click(getByLoginButton()));
-
-    // submits correct values to authentication
-    expect(mockAuthenticate).toHaveBeenCalledTimes(1);
-    expect(mockAuthenticate).toHaveBeenCalledWith(VALID_USER_CREDENTIAL);
 
     // redirect to the home page
     await waitFor(() => expect(queryByFakeHomePage()).toBeInTheDocument());
