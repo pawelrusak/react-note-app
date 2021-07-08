@@ -95,7 +95,7 @@ describe('<LoginPage />', () => {
     expect(getByPasswordPlaceholderText()).toBeValid();
   });
 
-  it('the email field should be invalid and have a server error message after a registered user tries to log in with an incorrect password', async () => {
+  it('the password field should be invalid and have a server error message after a registered user tries to log in with an incorrect password', async () => {
     renderLoginPage();
 
     userEvent.type(getByLoginPlaceholderText(), VALID_USER_CREDENTIAL.email);
@@ -105,8 +105,8 @@ describe('<LoginPage />', () => {
     await waitFor(() => userEvent.click(getByLoginButton()));
 
     expect(getByLoginButton()).toBeDisabled();
-    expect(getByLoginPlaceholderText()).toBeInvalid();
-    expect(getByLoginPlaceholderText()).toHaveErrorMessage(AUTH_ERRORS.WRONG_PASSWORD.message);
-    expect(getByPasswordPlaceholderText()).toBeValid();
+    expect(getByLoginPlaceholderText()).toBeValid();
+    expect(getByPasswordPlaceholderText()).toBeInvalid();
+    expect(getByPasswordPlaceholderText()).toHaveErrorMessage(AUTH_ERRORS.WRONG_PASSWORD.message);
   });
 });
