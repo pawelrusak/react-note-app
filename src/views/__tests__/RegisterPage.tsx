@@ -33,6 +33,42 @@ const renderRegisterPage = () =>
   );
 
 describe('<RegisterPage />', () => {
+  it('initially, the form should not contain any errors and button should be enable', () => {
+    renderRegisterPage();
+
+    expect(getByRegisterButton()).toBeEnabled();
+    expect(getByLoginPlaceholderText()).toBeValid();
+    expect(getByPasswordPlaceholderText()).toBeValid();
+  });
+
+  it('disable the button after submitting an invalid form and enable it after fixing all form errors', async () => {
+    renderRegisterPage();
+
+    // attempt to submit an invalid form
+    await waitFor(() => userEvent.click(getByRegisterButton()));
+
+    // the submit button should now be disabled and the form fields should be invalid
+    expect(getByRegisterButton()).toBeDisabled();
+    expect(getByLoginPlaceholderText()).toBeInvalid();
+    expect(getByPasswordPlaceholderText()).toBeInvalid();
+
+    userEvent.type(getByLoginPlaceholderText(), 'correct@example.email');
+
+    // the submit button should not be enable yet, it is waiting for all form fields to be valid
+    await waitFor(() => expect(getByRegisterButton()).toBeDisabled());
+
+    expect(getByLoginPlaceholderText()).toBeValid();
+    expect(getByPasswordPlaceholderText()).toBeInvalid();
+
+    userEvent.type(getByPasswordPlaceholderText(), 'correct-password');
+
+    // when all form fields are valid then enable the submit button
+    await waitFor(() => expect(getByRegisterButton()).toBeEnabled());
+
+    expect(getByLoginPlaceholderText()).toBeValid();
+    expect(getByPasswordPlaceholderText()).toBeValid();
+  });
+
   it('submits correct values to registration and redirect to the home page', async () => {
     const mockAuthenticate = jest.spyOn(actions, 'register');
 
