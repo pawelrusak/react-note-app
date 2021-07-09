@@ -18,4 +18,16 @@ export const AUTH_ERRORS = {
     code: AUTH_ERRORS_CODES.WRONG_PASSWORD,
     message: 'Wrong password',
   },
+  EMAIL_ALREADY_IN_USE: {
+    code: AUTH_ERRORS_CODES.EMAIL_ALREADY_IN_USE,
+    message: 'Email already in use',
+  },
+  WEAK_PASSWORD: {
+    code: AUTH_ERRORS_CODES.WEAK_PASSWORD,
+    message: 'Weak password',
+  },
+  INVALID_EMAIL: {
+    code: AUTH_ERRORS_CODES.INVALID_EMAIL,
+    message: 'Invalid email',
+  },
 } as const;
