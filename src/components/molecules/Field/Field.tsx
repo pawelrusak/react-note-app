@@ -29,6 +29,7 @@ const StyledErrorMessage = styled.span`
 
 export type FieldProps = FieldHookConfig<string> & {
   readonly search?: never;
+  readonly className?: string;
 };
 
 /**
@@ -36,7 +37,7 @@ export type FieldProps = FieldHookConfig<string> & {
  *
  * @todo add floating label for input
  */
-const Field = ({ component: Component = StyledInput, ...props }: FieldProps) => {
+const Field = ({ component: Component = StyledInput, className, ...props }: FieldProps) => {
   const [field, meta] = useField(props);
 
   const isInvalid = () => meta.touched && Boolean(meta.error);
@@ -44,7 +45,7 @@ const Field = ({ component: Component = StyledInput, ...props }: FieldProps) => 
   const errorMessageId = `${props.id || props.name}-errormessage`;
 
   return (
-    <StyledWrapper invalid={isInvalid()}>
+    <StyledWrapper invalid={isInvalid()} className={className}>
       <Component
         {...field}
         {...props}
