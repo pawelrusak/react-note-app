@@ -1,4 +1,5 @@
 import { fakeItemsData, fakeStateWithData } from 'testUtils/fakers';
+import * as yup from 'yup';
 
 import {
   TEST_FAKE_NEW_NOTE_DATA_ID,
@@ -79,8 +80,31 @@ export const authenticateUser = async (email: string, password: string) => {
   }
 };
 
-export const register = async () => {
+const isValidEmail = (email: string) => {
+  return yup.string().email().required().isValid(email);
+};
+/**
+ * Return true when using a weak password (less than 6 chars) to create a new account.
+ *
+ * @see {@link https://firebase.google.com/docs/reference/android/com/google/firebase/auth/FirebaseAuthWeakPasswordException}
+ */
+const isStrongPassword = (password: string) => {
+  const MIN_PASSWORD_LENGTH = 6;
+  return yup.string().min(MIN_PASSWORD_LENGTH).required().isValid(password);
+};
+
+export const register = async (email: string, password: string) => {
   try {
+    if (isEmailBelongsToRegisterUser(email)) {
+      throw AUTH_ERRORS.EMAIL_ALREADY_IN_USE;
+    }
+    if (!(await isStrongPassword(password))) {
+      throw AUTH_ERRORS.WEAK_PASSWORD;
+    }
+    if (!(await isValidEmail(email))) {
+      throw AUTH_ERRORS.INVALID_EMAIL;
+    }
+
     const user = {
       uid: TEST_FAKE_AUTH_USER_ID,
     };
