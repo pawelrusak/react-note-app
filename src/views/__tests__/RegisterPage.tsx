@@ -4,7 +4,6 @@ import { fakeStateWithNotLoggedInUser } from 'testUtils/fakers';
 
 import RegisterPage from '../RegisterPage/RegisterPage';
 import { routes } from '~/routes';
-import * as actions from '~/store/auth/authSlice';
 
 jest.mock('~/services');
 
@@ -70,8 +69,6 @@ describe('<RegisterPage />', () => {
   });
 
   it('submits correct values to registration and redirect to the home page', async () => {
-    const mockAuthenticate = jest.spyOn(actions, 'register');
-
     renderRegisterPage();
 
     expect(queryByFakeHomePage()).not.toBeInTheDocument();
@@ -81,10 +78,6 @@ describe('<RegisterPage />', () => {
 
     // submit form
     await waitFor(() => userEvent.click(getByRegisterButton()));
-
-    // submits correct values to registration
-    expect(mockAuthenticate).toHaveBeenCalledTimes(1);
-    expect(mockAuthenticate).toHaveBeenCalledWith(fakeRegistrationData);
 
     // redirect to the home page
     await waitFor(() => expect(queryByFakeHomePage()).toBeInTheDocument());
