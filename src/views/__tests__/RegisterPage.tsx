@@ -3,7 +3,11 @@ import { render, screen, waitFor, userEvent } from 'testUtils';
 import { fakeStateWithNotLoggedInUser } from 'testUtils/fakers';
 
 import RegisterPage from '../RegisterPage/RegisterPage';
-import { REGISTERED_USER_CREDENTIALS, AUTH_ERRORS } from '~/constants/tests';
+import {
+  REGISTERED_USER_CREDENTIALS,
+  AUTH_ERRORS,
+  SPECIAL_VALUE_TO_TEST_WEAK_PASSWORD,
+} from '~/constants/tests';
 import { routes } from '~/routes';
 
 jest.mock('~/services');
@@ -84,6 +88,21 @@ describe('<RegisterPage />', () => {
       AUTH_ERRORS.EMAIL_ALREADY_IN_USE.message,
     );
     expect(getByPasswordPlaceholderText()).toBeValid();
+  });
+
+  it.skip('the password field should be invalid and have a server error message after the user tries to register with a weak password', async () => {
+    renderRegisterPage();
+
+    userEvent.type(getByLoginPlaceholderText(), 'example@password.test');
+    userEvent.type(getByPasswordPlaceholderText(), SPECIAL_VALUE_TO_TEST_WEAK_PASSWORD);
+
+    // submit form
+    await waitFor(() => userEvent.click(getByRegisterButton()));
+
+    expect(getByRegisterButton()).toBeDisabled();
+    expect(getByLoginPlaceholderText()).toBeValid();
+    expect(getByPasswordPlaceholderText()).toBeInvalid();
+    expect(getByPasswordPlaceholderText()).toHaveErrorMessage(AUTH_ERRORS.WEAK_PASSWORD.message);
   });
 
   it('submits correct values to registration and redirect to the home page', async () => {

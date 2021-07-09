@@ -6,6 +6,7 @@ import {
   TEST_FAKE_AUTH_USER_ID,
   REGISTERED_USER_CREDENTIALS,
   AUTH_ERRORS,
+  SPECIAL_VALUE_TO_TEST_WEAK_PASSWORD,
 } from '~/constants/tests';
 
 import type { ItemVariants } from '~/commonTypes';
@@ -98,7 +99,7 @@ export const register = async (email: string, password: string) => {
     if (isEmailBelongsToRegisterUser(email)) {
       throw AUTH_ERRORS.EMAIL_ALREADY_IN_USE;
     }
-    if (!(await isStrongPassword(password))) {
+    if (!(await isStrongPassword(password)) || SPECIAL_VALUE_TO_TEST_WEAK_PASSWORD === password) {
       throw AUTH_ERRORS.WEAK_PASSWORD;
     }
     if (!(await isValidEmail(email))) {
