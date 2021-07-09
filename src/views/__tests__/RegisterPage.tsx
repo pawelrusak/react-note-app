@@ -73,7 +73,7 @@ describe('<RegisterPage />', () => {
     expect(getByPasswordPlaceholderText()).toBeValid();
   });
 
-  it.skip('the email field should be invalid and have an error message from the server when a registered user tries to log in', async () => {
+  it('the email field should be invalid and have an error message from the server when a registered user tries to log in', async () => {
     renderRegisterPage();
 
     userEvent.type(getByLoginPlaceholderText(), REGISTERED_USER_CREDENTIALS.email);
@@ -90,7 +90,7 @@ describe('<RegisterPage />', () => {
     expect(getByPasswordPlaceholderText()).toBeValid();
   });
 
-  it.skip('the password field should be invalid and have a server error message after the user tries to register with a weak password', async () => {
+  it('the password field should be invalid and have a server error message after the user tries to register with a weak password', async () => {
     renderRegisterPage();
 
     userEvent.type(getByLoginPlaceholderText(), 'example@password.test');
