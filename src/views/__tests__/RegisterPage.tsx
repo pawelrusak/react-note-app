@@ -3,8 +3,12 @@ import { render, screen, waitFor, userEvent } from 'testUtils';
 import { fakeStateWithNotLoggedInUser } from 'testUtils/fakers';
 
 import RegisterPage from '../RegisterPage/RegisterPage';
+import {
+  REGISTERED_USER_CREDENTIALS,
+  AUTH_ERRORS,
+  SPECIAL_VALUE_TO_TEST_WEAK_PASSWORD,
+} from '~/constants/tests';
 import { routes } from '~/routes';
-import * as actions from '~/store/auth/authSlice';
 
 jest.mock('~/services');
 
@@ -69,9 +73,39 @@ describe('<RegisterPage />', () => {
     expect(getByPasswordPlaceholderText()).toBeValid();
   });
 
-  it('submits correct values to registration and redirect to the home page', async () => {
-    const mockAuthenticate = jest.spyOn(actions, 'register');
+  it('the email field should be invalid and have an error message from the server when a registered user tries to log in', async () => {
+    renderRegisterPage();
 
+    userEvent.type(getByLoginPlaceholderText(), REGISTERED_USER_CREDENTIALS.email);
+    userEvent.type(getByPasswordPlaceholderText(), REGISTERED_USER_CREDENTIALS.password);
+
+    // // submit form
+    await waitFor(() => userEvent.click(getByRegisterButton()));
+
+    expect(getByRegisterButton()).toBeDisabled();
+    expect(getByLoginPlaceholderText()).toBeInvalid();
+    expect(getByLoginPlaceholderText()).toHaveErrorMessage(
+      AUTH_ERRORS.EMAIL_ALREADY_IN_USE.message,
+    );
+    expect(getByPasswordPlaceholderText()).toBeValid();
+  });
+
+  it('the password field should be invalid and have a server error message after the user tries to register with a weak password', async () => {
+    renderRegisterPage();
+
+    userEvent.type(getByLoginPlaceholderText(), 'example@password.test');
+    userEvent.type(getByPasswordPlaceholderText(), SPECIAL_VALUE_TO_TEST_WEAK_PASSWORD);
+
+    // submit form
+    await waitFor(() => userEvent.click(getByRegisterButton()));
+
+    expect(getByRegisterButton()).toBeDisabled();
+    expect(getByLoginPlaceholderText()).toBeValid();
+    expect(getByPasswordPlaceholderText()).toBeInvalid();
+    expect(getByPasswordPlaceholderText()).toHaveErrorMessage(AUTH_ERRORS.WEAK_PASSWORD.message);
+  });
+
+  it('submits correct values to registration and redirect to the home page', async () => {
     renderRegisterPage();
 
     expect(queryByFakeHomePage()).not.toBeInTheDocument();
@@ -81,10 +115,6 @@ describe('<RegisterPage />', () => {
 
     // submit form
     await waitFor(() => userEvent.click(getByRegisterButton()));
-
-    // submits correct values to registration
-    expect(mockAuthenticate).toHaveBeenCalledTimes(1);
-    expect(mockAuthenticate).toHaveBeenCalledWith(fakeRegistrationData);
 
     // redirect to the home page
     await waitFor(() => expect(queryByFakeHomePage()).toBeInTheDocument());

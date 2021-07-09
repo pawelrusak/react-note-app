@@ -6,10 +6,13 @@ import Button from '~/components/atoms/Button/Button';
 import Heading from '~/components/atoms/Heading/Heading';
 import Input from '~/components/atoms/Input/Input';
 import Field from '~/components/molecules/Field/Field';
+import { AUTH_ERRORS_CODES } from '~/constants/auth';
 import { useAuth } from '~/hooks';
 import { routes } from '~/routes';
 import AuthTemplate from '~/templates/AuthTemplate/AuthTemplate';
 import * as validation from '~/validations';
+
+import type firebase from 'firebase';
 
 const StyledForm = styled(Form)`
   display: flex;
@@ -45,8 +48,19 @@ const RegisterPage = () => {
       <Formik
         validationSchema={validation.authSchema}
         initialValues={{ email: '', password: '' }}
-        onSubmit={({ email, password }) => {
-          register(email, password);
+        onSubmit={async ({ email, password }, { setFieldError }) => {
+          try {
+            await register(email, password);
+          } catch (error) {
+            const authError = error as firebase.auth.Error;
+
+            // only the "weak password" error applies to the password field
+            if (AUTH_ERRORS_CODES.WEAK_PASSWORD === authError.code) {
+              setFieldError('password', authError.message);
+            } else {
+              setFieldError('email', authError.message);
+            }
+          }
         }}
       >
         {({ isSubmitting, touched, isValid }) => {

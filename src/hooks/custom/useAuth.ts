@@ -14,10 +14,8 @@ export const useAuth = () => {
   const authenticate = async (email: string, password: string) =>
     dispatch(authenticateAction({ email, password })).unwrap();
 
-  const register = (email: string, password: string) => {
-    // eslint-disable-next-line @typescript-eslint/no-floating-promises
-    dispatch(registerAction({ email, password }));
-  };
+  const register = (email: string, password: string) =>
+    dispatch(registerAction({ email, password })).unwrap();
 
   return {
     userID,
