@@ -3,6 +3,7 @@ import { render, screen, waitFor, userEvent } from 'testUtils';
 import { fakeStateWithNotLoggedInUser } from 'testUtils/fakers';
 
 import RegisterPage from '../RegisterPage/RegisterPage';
+import { REGISTERED_USER_CREDENTIALS, AUTH_ERRORS } from '~/constants/tests';
 import { routes } from '~/routes';
 
 jest.mock('~/services');
@@ -65,6 +66,23 @@ describe('<RegisterPage />', () => {
     await waitFor(() => expect(getByRegisterButton()).toBeEnabled());
 
     expect(getByLoginPlaceholderText()).toBeValid();
+    expect(getByPasswordPlaceholderText()).toBeValid();
+  });
+
+  it.skip('the email field should be invalid and have an error message from the server when a registered user tries to log in', async () => {
+    renderRegisterPage();
+
+    userEvent.type(getByLoginPlaceholderText(), REGISTERED_USER_CREDENTIALS.email);
+    userEvent.type(getByPasswordPlaceholderText(), REGISTERED_USER_CREDENTIALS.password);
+
+    // // submit form
+    await waitFor(() => userEvent.click(getByRegisterButton()));
+
+    expect(getByRegisterButton()).toBeDisabled();
+    expect(getByLoginPlaceholderText()).toBeInvalid();
+    expect(getByLoginPlaceholderText()).toHaveErrorMessage(
+      AUTH_ERRORS.EMAIL_ALREADY_IN_USE.message,
+    );
     expect(getByPasswordPlaceholderText()).toBeValid();
   });
 
