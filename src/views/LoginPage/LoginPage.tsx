@@ -23,13 +23,11 @@ const StyledForm = styled(Form)`
 
 const StyledInput = styled(Input)`
   height: 40px;
-  width: 300px;
+  width: 100%;
 `;
 
-/**
- * I'm not not styling <Field /> because its "as" props have conflicts with "as" props in StyledComponents
- */
-const StyledFieldWrapper = styled.div`
+const StyledField = styled(Field)`
+  display: block;
   width: 300px;
 `;
 
@@ -72,24 +70,20 @@ const LoginPage = () => {
             <>
               <Heading id="login-page-form">Sign in</Heading>
               <StyledForm aria-labelledby="login-page-form">
-                <StyledFieldWrapper>
-                  <Field
-                    name="email"
-                    type="email"
-                    placeholder="Login"
-                    as={StyledInput}
-                    aria-required="true"
-                  />
-                </StyledFieldWrapper>
-                <StyledFieldWrapper>
-                  <Field
-                    name="password"
-                    type="password"
-                    placeholder="Password"
-                    as={StyledInput}
-                    aria-required="true"
-                  />
-                </StyledFieldWrapper>
+                <StyledField
+                  name="email"
+                  type="email"
+                  placeholder="Login"
+                  component={StyledInput}
+                  aria-required="true"
+                />
+                <StyledField
+                  name="password"
+                  type="password"
+                  placeholder="Password"
+                  component={StyledInput}
+                  aria-required="true"
+                />
                 <Button
                   activecolor="notes"
                   type="submit"
