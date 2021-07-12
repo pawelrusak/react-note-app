@@ -7,7 +7,7 @@ import logoutIcon from '~/assets/icons/logout.svg';
 import penIcon from '~/assets/icons/pen.svg';
 import twitterIcon from '~/assets/icons/twitter.svg';
 import ButtonIcon from '~/components/atoms/ButtonIcon/ButtonIcon';
-import { usePageTypeContext } from '~/hooks';
+import { usePageTypeContext, useAuth } from '~/hooks';
 import { activecolor, ActiveColorArgs } from '~/theme/mixins';
 
 const StyledWrapper = styled.nav<Required<ActiveColorArgs>>`
@@ -48,6 +48,7 @@ const StyledLinksList = styled.ul`
 
 const Sidebar = () => {
   const pageContext = usePageTypeContext();
+  const { logout } = useAuth();
 
   return (
     <StyledWrapper activecolor={pageContext}>
@@ -63,7 +64,8 @@ const Sidebar = () => {
           <ButtonIcon as={NavLink} to="/articles" icon={bulbIcon} activeClassName="active" />
         </li>
       </StyledLinksList>
-      <StyledLogoutButton as={NavLink} to="/login" icon={logoutIcon} />
+      {/* <StyledLogoutButton as={NavLink} to="/login" icon={logoutIcon} /> */}
+      <StyledLogoutButton aria-label="logout" type="button" onClick={logout} icon={logoutIcon} />
     </StyledWrapper>
   );
 };

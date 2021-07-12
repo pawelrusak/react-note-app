@@ -117,3 +117,5 @@ export const register = async (email: string, password: string) => {
     return Promise.reject(error);
   }
 };
+
+export const logout = async () => Promise.resolve();

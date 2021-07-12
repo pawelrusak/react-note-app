@@ -3,12 +3,14 @@ import StoryRouter from 'storybook-react-router';
 import { sidebarLinks } from '../../../../.storybook/links';
 import Sidebar from './Sidebar';
 import { routes } from '~/routes';
+import { StoreDecorator } from '~~/.storybook/decorators';
 
 import type { Meta, Story } from '@storybook/react';
 
 export default {
   title: 'Organisms/Sidebar',
   component: Sidebar,
+  decorators: [StoreDecorator],
 } as Meta;
 
 const Template: Story = (args) => <Sidebar {...args} />;

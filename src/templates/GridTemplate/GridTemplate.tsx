@@ -77,6 +77,7 @@ const GridTemplate = ({ children }: GridTemplateProps) => {
         </StyledPageHeader>
         <StyledGrid>{children}</StyledGrid>
         <StyledButtonIcon
+          aria-label="toggle new item bar"
           onClick={toggleNewItemBarVisible}
           icon={plusIcon}
           activecolor={pageType}

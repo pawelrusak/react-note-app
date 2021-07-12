@@ -15,6 +15,8 @@ export const authenticateUser = (email: string, password: string) =>
 export const register = (email: string, password: string) =>
   auth.createUserWithEmailAndPassword(email, password);
 
+export const logout = () => auth.signOut();
+
 export const fetchItems = async ({ type, userID }: DocumentItemQueryArgs) => {
   try {
     const itemsSnap = await queryGetItemsByTypeAndUserID(type, userID);

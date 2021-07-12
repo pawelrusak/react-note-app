@@ -11,10 +11,7 @@ export type AuthState = {
 };
 
 const initialState: AuthState = {
-  /**
-   * @deprecated This hard code userID property value will be removing in future
-   */
-  userID: process.env.REACT_APP_TEMPORARY_USER_ID as string,
+  userID: null,
   isLoading: false,
 };
 
@@ -54,6 +51,13 @@ export const register = createAsyncThunk<RegisterReturn, RegisterArg, AppThunkCo
   },
 );
 
+export const logout = createAsyncThunk<void, void, AppThunkConfig>(
+  `${ACTION_DOMAINS.AUTH}/logout`,
+  async () => {
+    await services.logout();
+  },
+);
+
 const authSlice = createSlice({
   name: ACTION_DOMAINS.AUTH,
   initialState,
@@ -65,6 +69,9 @@ const authSlice = createSlice({
       })
       .addCase(register.fulfilled, (state, action) => {
         state.userID = action.payload.user?.uid ?? null;
+      })
+      .addCase(logout.fulfilled, (state) => {
+        state.userID = null;
       }),
 });
 
