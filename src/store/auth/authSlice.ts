@@ -54,6 +54,13 @@ export const register = createAsyncThunk<RegisterReturn, RegisterArg, AppThunkCo
   },
 );
 
+export const logout = createAsyncThunk<void, void, AppThunkConfig>(
+  `${ACTION_DOMAINS.AUTH}/logout`,
+  async () => {
+    await services.logout();
+  },
+);
+
 const authSlice = createSlice({
   name: ACTION_DOMAINS.AUTH,
   initialState,
@@ -65,6 +72,9 @@ const authSlice = createSlice({
       })
       .addCase(register.fulfilled, (state, action) => {
         state.userID = action.payload.user?.uid ?? null;
+      })
+      .addCase(logout.fulfilled, (state) => {
+        state.userID = null;
       }),
 });
 
