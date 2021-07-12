@@ -24,10 +24,11 @@ const renderGridTemplate = (path?: RoutesPaths, pageType?: ItemVariants) =>
 
 const getAllByHeadingRole = () => screen.getAllByRole('heading');
 const getByNewItemBar = () => screen.getByTestId('new-item-bar');
-const getAllByButtonRole = () => screen.getAllByRole('button');
 const getByTitlePlaceholderText = () => screen.getByPlaceholderText(/title/i);
 const getByNewItemBarContentTextarea = () => screen.getByTestId('new-item-bar-content-textarea');
 const getByAddNoteTextButton = () => screen.getByRole('button', { name: /add note/i });
+const getByToggleNewItemBarButton = () =>
+  screen.getByRole('button', { name: /toggle new item bar/i });
 
 const transformTranslateHundredPercent = 'transform: translate(100%)';
 const transformTranslateZero = 'transform: translate(0)';
@@ -67,15 +68,14 @@ describe('<GridTemplate />', () => {
     renderGridTemplate();
 
     const newItemBar = getByNewItemBar();
-    const [toggleNewItemBarButton] = getAllByButtonRole();
 
     expect(newItemBar).not.toBeVisible();
 
-    userEvent.click(toggleNewItemBarButton);
+    userEvent.click(getByToggleNewItemBarButton());
 
     expect(newItemBar).toBeVisible();
 
-    userEvent.click(toggleNewItemBarButton);
+    userEvent.click(getByToggleNewItemBarButton());
 
     expect(newItemBar).not.toBeVisible();
   });
@@ -87,15 +87,14 @@ describe('<GridTemplate />', () => {
     renderGridTemplate();
 
     const newItemBar = getByNewItemBar();
-    const [toggleNewItemBarButton] = getAllByButtonRole();
 
     expect(newItemBar).toHaveStyle(transformTranslateHundredPercent);
 
-    userEvent.click(toggleNewItemBarButton);
+    userEvent.click(getByToggleNewItemBarButton());
 
     expect(newItemBar).toHaveStyle(transformTranslateZero);
 
-    userEvent.click(toggleNewItemBarButton);
+    userEvent.click(getByToggleNewItemBarButton());
 
     expect(newItemBar).toHaveStyle(transformTranslateHundredPercent);
   });
@@ -106,8 +105,7 @@ describe('<GridTemplate />', () => {
     expect(store.getState().items.notes).toHaveLength(4);
 
     // open sidebar form
-    const [toggleNewItemBarButton] = getAllByButtonRole();
-    await waitFor(() => userEvent.click(toggleNewItemBarButton));
+    await waitFor(() => userEvent.click(getByToggleNewItemBarButton()));
 
     // input the values of the note
     userEvent.type(getByTitlePlaceholderText(), fakeNoteItemInputs.title);
