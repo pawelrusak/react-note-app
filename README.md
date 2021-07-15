@@ -4,7 +4,7 @@
 
 FavNote. is the application that enables you to conveniently browse, create, remove and filter several content types like notes, favorites twitts or interesting articles and get back to the them later whenever you want.
 
-## Getting stared
+## Getting started
 
 Build using [NPM](https://www.npmjs.com/get-npm) scripts. The following scripts are available:
 
