@@ -100,7 +100,7 @@ After [version 0.15.0](https://github.com/pawelrusak/react-note-app/tree/develop
 - [ ] validation of the forms to create new items (notes, twitts, articles) with error handling from the server, taking care of [UX](https://pl.wikipedia.org/wiki/User_experience),
 - [ ] version for mobile (Responsive Web Design)
 
-\*\* if the box is not checked, it means the work is in progress
+<sub><sup>\* if the box is not checked, it means the work is in progress</sup></sub>
 
 ## License
 
