@@ -1,6 +1,6 @@
 <p align="center"><img src="https://raw.githubusercontent.com/pawelrusak/react-note-app/851af0930676810310cac0c0e39832b03580d972/logo.svg" height="150" alt="FAV Note."><p>
   
-# React note app
+# FavNote. - React app to help you master your notes
 
 Simple [React](https://reactjs.org/) serverless application to manage your notes.
 
