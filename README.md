@@ -76,6 +76,32 @@ In the project I used the following libraries and tools:
 
 and more...
 
+## Features
+
+Up to the [version 0.15.0](https://github.com/pawelrusak/react-note-app/tree/v0.15.0) of the application, the following functions have been implemented:
+
+- ability to create, browse and delete only twitter types notes,
+- detail page for notes, tweets and articles,
+- the changing color of the page depending on the currently displayed note type
+- The form panel for creating new notes, that can be closed and opened, changing the form fields depending on the type of notes you are viewing,
+- the login page with sign-in form
+- the ability to log in for the already registered user (new accounts must be manually entered into the database)
+- the registration page with the sign-up form (not connected to the api so as to register a user)
+
+After [version 0.15.0](https://github.com/pawelrusak/react-note-app/tree/develop) the following features have been implemented (or are in progress):
+
+- [ ] ability to create, view and delete items, also for basic notes and articles,
+- [ ] ability to filter by means of the item content, also using URLs for better navigation (notes, tweets, articles),
+- [ ] the item counter (notes, tweets, articles),
+- [ ] documents titles for pages
+- [x] Validations for sign-in and sign-up forms, including the error handling from the server (e.g. email is busy), taking care at the same time of UX (clear error messages, blocking the submit button when the form contains errors, basic accessibility)
+- [x] ability to register new accounts through the form on the registration page,
+- [ ] maintaining session after logging-in
+- [ ] validation of the forms to create new items (notes, twitts, articles) with error handling from the server, taking care of [UX](https://pl.wikipedia.org/wiki/User_experience),
+- [ ] version for mobile (Responsive Web Design)
+
+\*\* if the box is not checked, it means the work is in progress
+
 ## License
 
 Licensed under the MIT License. See [LICENSE](./LICENSE) for more information.
