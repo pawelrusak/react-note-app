@@ -40,6 +40,20 @@ and more...
 
 You can preview the changes I have made by comparing the code from the [latest commit](https://github.com/pawelrusak/react-note-app/tree/develop) (branch develop) up to the [0.15.0 tag](https://github.com/pawelrusak/react-note-app/tree/v0.15.0) - which is the tag that ends up the course - or with the [original source code](https://github.com/eduwebpl/kurs-react-w-praktyce).
 
+## Commit messages
+
+I follow by the [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) specification in my commit messages, which are structured as follows:
+
+```
+<type>(scope): <description>
+
+[optional body]
+
+[optional footer(s)]
+```
+
+However in my case I used the word "my" in `scope` only when I did something on my own during the course, like connecting Firebase API or creating stories of StoryBook 6, because the course didn't cover that. I used this solution up to the Tag 0.15.0. All the following commits even if they didn't have a "my" in the "scope" were written by me, too.
+
 ## License
 
 Licensed under the MIT License. See [LICENSE](./LICENSE) for more information.
