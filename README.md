@@ -2,7 +2,7 @@
   
 # FavNote. - React app to help you master your notes
 
-Simple [React](https://reactjs.org/) serverless application to manage your notes.
+FavNote. is the application that enables you to conveniently browse, create, remove and filter several content types like notes, favorites twitts or interesting articles and get back to the them later whenever you want.
 
 ## Getting stared
 
