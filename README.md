@@ -6,6 +6,8 @@ FavNote. is the application that enables you to conveniently browse, create, rem
 
 ## Getting started
 
+**Obsolete! Will be updated soon!**
+
 Build using [NPM](https://www.npmjs.com/get-npm) scripts. The following scripts are available:
 
 - `start` - starts the development server,
