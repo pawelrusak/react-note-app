@@ -58,6 +58,24 @@ However in my case I used the word "my" in `scope` only when I did something on 
 
 I have tried using tags in the MAJOR.MINOR.PATCH convention, suggested in ["Semantic Versioning"](https://semver.org/), guided by the changes from the user's perspective. For example, I increased the "MINOR" version when adding new user functionality, like possibility to create new notes, or implementing a counter for a specific type of items.
 
+### Used technologies
+
+In the project I used the following libraries and tools:
+
+- [React 17](https://reactjs.org/blog/2020/10/20/react-v17.html),
+- React Hooks (migration from Class Component),
+- [React Router](https://reactrouter.com/)
+- Redux Toolkit (migration from Redux)
+- [Styled Components](https://styled-components.com/docs/basics#getting-started)
+- Typescript (migration from JavaScript)
+- [Formik](https://formik.org/) with [Yup](https://github.com/jquense/yup#yup)
+- [ESLint](https://eslint.org/docs/user-guide/getting-started) and [Prettier](https://prettier.io/docs/en/index.html)
+- [Husky](https://typicode.github.io/husky/#/) 6 with [lint-staged](https://github.com/okonet/lint-staged#-lint-staged----)
+- [Firebase Authentication](https://firebase.google.com/docs/auth) and [Cloud Firestore](https://firebase.google.com/docs/firestore)
+- [Storybook 6](https://storybook.js.org/)
+
+and more...
+
 ## License
 
 Licensed under the MIT License. See [LICENSE](./LICENSE) for more information.
