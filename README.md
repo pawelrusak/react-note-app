@@ -20,6 +20,10 @@ Build using [NPM](https://www.npmjs.com/get-npm) scripts. The following scripts 
 
 This project was bootstrapped with [Create React App](https://create-react-app.dev/).
 
+## About the project
+
+The project is application extension from the course ["Kurs React - W Praktyce"](https://eduweb.pl/programowanie-i-www/reactjs/react-w-praktyce) (en."React Course - in Practice") by [Adam Romanski](https://helloroman.pl/). I continued the course up to tag 0.15.0 (more about tagging [here](https://github.com/)). My main motivation for taking up the course was it's very smart UI design and interesting idea for application, which I thought showed a great potential for introducing new features (types of functionality) and technologies. However, at the end of tne course only some of the designed types of functionality worked.
+
 ## License
 
 Licensed under the MIT License. See [LICENSE](./LICENSE) for more information.
