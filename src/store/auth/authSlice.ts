@@ -7,6 +7,7 @@ import {
   ActionCreator,
 } from '@reduxjs/toolkit';
 
+import authPersist from './authPersist';
 import { ACTION_DOMAINS } from '~/constants/actionDomains';
 import * as services from '~/services';
 import { auth } from '~/services/core';
@@ -19,7 +20,7 @@ export type AuthState = {
 };
 
 const initialState: AuthState = {
-  userID: null,
+  userID: process.env.NODE_ENV === 'test' ? null : authPersist.getUserID(),
   isLoading: false,
 };
 
@@ -71,9 +72,11 @@ const authSlice = createSlice({
   initialState,
   reducers: {
     onLogin: (state, actions: PayloadAction<string>) => {
+      authPersist.setUserID(actions.payload);
       state.userID = actions.payload;
     },
     onLogout: (state) => {
+      authPersist.removeUserID();
       state.userID = null;
     },
   },
@@ -86,6 +89,7 @@ const authSlice = createSlice({
         state.userID = action.payload.user?.uid ?? null;
       })
       .addCase(logout.fulfilled, (state) => {
+        authPersist.removeUserID();
         state.userID = null;
       }),
 });
