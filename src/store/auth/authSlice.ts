@@ -1,7 +1,16 @@
-import { createSlice, createAsyncThunk, AppThunkConfig } from '@reduxjs/toolkit';
+import {
+  createSlice,
+  createAsyncThunk,
+  AppThunkConfig,
+  AppThunk,
+  PayloadAction,
+  ActionCreator,
+} from '@reduxjs/toolkit';
 
+import authPersist from './authPersist';
 import { ACTION_DOMAINS } from '~/constants/actionDomains';
 import * as services from '~/services';
+import { auth } from '~/services/core';
 
 import type firebase from 'firebase/app';
 
@@ -11,7 +20,7 @@ export type AuthState = {
 };
 
 const initialState: AuthState = {
-  userID: null,
+  userID: process.env.NODE_ENV === 'test' ? null : authPersist.getUserID(),
   isLoading: false,
 };
 
@@ -61,7 +70,16 @@ export const logout = createAsyncThunk<void, void, AppThunkConfig>(
 const authSlice = createSlice({
   name: ACTION_DOMAINS.AUTH,
   initialState,
-  reducers: {},
+  reducers: {
+    onLogin: (state, actions: PayloadAction<string>) => {
+      authPersist.setUserID(actions.payload);
+      state.userID = actions.payload;
+    },
+    onLogout: (state) => {
+      authPersist.removeUserID();
+      state.userID = null;
+    },
+  },
   extraReducers: (builder) =>
     builder
       .addCase(authenticate.fulfilled, (state, action) => {
@@ -71,8 +89,25 @@ const authSlice = createSlice({
         state.userID = action.payload.user?.uid ?? null;
       })
       .addCase(logout.fulfilled, (state) => {
+        authPersist.removeUserID();
         state.userID = null;
       }),
 });
+
+const { onLogin, onLogout } = authSlice.actions;
+
+type OnLoginAction = PayloadAction<string>;
+type OnLogoutAction = PayloadAction<void>;
+type AuthStateChangedAction = ActionCreator<AppThunk<OnLoginAction | OnLogoutAction>>;
+
+export const authStateChanged: AuthStateChangedAction = () => (dispatch) => {
+  auth.onAuthStateChanged((user) => {
+    if (user) {
+      dispatch(onLogin(user.uid));
+    } else {
+      dispatch(onLogout());
+    }
+  });
+};
 
 export default authSlice.reducer;
