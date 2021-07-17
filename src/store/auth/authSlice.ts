@@ -1,7 +1,15 @@
-import { createSlice, createAsyncThunk, AppThunkConfig } from '@reduxjs/toolkit';
+import {
+  createSlice,
+  createAsyncThunk,
+  AppThunkConfig,
+  AppThunk,
+  PayloadAction,
+  ActionCreator,
+} from '@reduxjs/toolkit';
 
 import { ACTION_DOMAINS } from '~/constants/actionDomains';
 import * as services from '~/services';
+import { auth } from '~/services/core';
 
 import type firebase from 'firebase/app';
 
@@ -61,7 +69,14 @@ export const logout = createAsyncThunk<void, void, AppThunkConfig>(
 const authSlice = createSlice({
   name: ACTION_DOMAINS.AUTH,
   initialState,
-  reducers: {},
+  reducers: {
+    onLogin: (state, actions: PayloadAction<string>) => {
+      state.userID = actions.payload;
+    },
+    onLogout: (state) => {
+      state.userID = null;
+    },
+  },
   extraReducers: (builder) =>
     builder
       .addCase(authenticate.fulfilled, (state, action) => {
@@ -74,5 +89,21 @@ const authSlice = createSlice({
         state.userID = null;
       }),
 });
+
+const { onLogin, onLogout } = authSlice.actions;
+
+type OnLoginAction = PayloadAction<string>;
+type OnLogoutAction = PayloadAction<void>;
+type AuthStateChangedAction = ActionCreator<AppThunk<OnLoginAction | OnLogoutAction>>;
+
+export const authStateChanged: AuthStateChangedAction = () => (dispatch) => {
+  auth.onAuthStateChanged((user) => {
+    if (user) {
+      dispatch(onLogin(user.uid));
+    } else {
+      dispatch(onLogout());
+    }
+  });
+};
 
 export default authSlice.reducer;
