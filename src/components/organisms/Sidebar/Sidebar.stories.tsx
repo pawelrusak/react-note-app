@@ -1,9 +1,9 @@
 import StoryRouter from 'storybook-react-router';
 
-import { sidebarLinks } from '../../../../.storybook/links';
 import Sidebar from './Sidebar';
 import { routes } from '~/routes';
 import { StoreDecorator } from '~~/.storybook/decorators';
+import { sidebarLinks } from '~~/.storybook/links';
 
 import type { Meta, Story } from '@storybook/react';
 

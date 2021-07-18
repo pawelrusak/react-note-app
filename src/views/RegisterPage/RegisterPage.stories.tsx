@@ -1,8 +1,8 @@
 import StoryRouter from 'storybook-react-router';
 
-import { StoreDecorator } from '../../../.storybook/decorators';
-import { authPageLinks } from '../../../.storybook/links';
 import RegisterPage from './RegisterPage';
+import { StoreDecorator } from '~~/.storybook/decorators';
+import { authPageLinks } from '~~/.storybook/links';
 
 import type { Meta, Story } from '@storybook/react';
 

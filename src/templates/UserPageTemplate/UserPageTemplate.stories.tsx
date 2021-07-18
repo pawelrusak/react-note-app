@@ -1,9 +1,9 @@
 import StoryRouter from 'storybook-react-router';
 
-import ViewPlaceholder from '../../../.storybook/components/ViewPlaceholder';
-import { UserPageTemplateRouterDecorator, StoreDecorator } from '../../../.storybook/decorators';
 import UserPageTemplate, { UserPageTemplateProps } from './UserPageTemplate';
 import { routes } from '~/routes';
+import ViewPlaceholder from '~~/.storybook/components/ViewPlaceholder';
+import { UserPageTemplateRouterDecorator, StoreDecorator } from '~~/.storybook/decorators';
 
 import type { Meta, Story } from '@storybook/react';
 
