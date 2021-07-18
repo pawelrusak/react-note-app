@@ -7,6 +7,7 @@ import Heading from '~/components/atoms/Heading/Heading';
 import Input from '~/components/atoms/Input/Input';
 import { usePageTypeContext } from '~/hooks';
 import { addItem as addItemAction } from '~/store/items/itemsSlice';
+import * as styledMixin from '~/theme/mixins';
 
 import type { ItemVariants, NewItem } from '~/commonTypes';
 import type { ActiveColorArgs } from '~/theme/mixins';
@@ -29,7 +30,7 @@ const StyledWrapper = styled.div<StyledWrapperProps>`
   background-color: white;
   box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
   transform: translate(${({ isVisible }) => (isVisible ? '0' : '100%')});
-  transition: transform 0.25s ease-in-out;
+  ${styledMixin.transitionTransformForNewItemBarAndHisToggleButton};
   overflow-y: scroll;
 `;
 

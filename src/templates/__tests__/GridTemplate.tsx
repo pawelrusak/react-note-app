@@ -30,8 +30,16 @@ const getByAddNoteTextButton = () => screen.getByRole('button', { name: /add not
 const getByToggleNewItemBarButton = () =>
   screen.getByRole('button', { name: /toggle new item bar/i });
 
-const transformTranslateHundredPercent = 'transform: translate(100%)';
-const transformTranslateZero = 'transform: translate(0)';
+const CSS_STYLES = {
+  TRANSFORM_TRANSLATE: {
+    VISIBLE: 'transform: translate(0)',
+    NOT_VISIBLE: 'transform: translate(100%)',
+  },
+  TRANSFORM_ROTATE: {
+    ACTIVE: 'transform: rotate(-45deg)',
+    NOT_ACTIVE: 'transform: rotate(0)',
+  },
+} as const;
 
 const fakeNoteItemInputs = {
   title: 'test note title',
@@ -70,14 +78,17 @@ describe('<GridTemplate />', () => {
     const newItemBar = getByNewItemBar();
 
     expect(newItemBar).not.toBeVisible();
+    expect(getByToggleNewItemBarButton()).toHaveStyle(CSS_STYLES.TRANSFORM_ROTATE.NOT_ACTIVE);
 
     userEvent.click(getByToggleNewItemBarButton());
 
     expect(newItemBar).toBeVisible();
+    expect(getByToggleNewItemBarButton()).toHaveStyle(CSS_STYLES.TRANSFORM_ROTATE.ACTIVE);
 
     userEvent.click(getByToggleNewItemBarButton());
 
     expect(newItemBar).not.toBeVisible();
+    expect(getByToggleNewItemBarButton()).toHaveStyle(CSS_STYLES.TRANSFORM_ROTATE.NOT_ACTIVE);
   });
 
   /**
@@ -88,15 +99,18 @@ describe('<GridTemplate />', () => {
 
     const newItemBar = getByNewItemBar();
 
-    expect(newItemBar).toHaveStyle(transformTranslateHundredPercent);
+    expect(newItemBar).toHaveStyle(CSS_STYLES.TRANSFORM_TRANSLATE.NOT_VISIBLE);
+    expect(getByToggleNewItemBarButton()).toHaveStyle(CSS_STYLES.TRANSFORM_ROTATE.NOT_ACTIVE);
 
     userEvent.click(getByToggleNewItemBarButton());
 
-    expect(newItemBar).toHaveStyle(transformTranslateZero);
+    expect(newItemBar).toHaveStyle(CSS_STYLES.TRANSFORM_TRANSLATE.VISIBLE);
+    expect(getByToggleNewItemBarButton()).toHaveStyle(CSS_STYLES.TRANSFORM_ROTATE.ACTIVE);
 
     userEvent.click(getByToggleNewItemBarButton());
 
-    expect(newItemBar).toHaveStyle(transformTranslateHundredPercent);
+    expect(newItemBar).toHaveStyle(CSS_STYLES.TRANSFORM_TRANSLATE.NOT_VISIBLE);
+    expect(getByToggleNewItemBarButton()).toHaveStyle(CSS_STYLES.TRANSFORM_ROTATE.NOT_ACTIVE);
   });
 
   it('add a new note to store that has been created by the form', async () => {
