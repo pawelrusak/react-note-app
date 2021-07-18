@@ -1,8 +1,8 @@
 import StoryRouter from 'storybook-react-router';
 
-import { StoreDecorator, CardWrapperDecorator } from '../../../../.storybook/decorators';
 import Card, { CardProps } from './Card';
 import { getEarlierDateOfDay } from '~/utils';
+import { StoreDecorator, CardWrapperDecorator } from '~~/.storybook/decorators';
 
 import type { Meta, Story } from '@storybook/react';
 
@@ -34,7 +34,7 @@ Note.parameters = {
 export const Twitter = Template.bind({});
 Twitter.args = {
   ...Default.args,
-  twitterName: 'hello_romans',
+  twitterName: 'hello_roman',
 } as CardProps;
 Twitter.parameters = {
   pageContext: 'twitters',

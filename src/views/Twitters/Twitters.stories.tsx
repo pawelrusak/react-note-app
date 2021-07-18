@@ -1,9 +1,9 @@
 import StoryRouter from 'storybook-react-router';
 
-import { StoreDecorator } from '../../../.storybook/decorators';
-import { itemsPageLinks } from '../../../.storybook/links';
 import Twitters from './Twitters';
 import { routes } from '~/routes';
+import { StoreDecorator } from '~~/.storybook/decorators';
+import { itemsPageLinks } from '~~/.storybook/links';
 
 import type { Meta, Story } from '@storybook/react';
 

@@ -35,7 +35,7 @@ const initialState: RootState = {
     twitters: [
       {
         ...sampleNote,
-        twitterName: 'hello_romans',
+        twitterName: 'hello_roman',
       },
     ],
     isLoading: false,

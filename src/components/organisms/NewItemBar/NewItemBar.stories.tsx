@@ -1,5 +1,5 @@
-import { StoreDecorator } from '../../../../.storybook/decorators';
 import NewItemBar, { OwnProps as NewItemBarOwnProps } from './NewItemBar';
+import { StoreDecorator } from '~~/.storybook/decorators';
 
 import type { Meta, Story } from '@storybook/react';
 
