@@ -8,7 +8,7 @@ import Paragraph from '~/components/atoms/Paragraph/Paragraph';
 import NewItemBar from '~/components/organisms/NewItemBar/NewItemBar';
 import { useToggle, usePageTypeContext } from '~/hooks';
 import UserPageTemplate from '~/templates/UserPageTemplate/UserPageTemplate';
-import { activecolor } from '~/theme/mixins';
+import { activecolor, ActiveColorArgs } from '~/theme/mixins';
 
 const StyledWrapper = styled.div`
   position: relative;
@@ -47,7 +47,11 @@ const StyledParagraph = styled(Paragraph)`
   font-weight: ${({ theme }) => theme.bold};
 `;
 
-const StyledButtonIcon = styled(ButtonIcon)`
+type StyledButtonIconProps = {
+  readonly active: boolean;
+} & ActiveColorArgs;
+
+const StyledButtonIcon = styled(ButtonIcon)<StyledButtonIconProps>`
   position: fixed;
   bottom: 40px;
   right: 40px;
@@ -55,6 +59,8 @@ const StyledButtonIcon = styled(ButtonIcon)`
   background-size: 35%;
   border-radius: 50px;
   z-index: 10000;
+  transform: rotate(${({ active }) => (active ? '-45deg' : '0')});
+  transition: transform 0.25s ease-in-out;
 `;
 
 export type GridTemplateProps = {
@@ -81,6 +87,7 @@ const GridTemplate = ({ children }: GridTemplateProps) => {
           onClick={toggleNewItemBarVisible}
           icon={plusIcon}
           activecolor={pageType}
+          active={newItemBarVisible}
         />
         <NewItemBar handleClose={toggleNewItemBarVisible} isVisible={newItemBarVisible} />
       </StyledWrapper>
