@@ -34,7 +34,7 @@ Note.parameters = {
 export const Twitter = Template.bind({});
 Twitter.args = {
   ...Default.args,
-  twitterName: 'hello_romans',
+  twitterName: 'hello_roman',
 } as CardProps;
 Twitter.parameters = {
   pageContext: 'twitters',
