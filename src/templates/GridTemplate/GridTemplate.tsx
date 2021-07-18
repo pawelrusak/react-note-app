@@ -8,7 +8,9 @@ import Paragraph from '~/components/atoms/Paragraph/Paragraph';
 import NewItemBar from '~/components/organisms/NewItemBar/NewItemBar';
 import { useToggle, usePageTypeContext } from '~/hooks';
 import UserPageTemplate from '~/templates/UserPageTemplate/UserPageTemplate';
-import { activecolor, ActiveColorArgs } from '~/theme/mixins';
+import * as styledMixin from '~/theme/mixins';
+
+import type { ActiveColorArgs } from '~/theme/mixins';
 
 const StyledWrapper = styled.div`
   position: relative;
@@ -55,7 +57,7 @@ const StyledButtonIcon = styled(ButtonIcon)<StyledButtonIconProps>`
   position: fixed;
   bottom: 40px;
   right: 40px;
-  ${activecolor}
+  ${styledMixin.activecolor}
   background-size: 35%;
   border-radius: 50px;
   z-index: 10000;
