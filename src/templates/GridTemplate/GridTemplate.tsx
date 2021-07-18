@@ -62,7 +62,7 @@ const StyledButtonIcon = styled(ButtonIcon)<StyledButtonIconProps>`
   border-radius: 50px;
   z-index: 10000;
   transform: rotate(${({ active }) => (active ? '-45deg' : '0')});
-  transition: transform 0.25s ease-in-out;
+  ${styledMixin.transitionTransformForNewItemBarAndHisToggleButton}
 `;
 
 export type GridTemplateProps = {

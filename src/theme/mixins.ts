@@ -29,3 +29,7 @@ export const lightenBlack = css`
 export const lightenBlackText = css`
   color: ${lightenBlack};
 `;
+
+export const transitionTransformForNewItemBarAndHisToggleButton = css`
+  transition: transform 0.25s ease-in-out;
+`;
