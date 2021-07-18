@@ -1,7 +1,7 @@
 import StoryRouter from 'storybook-react-router';
 
 import ViewPlaceholder from '../../../.storybook/components/ViewPlaceholder';
-import { UserPageTemplateRouterDecorator } from '../../../.storybook/decorators';
+import { UserPageTemplateRouterDecorator, StoreDecorator } from '../../../.storybook/decorators';
 import UserPageTemplate, { UserPageTemplateProps } from './UserPageTemplate';
 import { routes } from '~/routes';
 
@@ -10,7 +10,7 @@ import type { Meta, Story } from '@storybook/react';
 export default {
   title: 'Templates/UserPageTemplate',
   component: UserPageTemplate,
-  decorators: [StoryRouter()],
+  decorators: [StoreDecorator],
 } as Meta;
 
 const Template: Story<UserPageTemplateProps> = () => (
