@@ -72,6 +72,7 @@
     "@types/react-router-dom": "^5.1.7",
     "@types/storybook-react-router": "^1.0.1",
     "@types/styled-components": "^5.1.9",
+    "dayjs": "^1.10.6",
     "firebase": "^8.6.2",
     "formik": "^2.2.7",
     "polished": "^4.1.3",
