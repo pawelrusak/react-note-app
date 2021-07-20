@@ -56,28 +56,37 @@ const getByCardHeading = () => screen.getByTestId('card-heading-bar');
 const queryByImgRole = () => screen.queryByRole('img');
 const queryByCardArticleLink = () => screen.queryByTestId('card-article-link');
 const queryByFakeDetailsPage = () => screen.queryByTestId('fake-details-page');
+const queryByCardDate = () => screen.queryByTestId('card-date');
 
+/**
+ * @todo use CONSTANT_CASE names
+ */
 const twitterAvatarTestName = 'twitter avatar';
 const articleLinkTestName = 'article link';
+const CART_TYPES = ['Note', 'Twitter', 'Article'] as const;
 
 describe('<Card />', () => {
   beforeEach(cleanup);
 
-  it.each(['Note', 'Twitter', 'Article'])(
-    'redirect to %s details page after click on the card heading',
-    (cardType) => {
-      const { cardData } = renderCard(cardType as CardType);
+  it.each(CART_TYPES)('redirect to %s details page after click on the card heading', (cardType) => {
+    const { cardData } = renderCard(cardType);
 
-      expect(queryByFakeDetailsPage()).not.toBeInTheDocument();
+    expect(queryByFakeDetailsPage()).not.toBeInTheDocument();
 
-      userEvent.click(getByCardHeading());
+    userEvent.click(getByCardHeading());
 
-      expect(queryByFakeDetailsPage()).toBeInTheDocument();
-      expect(queryByFakeDetailsPage()).toHaveTextContent(
-        getFakeDetailsPageText(cardType as CardType, cardData.id),
-      );
-    },
-  );
+    expect(queryByFakeDetailsPage()).toBeInTheDocument();
+    expect(queryByFakeDetailsPage()).toHaveTextContent(
+      getFakeDetailsPageText(cardType, cardData.id),
+    );
+  });
+
+  it.each(CART_TYPES)('has a correctly formatted date', (cardType) => {
+    renderCard(cardType);
+
+    expect(queryByCardDate()).toBeInTheDocument();
+    expect(queryByCardDate()).toHaveTextContent(/3 days/i);
+  });
 
   /**
    * @deprecated remove this after write the test for <Notes />, <Twitters />, <Articles />, because they are more complex
