@@ -3,11 +3,8 @@ import relativeTime from 'dayjs/plugin/relativeTime';
 
 dayjs.extend(relativeTime);
 
-type DateInfoRender = (props: { date: string }) => React.ReactNode;
-
 export type DateInfoProps = {
   readonly date: Exclude<dayjs.ConfigType, null | undefined>;
-  readonly render?: DateInfoRender;
   /**
    * I haven't implemented a dynamic format date to make it easy to use.
    * Without having to remember the available date formats.
@@ -20,13 +17,13 @@ export type DateInfoProps = {
  *
  * @see {@link https://www.npmtrends.com/dayjs-vs-react-moment-vs-moment}
  */
-const DateInfo = ({ date, render, format, dateTime, ...props }: DateInfoProps) => {
+const DateInfo = ({ date, format, dateTime, ...props }: DateInfoProps) => {
   const formattedDate = format ? dayjs(date).format('DD/MM/YYYY') : dayjs(date).fromNow(true);
 
   return (
     // eslint-disable-next-line react/jsx-props-no-spreading
     <time dateTime={dateTime || dayjs(date).format()} {...props}>
-      {render ? render({ date: formattedDate }) : formattedDate}
+      {formattedDate}
     </time>
   );
 };
