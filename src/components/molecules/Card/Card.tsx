@@ -4,6 +4,7 @@ import LinkIcon from '~/assets/icons/link.svg';
 import Button from '~/components/atoms/Button/Button';
 import Heading from '~/components/atoms/Heading/Heading';
 import Paragraph from '~/components/atoms/Paragraph/Paragraph';
+import Time from '~/components/atoms/Time/Time';
 import { useHistoryPush, useRemoveItemAction, usePageTypeContext } from '~/hooks';
 import { activecolor } from '~/theme/mixins';
 
@@ -49,7 +50,7 @@ const ContentWrapper = styled(HeaderWrapper)<ContentWrapperProps>`
     `}
 `;
 
-const DateInfo = styled(Paragraph)`
+const DateInfo = styled(Time)`
   margin: 0 0 5px;
   font-weight: ${({ theme }) => theme.bold};
   font-size: ${({ theme }) => theme.fontSize.xs};
@@ -99,7 +100,7 @@ const Card = ({ id, title, created, twitterName, articleUrl, content }: CardProp
     <StyledWrapper>
       <HeaderWrapper data-testid="card-heading-bar" onClick={historyPush} activecolor={itemType}>
         <StyledHeading>{title}</StyledHeading>
-        <DateInfo>{created}</DateInfo>
+        <DateInfo data-testid="card-date" date={created} />
         {itemType === 'twitters' && (
           <StyledAvatar src={`https://unavatar.now.sh/twitter/${twitterName || ''}`} />
         )}
