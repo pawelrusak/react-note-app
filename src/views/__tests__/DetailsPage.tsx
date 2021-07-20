@@ -1,3 +1,4 @@
+import dayjs from 'dayjs';
 import { Route } from 'react-router-dom';
 import { render, screen, waitFor, cleanup, testComponent } from 'testUtils';
 import { fakeStateWithData } from 'testUtils/fakers';
@@ -20,11 +21,14 @@ const renderDetailsPage = (
   const [item] = fakeStateWithData.items[pluralItemTypeName];
   const itemPath = routes[itemType].replace(':id', item.id);
 
-  return render(<Route path={routes[itemType]} component={DetailsPage} />, {
-    initialState,
-    path: itemPath,
-    pageType: pluralItemTypeName,
-  });
+  return {
+    ...render(<Route path={routes[itemType]} component={DetailsPage} />, {
+      initialState,
+      path: itemPath,
+      pageType: pluralItemTypeName,
+    }),
+    detailsPageData: item,
+  };
 };
 
 const [noteItem] = fakeStateWithData.items.notes;
@@ -38,6 +42,7 @@ const queryByNoteItemTitleText = () => screen.queryByText(noteItem.title);
 const queryByNoteItemContentText = () => screen.queryByText(noteItem.content);
 const queryByArticleLink = () => screen.queryByTestId('article-link');
 const queryByAvatar = () => screen.queryByTestId('avatar');
+const queryByDetailsTemplateDate = () => screen.queryByTestId('details-template-date');
 
 const mocksFetchItem = () => jest.spyOn(services, 'fetchItem');
 
@@ -65,6 +70,16 @@ describe('<DetailsPage />', () => {
 
     expect(queryByNoteItemTitleText()).toBeInTheDocument();
     expect(queryByNoteItemContentText()).toBeInTheDocument();
+  });
+
+  it.each(['note', 'article', 'twitter'] as const)('has a correctly formatted date', (variant) => {
+    const { detailsPageData } = renderDetailsPage(variant);
+
+    const itemCreatedDate = new Date(detailsPageData.created);
+    const formattedItemCreatedDate = dayjs(itemCreatedDate).format('DD/MM/YYYY');
+
+    expect(queryByDetailsTemplateDate()).toBeInTheDocument();
+    expect(queryByDetailsTemplateDate()).toHaveTextContent(formattedItemCreatedDate);
   });
 
   testComponent(() => renderDetailsPage('note'), { suffixTestNames: 'when is note page' })
