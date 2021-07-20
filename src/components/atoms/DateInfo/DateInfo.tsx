@@ -12,7 +12,7 @@ const StyledDateInfo = styled.time`
 type DateInfoRender = (props: { date: string }) => React.ReactNode;
 
 export type DateInfoProps = {
-  readonly date: string;
+  readonly date: Exclude<dayjs.ConfigType, null | undefined>;
   readonly render?: DateInfoRender;
   /**
    * I haven't implemented a dynamic format date to make it easy to use.
@@ -31,7 +31,7 @@ const DateInfo = ({ date, render, format, dateTime, ...props }: DateInfoProps) =
 
   return (
     // eslint-disable-next-line react/jsx-props-no-spreading
-    <StyledDateInfo dateTime={dateTime || date} {...props}>
+    <StyledDateInfo dateTime={dateTime || dayjs(date).format()} {...props}>
       {render ? render({ date: formattedDate }) : formattedDate}
     </StyledDateInfo>
   );
