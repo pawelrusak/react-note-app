@@ -19,21 +19,21 @@ export type DateInfoProps = {
    * Without having to remember the available date formats.
    */
   readonly format?: boolean;
-  readonly className?: string;
-};
+} & React.ComponentPropsWithoutRef<'time'>;
 
 /**
  * Lightweight dedicated component for date formatting. Only ~3 KB vs ~80 KB (see link below)
  *
  * @see {@link https://www.npmtrends.com/dayjs-vs-react-moment-vs-moment}
  */
-const DateInfo = ({ ISOStringDate, render, format, className }: DateInfoProps) => {
+const DateInfo = ({ ISOStringDate, render, format, dateTime, ...props }: DateInfoProps) => {
   const date = format
     ? dayjs(ISOStringDate).format('DD/MM/YYYY')
     : dayjs(ISOStringDate).fromNow(true);
 
   return (
-    <StyledDateInfo className={className} dateTime={ISOStringDate}>
+    // eslint-disable-next-line react/jsx-props-no-spreading
+    <StyledDateInfo dateTime={dateTime || ISOStringDate} {...props}>
       {render ? render({ date }) : date}
     </StyledDateInfo>
   );
