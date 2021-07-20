@@ -1,13 +1,7 @@
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
-import styled from 'styled-components';
 
 dayjs.extend(relativeTime);
-
-const StyledDateInfo = styled.time`
-  font-weight: ${({ theme }) => theme.bold};
-  font-size: ${({ theme }) => theme.fontSize.xs};
-`;
 
 type DateInfoRender = (props: { date: string }) => React.ReactNode;
 
@@ -31,9 +25,9 @@ const DateInfo = ({ date, render, format, dateTime, ...props }: DateInfoProps) =
 
   return (
     // eslint-disable-next-line react/jsx-props-no-spreading
-    <StyledDateInfo dateTime={dateTime || dayjs(date).format()} {...props}>
+    <time dateTime={dateTime || dayjs(date).format()} {...props}>
       {render ? render({ date: formattedDate }) : formattedDate}
-    </StyledDateInfo>
+    </time>
   );
 };
 
