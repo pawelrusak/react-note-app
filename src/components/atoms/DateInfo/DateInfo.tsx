@@ -1,42 +1,27 @@
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
-import styled from 'styled-components';
 
 dayjs.extend(relativeTime);
 
-const StyledDateInfo = styled.time`
-  font-weight: ${({ theme }) => theme.bold};
-  font-size: ${({ theme }) => theme.fontSize.xs};
-`;
-
-type DateInfoRender = (props: { date: string }) => React.ReactNode;
-
 export type DateInfoProps = {
-  readonly ISOStringDate: string;
-  readonly render?: DateInfoRender;
+  readonly date: Exclude<dayjs.ConfigType, null | undefined>;
   /**
-   * I haven't implemented a dynamic format date to make it easy to use.
-   * Without having to remember the available date formats.
+   * The available date format can be found in the link below:
+   * @see https://day.js.org/docs/en/display/format#docsNav
    */
-  readonly format?: boolean;
-  readonly className?: string;
-};
+  readonly format?: string;
+} & React.ComponentPropsWithoutRef<'time'>;
 
 /**
  * Lightweight dedicated component for date formatting. Only ~3 KB vs ~80 KB (see link below)
  *
  * @see {@link https://www.npmtrends.com/dayjs-vs-react-moment-vs-moment}
  */
-const DateInfo = ({ ISOStringDate, render, format, className }: DateInfoProps) => {
-  const date = format
-    ? dayjs(ISOStringDate).format('DD/MM/YYYY')
-    : dayjs(ISOStringDate).fromNow(true);
-
-  return (
-    <StyledDateInfo className={className} dateTime={ISOStringDate}>
-      {render ? render({ date }) : date}
-    </StyledDateInfo>
-  );
-};
+const DateInfo = ({ date, format, dateTime, ...props }: DateInfoProps) => (
+  // eslint-disable-next-line react/jsx-props-no-spreading
+  <time {...props} dateTime={dateTime || dayjs(date).format()}>
+    {format ? dayjs(date).format(format) : dayjs(date).fromNow(true)}
+  </time>
+);
 
 export default DateInfo;
