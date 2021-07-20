@@ -18,5 +18,5 @@ Default.args = {
 export const Format = Template.bind({});
 Format.args = {
   ...Default.args,
-  format: true,
+  format: 'DD/MM/YYYY',
 };
