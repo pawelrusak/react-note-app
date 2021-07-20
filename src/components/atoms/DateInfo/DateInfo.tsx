@@ -6,10 +6,10 @@ dayjs.extend(relativeTime);
 export type DateInfoProps = {
   readonly date: Exclude<dayjs.ConfigType, null | undefined>;
   /**
-   * I haven't implemented a dynamic format date to make it easy to use.
-   * Without having to remember the available date formats.
+   * The available date format can be found in the link below:
+   * @see https://day.js.org/docs/en/display/format#docsNav
    */
-  readonly format?: boolean;
+  readonly format?: string;
 } & React.ComponentPropsWithoutRef<'time'>;
 
 /**
@@ -17,15 +17,11 @@ export type DateInfoProps = {
  *
  * @see {@link https://www.npmtrends.com/dayjs-vs-react-moment-vs-moment}
  */
-const DateInfo = ({ date, format, dateTime, ...props }: DateInfoProps) => {
-  const formattedDate = format ? dayjs(date).format('DD/MM/YYYY') : dayjs(date).fromNow(true);
-
-  return (
-    // eslint-disable-next-line react/jsx-props-no-spreading
-    <time dateTime={dateTime || dayjs(date).format()} {...props}>
-      {formattedDate}
-    </time>
-  );
-};
+const DateInfo = ({ date, format, dateTime, ...props }: DateInfoProps) => (
+  // eslint-disable-next-line react/jsx-props-no-spreading
+  <time {...props} dateTime={dateTime || dayjs(date).format()}>
+    {format ? dayjs(date).format(format) : dayjs(date).fromNow(true)}
+  </time>
+);
 
 export default DateInfo;
