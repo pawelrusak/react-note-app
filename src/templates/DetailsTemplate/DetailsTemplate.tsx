@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import Button from '~/components/atoms/Button/Button';
 import Heading from '~/components/atoms/Heading/Heading';
 import Paragraph from '~/components/atoms/Paragraph/Paragraph';
+import Time from '~/components/atoms/Time/Time';
 import { usePageTypeContext } from '~/hooks';
 import UserPageTemplate from '~/templates/UserPageTemplate/UserPageTemplate';
 
@@ -31,9 +32,12 @@ const StyledHeading = styled(Heading)`
   }
 `;
 
-const StyledParagraph = styled(Paragraph)`
-  margin: 0;
+const StyledParagraph = styled.p`
+  color: #434343;
   font-weight: ${({ theme }) => theme.bold};
+  font-size: 1.5rem;
+  text-transform: uppercase;
+  margin: 0;
 `;
 
 const StyledLink = styled.a`
@@ -72,8 +76,12 @@ const DetailsTemplate = ({
           <StyledHeading big as="h1">
             {title}
           </StyledHeading>
-          <StyledParagraph>{created}</StyledParagraph>
+          <StyledParagraph>
+            created -{' '}
+            <Time data-testid="details-template-date" date={created} format="DD/MM/YYYY" />
+          </StyledParagraph>
         </StyledPageHeader>
+
         <Paragraph>{content}</Paragraph>
         {pageContext === 'articles' && (
           <StyledLink data-testid="article-link" href={articleUrl as string}>
@@ -95,6 +103,9 @@ const DetailsTemplate = ({
   );
 };
 
+/**
+ * @todo check if this code can be removed
+ */
 DetailsTemplate.defaultProps = {
   title: '',
   created: '',
