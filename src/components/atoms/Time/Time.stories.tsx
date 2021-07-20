@@ -1,14 +1,14 @@
 import { Meta, Story } from '@storybook/react';
 
-import DateInfo, { DateInfoProps } from './DateInfo';
+import Time, { TimeProps } from './Time';
 import { getEarlierDateOfDay } from '~/utils';
 
 export default {
-  title: 'Atoms/DateInfo',
-  component: DateInfo,
+  title: 'Atoms/Time',
+  component: Time,
 } as Meta;
 
-const Template: Story<DateInfoProps> = (props) => <DateInfo {...props} />;
+const Template: Story<TimeProps> = (props) => <Time {...props} />;
 
 export const Default = Template.bind({});
 Default.args = {
