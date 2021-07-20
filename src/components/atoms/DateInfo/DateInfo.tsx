@@ -12,7 +12,7 @@ const StyledDateInfo = styled.time`
 type DateInfoRender = (props: { date: string }) => React.ReactNode;
 
 export type DateInfoProps = {
-  readonly ISOStringDate: string;
+  readonly date: string;
   readonly render?: DateInfoRender;
   /**
    * I haven't implemented a dynamic format date to make it easy to use.
@@ -26,15 +26,13 @@ export type DateInfoProps = {
  *
  * @see {@link https://www.npmtrends.com/dayjs-vs-react-moment-vs-moment}
  */
-const DateInfo = ({ ISOStringDate, render, format, dateTime, ...props }: DateInfoProps) => {
-  const date = format
-    ? dayjs(ISOStringDate).format('DD/MM/YYYY')
-    : dayjs(ISOStringDate).fromNow(true);
+const DateInfo = ({ date, render, format, dateTime, ...props }: DateInfoProps) => {
+  const formattedDate = format ? dayjs(date).format('DD/MM/YYYY') : dayjs(date).fromNow(true);
 
   return (
     // eslint-disable-next-line react/jsx-props-no-spreading
-    <StyledDateInfo dateTime={dateTime || ISOStringDate} {...props}>
-      {render ? render({ date }) : date}
+    <StyledDateInfo dateTime={dateTime || date} {...props}>
+      {render ? render({ date: formattedDate }) : formattedDate}
     </StyledDateInfo>
   );
 };
