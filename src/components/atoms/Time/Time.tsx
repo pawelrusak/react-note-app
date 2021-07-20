@@ -3,7 +3,7 @@ import relativeTime from 'dayjs/plugin/relativeTime';
 
 dayjs.extend(relativeTime);
 
-export type DateInfoProps = {
+export type TimeProps = {
   readonly date: Exclude<dayjs.ConfigType, null | undefined>;
   /**
    * The available date format can be found in the link below:
@@ -17,11 +17,11 @@ export type DateInfoProps = {
  *
  * @see {@link https://www.npmtrends.com/dayjs-vs-react-moment-vs-moment}
  */
-const DateInfo = ({ date, format, dateTime, ...props }: DateInfoProps) => (
+const Time = ({ date, format, dateTime, ...props }: TimeProps) => (
   // eslint-disable-next-line react/jsx-props-no-spreading
   <time {...props} dateTime={dateTime || dayjs(date).format()}>
     {format ? dayjs(date).format(format) : dayjs(date).fromNow(true)}
   </time>
 );
 
-export default DateInfo;
+export default Time;
