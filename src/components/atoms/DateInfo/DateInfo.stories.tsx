@@ -12,7 +12,7 @@ const Template: Story<DateInfoProps> = (props) => <DateInfo {...props} />;
 
 export const Default = Template.bind({});
 Default.args = {
-  ISOStringDate: getEarlierDateOfDay(3).toISOString(),
+  date: getEarlierDateOfDay(3).toISOString(),
 };
 
 export const Render = Template.bind({});
