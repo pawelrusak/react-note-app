@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import styled, { css } from 'styled-components';
 
 import LinkIcon from '~/assets/icons/link.svg';
@@ -46,7 +47,6 @@ const ContentWrapper = styled(HeaderWrapper)<ContentWrapperProps>`
     css`
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
     `}
 `;
 
@@ -101,6 +101,15 @@ const StyledContentParagraph = styled(Paragraph)`
   }
 `;
 
+const StyledContentLink = styled(Link)`
+  text-transform: uppercase;
+  font-weight: ${({ theme }) => theme.bold};
+  text-decoration: none;
+  color: ${({ theme }) => theme.black};
+  margin-bottom: auto;
+  font-variant-caps: all-small-caps;
+`;
+
 export type CardProps = Item;
 
 const defaultCardProps = {
@@ -110,7 +119,8 @@ const defaultCardProps = {
 
 const Card = ({ id, title, created, twitterName, articleUrl, content }: CardProps) => {
   const itemType = usePageTypeContext();
-  const historyPush = useHistoryPush(`${itemType}/${id}`);
+  const URLPathToDetails = `${itemType}/${id}`;
+  const historyPush = useHistoryPush(URLPathToDetails);
   const removeItem = useRemoveItemAction();
 
   return (
@@ -127,6 +137,7 @@ const Card = ({ id, title, created, twitterName, articleUrl, content }: CardProp
       </HeaderWrapper>
       <ContentWrapper flex>
         <StyledContentParagraph>{content}</StyledContentParagraph>
+        <StyledContentLink to={URLPathToDetails}>read more</StyledContentLink>
         <Button onClick={() => removeItem(itemType, id)} secondary>
           REMOVE
         </Button>
