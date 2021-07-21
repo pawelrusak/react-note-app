@@ -1,5 +1,8 @@
 import 'styled-components';
 
+/**
+ * @todo Group properties by type eg. color [notes, twitters, ...], font: [weight: [bold, light, ...]]
+ */
 declare module 'styled-components' {
   export interface DefaultTheme {
     notes: string;
@@ -12,6 +15,7 @@ declare module 'styled-components' {
     red100: string;
     red200: string;
     red300: string;
+    lineHeight: string | number;
     light: number;
     bold: number;
     fontSize: {
