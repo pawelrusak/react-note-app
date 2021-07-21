@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 
 import LinkIcon from '~/assets/icons/link.svg';
 import Button from '~/components/atoms/Button/Button';
@@ -35,19 +35,10 @@ const HeaderWrapper = styled.div<HeaderWrapperProps>`
   }
 `;
 
-type ContentWrapperProps = {
-  readonly flex: boolean;
-};
-
-const ContentWrapper = styled(HeaderWrapper)<ContentWrapperProps>`
+const ContentWrapper = styled(HeaderWrapper)`
   background-color: white;
-
-  ${({ flex }) =>
-    flex &&
-    css`
-      display: flex;
-      flex-direction: column;
-    `}
+  display: flex;
+  flex-direction: column;
 `;
 
 const DateInfo = styled(Time)`
@@ -138,7 +129,7 @@ const Card = ({ id, title, created, twitterName, articleUrl, content }: CardProp
           <StyledLinkButton data-testid="card-article-link" href={articleUrl || ''} />
         )}
       </HeaderWrapper>
-      <ContentWrapper flex>
+      <ContentWrapper>
         <StyledContentParagraph>{content}</StyledContentParagraph>
         <StyledContentLink to={URLPathToDetails}>read more</StyledContentLink>
         <Button onClick={() => removeItem(itemType, id)} secondary>
