@@ -92,6 +92,8 @@ const StyledContentParagraph = styled(Paragraph)`
   -webkit-line-clamp: 4;
   -webkit-box-orient: vertical;
   overflow: hidden;
+  margin: 0.5rem 0 0;
+  line-height: ${({ theme }) => theme.lineHeight};
 
   @supports not (-webkit-line-clamp: 4) {
     display: initial;
@@ -108,6 +110,7 @@ const StyledContentLink = styled(Link)`
   color: ${({ theme }) => theme.black};
   margin-bottom: auto;
   font-variant-caps: all-small-caps;
+  line-height: ${({ theme }) => theme.lineHeight};
 `;
 
 export type CardProps = Item;
