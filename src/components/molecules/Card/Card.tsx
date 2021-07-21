@@ -84,6 +84,23 @@ const StyledLinkButton = styled.a`
   transform: translateY(-50%);
 `;
 
+/**
+ * @todo Should I add a fallback for IE?
+ */
+const StyledContentParagraph = styled(Paragraph)`
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+
+  @supports not (-webkit-line-clamp: 4) {
+    display: initial;
+    /* theme-paragraph-font-size x 4 [line clamp] x 1.2[standard default browsers line height] */
+    height: ${({ theme }) => `${parseFloat(theme.fontSize.s) * 4 * 1.2}rem`};
+    overflow-y: hidden;
+  }
+`;
+
 export type CardProps = Item;
 
 const defaultCardProps = {
@@ -109,7 +126,7 @@ const Card = ({ id, title, created, twitterName, articleUrl, content }: CardProp
         )}
       </HeaderWrapper>
       <ContentWrapper flex>
-        <Paragraph>{content}</Paragraph>
+        <StyledContentParagraph>{content}</StyledContentParagraph>
         <Button onClick={() => removeItem(itemType, id)} secondary>
           REMOVE
         </Button>
