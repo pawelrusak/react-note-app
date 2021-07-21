@@ -1,4 +1,5 @@
-import styled, { css } from 'styled-components';
+import { Link } from 'react-router-dom';
+import styled from 'styled-components';
 
 import LinkIcon from '~/assets/icons/link.svg';
 import Button from '~/components/atoms/Button/Button';
@@ -34,20 +35,10 @@ const HeaderWrapper = styled.div<HeaderWrapperProps>`
   }
 `;
 
-type ContentWrapperProps = {
-  readonly flex: boolean;
-};
-
-const ContentWrapper = styled(HeaderWrapper)<ContentWrapperProps>`
+const ContentWrapper = styled(HeaderWrapper)`
   background-color: white;
-
-  ${({ flex }) =>
-    flex &&
-    css`
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    `}
+  display: flex;
+  flex-direction: column;
 `;
 
 const DateInfo = styled(Time)`
@@ -84,6 +75,35 @@ const StyledLinkButton = styled.a`
   transform: translateY(-50%);
 `;
 
+/**
+ * @todo Should I add a fallback for IE?
+ */
+const StyledContentParagraph = styled(Paragraph)`
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  margin: 0.5rem 0 0;
+  line-height: ${({ theme }) => theme.lineHeight};
+
+  @supports not (-webkit-line-clamp: 4) {
+    display: initial;
+    /* theme-paragraph-font-size x 4 [line clamp] x 1.2[standard default browsers line height] */
+    height: ${({ theme }) => `${parseFloat(theme.fontSize.s) * 4 * 1.2}rem`};
+    overflow-y: hidden;
+  }
+`;
+
+const StyledContentLink = styled(Link)`
+  text-transform: uppercase;
+  font-weight: ${({ theme }) => theme.bold};
+  text-decoration: none;
+  color: ${({ theme }) => theme.black};
+  margin-bottom: auto;
+  font-variant-caps: all-small-caps;
+  line-height: ${({ theme }) => theme.lineHeight};
+`;
+
 export type CardProps = Item;
 
 const defaultCardProps = {
@@ -93,7 +113,8 @@ const defaultCardProps = {
 
 const Card = ({ id, title, created, twitterName, articleUrl, content }: CardProps) => {
   const itemType = usePageTypeContext();
-  const historyPush = useHistoryPush(`${itemType}/${id}`);
+  const URLPathToDetails = `${itemType}/${id}`;
+  const historyPush = useHistoryPush(URLPathToDetails);
   const removeItem = useRemoveItemAction();
 
   return (
@@ -108,8 +129,9 @@ const Card = ({ id, title, created, twitterName, articleUrl, content }: CardProp
           <StyledLinkButton data-testid="card-article-link" href={articleUrl || ''} />
         )}
       </HeaderWrapper>
-      <ContentWrapper flex>
-        <Paragraph>{content}</Paragraph>
+      <ContentWrapper>
+        <StyledContentParagraph>{content}</StyledContentParagraph>
+        <StyledContentLink to={URLPathToDetails}>read more</StyledContentLink>
         <Button onClick={() => removeItem(itemType, id)} secondary>
           REMOVE
         </Button>

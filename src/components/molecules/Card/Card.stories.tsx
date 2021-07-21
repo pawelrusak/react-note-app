@@ -23,6 +23,16 @@ Default.args = {
     'Miles Dewey Davis III (May 26, 1926 - September 28, 1991) was an American jazz trumpeter, bandleader, and composer.',
 };
 
+export const WithLongContent = Template.bind({});
+WithLongContent.args = {
+  ...Default.args,
+  content:
+    `${Default.args.content as string} He is among the most influential and acclaimed ` +
+    'figures in the history of jazz and 20th-century music. Davis adopted a ' +
+    'variety of musical directions in a five-decade career that kept him at ' +
+    'the forefront of many major stylistic developments in jazz.',
+};
+
 export const Note = Template.bind({});
 Note.args = {
   ...Default.args,
