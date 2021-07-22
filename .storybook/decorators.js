@@ -7,10 +7,6 @@ import StoryRouter from 'storybook-react-router';
 import { itemsPageLinks, gridTemplateLinks, userPageTemplateLinks } from './links';
 import GlobalStyle from '../src/theme/GlobalStyle';
 
-const CardWrapper = styled.div`
-  max-width: 45.5rem;
-`;
-
 export const ThemeDecorator = (Story) => (
   <ThemeProvider theme={theme}>
     <Story />
@@ -36,10 +32,38 @@ export const StoreDecorator = (Story, args) => (
   </Provider>
 );
 
+const CardWrapper = styled.div`
+  max-width: 45.5rem;
+`;
+
 export const CardWrapperDecorator = (Story) => (
   <CardWrapper>
     <Story style={{ zIndex: 2 }} />
   </CardWrapper>
+);
+
+const StyledSkeletonWrapper = styled.div`
+  padding: 0 1rem;
+  border: 2px dashed hsl(0, 0%, 60%);
+`;
+
+const StyledInfoText = styled.p`
+  display: block;
+  text-align: center;
+  font-style: italic;
+  font-size: 1.4rem;
+`;
+
+export const SkeletonWrapperDecorator = (Story) => (
+  <>
+    <StyledSkeletonWrapper>
+      <Story />
+    </StyledSkeletonWrapper>
+    <StyledInfoText>
+      For presentation purpose, the Skeleton component is in wrapper element with dashed border and
+      1rem horizontal padding!
+    </StyledInfoText>
+  </>
 );
 
 export const DetailsPageRouterDecorator = (detailsPagePathname) => {
