@@ -142,4 +142,8 @@ const Card = ({ id, title, created, twitterName, articleUrl, content }: CardProp
 
 Card.defaultProps = defaultCardProps;
 
+Card.Wrapper = StyledWrapper;
+Card.HeaderWrapper = HeaderWrapper;
+Card.ContentWrapper = ContentWrapper;
+
 export default Card;
