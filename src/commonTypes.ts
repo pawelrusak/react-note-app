@@ -57,3 +57,22 @@ export type NewItem = Omit<Item, 'id' | 'created'>;
 export type URLParams = {
   id: string;
 };
+
+export type CSSSizeUnitVariants =
+  | '%'
+  | 'cm'
+  | 'mm'
+  | 'Q'
+  | 'in'
+  | 'pc'
+  | 'pt'
+  | 'px'
+  | 'em'
+  | 'ex'
+  | 'ch'
+  | 'rem'
+  | 'lh'
+  | 'vw'
+  | 'vh'
+  | 'vmin'
+  | 'vmax';
