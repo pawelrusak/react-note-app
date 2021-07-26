@@ -10,7 +10,7 @@ export default {
   decorators: [CardWrapperDecorator],
 } as Meta;
 
-const Template: Story = () => <SkeletonCard />;
+const Template: Story = (args) => <SkeletonCard {...args} />;
 
 export const Default = Template.bind({});
 
@@ -19,12 +19,72 @@ Note.parameters = {
   pageContext: 'notes',
 };
 
+export const LightenNote = Template.bind({});
+LightenNote.args = {
+  lighten: true,
+  lightenAmount: 0.17,
+};
+LightenNote.argTypes = {
+  lightenAmount: {
+    control: { type: 'number', min: 0, max: 1, step: 0.01 },
+  },
+};
+LightenNote.parameters = {
+  pageContext: 'notes',
+};
+
+export const GrayNote = Template.bind({});
+GrayNote.args = {
+  gray: true,
+};
+GrayNote.parameters = {
+  pageContext: 'notes',
+};
+
 export const Twitter = Template.bind({});
 Twitter.parameters = {
   pageContext: 'twitters',
 };
 
+export const LightenTwitter = Template.bind({});
+LightenTwitter.args = {
+  ...LightenNote.args,
+};
+LightenTwitter.argTypes = {
+  ...LightenNote.argTypes,
+};
+LightenTwitter.parameters = {
+  pageContext: 'twitters',
+};
+
+export const GrayTwitter = Template.bind({});
+GrayTwitter.args = {
+  gray: true,
+};
+GrayTwitter.parameters = {
+  pageContext: 'twitters',
+};
+
 export const Article = Template.bind({});
 Article.parameters = {
+  pageContext: 'articles',
+};
+
+export const LightenArticle = Template.bind({});
+LightenArticle.args = {
+  ...LightenNote.args,
+};
+LightenArticle.argTypes = {
+  ...LightenNote.argTypes,
+};
+LightenArticle.parameters = {
+  pageContext: 'articles',
+};
+
+export const GrayArticle = Template.bind({});
+GrayArticle.args = {
+  gray: true,
+};
+GrayArticle.parameters = {
   pageContext: 'articles',
 };
