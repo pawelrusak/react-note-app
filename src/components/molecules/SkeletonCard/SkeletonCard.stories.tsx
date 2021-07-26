@@ -33,6 +33,14 @@ LightenNote.parameters = {
   pageContext: 'notes',
 };
 
+export const GrayNote = Template.bind({});
+GrayNote.args = {
+  gray: true,
+};
+GrayNote.parameters = {
+  pageContext: 'notes',
+};
+
 export const Twitter = Template.bind({});
 Twitter.parameters = {
   pageContext: 'twitters',
@@ -49,6 +57,14 @@ LightenTwitter.parameters = {
   pageContext: 'twitters',
 };
 
+export const GrayTwitter = Template.bind({});
+GrayTwitter.args = {
+  gray: true,
+};
+GrayTwitter.parameters = {
+  pageContext: 'twitters',
+};
+
 export const Article = Template.bind({});
 Article.parameters = {
   pageContext: 'articles',
@@ -62,5 +78,13 @@ LightenArticle.argTypes = {
   ...LightenNote.argTypes,
 };
 LightenArticle.parameters = {
+  pageContext: 'articles',
+};
+
+export const GrayArticle = Template.bind({});
+GrayArticle.args = {
+  gray: true,
+};
+GrayArticle.parameters = {
   pageContext: 'articles',
 };
