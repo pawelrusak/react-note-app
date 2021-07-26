@@ -17,6 +17,11 @@ export type DeepWriteable<T> = { -readonly [P in keyof T]: DeepWriteable<T[P]> }
  */
 export type Optional<T, K extends keyof T> = Pick<Partial<T>, K> & Omit<T, K>;
 
+export type Never<T> = Record<keyof T, never>;
+
+export type RequiredOnlyWithNever<T, K extends keyof T> = Pick<Required<T>, K> &
+  Record<Exclude<keyof T, K>, never>;
+
 /*
  *
  * VARIANTS
