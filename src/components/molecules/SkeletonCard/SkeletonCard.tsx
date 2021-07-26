@@ -1,6 +1,7 @@
 import { lighten as lightenMixin } from 'polished';
 import styled, { css } from 'styled-components';
 
+import { RequiredOnlyWithNever, Never } from '~/commonTypes';
 import Skeleton from '~/components/atoms/Skeleton/Skeleton';
 import Card from '~/components/molecules/Card/Card';
 
@@ -16,7 +17,11 @@ type LightenActiveColor = {
   readonly lightenActiveColorAmount: number | string;
 };
 
-type StyledCardHeaderWrapperProps = LightenActiveColor & Required<ActiveColorArgs>;
+type GreyColor = {
+  readonly greyColor: boolean;
+};
+
+type StyledCardHeaderWrapperProps = LightenActiveColor & Required<ActiveColorArgs> & GreyColor;
 
 const StyledCardHeaderWrapper = styled(Card.HeaderWrapper)<StyledCardHeaderWrapperProps>`
   ${styledMixin.lightenActiveColor};
@@ -26,6 +31,12 @@ const StyledCardHeaderWrapper = styled(Card.HeaderWrapper)<StyledCardHeaderWrapp
     css<Required<ActiveColorArgs> & LightenActiveColor>`
       background-color: ${({ activecolor, theme, lightenActiveColorAmount }) =>
         lightenMixin(lightenActiveColorAmount, theme[activecolor])};
+    `}
+
+  ${({ greyColor }) =>
+    greyColor &&
+    css`
+      background-color: ${({ theme }) => theme.grey100};
     `}
 `;
 
@@ -41,7 +52,7 @@ const StyledSkeletonTime = styled(Skeleton)`
   height: ${({ theme }) => theme.fontSize.xs};
 `;
 
-type StyledAvatarSkeletonProps = LightenActiveColor;
+type StyledAvatarSkeletonProps = LightenActiveColor & GreyColor;
 
 const StyledAvatarSkeleton = styled(Skeleton)<StyledAvatarSkeletonProps>`
   margin: 0;
@@ -54,6 +65,12 @@ const StyledAvatarSkeleton = styled(Skeleton)<StyledAvatarSkeletonProps>`
   position: absolute;
   right: 25px;
   top: 25px;
+
+  ${({ greyColor }) =>
+    greyColor &&
+    css`
+      border-color: ${({ theme }) => theme.grey100};
+    `}
 `;
 
 const StyledLinkButtonSkeleton = styled(Skeleton)`
@@ -75,22 +92,37 @@ const StyledSecondaryButtonSkeleton = styled(Skeleton)`
   border-radius: 50px;
 `;
 
+type BaseSkeletonCardProps = {
+  readonly lighten?: boolean;
+  readonly lightenAmount?: number | string;
+  readonly grey?: boolean;
+};
+
+type SkeletonCardWithoutProps = Never<BaseSkeletonCardProps>;
+type SkeletonCardWithOnlyGreyProp = RequiredOnlyWithNever<BaseSkeletonCardProps, 'grey'>;
+type SkeletonCardWithOnlyLightenProp = RequiredOnlyWithNever<BaseSkeletonCardProps, 'lighten'>;
+type SkeletonCardWithLightenAndAmountProps = RequiredOnlyWithNever<
+  BaseSkeletonCardProps,
+  'lighten' | 'lightenAmount'
+>;
+
 export type SkeletonCardProps =
-  | {
-      readonly lighten?: false;
-      readonly lightenAmount?: number | string;
-    }
-  | {
-      readonly lighten: true;
-      readonly lightenAmount?: number | string;
-    };
+  | SkeletonCardWithoutProps
+  | SkeletonCardWithOnlyGreyProp
+  | SkeletonCardWithOnlyLightenProp
+  | SkeletonCardWithLightenAndAmountProps;
 
 const defaultProps = {
   lighten: false,
   lightenAmount: LIGHTEN_ACTIVE_COLOR_AMOUNT,
+  grey: false,
 };
 
-const SkeletonCard = ({ lighten, lightenAmount }: SkeletonCardProps & typeof defaultProps) => {
+const SkeletonCard = ({
+  lighten,
+  lightenAmount,
+  grey,
+}: SkeletonCardProps & typeof defaultProps) => {
   const itemType = usePageTypeContext();
 
   return (
@@ -99,6 +131,7 @@ const SkeletonCard = ({ lighten, lightenAmount }: SkeletonCardProps & typeof def
         lightenActiveColor={lighten}
         lightenActiveColorAmount={lightenAmount}
         activecolor={itemType}
+        greyColor={grey}
       >
         <StyledSkeletonHeading dark />
         <StyledSkeletonTime dark />
@@ -106,6 +139,7 @@ const SkeletonCard = ({ lighten, lightenAmount }: SkeletonCardProps & typeof def
           <StyledAvatarSkeleton
             lightenActiveColorAmount={lightenAmount}
             lightenActiveColor={lighten}
+            greyColor={grey}
             dark
           />
         )}
