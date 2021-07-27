@@ -97,4 +97,6 @@ const GridTemplate = ({ children }: GridTemplateProps) => {
   );
 };
 
+GridTemplate.Grid = StyledGrid;
+
 export default GridTemplate;
