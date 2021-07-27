@@ -6,6 +6,7 @@ import store from '../src/store';
 import StoryRouter from 'storybook-react-router';
 import { itemsPageLinks, gridTemplateLinks, userPageTemplateLinks } from './links';
 import GlobalStyle from '../src/theme/GlobalStyle';
+import GridTemplate from '../src/templates/GridTemplate/GridTemplate';
 
 export const ThemeDecorator = (Story) => (
   <ThemeProvider theme={theme}>
@@ -63,6 +64,23 @@ export const SkeletonWrapperDecorator = (Story) => (
       For presentation purpose, the Skeleton component is in wrapper element with dashed border and
       1rem horizontal padding!
     </StyledInfoText>
+  </>
+);
+
+const StyledSkeletonGridWrapper = styled(GridTemplate.Grid)`
+  padding: 1rem;
+  border: 2px dashed hsl(0, 0%, 60%);
+`;
+
+export const SkeletonCardListGridDecorator = (Story) => (
+  <>
+    <StyledInfoText>
+      For presentation purpose, the SkeletonCartList component is in wrapper element with dashed
+      border, 1rem padding and in the css grid from GridTemplate!
+    </StyledInfoText>
+    <StyledSkeletonGridWrapper>
+      <Story />
+    </StyledSkeletonGridWrapper>
   </>
 );
 

@@ -126,7 +126,7 @@ const SkeletonCard = ({
   const itemType = usePageTypeContext();
 
   return (
-    <Card.Wrapper>
+    <Card.Wrapper data-testid="skeleton-card">
       <StyledCardHeaderWrapper
         lightenActiveColor={lighten}
         lightenActiveColorAmount={lightenAmount}
