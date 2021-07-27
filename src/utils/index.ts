@@ -11,3 +11,8 @@ export const getEarlierDateOfDay = (numberOfPreviousDays: number) => {
 
   return previousDay;
 };
+
+/**
+ * @link https://stackoverflow.com/questions/3746725/how-to-create-an-array-containing-1-n
+ */
+export const getUniqueValuesArray = (length: number) => Array.from(Array(length).keys());
