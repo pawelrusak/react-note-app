@@ -1,4 +1,4 @@
-import { render, screen, userEvent, waitFor } from 'testUtils';
+import { render, screen, userEvent, waitFor, waitForElementToBeRemoved } from 'testUtils';
 import { fakeItemsData } from 'testUtils/fakers';
 
 import Twitters from '../Twitters/Twitters';
@@ -23,8 +23,19 @@ const getByFirstTwitterTitle = () => screen.queryByText(firstTwitterTitle);
 const findAllByRemoveButtons = () => screen.findAllByRole('button', { name: /remove/i });
 const findAllByCardHeadings = () => screen.findAllByTestId(cardHeadingBarId);
 const findByFirstTwitterTitle = () => screen.findByText(firstTwitterTitle);
+const queryAllBySkeletonCard = () => screen.queryAllByTestId('skeleton-card');
 
 describe('<Twitters />', () => {
+  it('display <CardListSkeleton /> until fetch data', async () => {
+    renderTwitters();
+
+    expect(queryAllBySkeletonCard()).toHaveLength(6);
+
+    await waitForElementToBeRemoved(() => queryAllBySkeletonCard());
+
+    expect(queryAllBySkeletonCard()).toHaveLength(0);
+  });
+
   it('display the cards with data from store', async () => {
     renderTwitters();
 
