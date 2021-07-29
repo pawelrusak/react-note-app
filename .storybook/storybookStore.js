@@ -43,8 +43,8 @@ const initialState = {
 
 const store = mockStore(initialState);
 
-export const storybookStore = (variant) => {
-  switch (variant) {
+export const storybookStore = (state) => {
+  switch (state) {
     case 'loading': {
       const loadingState = {
         ...initialState,
