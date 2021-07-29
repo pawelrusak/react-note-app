@@ -6,13 +6,20 @@ import { fetchItems } from '~/store/items/itemsSlice';
 
 import type { RootState, ItemsState } from '~/store';
 
-export const useFetchItems = <T extends ItemVariants>(itemVariant: T): ItemsState[T] => {
-  const items = useSelector((state: RootState) => state.items[itemVariant]);
+type UseFetchItemsReturn<T extends ItemVariants> = {
+  data: ItemsState[T];
+  loading: boolean;
+};
+
+export const useFetchItems = <T extends ItemVariants>(itemVariant: T): UseFetchItemsReturn<T> => {
+  const data = useSelector((state: RootState) => state.items[itemVariant]);
+  const loading = useSelector((state: RootState) => state.items.isLoading);
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(fetchItems({ itemVariant }));
-  }, [dispatch, itemVariant]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
-  return items;
+  return { data, loading };
 };

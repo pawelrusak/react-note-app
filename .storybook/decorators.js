@@ -7,6 +7,7 @@ import StoryRouter from 'storybook-react-router';
 import { itemsPageLinks, gridTemplateLinks, userPageTemplateLinks } from './links';
 import GlobalStyle from '../src/theme/GlobalStyle';
 import GridTemplate from '../src/templates/GridTemplate/GridTemplate';
+import { storybookStore } from './storybookStore';
 
 export const ThemeDecorator = (Story) => (
   <ThemeProvider theme={theme}>
@@ -28,7 +29,7 @@ export const PageContextDecorator = (Story, { parameters: { pageContext } }) => 
 );
 
 export const StoreDecorator = (Story, args) => (
-  <Provider {...args} store={store}>
+  <Provider {...args} store={storybookStore(args.parameters.state)}>
     <Story />
   </Provider>
 );

@@ -1,13 +1,16 @@
 import Card from '~/components/molecules/Card/Card';
+import SkeletonCardList from '~/components/organisms/SkeletonCardList/SkeletonCardList';
 import { useFetchItems } from '~/hooks';
 import GridTemplate from '~/templates/GridTemplate/GridTemplate';
 
 const Twitters = () => {
-  const twitters = useFetchItems('twitters');
+  const { data: twitters, loading } = useFetchItems('twitters');
 
   return (
     <GridTemplate>
-      {twitters.length > 0 &&
+      {loading ? (
+        <SkeletonCardList lighten />
+      ) : (
         twitters.map(({ id, title, content, twitterName, created }) => (
           <Card
             id={id}
@@ -17,7 +20,8 @@ const Twitters = () => {
             created={created}
             key={id}
           />
-        ))}
+        ))
+      )}
     </GridTemplate>
   );
 };

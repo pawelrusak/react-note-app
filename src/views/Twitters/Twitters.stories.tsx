@@ -23,4 +23,9 @@ export default {
 
 const Template: Story = (args) => <Twitters {...args} />;
 
-export const Default = Template.bind({});
+export const Loading = Template.bind({});
+Loading.parameters = {
+  state: 'loading',
+};
+
+export const Succeeded = Template.bind({});
