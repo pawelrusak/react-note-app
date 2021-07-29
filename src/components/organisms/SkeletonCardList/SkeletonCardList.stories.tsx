@@ -5,7 +5,7 @@ import { SkeletonCardListGridDecorator } from '~~/.storybook/decorators';
 import type { Meta, Story } from '@storybook/react';
 
 export default {
-  title: 'Molecules/SkeletonCardList',
+  title: 'Organisms/SkeletonCardList',
   component: SkeletonCardList,
   decorators: [SkeletonCardListGridDecorator],
 } as Meta;
