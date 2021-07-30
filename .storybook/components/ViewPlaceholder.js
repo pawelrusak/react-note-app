@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import Paragraph from '~/components/atoms/Paragraph/Paragraph';
+import PropTypes from 'prop-types';
 
 const firstSquareColor = 'lightgrey';
 const secondSquareColor = 'transparent';
@@ -27,10 +28,18 @@ const StyledParagraph = styled(Paragraph)`
   font-weight: ${({ theme }) => theme.bold};
 `;
 
-const ViewPlaceholder = () => (
+const ViewPlaceholder = ({ label }) => (
   <StyledChessboard>
-    <StyledParagraph>View components goes here!</StyledParagraph>
+    <StyledParagraph>{label}</StyledParagraph>
   </StyledChessboard>
 );
+
+ViewPlaceholder.propTypes = {
+  label: PropTypes.string,
+};
+
+ViewPlaceholder.defaultProps = {
+  label: 'View components goes here!',
+};
 
 export default ViewPlaceholder;
