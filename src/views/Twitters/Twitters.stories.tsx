@@ -10,18 +10,13 @@ import type { Meta, Story } from '@storybook/react';
 export default {
   title: 'Views/Twitters',
   component: Twitters,
-  argTypes: {
-    twitters: {
-      control: null,
-    },
-  },
   decorators: [StoryRouter(itemsPageLinks, { initialEntries: [routes.twitters] }), StoreDecorator],
   parameters: {
     pageContext: 'twitters',
   },
 } as Meta;
 
-const Template: Story = (args) => <Twitters {...args} />;
+const Template: Story = () => <Twitters />;
 
 export const Loading = Template.bind({});
 Loading.parameters = {
