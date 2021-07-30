@@ -12,9 +12,9 @@ export type CardListProps<T extends ItemVariants> = {
 };
 
 const CardList = <T extends ItemVariants>({ variant, children }: CardListProps<T>) => {
-  const { data, loading } = useFetchItems(variant);
+  const { data, isLoading } = useFetchItems(variant);
 
-  return <>{loading ? <SkeletonCardList lighten /> : children({ data })}</>;
+  return <>{isLoading() ? <SkeletonCardList lighten /> : children({ data })}</>;
 };
 
 export default CardList;

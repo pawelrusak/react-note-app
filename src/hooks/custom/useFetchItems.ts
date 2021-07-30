@@ -8,7 +8,7 @@ import type { RootState, ItemsState } from '~/store';
 
 type UseFetchItemsReturn<T extends ItemVariants> = {
   data: ItemsState[T];
-  loading: boolean;
+  isLoading: () => boolean;
 };
 
 export const useFetchItems = <T extends ItemVariants>(itemVariant: T): UseFetchItemsReturn<T> => {
@@ -21,5 +21,8 @@ export const useFetchItems = <T extends ItemVariants>(itemVariant: T): UseFetchI
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  return { data, loading };
+  return {
+    data,
+    isLoading: () => loading,
+  };
 };
