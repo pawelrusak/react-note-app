@@ -85,6 +85,18 @@ export const SkeletonCardListGridDecorator = (Story) => (
   </>
 );
 
+export const CardListGridDecorator = (Story) => (
+  <>
+    <StyledInfoText>
+      For presentation purpose, the CartList component is in wrapper element with dashed border,
+      1rem padding and in the css grid from GridTemplate!
+    </StyledInfoText>
+    <StyledSkeletonGridWrapper>
+      <Story />
+    </StyledSkeletonGridWrapper>
+  </>
+);
+
 export const DetailsPageRouterDecorator = (detailsPagePathname) => {
   /**
    * Hard code sample note id from 'store/__mocks__'
