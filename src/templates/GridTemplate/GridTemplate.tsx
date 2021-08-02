@@ -5,8 +5,9 @@ import ButtonIcon from '~/components/atoms/ButtonIcon/ButtonIcon';
 import Heading from '~/components/atoms/Heading/Heading';
 import Input from '~/components/atoms/Input/Input';
 import Paragraph from '~/components/atoms/Paragraph/Paragraph';
+import Skeleton from '~/components/atoms/Skeleton/Skeleton';
 import NewItemBar from '~/components/organisms/NewItemBar/NewItemBar';
-import { useToggle, usePageTypeContext } from '~/hooks';
+import { useToggle, usePageTypeContext, useItemsStatus } from '~/hooks';
 import UserPageTemplate from '~/templates/UserPageTemplate/UserPageTemplate';
 import * as styledMixin from '~/theme/mixins';
 
@@ -51,6 +52,11 @@ const StyledParagraph = styled(Paragraph)`
   color: ${({ theme }) => theme.grey500};
 `;
 
+const StyledSkeletonCounter = styled(Skeleton)`
+  height: ${({ theme }) => theme.fontSize.m};
+  width: 9rem;
+`;
+
 type StyledButtonIconProps = {
   readonly active: boolean;
 } & ActiveColorArgs;
@@ -74,6 +80,7 @@ export type GridTemplateProps = {
 const GridTemplate = ({ children }: GridTemplateProps) => {
   const [newItemBarVisible, toggleNewItemBarVisible] = useToggle(false);
   const pageType = usePageTypeContext();
+  const { isLoading } = useItemsStatus();
 
   return (
     <UserPageTemplate>
@@ -83,7 +90,11 @@ const GridTemplate = ({ children }: GridTemplateProps) => {
           <StyledHeading big as="h1">
             {pageType}
           </StyledHeading>
-          <StyledParagraph>6 {pageType}</StyledParagraph>
+          {isLoading() ? (
+            <StyledSkeletonCounter data-testid="grid-template-skeleton-counter" />
+          ) : (
+            <StyledParagraph data-testid="grid-template-counter">6 {pageType}</StyledParagraph>
+          )}
         </StyledPageHeader>
         <StyledGrid>{children}</StyledGrid>
         <StyledButtonIcon
