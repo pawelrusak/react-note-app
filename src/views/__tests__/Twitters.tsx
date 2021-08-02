@@ -24,6 +24,9 @@ const findAllByRemoveButtons = () => screen.findAllByRole('button', { name: /rem
 const findAllByCardHeadings = () => screen.findAllByTestId(cardHeadingBarId);
 const findByFirstTwitterTitle = () => screen.findByText(firstTwitterTitle);
 const queryAllBySkeletonCard = () => screen.queryAllByTestId('skeleton-card');
+const queryByGridTemplateCounter = () => screen.queryByTestId('grid-template-counter');
+const queryByGridTemplateSkeletonCounter = () =>
+  screen.queryByTestId('grid-template-skeleton-counter');
 
 describe('<Twitters />', () => {
   it('display <CardListSkeleton /> until fetch data', async () => {
@@ -34,6 +37,17 @@ describe('<Twitters />', () => {
     await waitForElementToBeRemoved(() => queryAllBySkeletonCard());
 
     expect(queryAllBySkeletonCard()).toHaveLength(0);
+  });
+
+  it('display counter skeleton until fetch data', async () => {
+    renderTwitters();
+
+    expect(queryByGridTemplateSkeletonCounter()).toBeInTheDocument();
+
+    await waitForElementToBeRemoved(() => queryByGridTemplateSkeletonCounter());
+
+    expect(queryByGridTemplateSkeletonCounter()).not.toBeInTheDocument();
+    expect(queryByGridTemplateCounter()).toBeInTheDocument();
   });
 
   it('display the cards with data from store', async () => {
