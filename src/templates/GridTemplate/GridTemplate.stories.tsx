@@ -22,9 +22,9 @@ const Template: Story<GridTemplateProps> = () => (
 export const Default = Template.bind({});
 Default.decorators = [StoryRouter()];
 
-export const Note = Template.bind({});
-Note.decorators = [GridTemplateRouterDecorator(routes.notes)];
-Note.parameters = {
+export const SucceededNote = Template.bind({});
+SucceededNote.decorators = [GridTemplateRouterDecorator(routes.notes)];
+SucceededNote.parameters = {
   pageContext: 'notes',
 };
 
@@ -35,9 +35,9 @@ NoteLoading.parameters = {
   pageContext: 'notes',
 };
 
-export const Twitter = Template.bind({});
-Twitter.decorators = [GridTemplateRouterDecorator(routes.twitters)];
-Twitter.parameters = {
+export const SucceededTwitter = Template.bind({});
+SucceededTwitter.decorators = [GridTemplateRouterDecorator(routes.twitters)];
+SucceededTwitter.parameters = {
   pageContext: 'twitters',
 };
 
@@ -47,9 +47,9 @@ TwitterLoading.parameters = {
   pageContext: 'twitters',
 };
 
-export const Article = Template.bind({});
-Article.decorators = [GridTemplateRouterDecorator(routes.articles)];
-Article.parameters = {
+export const SucceededArticle = Template.bind({});
+SucceededArticle.decorators = [GridTemplateRouterDecorator(routes.articles)];
+SucceededArticle.parameters = {
   pageContext: 'articles',
 };
 
