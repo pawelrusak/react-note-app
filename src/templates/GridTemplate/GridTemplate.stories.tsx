@@ -22,9 +22,9 @@ const Template: Story<GridTemplateProps> = () => (
 export const Default = Template.bind({});
 Default.decorators = [StoryRouter()];
 
-export const SucceededNote = Template.bind({});
-SucceededNote.decorators = [GridTemplateRouterDecorator(routes.notes)];
-SucceededNote.parameters = {
+export const NoteSucceeded = Template.bind({});
+NoteSucceeded.decorators = [GridTemplateRouterDecorator(routes.notes)];
+NoteSucceeded.parameters = {
   pageContext: 'notes',
 };
 
@@ -35,25 +35,27 @@ NoteLoading.parameters = {
   pageContext: 'notes',
 };
 
-export const SucceededTwitter = Template.bind({});
-SucceededTwitter.decorators = [GridTemplateRouterDecorator(routes.twitters)];
-SucceededTwitter.parameters = {
+export const TwitterSucceeded = Template.bind({});
+TwitterSucceeded.decorators = [GridTemplateRouterDecorator(routes.twitters)];
+TwitterSucceeded.parameters = {
   pageContext: 'twitters',
 };
 
 export const TwitterLoading = Template.bind({});
+TwitterLoading.decorators = [GridTemplateRouterDecorator(routes.twitters)];
 TwitterLoading.parameters = {
   state: 'loading',
   pageContext: 'twitters',
 };
 
-export const SucceededArticle = Template.bind({});
-SucceededArticle.decorators = [GridTemplateRouterDecorator(routes.articles)];
-SucceededArticle.parameters = {
+export const ArticleSucceeded = Template.bind({});
+ArticleSucceeded.decorators = [GridTemplateRouterDecorator(routes.articles)];
+ArticleSucceeded.parameters = {
   pageContext: 'articles',
 };
 
 export const ArticleLoading = Template.bind({});
+ArticleLoading.decorators = [GridTemplateRouterDecorator(routes.articles)];
 ArticleLoading.parameters = {
   state: 'loading',
   pageContext: 'articles',
