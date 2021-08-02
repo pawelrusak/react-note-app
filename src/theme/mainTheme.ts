@@ -7,6 +7,7 @@ export const theme: DefaultTheme = {
   grey100: 'hsl(0, 0%, 96%)',
   grey200: 'hsl(0, 0%, 90%)',
   grey300: 'hsl(0, 0%, 70%)',
+  grey500: 'hsl(0, 0%, 51%)',
   black: 'hsl(0, 0%, 0%)',
   red100: 'hsl(359, 100%, 95%)',
   red200: 'hsl(359, 100%, 65%)',
