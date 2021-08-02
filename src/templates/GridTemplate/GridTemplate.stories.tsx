@@ -28,14 +28,33 @@ Note.parameters = {
   pageContext: 'notes',
 };
 
+export const NoteLoading = Template.bind({});
+NoteLoading.decorators = [GridTemplateRouterDecorator(routes.notes)];
+NoteLoading.parameters = {
+  state: 'loading',
+  pageContext: 'notes',
+};
+
 export const Twitter = Template.bind({});
 Twitter.decorators = [GridTemplateRouterDecorator(routes.twitters)];
 Twitter.parameters = {
   pageContext: 'twitters',
 };
 
+export const TwitterLoading = Template.bind({});
+TwitterLoading.parameters = {
+  state: 'loading',
+  pageContext: 'twitters',
+};
+
 export const Article = Template.bind({});
 Article.decorators = [GridTemplateRouterDecorator(routes.articles)];
 Article.parameters = {
+  pageContext: 'articles',
+};
+
+export const ArticleLoading = Template.bind({});
+ArticleLoading.parameters = {
+  state: 'loading',
   pageContext: 'articles',
 };
