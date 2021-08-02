@@ -47,6 +47,8 @@ const StyledHeading = styled(Heading)`
 const StyledParagraph = styled(Paragraph)`
   margin: 0;
   font-weight: ${({ theme }) => theme.bold};
+  font-size: ${({ theme }) => theme.fontSize.m};
+  color: ${({ theme }) => theme.grey500};
 `;
 
 type StyledButtonIconProps = {
