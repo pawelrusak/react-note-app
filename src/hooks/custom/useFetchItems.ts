@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
+import { useItemsStatus } from './useItemsStatus';
 import { ItemVariants } from '~/commonTypes';
 import { fetchItems } from '~/store/items/itemsSlice';
 
@@ -13,7 +14,7 @@ type UseFetchItemsReturn<T extends ItemVariants> = {
 
 export const useFetchItems = <T extends ItemVariants>(itemVariant: T): UseFetchItemsReturn<T> => {
   const data = useSelector((state: RootState) => state.items[itemVariant]);
-  const loading = useSelector((state: RootState) => state.items.isLoading);
+  const { isLoading } = useItemsStatus();
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -23,6 +24,6 @@ export const useFetchItems = <T extends ItemVariants>(itemVariant: T): UseFetchI
 
   return {
     data,
-    isLoading: () => loading,
+    isLoading,
   };
 };
