@@ -1,7 +1,18 @@
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
-describe('<Notes />', () => {
-  it.todo('display the cards with data from store');
+import { render } from 'testUtils';
+import { fetchItemsTestSuite } from 'testUtils/sharedTests';
 
-  it.todo('delete the first tab after clicking the first remove button');
+import Notes from '../Notes/Notes';
+import { routes } from '~/routes';
+
+jest.mock('~/services');
+
+const renderNotes = () =>
+  render(<Notes />, {
+    path: routes.notes,
+    pageType: 'notes',
+  });
+
+fetchItemsTestSuite('<Notes />', {
+  render: () => renderNotes(),
+  variant: 'notes',
 });
