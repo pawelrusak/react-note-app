@@ -1,7 +1,18 @@
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
-describe('<Articles />', () => {
-  it.todo('display the cards with data from store');
+import { render } from 'testUtils';
+import { fetchItemsTestSuite } from 'testUtils/sharedTests';
 
-  it.todo('delete the first tab after clicking the first remove button');
+import Articles from '../Articles/Articles';
+import { routes } from '~/routes';
+
+jest.mock('~/services');
+
+const renderArticles = () =>
+  render(<Articles />, {
+    path: routes.articles,
+    pageType: 'articles',
+  });
+
+fetchItemsTestSuite('<Articles />', {
+  render: () => renderArticles(),
+  variant: 'articles',
 });
