@@ -19,7 +19,6 @@ module.exports = {
      */
     config.resolve.alias = {
       ...config.resolve?.alias,
-      '../src/store': path.resolve(__dirname, '../src/store/__mocks__/index.ts'),
       '~': path.resolve(__dirname, '../src/'),
       '~~': path.resolve(__dirname, '../'),
     };
