@@ -64,7 +64,6 @@ const Sidebar = () => {
           <ButtonIcon as={NavLink} to="/articles" icon={bulbIcon} activeClassName="active" />
         </li>
       </StyledLinksList>
-      {/* <StyledLogoutButton as={NavLink} to="/login" icon={logoutIcon} /> */}
       <StyledLogoutButton aria-label="logout" type="button" onClick={logout} icon={logoutIcon} />
     </StyledWrapper>
   );
