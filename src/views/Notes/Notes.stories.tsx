@@ -1,6 +1,6 @@
 import StoryRouter from 'storybook-react-router';
 
-import Notes, { NotesProps } from './Notes';
+import Notes from './Notes';
 import { routes } from '~/routes';
 import { StoreDecorator } from '~~/.storybook/decorators';
 import { itemsPageLinks } from '~~/.storybook/links';
@@ -10,17 +10,17 @@ import type { Meta, Story } from '@storybook/react';
 export default {
   title: 'Views/Notes',
   component: Notes,
-  argTypes: {
-    notes: {
-      control: null,
-    },
-  },
   decorators: [StoryRouter(itemsPageLinks, { initialEntries: [routes.notes] }), StoreDecorator],
   parameters: {
     pageContext: 'notes',
   },
 } as Meta;
 
-const Template: Story<NotesProps> = (args) => <Notes {...args} />;
+const Template: Story = () => <Notes />;
 
-export const Default = Template.bind({});
+export const Loading = Template.bind({});
+Loading.parameters = {
+  state: 'loading',
+};
+
+export const Succeeded = Template.bind({});
