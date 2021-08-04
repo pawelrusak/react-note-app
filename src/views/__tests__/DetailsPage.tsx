@@ -1,6 +1,6 @@
 import dayjs from 'dayjs';
 import { Route } from 'react-router-dom';
-import { render, screen, waitFor, cleanup, testComponent } from 'testUtils';
+import { render, screen, waitFor, testComponent } from 'testUtils';
 import { fakeStateWithData } from 'testUtils/fakers';
 
 import DetailsPage from '../DetailsPage/DetailsPage';
@@ -49,8 +49,6 @@ const queryDetailsTemplateDateInfo = () => screen.queryByTestId(TEST_ID.DETAILS_
 const mocksFetchItem = () => jest.spyOn(services, 'fetchItem');
 
 describe('<DetailsPage />', () => {
-  afterEach(cleanup);
-
   it('send a request to service if there is no item in store and display him', async () => {
     const mockFetchItem = mocksFetchItem();
 
