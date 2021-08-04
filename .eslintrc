@@ -92,7 +92,34 @@
       "rules": {
           "react/jsx-props-no-spreading": 0,
           "@typescript-eslint/no-unsafe-member-access": 0,
-          "@typescript-eslint/no-unsafe-call": 0
+          "@typescript-eslint/no-unsafe-call": 0,
+          "testing-library/consistent-data-testid": [
+            2,
+            {
+              "testIdPattern": "^(([A-Z][a-z]+)+$)?$"
+             }
+          ]
+      }
+    },
+    {
+      "files": [
+        "src/**/*.ts?(x)"
+      ],
+      "excludedFiles": [
+        "src/**/__tests__/**/*.ts?(x)",
+        "src/**/?(*.)+(spec|test).ts?(x)"
+      ],
+      "extends": [
+        "plugin:testing-library/react"
+      ],
+      
+      "rules": {
+          "testing-library/consistent-data-testid": [
+            2,
+            {
+              "testIdPattern": "^{fileName}(_(([A-Z][a-z]+)+$))?$"
+             }
+          ]
       }
     },
     {
