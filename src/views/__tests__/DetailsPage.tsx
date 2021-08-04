@@ -41,9 +41,11 @@ const articleLinkTestName = 'article link';
 
 const queryByNoteItemTitleText = () => screen.queryByText(noteItem.title);
 const queryByNoteItemContentText = () => screen.queryByText(noteItem.content);
-const queryByArticleLink = () => screen.queryByTestId(TEST_ID.DETAILS_TEMPLATE.ARTICLE_LINK);
-const queryByAvatar = () => screen.queryByTestId(TEST_ID.DETAILS_TEMPLATE.AVATAR);
-const queryByDetailsTemplateDate = () => screen.queryByTestId(TEST_ID.DETAILS_TEMPLATE.DATE_INFO);
+const queryByDetailsTemplateArticleLink = () =>
+  screen.queryByTestId(TEST_ID.DETAILS_TEMPLATE.ARTICLE_LINK);
+const queryByDetailsTemplateAvatar = () => screen.queryByTestId(TEST_ID.DETAILS_TEMPLATE.AVATAR);
+const queryByDetailsTemplateDateInfo = () =>
+  screen.queryByTestId(TEST_ID.DETAILS_TEMPLATE.DATE_INFO);
 
 const mocksFetchItem = () => jest.spyOn(services, 'fetchItem');
 
@@ -79,24 +81,24 @@ describe('<DetailsPage />', () => {
     const itemCreatedDate = new Date(detailsPageData.created);
     const formattedItemCreatedDate = dayjs(itemCreatedDate).format('DD/MM/YYYY');
 
-    expect(queryByDetailsTemplateDate()).toBeInTheDocument();
-    expect(queryByDetailsTemplateDate()).toHaveTextContent(formattedItemCreatedDate);
+    expect(queryByDetailsTemplateDateInfo()).toBeInTheDocument();
+    expect(queryByDetailsTemplateDateInfo()).toHaveTextContent(formattedItemCreatedDate);
   });
 
   testComponent(() => renderDetailsPage('note'), { suffixTestNames: 'when is note page' })
-    .not.toBeInTheDocument(articleLinkTestName, queryByArticleLink)
-    .not.toBeInTheDocument(twitterAvatarTestName, queryByAvatar)
+    .not.toBeInTheDocument(articleLinkTestName, queryByDetailsTemplateArticleLink)
+    .not.toBeInTheDocument(twitterAvatarTestName, queryByDetailsTemplateAvatar)
     .run();
 
   testComponent(() => renderDetailsPage('article'), { suffixTestNames: 'when is article page' })
-    .toBeInTheDocument(articleLinkTestName, queryByArticleLink)
+    .toBeInTheDocument(articleLinkTestName, queryByDetailsTemplateArticleLink)
     .withAttribute('href', articleItem.articleUrl)
-    .not.toBeInTheDocument(twitterAvatarTestName, queryByAvatar)
+    .not.toBeInTheDocument(twitterAvatarTestName, queryByDetailsTemplateAvatar)
     .run();
 
   testComponent(() => renderDetailsPage('twitter'), { suffixTestNames: 'when is twitter page' })
-    .toBeInTheDocument(twitterAvatarTestName, queryByAvatar)
+    .toBeInTheDocument(twitterAvatarTestName, queryByDetailsTemplateAvatar)
     .withAttribute('src', expect.stringContaining(twitterItem.twitterName as string))
-    .not.toBeInTheDocument(articleLinkTestName, queryByArticleLink)
+    .not.toBeInTheDocument(articleLinkTestName, queryByDetailsTemplateArticleLink)
     .run();
 });
