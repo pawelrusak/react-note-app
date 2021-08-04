@@ -15,7 +15,7 @@ jest.mock('~/services');
 const getByLoginPlaceholderText = () => screen.getByPlaceholderText(/login/i);
 const getByPasswordPlaceholderText = () => screen.getByPlaceholderText(/password/i);
 const getByRegisterButton = () => screen.getByRole('button', { name: /register/i });
-const queryByFakeHomePage = () => screen.queryByTestId('FakeHomePage');
+const queryFakeHomePage = () => screen.queryByTestId('FakeHomePage');
 
 const fakeRegistrationData = {
   email: 'app@login.test',
@@ -108,7 +108,7 @@ describe('<RegisterPage />', () => {
   it('submits correct values to registration and redirect to the home page', async () => {
     renderRegisterPage();
 
-    expect(queryByFakeHomePage()).not.toBeInTheDocument();
+    expect(queryFakeHomePage()).not.toBeInTheDocument();
 
     userEvent.type(getByLoginPlaceholderText(), fakeRegistrationData.email);
     userEvent.type(getByPasswordPlaceholderText(), fakeRegistrationData.password);
@@ -117,6 +117,6 @@ describe('<RegisterPage />', () => {
     await waitFor(() => userEvent.click(getByRegisterButton()));
 
     // redirect to the home page
-    await waitFor(() => expect(queryByFakeHomePage()).toBeInTheDocument());
+    await waitFor(() => expect(queryFakeHomePage()).toBeInTheDocument());
   });
 });
