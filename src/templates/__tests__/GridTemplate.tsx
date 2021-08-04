@@ -22,9 +22,9 @@ const renderGridTemplate = (path?: RoutesPaths, pageType?: ItemVariants) =>
   );
 
 const getAllByHeadingRole = () => screen.getAllByRole('heading');
-const getByNewItemBar = () => screen.getByTestId(TEST_ID.NEW_ITEM_BAR.WRAPPER);
+const getByNewItemBarWrapper = () => screen.getByTestId(TEST_ID.NEW_ITEM_BAR.WRAPPER);
 const getByTitlePlaceholderText = () => screen.getByPlaceholderText(/title/i);
-const getByNewItemBarContentTextarea = () => screen.getByTestId(TEST_ID.NEW_ITEM_BAR.TEXTAREA);
+const getByNewItemBarTextarea = () => screen.getByTestId(TEST_ID.NEW_ITEM_BAR.TEXTAREA);
 const getByAddNoteTextButton = () => screen.getByRole('button', { name: /add note/i });
 const getByToggleNewItemBarButton = () =>
   screen.getByRole('button', { name: /toggle new item bar/i });
@@ -74,7 +74,7 @@ describe('<GridTemplate />', () => {
   it.skip('toggles the visibility of the bar after click his button', () => {
     renderGridTemplate();
 
-    const newItemBar = getByNewItemBar();
+    const newItemBar = getByNewItemBarWrapper();
 
     expect(newItemBar).not.toBeVisible();
     expect(getByToggleNewItemBarButton()).toHaveStyle(CSS_STYLES.TRANSFORM_ROTATE.NOT_ACTIVE);
@@ -96,7 +96,7 @@ describe('<GridTemplate />', () => {
   it('toggles the transform property of the bar after click his button', () => {
     renderGridTemplate();
 
-    const newItemBar = getByNewItemBar();
+    const newItemBar = getByNewItemBarWrapper();
 
     expect(newItemBar).toHaveStyle(CSS_STYLES.TRANSFORM_TRANSLATE.NOT_VISIBLE);
     expect(getByToggleNewItemBarButton()).toHaveStyle(CSS_STYLES.TRANSFORM_ROTATE.NOT_ACTIVE);
@@ -122,7 +122,7 @@ describe('<GridTemplate />', () => {
 
     // input the values of the note
     userEvent.type(getByTitlePlaceholderText(), fakeNoteItemInputs.title);
-    userEvent.type(getByNewItemBarContentTextarea(), fakeNoteItemInputs.content);
+    userEvent.type(getByNewItemBarTextarea(), fakeNoteItemInputs.content);
 
     // submit the note form
     await waitFor(() => userEvent.click(getByAddNoteTextButton()));
