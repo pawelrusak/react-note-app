@@ -1,4 +1,4 @@
-import { cleanup, waitFor } from '@testing-library/react';
+import { waitFor } from '@testing-library/react';
 import { Route, Switch } from 'react-router-dom';
 import { render, screen, userEvent, testComponent } from 'testUtils';
 
@@ -67,8 +67,6 @@ const articleLinkTestName = 'article link';
 const CART_TYPES = ['Note', 'Twitter', 'Article'] as const;
 
 describe('<Card />', () => {
-  beforeEach(cleanup);
-
   it.each(CART_TYPES)('redirect to %s details page after click on the card heading', (cardType) => {
     const { cardData } = renderCard(cardType);
 
