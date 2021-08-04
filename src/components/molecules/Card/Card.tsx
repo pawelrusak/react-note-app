@@ -61,7 +61,7 @@ const StyledAvatar = styled.img`
   top: 25px;
 `;
 
-const StyledLinkButton = styled.a`
+const StyledArticleLink = styled.a`
   display: block;
   width: 47px;
   height: 47px;
@@ -119,14 +119,14 @@ const Card = ({ id, title, created, twitterName, articleUrl, content }: CardProp
 
   return (
     <StyledWrapper>
-      <HeaderWrapper data-testid="card-heading-bar" onClick={historyPush} activecolor={itemType}>
+      <HeaderWrapper data-testid="Card_Header" onClick={historyPush} activecolor={itemType}>
         <StyledHeading>{title}</StyledHeading>
-        <DateInfo data-testid="card-date" date={created} />
+        <DateInfo data-testid="Card_DateInfo" date={created} />
         {itemType === 'twitters' && (
           <StyledAvatar src={`https://unavatar.now.sh/twitter/${twitterName || ''}`} />
         )}
         {itemType === 'articles' && (
-          <StyledLinkButton data-testid="card-article-link" href={articleUrl || ''} />
+          <StyledArticleLink data-testid="Card_ArticleLink" href={articleUrl || ''} />
         )}
       </HeaderWrapper>
       <ContentWrapper>

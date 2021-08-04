@@ -21,11 +21,11 @@ export const fetchItemsTestSuite = (
   const itemsData = fakeItemsData[variant];
   const firstItemsTitle = itemsData[0].title;
 
-  const cardHeadingBarId = 'card-heading-bar';
-  const getAllByCardHeadings = () => screen.getAllByTestId(cardHeadingBarId);
+  const CARD_HEADER_TEST_ID = 'Card_Header';
+  const getAllByCardHeadings = () => screen.getAllByTestId(CARD_HEADER_TEST_ID);
   const getByFirstItemsTitle = () => screen.queryByText(firstItemsTitle);
   const findAllByRemoveButtons = () => screen.findAllByRole('button', { name: /remove/i });
-  const findAllByCardHeadings = () => screen.findAllByTestId(cardHeadingBarId);
+  const findAllByCardHeadings = () => screen.findAllByTestId(CARD_HEADER_TEST_ID);
   const findByFirstItemsTitle = () => screen.findByText(firstItemsTitle);
   const queryAllBySkeletonCard = () => screen.queryAllByTestId('skeleton-card');
   const queryByGridTemplateCounter = () => screen.queryByTestId('grid-template-counter');

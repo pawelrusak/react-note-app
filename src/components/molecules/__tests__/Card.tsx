@@ -52,11 +52,11 @@ const renderCard = (cardType: CardType) => {
 };
 
 const getByButtonRole = () => screen.getByRole('button');
-const getByCardHeading = () => screen.getByTestId('card-heading-bar');
 const queryByImgRole = () => screen.queryByRole('img');
-const queryByCardArticleLink = () => screen.queryByTestId('card-article-link');
+const getByCardHeading = () => screen.getByTestId('Card_Header');
+const queryByCardArticleLink = () => screen.queryByTestId('Card_ArticleLink');
 const queryByFakeDetailsPage = () => screen.queryByTestId('fake-details-page');
-const queryByCardDate = () => screen.queryByTestId('card-date');
+const queryByCardDate = () => screen.queryByTestId('Card_DateInfo');
 
 /**
  * @todo use CONSTANT_CASE names
