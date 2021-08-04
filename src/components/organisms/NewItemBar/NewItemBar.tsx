@@ -62,7 +62,7 @@ const NewItemBar = ({ isVisible, addItem, handleClose }: NewItemBarProps) => {
   const pageContext = usePageTypeContext();
 
   return (
-    <StyledWrapper data-testid="new-item-bar" isVisible={isVisible} activecolor={pageContext}>
+    <StyledWrapper data-testid="NewItemBar" isVisible={isVisible} activecolor={pageContext}>
       <Heading big>Create new {pageContext}</Heading>
       <Formik
         initialValues={{ title: '', content: '', articleUrl: '', twitterName: '' }}
@@ -104,7 +104,7 @@ const NewItemBar = ({ isVisible, addItem, handleClose }: NewItemBarProps) => {
             <StyledTextArea
               name="content"
               as="textarea"
-              data-testid="new-item-bar-content-textarea"
+              data-testid="NewItemBar_Textarea"
               onChange={handleChange}
               onBlur={handleBlur}
               value={values.content}
