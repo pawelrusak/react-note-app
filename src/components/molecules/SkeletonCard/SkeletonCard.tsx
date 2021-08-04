@@ -4,7 +4,7 @@ import styled, { css } from 'styled-components';
 import { RequiredOnlyWithNever, Never } from '~/commonTypes';
 import Skeleton from '~/components/atoms/Skeleton/Skeleton';
 import Card from '~/components/molecules/Card/Card';
-
+import { TEST_ID } from '~/constants/tests';
 import { usePageTypeContext } from '~/hooks';
 import * as styledMixin from '~/theme/mixins';
 
@@ -126,7 +126,7 @@ const SkeletonCard = ({
   const itemType = usePageTypeContext();
 
   return (
-    <Card.Wrapper data-testid="SkeletonCard">
+    <Card.Wrapper data-testid={TEST_ID.SKELETON_CARD.WRAPPER}>
       <StyledCardHeaderWrapper
         lightenActiveColor={lighten}
         lightenActiveColorAmount={lightenAmount}

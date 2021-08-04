@@ -40,4 +40,7 @@ export const TEST_ID = {
     DATE_INFO: 'Card_DateInfo',
     ARTICLE_LINK: 'Card_ArticleLink',
   },
+  SKELETON_CARD: {
+    WRAPPER: 'SkeletonCard',
+  },
 } as const;

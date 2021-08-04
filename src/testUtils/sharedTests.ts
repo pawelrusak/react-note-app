@@ -28,7 +28,7 @@ export const fetchItemsTestSuite = (
   const findAllByRemoveButtons = () => screen.findAllByRole('button', { name: /remove/i });
   const findAllByCardHeader = () => screen.findAllByTestId(TEST_ID.CARD.HEADER);
   const findByFirstItemsTitle = () => screen.findByText(firstItemsTitle);
-  const queryAllBySkeletonCard = () => screen.queryAllByTestId('SkeletonCard');
+  const queryAllBySkeletonCard = () => screen.queryAllByTestId(TEST_ID.SKELETON_CARD.WRAPPER);
   const queryByGridTemplateCounter = () => screen.queryByTestId('GridTemplate_Counter');
   const queryByGridTemplateSkeletonCounter = () =>
     screen.queryByTestId('GridTemplate_SkeletonCounter');
