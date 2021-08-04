@@ -2,7 +2,7 @@ import { render, screen, getRandomNaturalNumber } from 'testUtils';
 
 import SkeletonCardList from '../SkeletonCardList/SkeletonCardList';
 
-const getAllSkeletonCard = () => screen.getAllByTestId('skeleton-card');
+const getAllSkeletonCard = () => screen.getAllByTestId('SkeletonCard');
 
 const renderSkeletonCardList = (length: number | undefined = undefined) =>
   render(<SkeletonCardList length={length} />);

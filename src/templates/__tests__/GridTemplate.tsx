@@ -23,9 +23,9 @@ const renderGridTemplate = (path?: RoutesPaths, pageType?: ItemVariants) =>
   );
 
 const getAllByHeadingRole = () => screen.getAllByRole('heading');
-const getByNewItemBar = () => screen.getByTestId('new-item-bar');
+const getByNewItemBar = () => screen.getByTestId('NewItemBar');
 const getByTitlePlaceholderText = () => screen.getByPlaceholderText(/title/i);
-const getByNewItemBarContentTextarea = () => screen.getByTestId('new-item-bar-content-textarea');
+const getByNewItemBarContentTextarea = () => screen.getByTestId('NewItemBar_Textarea');
 const getByAddNoteTextButton = () => screen.getByRole('button', { name: /add note/i });
 const getByToggleNewItemBarButton = () =>
   screen.getByRole('button', { name: /toggle new item bar/i });

@@ -11,9 +11,9 @@ jest.mock('~/services');
 const getByLoginPlaceholderText = () => screen.getByPlaceholderText(/login/i);
 const getByPasswordPlaceholderText = () => screen.getByPlaceholderText(/password/i);
 const getByLoginButton = () => screen.getByRole('button');
-const queryByFakeHomePage = () => screen.queryByTestId('fake-home-Page');
+const queryByFakeHomePage = () => screen.queryByTestId('FakeHomePage');
 
-const FakeHomePage = () => <div data-testid="fake-home-Page">Home Page</div>;
+const FakeHomePage = () => <div data-testid="FakeHomePage">Home Page</div>;
 
 const renderLoginPage = () =>
   render(
