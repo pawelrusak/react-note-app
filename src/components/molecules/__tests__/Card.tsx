@@ -53,11 +53,11 @@ const renderCard = (cardType: CardType) => {
 };
 
 const getByButtonRole = () => screen.getByRole('button');
+const getCardHeader = () => screen.getByTestId(TEST_ID.CARD.HEADER);
 const queryByImgRole = () => screen.queryByRole('img');
-const getByCardHeader = () => screen.getByTestId(TEST_ID.CARD.HEADER);
-const queryByCardArticleLink = () => screen.queryByTestId(TEST_ID.CARD.ARTICLE_LINK);
-const queryByFakeDetailsPage = () => screen.queryByTestId('FakeDetailsPage');
-const queryByCardDate = () => screen.queryByTestId(TEST_ID.CARD.DATE_INFO);
+const queryCardArticleLink = () => screen.queryByTestId(TEST_ID.CARD.ARTICLE_LINK);
+const queryFakeDetailsPage = () => screen.queryByTestId('FakeDetailsPage');
+const queryCardDateInfo = () => screen.queryByTestId(TEST_ID.CARD.DATE_INFO);
 
 /**
  * @todo use CONSTANT_CASE names
@@ -72,21 +72,19 @@ describe('<Card />', () => {
   it.each(CART_TYPES)('redirect to %s details page after click on the card heading', (cardType) => {
     const { cardData } = renderCard(cardType);
 
-    expect(queryByFakeDetailsPage()).not.toBeInTheDocument();
+    expect(queryFakeDetailsPage()).not.toBeInTheDocument();
 
-    userEvent.click(getByCardHeader());
+    userEvent.click(getCardHeader());
 
-    expect(queryByFakeDetailsPage()).toBeInTheDocument();
-    expect(queryByFakeDetailsPage()).toHaveTextContent(
-      getFakeDetailsPageText(cardType, cardData.id),
-    );
+    expect(queryFakeDetailsPage()).toBeInTheDocument();
+    expect(queryFakeDetailsPage()).toHaveTextContent(getFakeDetailsPageText(cardType, cardData.id));
   });
 
   it.each(CART_TYPES)('has a correctly formatted date', (cardType) => {
     renderCard(cardType);
 
-    expect(queryByCardDate()).toBeInTheDocument();
-    expect(queryByCardDate()).toHaveTextContent(/3 days/i);
+    expect(queryCardDateInfo()).toBeInTheDocument();
+    expect(queryCardDateInfo()).toHaveTextContent(/3 days/i);
   });
 
   /**
@@ -115,17 +113,17 @@ describe('<Card />', () => {
 
   testComponent(() => renderCard('Note'), { suffixTestNames: 'when is note page' })
     .not.toBeInTheDocument(twitterAvatarTestName, queryByImgRole)
-    .not.toBeInTheDocument(articleLinkTestName, queryByCardArticleLink)
+    .not.toBeInTheDocument(articleLinkTestName, queryCardArticleLink)
     .run();
 
   testComponent(() => renderCard('Twitter'), { suffixTestNames: 'when is twitter page' })
     .toBeInTheDocument(twitterAvatarTestName, queryByImgRole)
     .withAttribute('src', expect.stringContaining(twitterNameCardArgs as string))
-    .not.toBeInTheDocument(articleLinkTestName, queryByCardArticleLink)
+    .not.toBeInTheDocument(articleLinkTestName, queryCardArticleLink)
     .run();
 
   testComponent(() => renderCard('Article'), { suffixTestNames: 'when is article page' })
-    .toBeInTheDocument(articleLinkTestName, queryByCardArticleLink)
+    .toBeInTheDocument(articleLinkTestName, queryCardArticleLink)
     .withAttribute('href', articleUrlCardArgs)
     .not.toBeInTheDocument(twitterAvatarTestName, queryByImgRole)
     .run();
