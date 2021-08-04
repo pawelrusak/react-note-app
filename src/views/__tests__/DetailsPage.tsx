@@ -4,6 +4,7 @@ import { render, screen, waitFor, cleanup, testComponent } from 'testUtils';
 import { fakeStateWithData } from 'testUtils/fakers';
 
 import DetailsPage from '../DetailsPage/DetailsPage';
+import { TEST_ID } from '~/constants/tests';
 import { routes } from '~/routes';
 import * as services from '~/services';
 
@@ -40,9 +41,9 @@ const articleLinkTestName = 'article link';
 
 const queryByNoteItemTitleText = () => screen.queryByText(noteItem.title);
 const queryByNoteItemContentText = () => screen.queryByText(noteItem.content);
-const queryByArticleLink = () => screen.queryByTestId('DetailsTemplate_ArticleLink');
-const queryByAvatar = () => screen.queryByTestId('DetailsTemplate_Avatar');
-const queryByDetailsTemplateDate = () => screen.queryByTestId('DetailsTemplate_DateInfo');
+const queryByArticleLink = () => screen.queryByTestId(TEST_ID.DETAILS_TEMPLATE.ARTICLE_LINK);
+const queryByAvatar = () => screen.queryByTestId(TEST_ID.DETAILS_TEMPLATE.AVATAR);
+const queryByDetailsTemplateDate = () => screen.queryByTestId(TEST_ID.DETAILS_TEMPLATE.DATE_INFO);
 
 const mocksFetchItem = () => jest.spyOn(services, 'fetchItem');
 

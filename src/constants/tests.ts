@@ -47,4 +47,9 @@ export const TEST_ID = {
     WRAPPER: 'NewItemBar',
     TEXTAREA: 'NewItemBar_Textarea',
   },
+  DETAILS_TEMPLATE: {
+    DATE_INFO: 'DetailsTemplate_DateInfo',
+    ARTICLE_LINK: 'DetailsTemplate_ArticleLink',
+    AVATAR: 'DetailsTemplate_Avatar',
+  },
 } as const;
