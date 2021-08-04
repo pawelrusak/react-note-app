@@ -22,7 +22,7 @@ type FakeDetailsPageProps = {
 };
 
 const FakeDetailsPage = ({ cardType, cardId }: FakeDetailsPageProps) => (
-  <div data-testid="fake-details-page">{getFakeDetailsPageText(cardType, cardId)}</div>
+  <div data-testid="FakeDetailsPage">{getFakeDetailsPageText(cardType, cardId)}</div>
 );
 
 const { twitterName: twitterNameCardArgs } = CardStories.Twitter.args as CardProps;
@@ -55,7 +55,7 @@ const getByButtonRole = () => screen.getByRole('button');
 const queryByImgRole = () => screen.queryByRole('img');
 const getByCardHeading = () => screen.getByTestId('Card_Header');
 const queryByCardArticleLink = () => screen.queryByTestId('Card_ArticleLink');
-const queryByFakeDetailsPage = () => screen.queryByTestId('fake-details-page');
+const queryByFakeDetailsPage = () => screen.queryByTestId('FakeDetailsPage');
 const queryByCardDate = () => screen.queryByTestId('Card_DateInfo');
 
 /**

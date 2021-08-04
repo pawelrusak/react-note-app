@@ -6,7 +6,7 @@ import { RoutesPaths } from '~/routes';
 
 const FakeContextPage = () => (
   <PageContext.Consumer>
-    {(value) => <span data-testid="fake-context-page">{value}</span>}
+    {(value) => <span data-testid="FakeContextPage">{value}</span>}
   </PageContext.Consumer>
 );
 
@@ -18,7 +18,7 @@ const renderMainTemplate = (path: RoutesPaths) =>
     { path },
   );
 
-const getByFakeContextPage = () => screen.getByTestId('fake-context-page');
+const getByFakeContextPage = () => screen.getByTestId('FakeContextPage');
 
 describe('<MainTemplate />', () => {
   it.each(getPairOfPathsAndPageTypes())(
