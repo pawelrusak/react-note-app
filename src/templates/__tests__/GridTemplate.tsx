@@ -22,11 +22,11 @@ const renderGridTemplate = (path?: RoutesPaths, pageType?: ItemVariants) =>
   );
 
 const getAllByHeadingRole = () => screen.getAllByRole('heading');
-const getByNewItemBarWrapper = () => screen.getByTestId(TEST_ID.NEW_ITEM_BAR.WRAPPER);
+const getNewItemBarWrapper = () => screen.getByTestId(TEST_ID.NEW_ITEM_BAR.WRAPPER);
 const getByTitlePlaceholderText = () => screen.getByPlaceholderText(/title/i);
-const getByNewItemBarTextarea = () => screen.getByTestId(TEST_ID.NEW_ITEM_BAR.TEXTAREA);
-const getByAddNoteTextButton = () => screen.getByRole('button', { name: /add note/i });
-const getByToggleNewItemBarButton = () =>
+const getNewItemBarTextarea = () => screen.getByTestId(TEST_ID.NEW_ITEM_BAR.TEXTAREA);
+const getByAddNoteNameAndButtonRole = () => screen.getByRole('button', { name: /add note/i });
+const getByToggleNewItemBarNameAndButtonRole = () =>
   screen.getByRole('button', { name: /toggle new item bar/i });
 
 const CSS_STYLES = {
@@ -74,20 +74,26 @@ describe('<GridTemplate />', () => {
   it.skip('toggles the visibility of the bar after click his button', () => {
     renderGridTemplate();
 
-    const newItemBar = getByNewItemBarWrapper();
+    const newItemBar = getNewItemBarWrapper();
 
     expect(newItemBar).not.toBeVisible();
-    expect(getByToggleNewItemBarButton()).toHaveStyle(CSS_STYLES.TRANSFORM_ROTATE.NOT_ACTIVE);
+    expect(getByToggleNewItemBarNameAndButtonRole()).toHaveStyle(
+      CSS_STYLES.TRANSFORM_ROTATE.NOT_ACTIVE,
+    );
 
-    userEvent.click(getByToggleNewItemBarButton());
+    userEvent.click(getByToggleNewItemBarNameAndButtonRole());
 
     expect(newItemBar).toBeVisible();
-    expect(getByToggleNewItemBarButton()).toHaveStyle(CSS_STYLES.TRANSFORM_ROTATE.ACTIVE);
+    expect(getByToggleNewItemBarNameAndButtonRole()).toHaveStyle(
+      CSS_STYLES.TRANSFORM_ROTATE.ACTIVE,
+    );
 
-    userEvent.click(getByToggleNewItemBarButton());
+    userEvent.click(getByToggleNewItemBarNameAndButtonRole());
 
     expect(newItemBar).not.toBeVisible();
-    expect(getByToggleNewItemBarButton()).toHaveStyle(CSS_STYLES.TRANSFORM_ROTATE.NOT_ACTIVE);
+    expect(getByToggleNewItemBarNameAndButtonRole()).toHaveStyle(
+      CSS_STYLES.TRANSFORM_ROTATE.NOT_ACTIVE,
+    );
   });
 
   /**
@@ -96,20 +102,26 @@ describe('<GridTemplate />', () => {
   it('toggles the transform property of the bar after click his button', () => {
     renderGridTemplate();
 
-    const newItemBar = getByNewItemBarWrapper();
+    const newItemBar = getNewItemBarWrapper();
 
     expect(newItemBar).toHaveStyle(CSS_STYLES.TRANSFORM_TRANSLATE.NOT_VISIBLE);
-    expect(getByToggleNewItemBarButton()).toHaveStyle(CSS_STYLES.TRANSFORM_ROTATE.NOT_ACTIVE);
+    expect(getByToggleNewItemBarNameAndButtonRole()).toHaveStyle(
+      CSS_STYLES.TRANSFORM_ROTATE.NOT_ACTIVE,
+    );
 
-    userEvent.click(getByToggleNewItemBarButton());
+    userEvent.click(getByToggleNewItemBarNameAndButtonRole());
 
     expect(newItemBar).toHaveStyle(CSS_STYLES.TRANSFORM_TRANSLATE.VISIBLE);
-    expect(getByToggleNewItemBarButton()).toHaveStyle(CSS_STYLES.TRANSFORM_ROTATE.ACTIVE);
+    expect(getByToggleNewItemBarNameAndButtonRole()).toHaveStyle(
+      CSS_STYLES.TRANSFORM_ROTATE.ACTIVE,
+    );
 
-    userEvent.click(getByToggleNewItemBarButton());
+    userEvent.click(getByToggleNewItemBarNameAndButtonRole());
 
     expect(newItemBar).toHaveStyle(CSS_STYLES.TRANSFORM_TRANSLATE.NOT_VISIBLE);
-    expect(getByToggleNewItemBarButton()).toHaveStyle(CSS_STYLES.TRANSFORM_ROTATE.NOT_ACTIVE);
+    expect(getByToggleNewItemBarNameAndButtonRole()).toHaveStyle(
+      CSS_STYLES.TRANSFORM_ROTATE.NOT_ACTIVE,
+    );
   });
 
   it('add a new note to store that has been created by the form', async () => {
@@ -118,14 +130,14 @@ describe('<GridTemplate />', () => {
     expect(store.getState().items.notes).toHaveLength(4);
 
     // open sidebar form
-    await waitFor(() => userEvent.click(getByToggleNewItemBarButton()));
+    await waitFor(() => userEvent.click(getByToggleNewItemBarNameAndButtonRole()));
 
     // input the values of the note
     userEvent.type(getByTitlePlaceholderText(), fakeNoteItemInputs.title);
-    userEvent.type(getByNewItemBarTextarea(), fakeNoteItemInputs.content);
+    userEvent.type(getNewItemBarTextarea(), fakeNoteItemInputs.content);
 
     // submit the note form
-    await waitFor(() => userEvent.click(getByAddNoteTextButton()));
+    await waitFor(() => userEvent.click(getByAddNoteNameAndButtonRole()));
 
     expect(store.getState().items.notes).toHaveLength(5);
     expect(store.getState().items.notes).toEqual(
