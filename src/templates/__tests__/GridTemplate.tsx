@@ -3,8 +3,7 @@ import { fakeStateWithDataAndLoggedInUser } from 'testUtils/fakers';
 
 import GridTemplate from '../GridTemplate/GridTemplate';
 import { ItemVariants } from '~/commonTypes';
-
-import { TEST_FAKE_NEW_NOTE_DATA_ID } from '~/constants/tests';
+import { TEST_FAKE_NEW_NOTE_DATA_ID, TEST_ID } from '~/constants/tests';
 
 import type { RoutesPaths } from '~/routes';
 
@@ -23,9 +22,9 @@ const renderGridTemplate = (path?: RoutesPaths, pageType?: ItemVariants) =>
   );
 
 const getAllByHeadingRole = () => screen.getAllByRole('heading');
-const getByNewItemBar = () => screen.getByTestId('NewItemBar');
+const getByNewItemBar = () => screen.getByTestId(TEST_ID.NEW_ITEM_BAR.WRAPPER);
 const getByTitlePlaceholderText = () => screen.getByPlaceholderText(/title/i);
-const getByNewItemBarContentTextarea = () => screen.getByTestId('NewItemBar_Textarea');
+const getByNewItemBarContentTextarea = () => screen.getByTestId(TEST_ID.NEW_ITEM_BAR.TEXTAREA);
 const getByAddNoteTextButton = () => screen.getByRole('button', { name: /add note/i });
 const getByToggleNewItemBarButton = () =>
   screen.getByRole('button', { name: /toggle new item bar/i });

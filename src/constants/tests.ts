@@ -43,4 +43,8 @@ export const TEST_ID = {
   SKELETON_CARD: {
     WRAPPER: 'SkeletonCard',
   },
+  NEW_ITEM_BAR: {
+    WRAPPER: 'NewItemBar',
+    TEXTAREA: 'NewItemBar_Textarea',
+  },
 } as const;
