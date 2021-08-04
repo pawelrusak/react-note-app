@@ -59,6 +59,8 @@ describe('<DetailsPage />', () => {
 
     await waitFor(() => expect(queryByNoteItemTitleText()).toBeInTheDocument());
     await waitFor(() => expect(queryByNoteItemContentText()).toBeInTheDocument());
+
+    mockFetchItem.mockRestore();
   });
 
   it('if the item exist in the store, he takes it', () => {
@@ -70,6 +72,8 @@ describe('<DetailsPage />', () => {
 
     expect(queryByNoteItemTitleText()).toBeInTheDocument();
     expect(queryByNoteItemContentText()).toBeInTheDocument();
+
+    mockFetchItem.mockRestore();
   });
 
   it.each(['note', 'article', 'twitter'] as const)('has a correctly formatted date', (variant) => {
