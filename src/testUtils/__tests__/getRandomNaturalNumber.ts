@@ -7,9 +7,14 @@ import { getRandomNaturalNumber } from '../helpers';
  * @link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random
  */
 const MATH_RANDOM = {
-  MAX_RANDOM_RETURN: 0.99999999,
-  MIN_RANDOM_RETURN: 0,
+  MAX_RETURN: 0.99999999,
+  MIN_RETURN: 0,
 } as const;
+
+export type MathRandomReturnValue = typeof MATH_RANDOM.MAX_RETURN | typeof MATH_RANDOM.MIN_RETURN;
+
+const mockingMathRandom = (returnValue: MathRandomReturnValue) =>
+  jest.spyOn(global.Math, 'random').mockReturnValue(returnValue);
 
 describe('getRandomNaturalNumber test utils helper', () => {
   it('throws a range error if the given maximum number is not an integer', () => {
@@ -27,35 +32,35 @@ describe('getRandomNaturalNumber test utils helper', () => {
   });
 
   it('the default maximum value should be 10', () => {
-    jest.spyOn(global.Math, 'random').mockReturnValue(MATH_RANDOM.MAX_RANDOM_RETURN);
+    const mockMathRandom = mockingMathRandom(MATH_RANDOM.MAX_RETURN);
 
     expect(getRandomNaturalNumber()).toBe(10);
 
-    jest.spyOn(global.Math, 'random').mockRestore();
+    mockMathRandom.mockRestore();
   });
 
   it('the default minimum value should be 1', () => {
-    jest.spyOn(global.Math, 'random').mockReturnValue(MATH_RANDOM.MIN_RANDOM_RETURN);
+    const mockMathRandom = mockingMathRandom(MATH_RANDOM.MIN_RETURN);
 
     expect(getRandomNaturalNumber()).toBe(1);
 
-    jest.spyOn(global.Math, 'random').mockRestore();
+    mockMathRandom.mockRestore();
   });
 
   it('the maximum return value should be equal to maximum given value', () => {
-    jest.spyOn(global.Math, 'random').mockReturnValue(MATH_RANDOM.MAX_RANDOM_RETURN);
+    const mockMathRandom = mockingMathRandom(MATH_RANDOM.MAX_RETURN);
 
     expect(getRandomNaturalNumber(5)).toBe(5);
 
-    jest.spyOn(global.Math, 'random').mockRestore();
+    mockMathRandom.mockRestore();
   });
 
   it('the minimum return value should be equal to minimum given value', () => {
-    jest.spyOn(global.Math, 'random').mockReturnValue(MATH_RANDOM.MIN_RANDOM_RETURN);
+    const mockMathRandom = mockingMathRandom(MATH_RANDOM.MIN_RETURN);
 
     expect(getRandomNaturalNumber(20, 3)).toBe(3);
 
-    jest.spyOn(global.Math, 'random').mockRestore();
+    mockMathRandom.mockRestore();
   });
 
   it('the return value should be integer', () => {
