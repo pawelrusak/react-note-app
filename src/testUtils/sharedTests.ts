@@ -17,23 +17,23 @@ type FetchItemsTestSuiteConfigArgs = {
 };
 
 export const fetchItemsTestSuite = (
-  testGroupName: string,
+  testSuiteName: string,
   { render, variant }: FetchItemsTestSuiteConfigArgs,
 ) => {
   const itemsData = fakeItemsData[variant];
   const firstItemsTitle = itemsData[0].title;
 
-  const getAllByCardHeadings = () => screen.getAllByTestId(TEST_ID.CARD.HEADER);
+  const getAllByCardHeader = () => screen.getAllByTestId(TEST_ID.CARD.HEADER);
   const getByFirstItemsTitle = () => screen.queryByText(firstItemsTitle);
   const findAllByRemoveButtons = () => screen.findAllByRole('button', { name: /remove/i });
-  const findAllByCardHeadings = () => screen.findAllByTestId(TEST_ID.CARD.HEADER);
+  const findAllByCardHeader = () => screen.findAllByTestId(TEST_ID.CARD.HEADER);
   const findByFirstItemsTitle = () => screen.findByText(firstItemsTitle);
   const queryAllBySkeletonCard = () => screen.queryAllByTestId('SkeletonCard');
   const queryByGridTemplateCounter = () => screen.queryByTestId('GridTemplate_Counter');
   const queryByGridTemplateSkeletonCounter = () =>
     screen.queryByTestId('GridTemplate_SkeletonCounter');
 
-  describe(testGroupName, () => {
+  describe(testSuiteName, () => {
     it('display <CardListSkeleton /> until fetch data', async () => {
       render();
 
@@ -58,7 +58,7 @@ export const fetchItemsTestSuite = (
     it('display the cards with data from store', async () => {
       render();
 
-      const cardsHeadings = await findAllByCardHeadings();
+      const cardsHeadings = await findAllByCardHeader();
 
       expect(cardsHeadings).toHaveLength(4);
 
@@ -70,14 +70,14 @@ export const fetchItemsTestSuite = (
     it('delete first card after clicking its the "remove" button', async () => {
       render();
 
-      expect(await findAllByCardHeadings()).toHaveLength(4);
+      expect(await findAllByCardHeader()).toHaveLength(4);
       expect(await findByFirstItemsTitle()).toBeInTheDocument();
 
       const [firstCardItemRemoveButton] = await findAllByRemoveButtons();
 
       await waitFor(() => userEvent.click(firstCardItemRemoveButton));
 
-      expect(getAllByCardHeadings()).toHaveLength(3);
+      expect(getAllByCardHeader()).toHaveLength(3);
       expect(getByFirstItemsTitle()).not.toBeInTheDocument();
     });
   });
