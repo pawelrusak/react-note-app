@@ -52,4 +52,8 @@ export const TEST_ID = {
     ARTICLE_LINK: 'DetailsTemplate_ArticleLink',
     AVATAR: 'DetailsTemplate_Avatar',
   },
+  GRID_TEMPLATE: {
+    COUNTER: 'GridTemplate_Counter',
+    SKELETON_COUNTER: 'GridTemplate_SkeletonCounter',
+  },
 } as const;

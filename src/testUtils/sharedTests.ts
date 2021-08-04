@@ -29,9 +29,9 @@ export const fetchItemsTestSuite = (
   const findAllByCardHeader = () => screen.findAllByTestId(TEST_ID.CARD.HEADER);
   const findByFirstItemsTitle = () => screen.findByText(firstItemsTitle);
   const queryAllBySkeletonCard = () => screen.queryAllByTestId(TEST_ID.SKELETON_CARD.WRAPPER);
-  const queryByGridTemplateCounter = () => screen.queryByTestId('GridTemplate_Counter');
+  const queryByGridTemplateCounter = () => screen.queryByTestId(TEST_ID.GRID_TEMPLATE.COUNTER);
   const queryByGridTemplateSkeletonCounter = () =>
-    screen.queryByTestId('GridTemplate_SkeletonCounter');
+    screen.queryByTestId(TEST_ID.GRID_TEMPLATE.SKELETON_COUNTER);
 
   describe(testSuiteName, () => {
     it('display <CardListSkeleton /> until fetch data', async () => {
