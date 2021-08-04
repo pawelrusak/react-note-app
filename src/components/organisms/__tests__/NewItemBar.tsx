@@ -1,4 +1,4 @@
-import { testComponent, render, screen, userEvent, waitFor, cleanup } from 'testUtils';
+import { testComponent, render, screen, userEvent, waitFor } from 'testUtils';
 
 import NewItemBar, { OwnProps as NewItemBarOwnProps } from '../NewItemBar/NewItemBar';
 import * as NewItemBarStories from '../NewItemBar/NewItemBar.stories';
@@ -28,8 +28,6 @@ const twitterUsernameInputTestName = 'twitter username input';
 const articleLinkInputTestName = 'twitter username input';
 
 describe('<NewItemBar />', () => {
-  afterEach(cleanup);
-
   it.each([['notes'], ['twitters'], ['articles']])('display correctly heading', (pageType) => {
     renderNewItemBar(pageType as ItemVariants);
 
