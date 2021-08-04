@@ -40,9 +40,9 @@ const articleLinkTestName = 'article link';
 
 const queryByNoteItemTitleText = () => screen.queryByText(noteItem.title);
 const queryByNoteItemContentText = () => screen.queryByText(noteItem.content);
-const queryByArticleLink = () => screen.queryByTestId('article-link');
-const queryByAvatar = () => screen.queryByTestId('avatar');
-const queryByDetailsTemplateDate = () => screen.queryByTestId('details-template-date');
+const queryByArticleLink = () => screen.queryByTestId('DetailsTemplate_ArticleLink');
+const queryByAvatar = () => screen.queryByTestId('DetailsTemplate_Avatar');
+const queryByDetailsTemplateDate = () => screen.queryByTestId('DetailsTemplate_DateInfo');
 
 const mocksFetchItem = () => jest.spyOn(services, 'fetchItem');
 

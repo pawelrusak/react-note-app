@@ -49,7 +49,7 @@ const StyledLink = styled.a`
   margin: 20px 0 50px;
 `;
 
-const StyledImage = styled.img`
+const StyledAvatar = styled.img`
   position: absolute;
   right: -80px;
   top: 50px;
@@ -78,19 +78,19 @@ const DetailsTemplate = ({
           </StyledHeading>
           <StyledParagraph>
             created -{' '}
-            <Time data-testid="details-template-date" date={created} format="DD/MM/YYYY" />
+            <Time data-testid="DetailsTemplate_DateInfo" date={created} format="DD/MM/YYYY" />
           </StyledParagraph>
         </StyledPageHeader>
 
         <Paragraph>{content}</Paragraph>
         {pageContext === 'articles' && (
-          <StyledLink data-testid="article-link" href={articleUrl as string}>
+          <StyledLink data-testid="DetailsTemplate_ArticleLink" href={articleUrl as string}>
             Open article
           </StyledLink>
         )}
         {pageContext === 'twitters' && (
-          <StyledImage
-            data-testid="avatar"
+          <StyledAvatar
+            data-testid="DetailsTemplate_Avatar"
             alt={title}
             src={`https://unavatar.now.sh/twitter/${twitterName as string}  `}
           />
