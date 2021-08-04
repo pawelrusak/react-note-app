@@ -7,6 +7,8 @@ import {
 } from 'testUtils';
 import { fakeItemsData } from 'testUtils/fakers';
 
+import { TEST_ID } from '~/constants/tests';
+
 import type { ItemVariants } from '~/commonTypes';
 
 type FetchItemsTestSuiteConfigArgs = {
@@ -21,11 +23,10 @@ export const fetchItemsTestSuite = (
   const itemsData = fakeItemsData[variant];
   const firstItemsTitle = itemsData[0].title;
 
-  const CARD_HEADER_TEST_ID = 'Card_Header';
-  const getAllByCardHeadings = () => screen.getAllByTestId(CARD_HEADER_TEST_ID);
+  const getAllByCardHeadings = () => screen.getAllByTestId(TEST_ID.CARD.HEADER);
   const getByFirstItemsTitle = () => screen.queryByText(firstItemsTitle);
   const findAllByRemoveButtons = () => screen.findAllByRole('button', { name: /remove/i });
-  const findAllByCardHeadings = () => screen.findAllByTestId(CARD_HEADER_TEST_ID);
+  const findAllByCardHeadings = () => screen.findAllByTestId(TEST_ID.CARD.HEADER);
   const findByFirstItemsTitle = () => screen.findByText(firstItemsTitle);
   const queryAllBySkeletonCard = () => screen.queryAllByTestId('SkeletonCard');
   const queryByGridTemplateCounter = () => screen.queryByTestId('GridTemplate_Counter');

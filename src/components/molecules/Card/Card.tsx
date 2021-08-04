@@ -6,6 +6,7 @@ import Button from '~/components/atoms/Button/Button';
 import Heading from '~/components/atoms/Heading/Heading';
 import Paragraph from '~/components/atoms/Paragraph/Paragraph';
 import Time from '~/components/atoms/Time/Time';
+import { TEST_ID } from '~/constants/tests';
 import { useHistoryPush, useRemoveItemAction, usePageTypeContext } from '~/hooks';
 import { activecolor } from '~/theme/mixins';
 
@@ -119,14 +120,14 @@ const Card = ({ id, title, created, twitterName, articleUrl, content }: CardProp
 
   return (
     <StyledWrapper>
-      <HeaderWrapper data-testid="Card_Header" onClick={historyPush} activecolor={itemType}>
+      <HeaderWrapper data-testid={TEST_ID.CARD.HEADER} onClick={historyPush} activecolor={itemType}>
         <StyledHeading>{title}</StyledHeading>
-        <DateInfo data-testid="Card_DateInfo" date={created} />
+        <DateInfo data-testid={TEST_ID.CARD.DATE_INFO} date={created} />
         {itemType === 'twitters' && (
           <StyledAvatar src={`https://unavatar.now.sh/twitter/${twitterName || ''}`} />
         )}
         {itemType === 'articles' && (
-          <StyledArticleLink data-testid="Card_ArticleLink" href={articleUrl || ''} />
+          <StyledArticleLink data-testid={TEST_ID.CARD.ARTICLE_LINK} href={articleUrl || ''} />
         )}
       </HeaderWrapper>
       <ContentWrapper>

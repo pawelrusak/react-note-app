@@ -33,3 +33,11 @@ export const AUTH_ERRORS = {
     message: 'Invalid email',
   },
 } as const;
+
+export const TEST_ID = {
+  CARD: {
+    HEADER: 'Card_Header',
+    DATE_INFO: 'Card_DateInfo',
+    ARTICLE_LINK: 'Card_ArticleLink',
+  },
+} as const;

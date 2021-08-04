@@ -4,6 +4,7 @@ import { render, screen, userEvent, testComponent } from 'testUtils';
 
 import Card, { CardProps } from '../Card/Card';
 import * as CardStories from '../Card/Card.stories';
+import { TEST_ID } from '~/constants/tests';
 import { routes } from '~/routes';
 import * as actions from '~/store/items/itemsSlice';
 
@@ -53,10 +54,10 @@ const renderCard = (cardType: CardType) => {
 
 const getByButtonRole = () => screen.getByRole('button');
 const queryByImgRole = () => screen.queryByRole('img');
-const getByCardHeading = () => screen.getByTestId('Card_Header');
-const queryByCardArticleLink = () => screen.queryByTestId('Card_ArticleLink');
+const getByCardHeader = () => screen.getByTestId(TEST_ID.CARD.HEADER);
+const queryByCardArticleLink = () => screen.queryByTestId(TEST_ID.CARD.ARTICLE_LINK);
 const queryByFakeDetailsPage = () => screen.queryByTestId('FakeDetailsPage');
-const queryByCardDate = () => screen.queryByTestId('Card_DateInfo');
+const queryByCardDate = () => screen.queryByTestId(TEST_ID.CARD.DATE_INFO);
 
 /**
  * @todo use CONSTANT_CASE names
@@ -73,7 +74,7 @@ describe('<Card />', () => {
 
     expect(queryByFakeDetailsPage()).not.toBeInTheDocument();
 
-    userEvent.click(getByCardHeading());
+    userEvent.click(getByCardHeader());
 
     expect(queryByFakeDetailsPage()).toBeInTheDocument();
     expect(queryByFakeDetailsPage()).toHaveTextContent(
