@@ -91,9 +91,9 @@ const GridTemplate = ({ children }: GridTemplateProps) => {
             {pageType}
           </StyledHeading>
           {isLoading() ? (
-            <StyledSkeletonCounter data-testid="grid-template-skeleton-counter" />
+            <StyledSkeletonCounter data-testid="GridTemplate_SkeletonCounter" />
           ) : (
-            <StyledParagraph data-testid="grid-template-counter">6 {pageType}</StyledParagraph>
+            <StyledParagraph data-testid="GridTemplate_Counter">6 {pageType}</StyledParagraph>
           )}
         </StyledPageHeader>
         <StyledGrid>{children}</StyledGrid>
