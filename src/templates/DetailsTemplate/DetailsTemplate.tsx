@@ -5,6 +5,7 @@ import Button from '~/components/atoms/Button/Button';
 import Heading from '~/components/atoms/Heading/Heading';
 import Paragraph from '~/components/atoms/Paragraph/Paragraph';
 import Time from '~/components/atoms/Time/Time';
+import { TEST_ID } from '~/constants/tests';
 import { usePageTypeContext } from '~/hooks';
 import UserPageTemplate from '~/templates/UserPageTemplate/UserPageTemplate';
 
@@ -78,19 +79,26 @@ const DetailsTemplate = ({
           </StyledHeading>
           <StyledParagraph>
             created -{' '}
-            <Time data-testid="DetailsTemplate_DateInfo" date={created} format="DD/MM/YYYY" />
+            <Time
+              data-testid={TEST_ID.DETAILS_TEMPLATE.DATE_INFO}
+              date={created}
+              format="DD/MM/YYYY"
+            />
           </StyledParagraph>
         </StyledPageHeader>
 
         <Paragraph>{content}</Paragraph>
         {pageContext === 'articles' && (
-          <StyledLink data-testid="DetailsTemplate_ArticleLink" href={articleUrl as string}>
+          <StyledLink
+            data-testid={TEST_ID.DETAILS_TEMPLATE.ARTICLE_LINK}
+            href={articleUrl as string}
+          >
             Open article
           </StyledLink>
         )}
         {pageContext === 'twitters' && (
           <StyledAvatar
-            data-testid="DetailsTemplate_Avatar"
+            data-testid={TEST_ID.DETAILS_TEMPLATE.AVATAR}
             alt={title}
             src={`https://unavatar.now.sh/twitter/${twitterName as string}  `}
           />

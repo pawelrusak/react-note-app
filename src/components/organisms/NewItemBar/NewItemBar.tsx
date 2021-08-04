@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import Button from '~/components/atoms/Button/Button';
 import Heading from '~/components/atoms/Heading/Heading';
 import Input from '~/components/atoms/Input/Input';
+import { TEST_ID } from '~/constants/tests';
 import { usePageTypeContext } from '~/hooks';
 import { addItem as addItemAction } from '~/store/items/itemsSlice';
 import * as styledMixin from '~/theme/mixins';
@@ -62,7 +63,11 @@ const NewItemBar = ({ isVisible, addItem, handleClose }: NewItemBarProps) => {
   const pageContext = usePageTypeContext();
 
   return (
-    <StyledWrapper data-testid="NewItemBar" isVisible={isVisible} activecolor={pageContext}>
+    <StyledWrapper
+      data-testid={TEST_ID.NEW_ITEM_BAR.WRAPPER}
+      isVisible={isVisible}
+      activecolor={pageContext}
+    >
       <Heading big>Create new {pageContext}</Heading>
       <Formik
         initialValues={{ title: '', content: '', articleUrl: '', twitterName: '' }}
@@ -104,7 +109,7 @@ const NewItemBar = ({ isVisible, addItem, handleClose }: NewItemBarProps) => {
             <StyledTextArea
               name="content"
               as="textarea"
-              data-testid="NewItemBar_Textarea"
+              data-testid={TEST_ID.NEW_ITEM_BAR.TEXTAREA}
               onChange={handleChange}
               onBlur={handleBlur}
               value={values.content}

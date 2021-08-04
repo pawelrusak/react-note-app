@@ -7,6 +7,7 @@ import Input from '~/components/atoms/Input/Input';
 import Paragraph from '~/components/atoms/Paragraph/Paragraph';
 import Skeleton from '~/components/atoms/Skeleton/Skeleton';
 import NewItemBar from '~/components/organisms/NewItemBar/NewItemBar';
+import { TEST_ID } from '~/constants/tests';
 import { useToggle, usePageTypeContext, useItemsStatus } from '~/hooks';
 import UserPageTemplate from '~/templates/UserPageTemplate/UserPageTemplate';
 import * as styledMixin from '~/theme/mixins';
@@ -91,9 +92,11 @@ const GridTemplate = ({ children }: GridTemplateProps) => {
             {pageType}
           </StyledHeading>
           {isLoading() ? (
-            <StyledSkeletonCounter data-testid="GridTemplate_SkeletonCounter" />
+            <StyledSkeletonCounter data-testid={TEST_ID.GRID_TEMPLATE.SKELETON_COUNTER} />
           ) : (
-            <StyledParagraph data-testid="GridTemplate_Counter">6 {pageType}</StyledParagraph>
+            <StyledParagraph data-testid={TEST_ID.GRID_TEMPLATE.COUNTER}>
+              6 {pageType}
+            </StyledParagraph>
           )}
         </StyledPageHeader>
         <StyledGrid>{children}</StyledGrid>

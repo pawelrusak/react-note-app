@@ -7,6 +7,8 @@ import {
 } from 'testUtils';
 import { fakeItemsData } from 'testUtils/fakers';
 
+import { TEST_ID } from '~/constants/tests';
+
 import type { ItemVariants } from '~/commonTypes';
 
 type FetchItemsTestSuiteConfigArgs = {
@@ -15,49 +17,48 @@ type FetchItemsTestSuiteConfigArgs = {
 };
 
 export const fetchItemsTestSuite = (
-  testGroupName: string,
+  testSuiteName: string,
   { render, variant }: FetchItemsTestSuiteConfigArgs,
 ) => {
   const itemsData = fakeItemsData[variant];
   const firstItemsTitle = itemsData[0].title;
 
-  const CARD_HEADER_TEST_ID = 'Card_Header';
-  const getAllByCardHeadings = () => screen.getAllByTestId(CARD_HEADER_TEST_ID);
+  const getAllCardHeaders = () => screen.getAllByTestId(TEST_ID.CARD.HEADER);
   const getByFirstItemsTitle = () => screen.queryByText(firstItemsTitle);
   const findAllByRemoveButtons = () => screen.findAllByRole('button', { name: /remove/i });
-  const findAllByCardHeadings = () => screen.findAllByTestId(CARD_HEADER_TEST_ID);
+  const findAllCardHeader = () => screen.findAllByTestId(TEST_ID.CARD.HEADER);
   const findByFirstItemsTitle = () => screen.findByText(firstItemsTitle);
-  const queryAllBySkeletonCard = () => screen.queryAllByTestId('SkeletonCard');
-  const queryByGridTemplateCounter = () => screen.queryByTestId('GridTemplate_Counter');
-  const queryByGridTemplateSkeletonCounter = () =>
-    screen.queryByTestId('GridTemplate_SkeletonCounter');
+  const queryAllSkeletonCard = () => screen.queryAllByTestId(TEST_ID.SKELETON_CARD.WRAPPER);
+  const queryGridTemplateCounter = () => screen.queryByTestId(TEST_ID.GRID_TEMPLATE.COUNTER);
+  const queryGridTemplateSkeletonCounter = () =>
+    screen.queryByTestId(TEST_ID.GRID_TEMPLATE.SKELETON_COUNTER);
 
-  describe(testGroupName, () => {
+  describe(testSuiteName, () => {
     it('display <CardListSkeleton /> until fetch data', async () => {
       render();
 
-      expect(queryAllBySkeletonCard()).toHaveLength(6);
+      expect(queryAllSkeletonCard()).toHaveLength(6);
 
-      await waitForElementToBeRemoved(() => queryAllBySkeletonCard());
+      await waitForElementToBeRemoved(() => queryAllSkeletonCard());
 
-      expect(queryAllBySkeletonCard()).toHaveLength(0);
+      expect(queryAllSkeletonCard()).toHaveLength(0);
     });
 
     it('display counter skeleton until fetch data', async () => {
       render();
 
-      expect(queryByGridTemplateSkeletonCounter()).toBeInTheDocument();
+      expect(queryGridTemplateSkeletonCounter()).toBeInTheDocument();
 
-      await waitForElementToBeRemoved(() => queryByGridTemplateSkeletonCounter());
+      await waitForElementToBeRemoved(() => queryGridTemplateSkeletonCounter());
 
-      expect(queryByGridTemplateSkeletonCounter()).not.toBeInTheDocument();
-      expect(queryByGridTemplateCounter()).toBeInTheDocument();
+      expect(queryGridTemplateSkeletonCounter()).not.toBeInTheDocument();
+      expect(queryGridTemplateCounter()).toBeInTheDocument();
     });
 
     it('display the cards with data from store', async () => {
       render();
 
-      const cardsHeadings = await findAllByCardHeadings();
+      const cardsHeadings = await findAllCardHeader();
 
       expect(cardsHeadings).toHaveLength(4);
 
@@ -69,14 +70,14 @@ export const fetchItemsTestSuite = (
     it('delete first card after clicking its the "remove" button', async () => {
       render();
 
-      expect(await findAllByCardHeadings()).toHaveLength(4);
+      expect(await findAllCardHeader()).toHaveLength(4);
       expect(await findByFirstItemsTitle()).toBeInTheDocument();
 
       const [firstCardItemRemoveButton] = await findAllByRemoveButtons();
 
       await waitFor(() => userEvent.click(firstCardItemRemoveButton));
 
-      expect(getAllByCardHeadings()).toHaveLength(3);
+      expect(getAllCardHeaders()).toHaveLength(3);
       expect(getByFirstItemsTitle()).not.toBeInTheDocument();
     });
   });

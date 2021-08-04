@@ -18,7 +18,7 @@ const renderMainTemplate = (path: RoutesPaths) =>
     { path },
   );
 
-const getByFakeContextPage = () => screen.getByTestId('FakeContextPage');
+const getFakeContextPage = () => screen.getByTestId('FakeContextPage');
 
 describe('<MainTemplate />', () => {
   it.each(getPairOfPathsAndPageTypes())(
@@ -26,7 +26,7 @@ describe('<MainTemplate />', () => {
     (path, pageType) => {
       renderMainTemplate(path);
 
-      expect(getByFakeContextPage()).toHaveTextContent(pageType);
+      expect(getFakeContextPage()).toHaveTextContent(pageType);
     },
   );
 });

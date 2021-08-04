@@ -33,3 +33,27 @@ export const AUTH_ERRORS = {
     message: 'Invalid email',
   },
 } as const;
+
+export const TEST_ID = {
+  CARD: {
+    HEADER: 'Card_Header',
+    DATE_INFO: 'Card_DateInfo',
+    ARTICLE_LINK: 'Card_ArticleLink',
+  },
+  SKELETON_CARD: {
+    WRAPPER: 'SkeletonCard',
+  },
+  NEW_ITEM_BAR: {
+    WRAPPER: 'NewItemBar',
+    TEXTAREA: 'NewItemBar_Textarea',
+  },
+  DETAILS_TEMPLATE: {
+    DATE_INFO: 'DetailsTemplate_DateInfo',
+    ARTICLE_LINK: 'DetailsTemplate_ArticleLink',
+    AVATAR: 'DetailsTemplate_Avatar',
+  },
+  GRID_TEMPLATE: {
+    COUNTER: 'GridTemplate_Counter',
+    SKELETON_COUNTER: 'GridTemplate_SkeletonCounter',
+  },
+} as const;
