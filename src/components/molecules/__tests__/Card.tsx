@@ -1,4 +1,3 @@
-import { waitFor } from '@testing-library/react';
 import { Route, Switch } from 'react-router-dom';
 import { render, screen, userEvent, testComponent } from 'testUtils';
 
@@ -6,7 +5,6 @@ import Card, { CardProps } from '../Card/Card';
 import * as CardStories from '../Card/Card.stories';
 import { TEST_ID } from '~/constants/tests';
 import { routes } from '~/routes';
-import * as actions from '~/store/items/itemsSlice';
 
 import type { Item } from '~/commonTypes';
 
@@ -52,7 +50,6 @@ const renderCard = (cardType: CardType) => {
   };
 };
 
-const getByButtonRole = () => screen.getByRole('button');
 const getCardHeader = () => screen.getByTestId(TEST_ID.CARD.HEADER);
 const queryByImgRole = () => screen.queryByRole('img');
 const queryCardArticleLink = () => screen.queryByTestId(TEST_ID.CARD.ARTICLE_LINK);
@@ -83,30 +80,6 @@ describe('<Card />', () => {
 
     expect(queryCardDateInfo()).toBeInTheDocument();
     expect(queryCardDateInfo()).toHaveTextContent(/3 days/i);
-  });
-
-  /**
-   * @deprecated remove this after write the test for <Notes />, <Twitters />, <Articles />, because they are more complex
-   */
-  it('trigger removeItem action with the data of card  when the remove button was clicked', async () => {
-    const mockRemoveItemAction = jest.spyOn(actions, 'removeItem');
-
-    renderCard('Note');
-    const removeItemButton = getByButtonRole();
-
-    await waitFor(() => userEvent.click(removeItemButton));
-
-    expect(mockRemoveItemAction).toHaveBeenCalledTimes(1);
-    expect(mockRemoveItemAction.mock.calls[0]).toMatchInlineSnapshot(`
-      Array [
-        Object {
-          "id": "8885d2d6-b081-4342-8232-e889affa9d93",
-          "itemVariant": "notes",
-        },
-      ]
-    `);
-
-    mockRemoveItemAction.mockRestore();
   });
 
   testComponent(() => renderCard('Note'), { suffixTestNames: 'when is note page' })
