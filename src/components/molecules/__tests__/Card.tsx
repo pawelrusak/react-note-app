@@ -1,7 +1,7 @@
 import { Route, Switch } from 'react-router-dom';
 import { render, screen, userEvent, testComponent } from 'testUtils';
 
-import Card, { CardProps } from '../Card/Card';
+import Card from '../Card/Card';
 import * as CardStories from '../Card/Card.stories';
 import { TEST_ID } from '~/constants/tests';
 import { routes } from '~/routes';
@@ -20,9 +20,6 @@ type FakeDetailsPageProps = {
 const FakeDetailsPage = ({ cardType, cardId }: FakeDetailsPageProps) => (
   <div data-testid="FakeDetailsPage">{`${cardType}:${cardId}`}</div>
 );
-
-const { twitterName: TWITTER_NAME_FROM_CARD_ARGS } = CardStories.Twitter.args as CardProps;
-const { articleUrl: ARTICLE_LINK_FROM_CARD_ARGS } = CardStories.Article.args as CardProps;
 
 const renderCard = (cardType: CardType) => {
   const cardData = CardStories[cardType]?.args as Item;
@@ -85,13 +82,13 @@ describe('<Card />', () => {
 
   testComponent(() => renderCard('Twitter'), { suffixTestNames: 'when is twitter page' })
     .toBeInTheDocument(TEST_NAME.TWITTER_AVATAR, queryByImgRole)
-    .withAttribute('src', expect.stringContaining(TWITTER_NAME_FROM_CARD_ARGS as string))
+    .withAttribute('src', expect.stringContaining(CardStories.Twitter.args?.twitterName as string))
     .not.toBeInTheDocument(TEST_NAME.ARTICLE_LINK, queryCardArticleLink)
     .run();
 
   testComponent(() => renderCard('Article'), { suffixTestNames: 'when is article page' })
     .toBeInTheDocument(TEST_NAME.ARTICLE_LINK, queryCardArticleLink)
-    .withAttribute('href', ARTICLE_LINK_FROM_CARD_ARGS)
+    .withAttribute('href', CardStories.Article.args?.articleUrl)
     .not.toBeInTheDocument(TEST_NAME.TWITTER_AVATAR, queryByImgRole)
     .run();
 });
