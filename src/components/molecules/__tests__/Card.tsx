@@ -12,28 +12,21 @@ jest.mock('~/services');
 
 type CardType = 'Note' | 'Twitter' | 'Article';
 
-type FakeDetailsPageProps = {
-  readonly cardId: string;
-  readonly cardType: CardType;
-};
-
-const FakeDetailsPage = ({ cardType, cardId }: FakeDetailsPageProps) => (
-  <div data-testid="FakeDetailsPage">{`${cardType}:${cardId}`}</div>
-);
-
 const renderCard = (cardType: CardType) => {
   const cardData = CardStories[cardType]?.args as Item;
   const itemType = cardType.toLowerCase() as 'note' | 'twitter' | 'article';
   const pageType = `${itemType}s` as const;
   const pathToDetailsPageWithGivenId = routes[itemType].replace(':id', cardData.id);
 
-  const FakeDetailsDataPage = () => <FakeDetailsPage cardType={cardType} cardId={cardData.id} />;
+  const FakeDetailsPage = () => (
+    <div data-testid="FakeDetailsPage">{`${cardType}:${cardData.id}`}</div>
+  );
 
   return {
     ...render(
       <Switch>
         <Route exact path={routes[pageType]} render={() => <Card {...cardData} />} />
-        <Route exact path={pathToDetailsPageWithGivenId} component={FakeDetailsDataPage} />
+        <Route exact path={pathToDetailsPageWithGivenId} component={FakeDetailsPage} />
       </Switch>,
       {
         path: routes[pageType],
