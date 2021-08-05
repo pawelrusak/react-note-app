@@ -1,6 +1,6 @@
 import dayjs from 'dayjs';
 import { Route } from 'react-router-dom';
-import { render, screen, waitFor, cleanup, testComponent } from 'testUtils';
+import { render, screen, waitFor, testComponent } from 'testUtils';
 import { fakeStateWithData } from 'testUtils/fakers';
 
 import DetailsPage from '../DetailsPage/DetailsPage';
@@ -49,8 +49,6 @@ const queryDetailsTemplateDateInfo = () => screen.queryByTestId(TEST_ID.DETAILS_
 const mocksFetchItem = () => jest.spyOn(services, 'fetchItem');
 
 describe('<DetailsPage />', () => {
-  afterEach(cleanup);
-
   it('send a request to service if there is no item in store and display him', async () => {
     const mockFetchItem = mocksFetchItem();
 
@@ -61,6 +59,8 @@ describe('<DetailsPage />', () => {
 
     await waitFor(() => expect(queryByNoteItemTitleText()).toBeInTheDocument());
     await waitFor(() => expect(queryByNoteItemContentText()).toBeInTheDocument());
+
+    mockFetchItem.mockRestore();
   });
 
   it('if the item exist in the store, he takes it', () => {
@@ -72,6 +72,8 @@ describe('<DetailsPage />', () => {
 
     expect(queryByNoteItemTitleText()).toBeInTheDocument();
     expect(queryByNoteItemContentText()).toBeInTheDocument();
+
+    mockFetchItem.mockRestore();
   });
 
   it.each(['note', 'article', 'twitter'] as const)('has a correctly formatted date', (variant) => {
