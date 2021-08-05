@@ -12,16 +12,13 @@ jest.mock('~/services');
 
 type CardType = 'Note' | 'Twitter' | 'Article';
 
-const getFakeDetailsPageText = (cardType: CardType, cardId: string) =>
-  `${cardType} page with ${cardId}`;
-
 type FakeDetailsPageProps = {
   readonly cardId: string;
   readonly cardType: CardType;
 };
 
 const FakeDetailsPage = ({ cardType, cardId }: FakeDetailsPageProps) => (
-  <div data-testid="FakeDetailsPage">{getFakeDetailsPageText(cardType, cardId)}</div>
+  <div data-testid="FakeDetailsPage">{`${cardType}:${cardId}`}</div>
 );
 
 const { twitterName: TWITTER_NAME_FROM_CARD_ARGS } = CardStories.Twitter.args as CardProps;
@@ -71,7 +68,7 @@ describe('<Card />', () => {
     userEvent.click(getCardHeader());
 
     expect(queryFakeDetailsPage()).toBeInTheDocument();
-    expect(queryFakeDetailsPage()).toHaveTextContent(getFakeDetailsPageText(cardType, cardData.id));
+    expect(queryFakeDetailsPage()).toHaveTextContent(`${cardType}:${cardData.id}`);
   });
 
   it.each(CART_TYPES)('has a correctly formatted date', (cardType) => {
