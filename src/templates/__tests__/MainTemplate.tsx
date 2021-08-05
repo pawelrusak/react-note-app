@@ -18,15 +18,13 @@ const renderMainTemplate = (path: RoutesPaths) =>
     { path },
   );
 
-const getFakeContextPage = () => screen.getByTestId('FakeContextPage');
-
 describe('<MainTemplate />', () => {
   it.each(getPairOfPathsAndPageTypes())(
     'parse the %s URL path and pass "%s" value to the page context consumer',
     (path, pageType) => {
       renderMainTemplate(path);
 
-      expect(getFakeContextPage()).toHaveTextContent(pageType);
+      expect(screen.getByTestId('FakeContextPage')).toHaveTextContent(pageType);
     },
   );
 });
