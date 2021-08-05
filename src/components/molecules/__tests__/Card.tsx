@@ -24,14 +24,14 @@ const FakeDetailsPage = ({ cardType, cardId }: FakeDetailsPageProps) => (
   <div data-testid="FakeDetailsPage">{getFakeDetailsPageText(cardType, cardId)}</div>
 );
 
-const { twitterName: twitterNameCardArgs } = CardStories.Twitter.args as CardProps;
-const { articleUrl: articleUrlCardArgs } = CardStories.Article.args as CardProps;
+const { twitterName: TWITTER_NAME_FROM_CARD_ARGS } = CardStories.Twitter.args as CardProps;
+const { articleUrl: ARTICLE_LINK_FROM_CARD_ARGS } = CardStories.Article.args as CardProps;
 
 const renderCard = (cardType: CardType) => {
   const cardData = CardStories[cardType]?.args as Item;
   const itemType = cardType.toLowerCase() as 'note' | 'twitter' | 'article';
   const pageType = `${itemType}s` as const;
-  const detailsPagePath = routes[itemType].replace(':id', cardData.id);
+  const pathToDetailsPageWithGivenId = routes[itemType].replace(':id', cardData.id);
 
   const FakeDetailsDataPage = () => <FakeDetailsPage cardType={cardType} cardId={cardData.id} />;
 
@@ -39,7 +39,7 @@ const renderCard = (cardType: CardType) => {
     ...render(
       <Switch>
         <Route exact path={routes[pageType]} render={() => <Card {...cardData} />} />
-        <Route exact path={detailsPagePath} component={FakeDetailsDataPage} />
+        <Route exact path={pathToDetailsPageWithGivenId} component={FakeDetailsDataPage} />
       </Switch>,
       {
         path: routes[pageType],
@@ -56,11 +56,10 @@ const queryCardArticleLink = () => screen.queryByTestId(TEST_ID.CARD.ARTICLE_LIN
 const queryFakeDetailsPage = () => screen.queryByTestId('FakeDetailsPage');
 const queryCardDateInfo = () => screen.queryByTestId(TEST_ID.CARD.DATE_INFO);
 
-/**
- * @todo use CONSTANT_CASE names
- */
-const twitterAvatarTestName = 'twitter avatar';
-const articleLinkTestName = 'article link';
+const TEST_NAME = {
+  TWITTER_AVATAR: 'twitter avatar',
+  ARTICLE_LINK: 'article link',
+};
 const CART_TYPES = ['Note', 'Twitter', 'Article'] as const;
 
 describe('<Card />', () => {
@@ -83,19 +82,19 @@ describe('<Card />', () => {
   });
 
   testComponent(() => renderCard('Note'), { suffixTestNames: 'when is note page' })
-    .not.toBeInTheDocument(twitterAvatarTestName, queryByImgRole)
-    .not.toBeInTheDocument(articleLinkTestName, queryCardArticleLink)
+    .not.toBeInTheDocument(TEST_NAME.TWITTER_AVATAR, queryByImgRole)
+    .not.toBeInTheDocument(TEST_NAME.ARTICLE_LINK, queryCardArticleLink)
     .run();
 
   testComponent(() => renderCard('Twitter'), { suffixTestNames: 'when is twitter page' })
-    .toBeInTheDocument(twitterAvatarTestName, queryByImgRole)
-    .withAttribute('src', expect.stringContaining(twitterNameCardArgs as string))
-    .not.toBeInTheDocument(articleLinkTestName, queryCardArticleLink)
+    .toBeInTheDocument(TEST_NAME.TWITTER_AVATAR, queryByImgRole)
+    .withAttribute('src', expect.stringContaining(TWITTER_NAME_FROM_CARD_ARGS as string))
+    .not.toBeInTheDocument(TEST_NAME.ARTICLE_LINK, queryCardArticleLink)
     .run();
 
   testComponent(() => renderCard('Article'), { suffixTestNames: 'when is article page' })
-    .toBeInTheDocument(articleLinkTestName, queryCardArticleLink)
-    .withAttribute('href', articleUrlCardArgs)
-    .not.toBeInTheDocument(twitterAvatarTestName, queryByImgRole)
+    .toBeInTheDocument(TEST_NAME.ARTICLE_LINK, queryCardArticleLink)
+    .withAttribute('href', ARTICLE_LINK_FROM_CARD_ARGS)
+    .not.toBeInTheDocument(TEST_NAME.TWITTER_AVATAR, queryByImgRole)
     .run();
 });
