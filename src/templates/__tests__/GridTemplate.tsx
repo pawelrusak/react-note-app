@@ -3,7 +3,7 @@ import { fakeStateWithDataAndLoggedInUser } from 'testUtils/fakers';
 
 import GridTemplate from '../GridTemplate/GridTemplate';
 import { ItemVariants } from '~/commonTypes';
-import { TEST_FAKE_NEW_NOTE_DATA_ID, TEST_ID } from '~/constants/tests';
+import { TEST_ID } from '~/constants/tests';
 
 import type { RoutesPaths } from '~/routes';
 
@@ -143,7 +143,7 @@ describe('<GridTemplate />', () => {
     expect(store.getState().items.notes).toEqual(
       expect.arrayContaining([
         expect.objectContaining({
-          id: TEST_FAKE_NEW_NOTE_DATA_ID,
+          id: expect.any(String) as string,
           ...fakeNoteItemInputs,
           articleUrl: expect.any(String) as string,
           created: expect.any(String) as string,
