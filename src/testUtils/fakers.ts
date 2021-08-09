@@ -1,4 +1,5 @@
-import { TEST_FAKE_AUTH_USER_ID } from '~/constants/tests';
+import { nanoid } from '@reduxjs/toolkit';
+
 import { getEarlierDateOfDay } from '~/utils';
 
 import type { RootState } from '~/store';
@@ -123,7 +124,7 @@ export const fakeStateWithDataAndLoggedInUser: RootState = {
   ...fakeStateWithData,
   auth: {
     ...fakeStateWithData.auth,
-    userID: TEST_FAKE_AUTH_USER_ID,
+    userID: nanoid(),
   },
 };
 
