@@ -1,7 +1,5 @@
 import { AUTH_ERRORS_CODES } from './auth';
 
-export const TEST_FAKE_NEW_NOTE_DATA_ID = 'test-fake-new-note-data-id';
-
 export const TEST_FAKE_AUTH_USER_ID = 'test-fake-auth-user-id';
 
 export const SPECIAL_VALUE_TO_TEST_WEAK_PASSWORD = 'special.variable.for.testing.weak.passwords';
