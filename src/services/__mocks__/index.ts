@@ -3,9 +3,8 @@ import { fakeItemsData, fakeStateWithData } from 'testUtils/fakers';
 import * as yup from 'yup';
 
 import {
-  TEST_FAKE_AUTH_USER_ID,
-  REGISTERED_USER_CREDENTIALS,
   AUTH_ERRORS,
+  REGISTERED_USER_CREDENTIALS,
   SPECIAL_VALUE_TO_TEST_WEAK_PASSWORD,
 } from '~/constants/tests';
 
@@ -110,7 +109,7 @@ export const register = async (email: string, password: string) => {
     }
 
     const user = {
-      uid: TEST_FAKE_AUTH_USER_ID,
+      uid: nanoid(),
     };
     return Promise.resolve({ user });
   } catch (error) {
