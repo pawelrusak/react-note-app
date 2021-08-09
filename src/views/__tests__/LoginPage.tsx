@@ -69,7 +69,7 @@ describe('<LoginPage />', () => {
 
     userEvent.type(getByLoginPlaceholderText(), 'unregister.user@email.com');
     // may have the same password as the registered
-    userEvent.type(getByPasswordPlaceholderText(), REGISTERED_USER_CREDENTIALS.password);
+    userEvent.type(getByPasswordPlaceholderText(), REGISTERED_USER_CREDENTIALS.PASSWORD);
 
     // // submit form
     await waitFor(() => userEvent.click(getByLoginButton()));
@@ -83,7 +83,7 @@ describe('<LoginPage />', () => {
   it('the password field should be invalid and have a server error message after a registered user tries to log in with an incorrect password', async () => {
     renderLoginPage();
 
-    userEvent.type(getByLoginPlaceholderText(), REGISTERED_USER_CREDENTIALS.email);
+    userEvent.type(getByLoginPlaceholderText(), REGISTERED_USER_CREDENTIALS.EMAIL);
     userEvent.type(getByPasswordPlaceholderText(), 'wrong.password');
 
     // // submit form
@@ -100,8 +100,8 @@ describe('<LoginPage />', () => {
 
     expect(queryFakeHomePage()).not.toBeInTheDocument();
 
-    userEvent.type(getByLoginPlaceholderText(), REGISTERED_USER_CREDENTIALS.email);
-    userEvent.type(getByPasswordPlaceholderText(), REGISTERED_USER_CREDENTIALS.password);
+    userEvent.type(getByLoginPlaceholderText(), REGISTERED_USER_CREDENTIALS.EMAIL);
+    userEvent.type(getByPasswordPlaceholderText(), REGISTERED_USER_CREDENTIALS.PASSWORD);
 
     // submit forme
     await waitFor(() => userEvent.click(getByLoginButton()));
