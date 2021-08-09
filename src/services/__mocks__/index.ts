@@ -1,8 +1,8 @@
+import { nanoid } from '@reduxjs/toolkit';
 import { fakeItemsData, fakeStateWithData } from 'testUtils/fakers';
 import * as yup from 'yup';
 
 import {
-  TEST_FAKE_NEW_NOTE_DATA_ID,
   TEST_FAKE_AUTH_USER_ID,
   REGISTERED_USER_CREDENTIALS,
   AUTH_ERRORS,
@@ -44,7 +44,7 @@ export const fetchItem = async (id: string) => {
 export const addItem = async ({ ...itemContent }) => {
   try {
     const data = {
-      id: TEST_FAKE_NEW_NOTE_DATA_ID,
+      id: nanoid(),
       created: new Date().toISOString(),
       ...itemContent,
     };
