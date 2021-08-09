@@ -76,8 +76,8 @@ describe('<RegisterPage />', () => {
   it('the email field should be invalid and have an error message from the server when a registered user tries to log in', async () => {
     renderRegisterPage();
 
-    userEvent.type(getByLoginPlaceholderText(), REGISTERED_USER_CREDENTIALS.email);
-    userEvent.type(getByPasswordPlaceholderText(), REGISTERED_USER_CREDENTIALS.password);
+    userEvent.type(getByLoginPlaceholderText(), REGISTERED_USER_CREDENTIALS.EMAIL);
+    userEvent.type(getByPasswordPlaceholderText(), REGISTERED_USER_CREDENTIALS.PASSWORD);
 
     // // submit form
     await waitFor(() => userEvent.click(getByRegisterButton()));

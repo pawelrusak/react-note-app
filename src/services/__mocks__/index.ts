@@ -56,11 +56,11 @@ export const addItem = async ({ ...itemContent }) => {
 };
 
 const isEmailBelongsToRegisterUser = (email: string) => {
-  return REGISTERED_USER_CREDENTIALS.email === email;
+  return REGISTERED_USER_CREDENTIALS.EMAIL === email;
 };
 
 const isRegisterUserButWithWrongPassword = (email: string, password: string) => {
-  return isEmailBelongsToRegisterUser(email) && REGISTERED_USER_CREDENTIALS.password !== password;
+  return isEmailBelongsToRegisterUser(email) && REGISTERED_USER_CREDENTIALS.PASSWORD !== password;
 };
 
 export const authenticateUser = async (email: string, password: string) => {
