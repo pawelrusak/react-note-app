@@ -1,6 +1,7 @@
 import { render, screen, testComponent } from 'testUtils';
 
 import SkeletonCard from '../SkeletonCard/SkeletonCard';
+import { TEST_ID } from '~/constants/tests';
 
 type SkeletonCardType = 'Note' | 'Twitter' | 'Article';
 
@@ -13,9 +14,10 @@ const renderSkeletonCard = (cardType: SkeletonCardType) => {
   };
 };
 
-const querySkeletonCardAvatarSkeleton = () => screen.queryByTestId('SkeletonCard_AvatarSkeleton');
+const querySkeletonCardAvatarSkeleton = () =>
+  screen.queryByTestId(TEST_ID.SKELETON_CARD.AVATAR_SKELETON);
 const querySkeletonCardArticleLinkSkeleton = () =>
-  screen.queryByTestId('SkeletonCard_ArticleLinkSkeleton');
+  screen.queryByTestId(TEST_ID.SKELETON_CARD.ARTICLE_LINK_SKELETON);
 
 const TEST_NAME = {
   TWITTER_AVATAR_SKELETON: 'twitter avatar skeleton',
