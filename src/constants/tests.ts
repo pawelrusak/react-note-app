@@ -38,6 +38,8 @@ export const TEST_ID = {
   },
   SKELETON_CARD: {
     WRAPPER: 'SkeletonCard',
+    AVATAR_SKELETON: 'SkeletonCard_AvatarSkeleton',
+    ARTICLE_LINK_SKELETON: 'SkeletonCard_ArticleLinkSkeleton',
   },
   NEW_ITEM_BAR: {
     WRAPPER: 'NewItemBar',
