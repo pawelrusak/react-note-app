@@ -1,13 +1,13 @@
 import { lighten as lightenMixin } from 'polished';
 import styled, { css } from 'styled-components';
 
-import { RequiredOnlyWithNever, Never } from '~/commonTypes';
 import Skeleton from '~/components/atoms/Skeleton/Skeleton';
 import Card from '~/components/molecules/Card/Card';
 import { TEST_ID } from '~/constants/tests';
 import { usePageTypeContext } from '~/hooks';
 import * as styledMixin from '~/theme/mixins';
 
+import type { RequiredOnlyWithNever, Never } from '~/commonTypes';
 import type { ActiveColorArgs } from '~/theme/mixins';
 
 const LIGHTEN_ACTIVE_COLOR_AMOUNT = 0.17;
@@ -137,13 +137,16 @@ const SkeletonCard = ({
         <StyledSkeletonTime dark />
         {itemType === 'twitters' && (
           <StyledAvatarSkeleton
+            data-testid="SkeletonCard_AvatarSkeleton"
             lightenActiveColorAmount={lightenAmount}
             lightenActiveColor={lighten}
             greyColor={grey}
             dark
           />
         )}
-        {itemType === 'articles' && <StyledLinkButtonSkeleton dark />}
+        {itemType === 'articles' && (
+          <StyledLinkButtonSkeleton data-testid="SkeletonCard_ArticleLinkSkeleton" dark />
+        )}
       </StyledCardHeaderWrapper>
       <Card.ContentWrapper>
         <Skeleton width="80%" />
