@@ -34,27 +34,24 @@ const Button = styled.button<ButtonProps>`
   }
 
   ${({ secondary }) =>
-    secondary &&
-    css`
-      background-color: hsl(0, 0%, 90%);
-      width: 105px;
-      height: 30px;
-      font-size: 10px;
+    secondary
+      ? css`
+          background-color: hsl(0, 0%, 90%);
+          width: 105px;
+          height: 30px;
+          font-size: 10px;
 
-      &:hover {
-        background-color: hsl(0, 0%, 90%);
-      }
-    `}
-
-  ${({ secondary }) =>
-    !secondary &&
-    css`
-      &:disabled {
-        ${styledMixin.lightenActiveColor};
-        ${styledMixin.lightenBlackText};
-        cursor: not-allowed;
-      }
-    `}
+          &:hover {
+            background-color: hsl(0, 0%, 90%);
+          }
+        `
+      : css`
+          &:disabled {
+            ${styledMixin.lightenActiveColor};
+            ${styledMixin.lightenBlackText};
+            cursor: not-allowed;
+          }
+        `}
 
   ${({ secondary, pending }) =>
     !secondary &&
