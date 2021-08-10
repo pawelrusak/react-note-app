@@ -1,3 +1,4 @@
+import { build, fake } from '@jackfranklin/test-data-bot';
 import { render, screen, userEvent, getPairOfPathsAndPageTypes, waitFor } from 'testUtils';
 import { fakeStateWithDataAndLoggedInUser } from 'testUtils/fakers';
 
@@ -5,6 +6,7 @@ import GridTemplate from '../GridTemplate/GridTemplate';
 import { ItemVariants } from '~/commonTypes';
 import { TEST_ID } from '~/constants/tests';
 
+import type { NoteItem } from '~/commonTypes';
 import type { RoutesPaths } from '~/routes';
 
 jest.mock('~/services');
@@ -40,10 +42,12 @@ const CSS_STYLES = {
   },
 } as const;
 
-const fakeNoteItemInputs = {
-  title: 'test note title',
-  content: 'test note content',
-};
+const noteItemBuilder = build<Omit<NoteItem, 'id' | 'created'>>({
+  fields: {
+    title: fake((faker) => faker.lorem.words()),
+    content: fake((faker) => faker.lorem.sentence()),
+  },
+});
 
 describe('<GridTemplate />', () => {
   it.each(getPairOfPathsAndPageTypes())(
@@ -125,6 +129,8 @@ describe('<GridTemplate />', () => {
   });
 
   it('add a new note to store that has been created by the form', async () => {
+    const fakeNoteItem = noteItemBuilder();
+
     const { store } = renderGridTemplate();
 
     expect(store.getState().items.notes).toHaveLength(4);
@@ -133,8 +139,8 @@ describe('<GridTemplate />', () => {
     await waitFor(() => userEvent.click(getByToggleNewItemBarNameAndButtonRole()));
 
     // input the values of the note
-    userEvent.type(getByTitlePlaceholderText(), fakeNoteItemInputs.title);
-    userEvent.type(getNewItemBarTextarea(), fakeNoteItemInputs.content);
+    userEvent.type(getByTitlePlaceholderText(), fakeNoteItem.title);
+    userEvent.type(getNewItemBarTextarea(), fakeNoteItem.content);
 
     // submit the note form
     await waitFor(() => userEvent.click(getByAddNoteNameAndButtonRole()));
@@ -144,10 +150,8 @@ describe('<GridTemplate />', () => {
       expect.arrayContaining([
         expect.objectContaining({
           id: expect.any(String) as string,
-          ...fakeNoteItemInputs,
-          articleUrl: expect.any(String) as string,
+          ...fakeNoteItem,
           created: expect.any(String) as string,
-          twitterName: expect.any(String) as string,
         }),
       ]),
     );
