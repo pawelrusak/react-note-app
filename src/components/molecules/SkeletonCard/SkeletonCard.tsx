@@ -137,7 +137,7 @@ const SkeletonCard = ({
         <StyledSkeletonTime dark />
         {itemType === 'twitters' && (
           <StyledAvatarSkeleton
-            data-testid="SkeletonCard_AvatarSkeleton"
+            data-testid={TEST_ID.SKELETON_CARD.AVATAR_SKELETON}
             lightenActiveColorAmount={lightenAmount}
             lightenActiveColor={lighten}
             greyColor={grey}
@@ -145,7 +145,10 @@ const SkeletonCard = ({
           />
         )}
         {itemType === 'articles' && (
-          <StyledLinkButtonSkeleton data-testid="SkeletonCard_ArticleLinkSkeleton" dark />
+          <StyledLinkButtonSkeleton
+            data-testid={TEST_ID.SKELETON_CARD.ARTICLE_LINK_SKELETON}
+            dark
+          />
         )}
       </StyledCardHeaderWrapper>
       <Card.ContentWrapper>
