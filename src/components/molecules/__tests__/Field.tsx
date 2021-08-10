@@ -1,3 +1,4 @@
+import { build, fake } from '@jackfranklin/test-data-bot';
 import { Formik, FormikConfig, Form } from 'formik';
 import { render, screen, userEvent, waitFor } from 'testUtils';
 
@@ -39,14 +40,38 @@ const renderField = ({
 
 const getByFieldPlaceholder = () => screen.getByPlaceholderText(FIELD_PLACEHOLDER);
 
+type HTMLAttributes = {
+  name: 'title';
+  value: string;
+};
+
+const HTMLAttributeBuilder = build<HTMLAttributes>({
+  fields: {
+    name: 'title',
+    value: fake((faker) => faker.lorem.words()),
+  },
+});
+
+type ValidationError = {
+  message: string;
+};
+
+const validationErrorBuilder = build<ValidationError>({
+  fields: {
+    message: fake((faker) => faker.lorem.words()),
+  },
+});
+
 describe('<Field />', () => {
   it('the attributes can be added to the input element', () => {
-    const ATTRIBUTE_KEY = 'title' as string;
-    const ATTRIBUTE_VALUE = 'example field title';
+    const fakeHTMLAttribute = HTMLAttributeBuilder();
 
-    renderField({ [ATTRIBUTE_KEY]: ATTRIBUTE_VALUE });
+    renderField({ [fakeHTMLAttribute.name]: fakeHTMLAttribute.value });
 
-    expect(getByFieldPlaceholder()).toHaveAttribute(ATTRIBUTE_KEY, ATTRIBUTE_VALUE);
+    expect(getByFieldPlaceholder()).toHaveAttribute(
+      fakeHTMLAttribute.name,
+      fakeHTMLAttribute.value,
+    );
   });
 
   it('default the input should be valid and does not have error message', () => {
@@ -57,13 +82,13 @@ describe('<Field />', () => {
   });
 
   it('when the form has the Formik errors then the field should be invalid and have the error message', async () => {
-    const EXAMPLE_ERROR_MESSAGE = 'Example error message';
+    const fakeValidationError = validationErrorBuilder();
 
     const validate = (values: FieldValues) => {
       const errors: Partial<FieldValues> = {};
 
       if (!values[FIELD_NAME]) {
-        errors[FIELD_NAME] = EXAMPLE_ERROR_MESSAGE;
+        errors[FIELD_NAME] = fakeValidationError.message;
       }
       return errors;
     };
@@ -73,6 +98,6 @@ describe('<Field />', () => {
     await waitFor(() => userEvent.click(screen.getByRole('button', { name: /submit/i })));
 
     expect(getByFieldPlaceholder()).toBeInvalid();
-    expect(getByFieldPlaceholder()).toHaveErrorMessage(EXAMPLE_ERROR_MESSAGE);
+    expect(getByFieldPlaceholder()).toHaveErrorMessage(fakeValidationError.message);
   });
 });

@@ -1,3 +1,4 @@
+import { build, fake } from '@jackfranklin/test-data-bot';
 import { Route, Switch } from 'react-router-dom';
 import { render, screen, waitFor, userEvent } from 'testUtils';
 import { fakeStateWithNotLoggedInUser } from 'testUtils/fakers';
@@ -17,11 +18,6 @@ const getByPasswordPlaceholderText = () => screen.getByPlaceholderText(/password
 const getByRegisterButton = () => screen.getByRole('button', { name: /register/i });
 const queryFakeHomePage = () => screen.queryByTestId('FakeHomePage');
 
-const fakeRegistrationData = {
-  email: 'app@login.test',
-  password: 'password', // the best password in the world
-};
-
 const FakeHomePage = () => <div data-testid="FakeHomePage">Home Page</div>;
 
 const renderRegisterPage = () =>
@@ -36,6 +32,18 @@ const renderRegisterPage = () =>
     },
   );
 
+type User = {
+  email: string;
+  password: string;
+};
+
+const userBuilder = build<User>({
+  fields: {
+    email: fake((faker) => faker.internet.email()),
+    password: fake((faker) => faker.internet.password()),
+  },
+});
+
 describe('<RegisterPage />', () => {
   it('initially, the form should not contain any errors and button should be enable', () => {
     renderRegisterPage();
@@ -46,6 +54,8 @@ describe('<RegisterPage />', () => {
   });
 
   it('disable the button after submitting an invalid form and enable it after fixing all form errors', async () => {
+    const fakeUnregisteredUser = userBuilder();
+
     renderRegisterPage();
 
     // attempt to submit an invalid form
@@ -56,7 +66,7 @@ describe('<RegisterPage />', () => {
     expect(getByLoginPlaceholderText()).toBeInvalid();
     expect(getByPasswordPlaceholderText()).toBeInvalid();
 
-    userEvent.type(getByLoginPlaceholderText(), 'correct@example.email');
+    userEvent.type(getByLoginPlaceholderText(), fakeUnregisteredUser.email);
 
     // the submit button should not be enable yet, it is waiting for all form fields to be valid
     await waitFor(() => expect(getByRegisterButton()).toBeDisabled());
@@ -64,7 +74,7 @@ describe('<RegisterPage />', () => {
     expect(getByLoginPlaceholderText()).toBeValid();
     expect(getByPasswordPlaceholderText()).toBeInvalid();
 
-    userEvent.type(getByPasswordPlaceholderText(), 'correct-password');
+    userEvent.type(getByPasswordPlaceholderText(), fakeUnregisteredUser.password);
 
     // when all form fields are valid then enable the submit button
     await waitFor(() => expect(getByRegisterButton()).toBeEnabled());
@@ -91,10 +101,16 @@ describe('<RegisterPage />', () => {
   });
 
   it('the password field should be invalid and have a server error message after the user tries to register with a weak password', async () => {
+    const fakeUnregisteredUserWithWeakPassword = userBuilder({
+      overrides: {
+        password: SPECIAL_VALUE_TO_TEST_WEAK_PASSWORD,
+      },
+    });
+
     renderRegisterPage();
 
-    userEvent.type(getByLoginPlaceholderText(), 'example@password.test');
-    userEvent.type(getByPasswordPlaceholderText(), SPECIAL_VALUE_TO_TEST_WEAK_PASSWORD);
+    userEvent.type(getByLoginPlaceholderText(), fakeUnregisteredUserWithWeakPassword.email);
+    userEvent.type(getByPasswordPlaceholderText(), fakeUnregisteredUserWithWeakPassword.password);
 
     // submit form
     await waitFor(() => userEvent.click(getByRegisterButton()));
@@ -106,12 +122,14 @@ describe('<RegisterPage />', () => {
   });
 
   it('submits correct values to registration and redirect to the home page', async () => {
+    const fakeUnregisteredUser = userBuilder();
+
     renderRegisterPage();
 
     expect(queryFakeHomePage()).not.toBeInTheDocument();
 
-    userEvent.type(getByLoginPlaceholderText(), fakeRegistrationData.email);
-    userEvent.type(getByPasswordPlaceholderText(), fakeRegistrationData.password);
+    userEvent.type(getByLoginPlaceholderText(), fakeUnregisteredUser.email);
+    userEvent.type(getByPasswordPlaceholderText(), fakeUnregisteredUser.password);
 
     // submit form
     await waitFor(() => userEvent.click(getByRegisterButton()));
