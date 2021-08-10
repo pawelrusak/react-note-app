@@ -1,3 +1,4 @@
+import { build, fake } from '@jackfranklin/test-data-bot';
 import { Route, Switch } from 'react-router-dom';
 import { render, screen, waitFor, userEvent } from 'testUtils';
 import { fakeStateWithNotLoggedInUser } from 'testUtils/fakers';
@@ -27,6 +28,18 @@ const renderLoginPage = () =>
     },
   );
 
+type User = {
+  email: string;
+  password: string;
+};
+
+const userBuilder = build<User>({
+  fields: {
+    email: fake((faker) => faker.internet.email()),
+    password: fake((faker) => faker.internet.password()),
+  },
+});
+
 describe('<LoginPage />', () => {
   it('initially, the form should not contain any errors and button should be enable', () => {
     renderLoginPage();
@@ -37,6 +50,8 @@ describe('<LoginPage />', () => {
   });
 
   it('disable the button after submitting an invalid form and enable it after fixing all form errors', async () => {
+    const fakeUser = userBuilder();
+
     renderLoginPage();
 
     // attempt to submit an invalid form
@@ -47,7 +62,7 @@ describe('<LoginPage />', () => {
     expect(getByLoginPlaceholderText()).toBeInvalid();
     expect(getByPasswordPlaceholderText()).toBeInvalid();
 
-    userEvent.type(getByLoginPlaceholderText(), 'correct@example.email');
+    userEvent.type(getByLoginPlaceholderText(), fakeUser.email);
 
     // the submit button should not be enable yet, it is waiting for all form fields to be valid
     await waitFor(() => expect(getByLoginButton()).toBeDisabled());
@@ -55,7 +70,7 @@ describe('<LoginPage />', () => {
     expect(getByLoginPlaceholderText()).toBeValid();
     expect(getByPasswordPlaceholderText()).toBeInvalid();
 
-    userEvent.type(getByPasswordPlaceholderText(), 'correct-password');
+    userEvent.type(getByPasswordPlaceholderText(), fakeUser.password);
 
     // when all form fields are valid then enable the submit button
     await waitFor(() => expect(getByLoginButton()).toBeEnabled());
@@ -65,13 +80,14 @@ describe('<LoginPage />', () => {
   });
 
   it('the email field should be invalid and have an error message from the server when a unregistered user tries to log in', async () => {
+    const fakeUnregisteredUser = userBuilder();
+
     renderLoginPage();
 
-    userEvent.type(getByLoginPlaceholderText(), 'unregister.user@email.com');
-    // may have the same password as the registered
-    userEvent.type(getByPasswordPlaceholderText(), REGISTERED_USER_CREDENTIALS.PASSWORD);
+    userEvent.type(getByLoginPlaceholderText(), fakeUnregisteredUser.email);
+    userEvent.type(getByPasswordPlaceholderText(), fakeUnregisteredUser.password);
 
-    // // submit form
+    // submit form
     await waitFor(() => userEvent.click(getByLoginButton()));
 
     expect(getByLoginButton()).toBeDisabled();
@@ -81,12 +97,18 @@ describe('<LoginPage />', () => {
   });
 
   it('the password field should be invalid and have a server error message after a registered user tries to log in with an incorrect password', async () => {
+    const registeredUserWithWrongPassword = userBuilder({
+      overrides: {
+        email: REGISTERED_USER_CREDENTIALS.EMAIL,
+      },
+    });
+
     renderLoginPage();
 
-    userEvent.type(getByLoginPlaceholderText(), REGISTERED_USER_CREDENTIALS.EMAIL);
-    userEvent.type(getByPasswordPlaceholderText(), 'wrong.password');
+    userEvent.type(getByLoginPlaceholderText(), registeredUserWithWrongPassword.email);
+    userEvent.type(getByPasswordPlaceholderText(), registeredUserWithWrongPassword.password);
 
-    // // submit form
+    // submit form
     await waitFor(() => userEvent.click(getByLoginButton()));
 
     expect(getByLoginButton()).toBeDisabled();
@@ -103,7 +125,7 @@ describe('<LoginPage />', () => {
     userEvent.type(getByLoginPlaceholderText(), REGISTERED_USER_CREDENTIALS.EMAIL);
     userEvent.type(getByPasswordPlaceholderText(), REGISTERED_USER_CREDENTIALS.PASSWORD);
 
-    // submit forme
+    // submit form
     await waitFor(() => userEvent.click(getByLoginButton()));
 
     // redirect to the home page
