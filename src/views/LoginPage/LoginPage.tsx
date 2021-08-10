@@ -85,7 +85,6 @@ const LoginPage = () => {
                   aria-required="true"
                 />
                 <Button
-                  activecolor="notes"
                   type="submit"
                   pending={isSubmitting}
                   disabled={isSubmitting || (touched.email && touched.password && !isValid)}

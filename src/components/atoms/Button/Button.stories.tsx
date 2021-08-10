@@ -11,6 +11,8 @@ type StoryButtonProps = ButtonProps & React.ComponentPropsWithoutRef<'button'>;
 
 const Template: Story<StoryButtonProps> = (args) => <Button {...args}>Hello, World!</Button>;
 
+export const Default = Template.bind({});
+
 export const Note = Template.bind({});
 Note.args = {
   activecolor: 'notes',

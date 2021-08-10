@@ -8,8 +8,8 @@ import type { ItemVariants } from '~/commonTypes';
 const SPINNER_HEIGHT = 18;
 
 export type ButtonProps =
-  | { readonly activecolor?: never; readonly secondary: true; pending?: never }
-  | { readonly activecolor: ItemVariants; readonly secondary?: never; pending?: boolean };
+  | Readonly<{ activecolor?: never; secondary: true; pending?: never }>
+  | Readonly<{ activecolor?: ItemVariants; secondary?: never; pending?: boolean }>;
 
 const Button = styled.button<ButtonProps>`
   display: flex;
@@ -34,27 +34,24 @@ const Button = styled.button<ButtonProps>`
   }
 
   ${({ secondary }) =>
-    secondary &&
-    css`
-      background-color: hsl(0, 0%, 90%);
-      width: 105px;
-      height: 30px;
-      font-size: 10px;
+    secondary
+      ? css`
+          background-color: hsl(0, 0%, 90%);
+          width: 105px;
+          height: 30px;
+          font-size: 10px;
 
-      &:hover {
-        background-color: hsl(0, 0%, 90%);
-      }
-    `}
-
-  ${({ secondary }) =>
-    !secondary &&
-    css`
-      &:disabled {
-        ${styledMixin.lightenActiveColor};
-        ${styledMixin.lightenBlackText};
-        cursor: not-allowed;
-      }
-    `}
+          &:hover {
+            background-color: hsl(0, 0%, 90%);
+          }
+        `
+      : css`
+          &:disabled {
+            ${styledMixin.lightenActiveColor};
+            ${styledMixin.lightenBlackText};
+            cursor: not-allowed;
+          }
+        `}
 
   ${({ secondary, pending }) =>
     !secondary &&
