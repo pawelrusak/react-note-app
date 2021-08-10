@@ -9,7 +9,7 @@ const SPINNER_HEIGHT = 18;
 
 export type ButtonProps =
   | { readonly activecolor?: never; readonly secondary: true; pending?: never }
-  | { readonly activecolor: ItemVariants; readonly secondary?: never; pending?: boolean };
+  | { readonly activecolor?: ItemVariants; readonly secondary?: never; pending?: boolean };
 
 const Button = styled.button<ButtonProps>`
   display: flex;
