@@ -118,6 +118,11 @@ export const fakeStateWithData: RootState = {
     userID: null,
     isLoading: false,
   },
+  search: {
+    notes: '',
+    articles: '',
+    twitters: '',
+  },
 };
 
 export const fakeStateWithDataAndLoggedInUser: RootState = {
@@ -136,8 +141,10 @@ export const fakeStateWithoutData: RootState = {
     isLoading: false,
   },
   auth: {
-    userID: null,
-    isLoading: false,
+    ...fakeStateWithData.auth,
+  },
+  search: {
+    ...fakeStateWithData.search,
   },
 };
 
