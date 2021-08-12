@@ -4,11 +4,9 @@ import plusIcon from '~/assets/icons/plus.svg';
 import ButtonIcon from '~/components/atoms/ButtonIcon/ButtonIcon';
 import Heading from '~/components/atoms/Heading/Heading';
 import Input from '~/components/atoms/Input/Input';
-import Paragraph from '~/components/atoms/Paragraph/Paragraph';
-import Skeleton from '~/components/atoms/Skeleton/Skeleton';
+import Counter from '~/components/molecules/Counter/Counter';
 import NewItemBar from '~/components/organisms/NewItemBar/NewItemBar';
-import { TEST_ID } from '~/constants/tests';
-import { useToggle, usePageTypeContext, useItemsStatus, useSearchState } from '~/hooks';
+import { useToggle, usePageTypeContext, useSearchState } from '~/hooks';
 import UserPageTemplate from '~/templates/UserPageTemplate/UserPageTemplate';
 import * as styledMixin from '~/theme/mixins';
 
@@ -46,18 +44,6 @@ const StyledHeading = styled(Heading)`
   }
 `;
 
-const StyledParagraph = styled(Paragraph)`
-  margin: 0;
-  font-weight: ${({ theme }) => theme.bold};
-  font-size: ${({ theme }) => theme.fontSize.m};
-  color: ${({ theme }) => theme.grey500};
-`;
-
-const StyledSkeletonCounter = styled(Skeleton)`
-  height: ${({ theme }) => theme.fontSize.m};
-  width: 9rem;
-`;
-
 type StyledButtonIconProps = {
   readonly active: boolean;
 } & ActiveColorArgs;
@@ -81,7 +67,6 @@ export type GridTemplateProps = {
 const GridTemplate = ({ children }: GridTemplateProps) => {
   const [newItemBarVisible, toggleNewItemBarVisible] = useToggle(false);
   const pageType = usePageTypeContext();
-  const { isLoading } = useItemsStatus();
   const [search, setSearch] = useSearchState(pageType);
 
   return (
@@ -97,13 +82,7 @@ const GridTemplate = ({ children }: GridTemplateProps) => {
           <StyledHeading big as="h1">
             {pageType}
           </StyledHeading>
-          {isLoading() ? (
-            <StyledSkeletonCounter data-testid={TEST_ID.GRID_TEMPLATE.SKELETON_COUNTER} />
-          ) : (
-            <StyledParagraph data-testid={TEST_ID.GRID_TEMPLATE.COUNTER}>
-              6 {pageType}
-            </StyledParagraph>
-          )}
+          <Counter />
         </StyledPageHeader>
         <StyledGrid>{children}</StyledGrid>
         <StyledButtonIcon

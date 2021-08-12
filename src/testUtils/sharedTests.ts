@@ -31,10 +31,9 @@ export const fetchItemsTestSuite = (
   const findAllCardTitles = () => screen.findAllByTestId(TEST_ID.CARD.TITLE);
   const findByFirstItemsTitle = () => screen.findByText(firstItemsTitle);
   const queryAllSkeletonCard = () => screen.queryAllByTestId(TEST_ID.SKELETON_CARD.WRAPPER);
-  const queryGridTemplateCounter = () => screen.queryByTestId(TEST_ID.GRID_TEMPLATE.COUNTER);
+  const queryCounterParagraph = () => screen.queryByTestId(TEST_ID.COUNTER.PARAGRAPH);
   const queryAllCardTitles = () => screen.queryAllByTestId(TEST_ID.CARD.TITLE);
-  const queryGridTemplateSkeletonCounter = () =>
-    screen.queryByTestId(TEST_ID.GRID_TEMPLATE.SKELETON_COUNTER);
+  const queryCounterSkeleton = () => screen.queryByTestId(TEST_ID.COUNTER.SKELETON);
 
   const loremBuilder = build<{ word: string }>({
     fields: {
@@ -59,12 +58,12 @@ export const fetchItemsTestSuite = (
     it('display counter skeleton until fetch data', async () => {
       render();
 
-      expect(queryGridTemplateSkeletonCounter()).toBeInTheDocument();
+      expect(queryCounterSkeleton()).toBeInTheDocument();
 
-      await waitForElementToBeRemoved(() => queryGridTemplateSkeletonCounter());
+      await waitForElementToBeRemoved(() => queryCounterSkeleton());
 
-      expect(queryGridTemplateSkeletonCounter()).not.toBeInTheDocument();
-      expect(queryGridTemplateCounter()).toBeInTheDocument();
+      expect(queryCounterSkeleton()).not.toBeInTheDocument();
+      expect(queryCounterParagraph()).toBeInTheDocument();
     });
 
     it('display the cards with data from store', async () => {
