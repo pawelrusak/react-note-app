@@ -4,8 +4,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useItemsStatus } from './useItemsStatus';
 import { ItemVariants } from '~/commonTypes';
 import { fetchItems } from '~/store/items/itemsSlice';
+import { searchItemsByVariantSelector } from '~/store/search/searchSelectors';
 
-import type { RootState, ItemsState } from '~/store';
+import type { ItemsState } from '~/store';
 
 type UseFetchItemsReturn<T extends ItemVariants> = {
   data: ItemsState[T];
@@ -13,7 +14,7 @@ type UseFetchItemsReturn<T extends ItemVariants> = {
 };
 
 export const useFetchItems = <T extends ItemVariants>(itemVariant: T): UseFetchItemsReturn<T> => {
-  const data = useSelector((state: RootState) => state.items[itemVariant]);
+  const searchedItems = useSelector(searchItemsByVariantSelector(itemVariant));
   const { isLoading } = useItemsStatus();
   const dispatch = useDispatch();
 
@@ -23,7 +24,7 @@ export const useFetchItems = <T extends ItemVariants>(itemVariant: T): UseFetchI
   }, []);
 
   return {
-    data,
+    data: searchedItems,
     isLoading,
   };
 };

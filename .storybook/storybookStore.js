@@ -39,6 +39,11 @@ const initialState = {
     userID: null,
     isLoading: false,
   },
+  search: {
+    notes: '',
+    articles: '',
+    twitters: '',
+  },
 };
 
 const store = mockStore(initialState);

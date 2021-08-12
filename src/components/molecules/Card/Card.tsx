@@ -121,7 +121,7 @@ const Card = ({ id, title, created, twitterName, articleUrl, content }: CardProp
   return (
     <StyledWrapper>
       <HeaderWrapper data-testid={TEST_ID.CARD.HEADER} onClick={historyPush} activecolor={itemType}>
-        <StyledHeading>{title}</StyledHeading>
+        <StyledHeading data-testid={TEST_ID.CARD.TITLE}>{title}</StyledHeading>
         <DateInfo data-testid={TEST_ID.CARD.DATE_INFO} date={created} />
         {itemType === 'twitters' && (
           <StyledAvatar src={`https://unavatar.now.sh/twitter/${twitterName || ''}`} />

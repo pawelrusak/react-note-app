@@ -8,7 +8,7 @@ import Paragraph from '~/components/atoms/Paragraph/Paragraph';
 import Skeleton from '~/components/atoms/Skeleton/Skeleton';
 import NewItemBar from '~/components/organisms/NewItemBar/NewItemBar';
 import { TEST_ID } from '~/constants/tests';
-import { useToggle, usePageTypeContext, useItemsStatus } from '~/hooks';
+import { useToggle, usePageTypeContext, useItemsStatus, useSearchState } from '~/hooks';
 import UserPageTemplate from '~/templates/UserPageTemplate/UserPageTemplate';
 import * as styledMixin from '~/theme/mixins';
 
@@ -82,12 +82,18 @@ const GridTemplate = ({ children }: GridTemplateProps) => {
   const [newItemBarVisible, toggleNewItemBarVisible] = useToggle(false);
   const pageType = usePageTypeContext();
   const { isLoading } = useItemsStatus();
+  const [search, setSearch] = useSearchState(pageType);
 
   return (
     <UserPageTemplate>
       <StyledWrapper>
         <StyledPageHeader>
-          <Input search placeholder="Search" />
+          <Input
+            search
+            placeholder="Search"
+            value={search}
+            onChange={(event) => setSearch(event.target.value)}
+          />
           <StyledHeading big as="h1">
             {pageType}
           </StyledHeading>
