@@ -1,3 +1,4 @@
+import { build, fake } from '@jackfranklin/test-data-bot';
 import {
   screen,
   render as renderWithProviders,
@@ -27,11 +28,22 @@ export const fetchItemsTestSuite = (
   const getByFirstItemsTitle = () => screen.queryByText(firstItemsTitle);
   const findAllByRemoveButtons = () => screen.findAllByRole('button', { name: /remove/i });
   const findAllCardHeader = () => screen.findAllByTestId(TEST_ID.CARD.HEADER);
+  const findAllCardTitles = () => screen.findAllByTestId('Card_Title');
   const findByFirstItemsTitle = () => screen.findByText(firstItemsTitle);
   const queryAllSkeletonCard = () => screen.queryAllByTestId(TEST_ID.SKELETON_CARD.WRAPPER);
   const queryGridTemplateCounter = () => screen.queryByTestId(TEST_ID.GRID_TEMPLATE.COUNTER);
+  const queryAllCardTitles = () => screen.queryAllByTestId('Card_Title');
   const queryGridTemplateSkeletonCounter = () =>
     screen.queryByTestId(TEST_ID.GRID_TEMPLATE.SKELETON_COUNTER);
+
+  const loremBuilder = build<{ word: string }>({
+    fields: {
+      word: fake((faker) => faker.lorem.word()),
+    },
+  });
+
+  const filterTitleByText = (titles: string[], searchText: string) =>
+    titles.filter((title) => title?.toLowerCase().includes(searchText.toLowerCase()));
 
   describe(testSuiteName, () => {
     it('display <CardListSkeleton /> until fetch data', async () => {
@@ -79,6 +91,35 @@ export const fetchItemsTestSuite = (
 
       expect(getAllCardHeaders()).toHaveLength(3);
       expect(getByFirstItemsTitle()).not.toBeInTheDocument();
+    });
+
+    it('filter card list by search word in cards title', async () => {
+      const lorem = loremBuilder();
+      // add the letter "e" because it is the most common in english language
+      const searchWordArray = `e${lorem.word}`.split('');
+      let searchText = '';
+
+      render();
+
+      const allCardTitles = (await findAllCardTitles()).map(
+        (title) => title.textContent,
+      ) as string[];
+
+      for (let i = 0; i < searchWordArray.length; i += 1) {
+        searchText += searchWordArray[i];
+
+        // eslint-disable-next-line no-loop-func, no-await-in-loop
+        await waitFor(() => userEvent.type(screen.getByPlaceholderText(/search/i), searchText));
+
+        const filteredCardTitles = filterTitleByText(allCardTitles, searchText);
+
+        const currentCardTitles = queryAllCardTitles().map((title) => title.textContent);
+
+        expect(currentCardTitles).toEqual(filteredCardTitles);
+
+        // if the card title list is empty then omit unnecessary iterations for performance reason
+        if (currentCardTitles.length === 0 && filteredCardTitles.length === 0) break;
+      }
     });
   });
 };
