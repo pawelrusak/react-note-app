@@ -28,11 +28,11 @@ export const fetchItemsTestSuite = (
   const getByFirstItemsTitle = () => screen.queryByText(firstItemsTitle);
   const findAllByRemoveButtons = () => screen.findAllByRole('button', { name: /remove/i });
   const findAllCardHeader = () => screen.findAllByTestId(TEST_ID.CARD.HEADER);
-  const findAllCardTitles = () => screen.findAllByTestId('Card_Title');
+  const findAllCardTitles = () => screen.findAllByTestId(TEST_ID.CARD.TITLE);
   const findByFirstItemsTitle = () => screen.findByText(firstItemsTitle);
   const queryAllSkeletonCard = () => screen.queryAllByTestId(TEST_ID.SKELETON_CARD.WRAPPER);
   const queryGridTemplateCounter = () => screen.queryByTestId(TEST_ID.GRID_TEMPLATE.COUNTER);
-  const queryAllCardTitles = () => screen.queryAllByTestId('Card_Title');
+  const queryAllCardTitles = () => screen.queryAllByTestId(TEST_ID.CARD.TITLE);
   const queryGridTemplateSkeletonCounter = () =>
     screen.queryByTestId(TEST_ID.GRID_TEMPLATE.SKELETON_COUNTER);
 

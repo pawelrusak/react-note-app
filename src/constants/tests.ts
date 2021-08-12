@@ -32,6 +32,7 @@ export const AUTH_ERRORS = {
 
 export const TEST_ID = {
   CARD: {
+    TITLE: 'Card_Title',
     HEADER: 'Card_Header',
     DATE_INFO: 'Card_DateInfo',
     ARTICLE_LINK: 'Card_ArticleLink',
