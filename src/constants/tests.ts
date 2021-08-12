@@ -37,14 +37,9 @@ export const TEST_ID = {
     DATE_INFO: 'Card_DateInfo',
     ARTICLE_LINK: 'Card_ArticleLink',
   },
-  SKELETON_CARD: {
-    WRAPPER: 'SkeletonCard',
-    AVATAR_SKELETON: 'SkeletonCard_AvatarSkeleton',
-    ARTICLE_LINK_SKELETON: 'SkeletonCard_ArticleLinkSkeleton',
-  },
-  NEW_ITEM_BAR: {
-    WRAPPER: 'NewItemBar',
-    TEXTAREA: 'NewItemBar_Textarea',
+  COUNTER: {
+    PARAGRAPH: 'Counter_Paragraph',
+    SKELETON: 'Counter_Skeleton',
   },
   DETAILS_TEMPLATE: {
     DATE_INFO: 'DetailsTemplate_DateInfo',
@@ -54,5 +49,14 @@ export const TEST_ID = {
   GRID_TEMPLATE: {
     COUNTER: 'GridTemplate_Counter',
     SKELETON_COUNTER: 'GridTemplate_SkeletonCounter',
+  },
+  NEW_ITEM_BAR: {
+    WRAPPER: 'NewItemBar',
+    TEXTAREA: 'NewItemBar_Textarea',
+  },
+  SKELETON_CARD: {
+    WRAPPER: 'SkeletonCard',
+    AVATAR_SKELETON: 'SkeletonCard_AvatarSkeleton',
+    ARTICLE_LINK_SKELETON: 'SkeletonCard_ArticleLinkSkeleton',
   },
 } as const;

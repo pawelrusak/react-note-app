@@ -2,6 +2,7 @@ import styled from 'styled-components';
 
 import Paragraph from '~/components/atoms/Paragraph/Paragraph';
 import Skeleton from '~/components/atoms/Skeleton/Skeleton';
+import { TEST_ID } from '~/constants/tests';
 import { useItemsStatus, usePageTypeContext } from '~/hooks';
 
 const StyledParagraph = styled(Paragraph)`
@@ -20,7 +21,11 @@ const Counter = () => {
   const pageType = usePageTypeContext();
   const { isLoading } = useItemsStatus();
 
-  return isLoading() ? <StyledSkeleton /> : <StyledParagraph>6 {pageType}</StyledParagraph>;
+  return isLoading() ? (
+    <StyledSkeleton data-testid={TEST_ID.COUNTER.SKELETON} />
+  ) : (
+    <StyledParagraph data-testid={TEST_ID.COUNTER.PARAGRAPH}>6 {pageType}</StyledParagraph>
+  );
 };
 
 export default Counter;
