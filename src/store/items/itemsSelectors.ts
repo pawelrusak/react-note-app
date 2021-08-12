@@ -5,3 +5,8 @@ export const itemByTypeAndIDSelector =
   <T extends ItemVariants>(itemType: T, itemID: string) =>
   (store: RootState) =>
     (store.items[itemType] as Item[] | undefined)?.find((item) => item.id === itemID);
+
+export const itemVariantSelector =
+  <T extends ItemVariants>(variant: T) =>
+  (state: RootState) =>
+    state.items[variant];
