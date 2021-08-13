@@ -114,6 +114,31 @@ const StyledContentLink = styled(Link)`
   margin-bottom: auto;
   font-variant-caps: all-small-caps;
   line-height: ${({ theme }) => theme.lineHeight};
+  position: relative;
+  align-self: flex-start;
+
+  &::after {
+    content: ' ';
+    position: absolute;
+    left: 0;
+    // ((line height * font-height) - font-height) / half-white-space-around-font
+    bottom: ${({ theme }) => `calc(${(+theme.lineHeight * 1.6 - 1.6) / 2}rem - 0.2rem)`};
+    height: 0.2rem;
+    width: 100%;
+    background-color: currentColor;
+    transform: scaleX(0);
+    transform-origin: left;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    &::after {
+      transition: transform 0.15s ease-in-out;
+    }
+  }
+
+  &:hover::after {
+    transform: scaleX(1);
+  }
 `;
 
 export type CardProps = Item;
