@@ -22,6 +22,17 @@ const StyledWrapper = styled.div`
   grid-template-rows: 0.25fr 1fr;
 `;
 
+// create new component because the base one is reuse in others places
+const StyledWrapperWithHover = styled(StyledWrapper)`
+  @media (prefers-reduced-motion: no-preference) {
+    transition: transform 0.15s ease-out;
+
+    &:hover {
+      transform: scale(1.015);
+    }
+  }
+`;
+
 type HeaderWrapperProps = {
   readonly activecolor?: ItemVariants;
 };
@@ -119,7 +130,7 @@ const Card = ({ id, title, created, twitterName, articleUrl, content }: CardProp
   const removeItem = useRemoveItemAction();
 
   return (
-    <StyledWrapper>
+    <StyledWrapperWithHover>
       <HeaderWrapper data-testid={TEST_ID.CARD.HEADER} onClick={historyPush} activecolor={itemType}>
         <StyledHeading data-testid={TEST_ID.CARD.TITLE}>{title}</StyledHeading>
         <DateInfo data-testid={TEST_ID.CARD.DATE_INFO} date={created} />
@@ -137,7 +148,7 @@ const Card = ({ id, title, created, twitterName, articleUrl, content }: CardProp
           REMOVE
         </Button>
       </ContentWrapper>
-    </StyledWrapper>
+    </StyledWrapperWithHover>
   );
 };
 
