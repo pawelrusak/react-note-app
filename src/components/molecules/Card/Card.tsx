@@ -11,7 +11,8 @@ import { TEST_ID } from '~/constants/tests';
 import { useHistoryPush, useRemoveItemAction, usePageTypeContext } from '~/hooks';
 import * as styledMixin from '~/theme/mixins';
 
-import type { ItemVariants, Item } from '~/commonTypes';
+import type { Item } from '~/commonTypes';
+import type { ActiveColorArgs } from '~/theme/mixins';
 
 const StyledWrapper = styled.div`
   min-height: 380px;
@@ -34,9 +35,7 @@ const StyledWrapperWithHover = styled(StyledWrapper)`
   }
 `;
 
-type HeaderWrapperProps = {
-  readonly activecolor?: ItemVariants;
-};
+type HeaderWrapperProps = ActiveColorArgs;
 
 const HeaderWrapper = styled.div<HeaderWrapperProps>`
   position: relative;
@@ -48,9 +47,7 @@ const HeaderWrapper = styled.div<HeaderWrapperProps>`
   }
 `;
 
-type HeaderWrapperWithHoverProps = {
-  readonly activecolor?: ItemVariants;
-};
+type HeaderWrapperWithHoverProps = ActiveColorArgs;
 
 // create new component because the base one is reuse in others places
 const HeaderWrapperWithHover = styled(HeaderWrapper)<HeaderWrapperWithHoverProps>`
