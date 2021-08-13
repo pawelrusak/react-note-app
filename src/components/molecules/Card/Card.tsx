@@ -1,3 +1,4 @@
+import { darken } from 'polished';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
@@ -89,6 +90,14 @@ const StyledAvatar = styled.img`
   position: absolute;
   right: 25px;
   top: 25px;
+  @media (prefers-reduced-motion: no-preference) {
+    will-change: border-color;
+    transition: border-color 0.2s ease-in-out;
+  }
+
+  ${HeaderWrapperWithHover}:hover & {
+    border-color: ${(props) => darken(0.075, props.theme.twitters)};
+  }
 `;
 
 const StyledArticleLink = styled.a`
