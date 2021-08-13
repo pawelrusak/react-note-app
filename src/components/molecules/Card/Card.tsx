@@ -8,7 +8,7 @@ import Paragraph from '~/components/atoms/Paragraph/Paragraph';
 import Time from '~/components/atoms/Time/Time';
 import { TEST_ID } from '~/constants/tests';
 import { useHistoryPush, useRemoveItemAction, usePageTypeContext } from '~/hooks';
-import { activecolor } from '~/theme/mixins';
+import { activecolor, darkenActiveColor } from '~/theme/mixins';
 
 import type { ItemVariants, Item } from '~/commonTypes';
 
@@ -42,8 +42,26 @@ const HeaderWrapper = styled.div<HeaderWrapperProps>`
   padding: 17px 30px;
   ${activecolor}
 
-  :first-of-type {
+  &:first-of-type {
     z-index: 9999;
+  }
+`;
+
+type HeaderWrapperWithHoverProps = {
+  readonly activecolor?: ItemVariants;
+};
+
+// create new component because the base one is reuse in others places
+const HeaderWrapperWithHover = styled(HeaderWrapper)<HeaderWrapperWithHoverProps>`
+  cursor: pointer;
+
+  @media (prefers-reduced-motion: no-preference) {
+    will-change: background-color;
+    transition: background-color 0.2s ease-in-out;
+  }
+
+  &:hover {
+    ${darkenActiveColor}
   }
 `;
 
@@ -156,7 +174,11 @@ const Card = ({ id, title, created, twitterName, articleUrl, content }: CardProp
 
   return (
     <StyledWrapperWithHover>
-      <HeaderWrapper data-testid={TEST_ID.CARD.HEADER} onClick={historyPush} activecolor={itemType}>
+      <HeaderWrapperWithHover
+        data-testid={TEST_ID.CARD.HEADER}
+        onClick={historyPush}
+        activecolor={itemType}
+      >
         <StyledHeading data-testid={TEST_ID.CARD.TITLE}>{title}</StyledHeading>
         <DateInfo data-testid={TEST_ID.CARD.DATE_INFO} date={created} />
         {itemType === 'twitters' && (
@@ -165,7 +187,7 @@ const Card = ({ id, title, created, twitterName, articleUrl, content }: CardProp
         {itemType === 'articles' && (
           <StyledArticleLink data-testid={TEST_ID.CARD.ARTICLE_LINK} href={articleUrl || ''} />
         )}
-      </HeaderWrapper>
+      </HeaderWrapperWithHover>
       <ContentWrapper>
         <StyledContentParagraph>{content}</StyledContentParagraph>
         <StyledContentLink to={URLPathToDetails}>read more</StyledContentLink>
