@@ -8,7 +8,7 @@ import Paragraph from '~/components/atoms/Paragraph/Paragraph';
 import Time from '~/components/atoms/Time/Time';
 import { TEST_ID } from '~/constants/tests';
 import { useHistoryPush, useRemoveItemAction, usePageTypeContext } from '~/hooks';
-import { activecolor, darkenActiveColor } from '~/theme/mixins';
+import * as styledMixin from '~/theme/mixins';
 
 import type { ItemVariants, Item } from '~/commonTypes';
 
@@ -40,7 +40,7 @@ type HeaderWrapperProps = {
 const HeaderWrapper = styled.div<HeaderWrapperProps>`
   position: relative;
   padding: 17px 30px;
-  ${activecolor}
+  ${styledMixin.activecolor}
 
   &:first-of-type {
     z-index: 9999;
@@ -61,7 +61,7 @@ const HeaderWrapperWithHover = styled(HeaderWrapper)<HeaderWrapperWithHoverProps
   }
 
   &:hover {
-    ${darkenActiveColor}
+    ${styledMixin.darkenActiveColor}
   }
 `;
 
