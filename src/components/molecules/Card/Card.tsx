@@ -1,3 +1,4 @@
+import { darken } from 'polished';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
@@ -8,9 +9,10 @@ import Paragraph from '~/components/atoms/Paragraph/Paragraph';
 import Time from '~/components/atoms/Time/Time';
 import { TEST_ID } from '~/constants/tests';
 import { useHistoryPush, useRemoveItemAction, usePageTypeContext } from '~/hooks';
-import { activecolor } from '~/theme/mixins';
+import * as styledMixin from '~/theme/mixins';
 
-import type { ItemVariants, Item } from '~/commonTypes';
+import type { Item } from '~/commonTypes';
+import type { ActiveColorArgs } from '~/theme/mixins';
 
 const StyledWrapper = styled.div`
   min-height: 380px;
@@ -22,17 +24,42 @@ const StyledWrapper = styled.div`
   grid-template-rows: 0.25fr 1fr;
 `;
 
-type HeaderWrapperProps = {
-  readonly activecolor?: ItemVariants;
-};
+// create new component because the base one is reuse in others places
+const StyledWrapperWithHover = styled(StyledWrapper)`
+  @media (prefers-reduced-motion: no-preference) {
+    transition: transform 0.15s ease-out;
+
+    &:hover {
+      transform: scale(1.015);
+    }
+  }
+`;
+
+type HeaderWrapperProps = ActiveColorArgs;
 
 const HeaderWrapper = styled.div<HeaderWrapperProps>`
   position: relative;
   padding: 17px 30px;
-  ${activecolor}
+  ${styledMixin.activecolor}
 
-  :first-of-type {
+  &:first-of-type {
     z-index: 9999;
+  }
+`;
+
+type HeaderWrapperWithHoverProps = ActiveColorArgs;
+
+// create new component because the base one is reuse in others places
+const HeaderWrapperWithHover = styled(HeaderWrapper)<HeaderWrapperWithHoverProps>`
+  cursor: pointer;
+
+  @media (prefers-reduced-motion: no-preference) {
+    will-change: background-color;
+    transition: background-color 0.2s ease-in-out;
+  }
+
+  &:hover {
+    ${styledMixin.darkenActiveColor}
   }
 `;
 
@@ -60,6 +87,14 @@ const StyledAvatar = styled.img`
   position: absolute;
   right: 25px;
   top: 25px;
+  @media (prefers-reduced-motion: no-preference) {
+    will-change: border-color;
+    transition: border-color 0.2s ease-in-out;
+  }
+
+  ${HeaderWrapperWithHover}:hover & {
+    border-color: ${(props) => darken(0.075, props.theme.twitters)};
+  }
 `;
 
 const StyledArticleLink = styled.a`
@@ -103,6 +138,31 @@ const StyledContentLink = styled(Link)`
   margin-bottom: auto;
   font-variant-caps: all-small-caps;
   line-height: ${({ theme }) => theme.lineHeight};
+  position: relative;
+  align-self: flex-start;
+
+  &::after {
+    content: ' ';
+    position: absolute;
+    left: 0;
+    // ((line height * font-height) - font-height) / half-white-space-around-font
+    bottom: ${({ theme }) => `calc(${(+theme.lineHeight * 1.6 - 1.6) / 2}rem - 0.2rem)`};
+    height: 0.2rem;
+    width: 100%;
+    background-color: currentColor;
+    transform: scaleX(0);
+    transform-origin: left;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    &::after {
+      transition: transform 0.15s ease-in-out;
+    }
+  }
+
+  &:hover::after {
+    transform: scaleX(1);
+  }
 `;
 
 export type CardProps = Item;
@@ -119,8 +179,12 @@ const Card = ({ id, title, created, twitterName, articleUrl, content }: CardProp
   const removeItem = useRemoveItemAction();
 
   return (
-    <StyledWrapper>
-      <HeaderWrapper data-testid={TEST_ID.CARD.HEADER} onClick={historyPush} activecolor={itemType}>
+    <StyledWrapperWithHover>
+      <HeaderWrapperWithHover
+        data-testid={TEST_ID.CARD.HEADER}
+        onClick={historyPush}
+        activecolor={itemType}
+      >
         <StyledHeading data-testid={TEST_ID.CARD.TITLE}>{title}</StyledHeading>
         <DateInfo data-testid={TEST_ID.CARD.DATE_INFO} date={created} />
         {itemType === 'twitters' && (
@@ -129,7 +193,7 @@ const Card = ({ id, title, created, twitterName, articleUrl, content }: CardProp
         {itemType === 'articles' && (
           <StyledArticleLink data-testid={TEST_ID.CARD.ARTICLE_LINK} href={articleUrl || ''} />
         )}
-      </HeaderWrapper>
+      </HeaderWrapperWithHover>
       <ContentWrapper>
         <StyledContentParagraph>{content}</StyledContentParagraph>
         <StyledContentLink to={URLPathToDetails}>read more</StyledContentLink>
@@ -137,7 +201,7 @@ const Card = ({ id, title, created, twitterName, articleUrl, content }: CardProp
           REMOVE
         </Button>
       </ContentWrapper>
-    </StyledWrapper>
+    </StyledWrapperWithHover>
   );
 };
 
