@@ -1,4 +1,5 @@
 import { build, fake } from '@jackfranklin/test-data-bot';
+import pluralize from 'pluralize';
 import {
   screen,
   render as renderWithProviders,
@@ -29,6 +30,7 @@ export const fetchItemsTestSuite = (
   const findAllByRemoveButtons = () => screen.findAllByRole('button', { name: /remove/i });
   const findAllCardHeader = () => screen.findAllByTestId(TEST_ID.CARD.HEADER);
   const findAllCardTitles = () => screen.findAllByTestId(TEST_ID.CARD.TITLE);
+  const findCounterParagraph = () => screen.findByTestId(TEST_ID.COUNTER.PARAGRAPH);
   const findByFirstItemsTitle = () => screen.findByText(firstItemsTitle);
   const queryAllSkeletonCard = () => screen.queryAllByTestId(TEST_ID.SKELETON_CARD.WRAPPER);
   const queryCounterParagraph = () => screen.queryByTestId(TEST_ID.COUNTER.PARAGRAPH);
@@ -119,6 +121,57 @@ export const fetchItemsTestSuite = (
         // if the card title list is empty then omit unnecessary iterations for performance reason
         if (currentCardTitles.length === 0 && filteredCardTitles.length === 0) break;
       }
+    });
+
+    it('display the correct number of current variant of items', async () => {
+      render();
+
+      const itemsNumber = (await findAllCardTitles()).length;
+      const counterText = `${itemsNumber.toString()} ${variant}`;
+
+      expect(queryCounterParagraph()).toHaveTextContent(counterText);
+    });
+
+    it('display the correct number of current variant of items when searching', async () => {
+      const lorem = loremBuilder();
+      // add the letter "e" because it is the most common in english language
+      const searchWordArray = `e${lorem.word}`.split('');
+      let searchText = '';
+
+      render();
+
+      const allCardTitles = (await findAllCardTitles()).map(
+        (title) => title.textContent,
+      ) as string[];
+
+      for (let i = 0; i < searchWordArray.length; i += 1) {
+        searchText += searchWordArray[i];
+
+        // eslint-disable-next-line no-loop-func, no-await-in-loop
+        await waitFor(() => userEvent.type(screen.getByPlaceholderText(/search/i), searchText));
+
+        const numberOfFilteredCardTitles = filterTitleByText(allCardTitles, searchText).length;
+        const counterText = pluralize(variant, numberOfFilteredCardTitles, true);
+
+        expect(queryCounterParagraph()).toHaveTextContent(counterText);
+
+        // if the card title list is empty then omit unnecessary iterations for performance reason
+        if (numberOfFilteredCardTitles === 0) break;
+      }
+    });
+
+    it('do not display the total number of items when they are not searching', async () => {
+      render();
+
+      expect(await findCounterParagraph()).not.toHaveTextContent(/total [0-9]/i);
+    });
+
+    it('display the correct total number of items when searching', async () => {
+      render();
+
+      const numberOfTotalItems = fakeItemsData[variant].length;
+
+      expect(await findCounterParagraph()).not.toHaveTextContent(`total ${numberOfTotalItems}`);
     });
   });
 };

@@ -156,6 +156,4 @@ describe('<GridTemplate />', () => {
       ]),
     );
   });
-
-  it.todo('displays the correct number of items');
 });

@@ -1,6 +1,7 @@
 import createMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 
+import { fakeItemsData } from '~~/src/testUtils/fakers';
 import { getEarlierDateOfDay } from '~~/src/utils';
 
 const sampleNote = {
@@ -60,6 +61,32 @@ export const storybookStore = (state) => {
           isLoading: true,
         },
       };
+      return mockStore(loadingState);
+    }
+    case 'many': {
+      const loadingState = {
+        ...initialState,
+        items: {
+          ...fakeItemsData,
+          isLoading: false,
+        },
+      };
+      return mockStore(loadingState);
+    }
+    case 'search': {
+      const loadingState = {
+        ...initialState,
+        items: {
+          ...fakeItemsData,
+          isLoading: false,
+        },
+        search: {
+          notes: 'e',
+          articles: 'e',
+          twitters: 'e',
+        },
+      };
+
       return mockStore(loadingState);
     }
     default:
