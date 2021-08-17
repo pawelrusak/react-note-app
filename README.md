@@ -90,17 +90,17 @@ Up to the [version 0.15.0](https://github.com/pawelrusak/react-note-app/tree/v0.
 
 After [version 0.15.0](https://github.com/pawelrusak/react-note-app/tree/develop) the following features have been implemented (or are in progress):
 
-- [ ] ability to create, view and delete items, also for basic notes and articles,
-- [ ] ability to filter by means of the item content, also using URLs for better navigation (notes, tweets, articles),
-- [ ] the item counter (notes, tweets, articles),
+- [x] ability to create, view and delete items, also for basic notes and articles,
+- [ ] ability to filter by characters of the item content, also using URLs for better navigation (notes, tweets, articles),
+- [x] the item counter (notes, tweets, articles),
 - [ ] documents titles for pages
-- [x] Validations for sign-in and sign-up forms, including the error handling from the server (e.g. email is busy), taking care at the same time of UX (clear error messages, blocking the submit button when the form contains errors, basic accessibility)
+- [x] form validation for login and registration, with the error handling from the server (e.g. email is busy), taking care at the same time of UX (clear error messages, blocking the submit button when the form contains errors, basic accessibility)
 - [x] ability to register new accounts through the form on the registration page,
-- [ ] maintaining session after logging-in
-- [ ] validation of the forms to create new items (notes, twitts, articles) with error handling from the server, taking care of [UX](https://pl.wikipedia.org/wiki/User_experience),
+- [x] maintaining session after logging-in
+- [ ] form validation when creating new items (notes, twitts, articles) with error handling from the server. With[UX](https://pl.wikipedia.org/wiki/User_experience) in mind,
 - [ ] version for mobile (Responsive Web Design)
 
-<sub><sup>\* if the box is not checked, it means the work is in progress</sup></sub>
+\* if the box is not checked, it means the work is in progress
 
 ## License
 
