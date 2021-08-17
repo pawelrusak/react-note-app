@@ -1,4 +1,5 @@
 import { build, fake } from '@jackfranklin/test-data-bot';
+import pluralize from 'pluralize';
 import {
   screen,
   render as renderWithProviders,
@@ -150,7 +151,7 @@ export const fetchItemsTestSuite = (
         await waitFor(() => userEvent.type(screen.getByPlaceholderText(/search/i), searchText));
 
         const numberOfFilteredCardTitles = filterTitleByText(allCardTitles, searchText).length;
-        const counterText = `${numberOfFilteredCardTitles.toString()} ${variant}`;
+        const counterText = pluralize(variant, numberOfFilteredCardTitles, true);
 
         expect(queryCounterParagraph()).toHaveTextContent(counterText);
 
