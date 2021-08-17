@@ -1,3 +1,4 @@
+import pluralize from 'pluralize';
 import styled from 'styled-components';
 
 import Paragraph from '~/components/atoms/Paragraph/Paragraph';
@@ -38,7 +39,7 @@ const Counter = () => {
     <StyledSkeleton data-testid={TEST_ID.COUNTER.SKELETON} />
   ) : (
     <StyledParagraph data-testid={TEST_ID.COUNTER.PARAGRAPH}>
-      {currentNumber} {pageType}{' '}
+      {pluralize(pageType, currentNumber, true)}{' '}
       {isSearching() && <StyledAdditionalInfo>total {totalNumber}</StyledAdditionalInfo>}
     </StyledParagraph>
   );
