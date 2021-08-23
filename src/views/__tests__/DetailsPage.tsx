@@ -7,6 +7,7 @@ import DetailsPage from '../DetailsPage/DetailsPage';
 import { TEST_ID } from '~/constants/tests';
 import { routes } from '~/routes';
 import * as services from '~/services';
+import { capitalize } from '~/utils';
 
 import type { RootState } from '~/store';
 
@@ -48,7 +49,17 @@ const queryDetailsTemplateDateInfo = () => screen.queryByTestId(TEST_ID.DETAILS_
 
 const mocksFetchItem = () => jest.spyOn(services, 'fetchItem');
 
+const DETAILS_PAGE_VARIANTS = ['note', 'article', 'twitter'] as const;
+
 describe('<DetailsPage />', () => {
+  it.each(DETAILS_PAGE_VARIANTS)('display correct document title ', async (variant) => {
+    const { detailsPageData } = renderDetailsPage(variant);
+
+    const detailsPageDocumentTitle = `${capitalize(variant)}: "${detailsPageData.title}"`;
+
+    await waitFor(() => expect(document.title).toBe(detailsPageDocumentTitle));
+  });
+
   it('send a request to service if there is no item in store and display him', async () => {
     const mockFetchItem = mocksFetchItem();
 
