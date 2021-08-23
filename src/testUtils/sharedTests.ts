@@ -6,6 +6,7 @@ import {
   waitFor,
   waitForElementToBeRemoved,
   userEvent,
+  capitalize,
 } from 'testUtils';
 import { fakeItemsData } from 'testUtils/fakers';
 
@@ -47,6 +48,14 @@ export const fetchItemsTestSuite = (
     titles.filter((title) => title?.toLowerCase().includes(searchText.toLowerCase()));
 
   describe(testSuiteName, () => {
+    test('display correct document title ', async () => {
+      render();
+
+      const capitalizedTitle = capitalize(variant);
+
+      await waitFor(() => expect(document.title).toContain(capitalizedTitle));
+    });
+
     it('display <CardListSkeleton /> until fetch data', async () => {
       render();
 
