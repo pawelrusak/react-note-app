@@ -6,11 +6,11 @@ import {
   waitFor,
   waitForElementToBeRemoved,
   userEvent,
-  capitalize,
 } from 'testUtils';
 import { fakeItemsData } from 'testUtils/fakers';
 
 import { TEST_ID } from '~/constants/tests';
+import { capitalize } from '~/utils';
 
 import type { ItemVariants } from '~/commonTypes';
 

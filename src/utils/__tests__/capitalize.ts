@@ -1,4 +1,4 @@
-import { capitalize } from '../helpers';
+import { capitalize } from '../index';
 
 describe('capitalize test utils helper', () => {
   it('capitalize first letter', () => {

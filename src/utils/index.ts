@@ -16,3 +16,6 @@ export const getEarlierDateOfDay = (numberOfPreviousDays: number) => {
  * @link https://stackoverflow.com/questions/3746725/how-to-create-an-array-containing-1-n
  */
 export const getUniqueValuesArray = (length: number) => Array.from(Array(length).keys());
+
+export const capitalize = <T extends string>(str: T) =>
+  (str[0].toUpperCase() + str.substring(1)) as Capitalize<T>;

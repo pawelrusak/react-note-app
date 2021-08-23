@@ -21,6 +21,3 @@ export const getRandomNaturalNumber = (max = 10, min = 1) => {
 
   return Math.floor(Math.random() * (max + 1 - min)) + min;
 };
-
-export const capitalize = <T extends string>(str: T) =>
-  (str[0].toUpperCase() + str.substring(1)) as Capitalize<T>;
