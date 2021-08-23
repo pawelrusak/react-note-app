@@ -45,6 +45,12 @@ const userBuilder = build<User>({
 });
 
 describe('<RegisterPage />', () => {
+  test('display correct document title ', async () => {
+    renderRegisterPage();
+
+    await waitFor(() => expect(document.title).toBe('Register'));
+  });
+
   it('initially, the form should not contain any errors and button should be enable', () => {
     renderRegisterPage();
 
