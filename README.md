@@ -93,7 +93,7 @@ After [version 0.15.0](https://github.com/pawelrusak/react-note-app/tree/develop
 - [x] ability to create, view and delete items, also for basic notes and articles,
 - [ ] ability to filter by characters of the item content, also using URLs for better navigation (notes, tweets, articles),
 - [x] the item counter (notes, tweets, articles),
-- [ ] documents titles for pages
+- [x] documents titles for pages
 - [x] form validation for login and registration, with the error handling from the server (e.g. email is busy), taking care at the same time of UX (clear error messages, blocking the submit button when the form contains errors, basic accessibility)
 - [x] ability to register new accounts through the form on the registration page,
 - [x] maintaining session after logging-in
