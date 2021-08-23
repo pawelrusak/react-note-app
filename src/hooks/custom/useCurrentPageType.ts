@@ -1,19 +1,15 @@
-import { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 
 import type { ItemVariants } from '~/commonTypes';
 
-export const useCurrentPageType = () => {
-  const [pageType, setPageType] = useState<ItemVariants | undefined>('notes');
+export const useCurrentPageType = (): ItemVariants => {
   const { pathname } = useLocation();
 
-  useEffect(() => {
-    const pageTypes = ['twitters', 'articles', 'notes'] as const;
+  const AVAILABLE_PAGE_TYPES = ['twitters', 'articles', 'notes'] as const;
+  const [currentRootDirectory] = pathname.split('/').filter(Boolean);
+  const currentPageType = AVAILABLE_PAGE_TYPES.find(
+    (pageType) => pageType === currentRootDirectory,
+  );
 
-    const [currentPage] = pageTypes.filter((page) => pathname.includes(page));
-
-    setPageType(currentPage);
-  }, [pathname]);
-
-  return pageType;
+  return currentPageType ?? 'notes';
 };
