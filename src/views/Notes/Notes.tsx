@@ -1,14 +1,11 @@
-import { Helmet } from 'react-helmet';
-
 import Card from '~/components/molecules/Card/Card';
 import CardList from '~/components/organisms/CardList/CardList';
 import GridTemplate from '~/templates/GridTemplate/GridTemplate';
+import { DocumentTitle } from '~/utils/components';
 
 const Notes = () => (
   <>
-    <Helmet>
-      <title>Notes</title>
-    </Helmet>
+    <DocumentTitle>Notes</DocumentTitle>
 
     <GridTemplate>
       <CardList variant="notes">

@@ -1,5 +1,4 @@
 import { Formik, Form } from 'formik';
-import { Helmet } from 'react-helmet';
 import { Link, Redirect } from 'react-router-dom';
 import styled from 'styled-components';
 
@@ -11,6 +10,7 @@ import { AUTH_ERRORS_CODES } from '~/constants/auth';
 import { useAuth } from '~/hooks';
 import { routes } from '~/routes';
 import AuthTemplate from '~/templates/AuthTemplate/AuthTemplate';
+import { DocumentTitle } from '~/utils/components';
 import * as validation from '~/validations';
 
 import type firebase from 'firebase';
@@ -46,9 +46,7 @@ const RegisterPage = () => {
 
   return (
     <>
-      <Helmet>
-        <title>Register</title>
-      </Helmet>
+      <DocumentTitle>Register</DocumentTitle>
 
       <AuthTemplate>
         <Formik

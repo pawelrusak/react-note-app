@@ -1,9 +1,8 @@
 import pluralize from 'pluralize';
-import { Helmet } from 'react-helmet';
 
 import { useActiveItem, useCurrentPageType } from '~/hooks';
 import DetailsTemplate from '~/templates/DetailsTemplate/DetailsTemplate';
-import { capitalize } from '~/utils';
+import { DocumentTitle } from '~/utils/components';
 
 const DetailsPage = () => {
   const activeItem = useActiveItem();
@@ -11,9 +10,9 @@ const DetailsPage = () => {
 
   return (
     <>
-      <Helmet>
-        <title>{`${pluralize.singular(capitalize(pageType))}: "${activeItem.title}"`}</title>
-      </Helmet>
+      <DocumentTitle capitalize>
+        {pluralize.singular(pageType)}: &quot;{activeItem.title}&quot;
+      </DocumentTitle>
 
       <DetailsTemplate
         title={activeItem.title}
