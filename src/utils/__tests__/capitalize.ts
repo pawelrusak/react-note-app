@@ -1,6 +1,6 @@
 import { capitalize } from '../index';
 
-describe('capitalize test utils helper', () => {
+describe('capitalize utils', () => {
   it('capitalize first letter', () => {
     expect(capitalize('notes')).toBe('Notes');
     expect(capitalize('articles')).toBe('Articles');
