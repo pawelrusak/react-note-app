@@ -1,5 +1,5 @@
 import { Formik, Form } from 'formik';
-import { connect } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 
 import Button from '~/components/atoms/Button/Button';
@@ -10,7 +10,6 @@ import { usePageTypeContext } from '~/hooks';
 import { addItem as addItemAction } from '~/store/items/itemsSlice';
 import * as styledMixin from '~/theme/mixins';
 
-import type { ItemVariants, NewItem } from '~/commonTypes';
 import type { ActiveColorArgs } from '~/theme/mixins';
 
 type IsVisible = { readonly isVisible: boolean };
@@ -50,17 +49,11 @@ const StyledInput = styled(Input)`
   margin-top: 30px;
 `;
 
-type DispatchProps = {
-  addItem: (itemType: ItemVariants, itemContent: NewItem) => void;
-};
+export type NewItemBarProps = IsVisible & { readonly handleClose: () => void };
 
-// export for StoryBook use
-export type OwnProps = IsVisible & { readonly handleClose: () => void };
-
-export type NewItemBarProps = DispatchProps & OwnProps;
-
-const NewItemBar = ({ isVisible, addItem, handleClose }: NewItemBarProps) => {
+const NewItemBar = ({ isVisible, handleClose }: NewItemBarProps) => {
   const pageContext = usePageTypeContext();
+  const dispatch = useDispatch();
 
   return (
     <StyledWrapper
@@ -72,7 +65,7 @@ const NewItemBar = ({ isVisible, addItem, handleClose }: NewItemBarProps) => {
       <Formik
         initialValues={{ title: '', content: '', articleUrl: '', twitterName: '' }}
         onSubmit={(values) => {
-          addItem(pageContext, values);
+          dispatch(addItemAction({ itemVariant: pageContext, itemContent: values }));
           handleClose();
         }}
       >
@@ -128,8 +121,4 @@ NewItemBar.defaultProps = {
   isVisible: false,
 };
 
-const mapDispatch: DispatchProps = {
-  addItem: (itemVariant, itemContent) => addItemAction({ itemVariant, itemContent }),
-};
-
-export default connect(null, mapDispatch)(NewItemBar);
+export default NewItemBar;
