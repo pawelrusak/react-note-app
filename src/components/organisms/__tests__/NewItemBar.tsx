@@ -1,6 +1,6 @@
 import { testComponent, render, screen, userEvent, waitFor } from 'testUtils';
 
-import NewItemBar, { OwnProps as NewItemBarOwnProps } from '../NewItemBar/NewItemBar';
+import NewItemBar, { NewItemBarProps } from '../NewItemBar/NewItemBar';
 import * as NewItemBarStories from '../NewItemBar/NewItemBar.stories';
 import { routes, RoutesPaths } from '~/routes';
 import { stripSlashPrefix } from '~/utils';
@@ -9,7 +9,7 @@ import type { ItemVariants } from '~/commonTypes';
 
 const exampleProps = {
   ...NewItemBarStories.Default.args,
-} as NewItemBarOwnProps;
+} as NewItemBarProps;
 
 const renderNewItemBar = (
   pageTypeOrPath: ItemVariants | RoutesPaths,
