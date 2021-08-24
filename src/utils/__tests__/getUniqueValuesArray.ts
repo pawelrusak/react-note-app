@@ -1,6 +1,6 @@
 import { getUniqueValuesArray } from '../index';
 
-describe('getUniqueValuesArray', () => {
+describe('getUniqueValuesArray utils', () => {
   it('throws a range error if the given length is less than zero', () => {
     expect(() => getUniqueValuesArray(-5)).toThrow(RangeError);
   });

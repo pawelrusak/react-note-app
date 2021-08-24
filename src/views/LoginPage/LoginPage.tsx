@@ -10,6 +10,7 @@ import { AUTH_ERRORS_CODES } from '~/constants/auth';
 import { useAuth } from '~/hooks';
 import { routes } from '~/routes';
 import AuthTemplate from '~/templates/AuthTemplate/AuthTemplate';
+import { DocumentTitle } from '~/utils/components';
 import * as validation from '~/validations';
 
 import type firebase from 'firebase';
@@ -44,60 +45,64 @@ const LoginPage = () => {
   const { userID, authenticate } = useAuth();
 
   return (
-    <AuthTemplate>
-      <Formik
-        validationSchema={validation.authSchema}
-        initialValues={{ email: '', password: '' }}
-        onSubmit={async ({ email, password }, actions) => {
-          try {
-            await authenticate(email, password);
-          } catch (error) {
-            const authError = error as firebase.auth.Error;
+    <>
+      <DocumentTitle>Login</DocumentTitle>
 
-            if (AUTH_ERRORS_CODES.WRONG_PASSWORD === authError.code) {
-              actions.setFieldError('password', authError.message);
-            } else {
-              actions.setFieldError('email', authError.message);
+      <AuthTemplate>
+        <Formik
+          validationSchema={validation.authSchema}
+          initialValues={{ email: '', password: '' }}
+          onSubmit={async ({ email, password }, actions) => {
+            try {
+              await authenticate(email, password);
+            } catch (error) {
+              const authError = error as firebase.auth.Error;
+
+              if (AUTH_ERRORS_CODES.WRONG_PASSWORD === authError.code) {
+                actions.setFieldError('password', authError.message);
+              } else {
+                actions.setFieldError('email', authError.message);
+              }
             }
-          }
-        }}
-      >
-        {({ isSubmitting, touched, isValid }) => {
-          if (userID) {
-            return <Redirect to={routes.home} />;
-          }
-          return (
-            <>
-              <Heading id="login-page-form">Sign in</Heading>
-              <StyledForm aria-labelledby="login-page-form">
-                <StyledField
-                  name="email"
-                  type="email"
-                  placeholder="Login"
-                  component={StyledInput}
-                  aria-required="true"
-                />
-                <StyledField
-                  name="password"
-                  type="password"
-                  placeholder="Password"
-                  component={StyledInput}
-                  aria-required="true"
-                />
-                <Button
-                  type="submit"
-                  pending={isSubmitting}
-                  disabled={isSubmitting || (touched.email && touched.password && !isValid)}
-                >
-                  sign in
-                </Button>
-              </StyledForm>
-              <StyledLink to={routes.register}>I want my account!</StyledLink>
-            </>
-          );
-        }}
-      </Formik>
-    </AuthTemplate>
+          }}
+        >
+          {({ isSubmitting, touched, isValid }) => {
+            if (userID) {
+              return <Redirect to={routes.home} />;
+            }
+            return (
+              <>
+                <Heading id="login-page-form">Sign in</Heading>
+                <StyledForm aria-labelledby="login-page-form">
+                  <StyledField
+                    name="email"
+                    type="email"
+                    placeholder="Login"
+                    component={StyledInput}
+                    aria-required="true"
+                  />
+                  <StyledField
+                    name="password"
+                    type="password"
+                    placeholder="Password"
+                    component={StyledInput}
+                    aria-required="true"
+                  />
+                  <Button
+                    type="submit"
+                    pending={isSubmitting}
+                    disabled={isSubmitting || (touched.email && touched.password && !isValid)}
+                  >
+                    sign in
+                  </Button>
+                </StyledForm>
+                <StyledLink to={routes.register}>I want my account!</StyledLink>
+              </>
+            );
+          }}
+        </Formik>
+      </AuthTemplate>
+    </>
   );
 };
 

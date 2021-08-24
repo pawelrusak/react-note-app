@@ -10,6 +10,7 @@ import {
 import { fakeItemsData } from 'testUtils/fakers';
 
 import { TEST_ID } from '~/constants/tests';
+import { capitalize } from '~/utils';
 
 import type { ItemVariants } from '~/commonTypes';
 
@@ -47,6 +48,14 @@ export const fetchItemsTestSuite = (
     titles.filter((title) => title?.toLowerCase().includes(searchText.toLowerCase()));
 
   describe(testSuiteName, () => {
+    test('display correct document title ', async () => {
+      render();
+
+      const capitalizedTitle = capitalize(variant);
+
+      await waitFor(() => expect(document.title).toContain(capitalizedTitle));
+    });
+
     it('display <CardListSkeleton /> until fetch data', async () => {
       render();
 

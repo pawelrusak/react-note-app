@@ -41,6 +41,12 @@ const userBuilder = build<User>({
 });
 
 describe('<LoginPage />', () => {
+  test('display correct document title ', async () => {
+    renderLoginPage();
+
+    await waitFor(() => expect(document.title).toBe('Login'));
+  });
+
   it('initially, the form should not contain any errors and button should be enable', () => {
     renderLoginPage();
 
