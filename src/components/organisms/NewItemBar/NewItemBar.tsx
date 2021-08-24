@@ -1,13 +1,11 @@
 import { Formik, Form } from 'formik';
-import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 
 import Button from '~/components/atoms/Button/Button';
 import Heading from '~/components/atoms/Heading/Heading';
 import Input from '~/components/atoms/Input/Input';
 import { TEST_ID } from '~/constants/tests';
-import { usePageTypeContext } from '~/hooks';
-import { addItem as addItemAction } from '~/store/items/itemsSlice';
+import { usePageTypeContext, useAddItemAction } from '~/hooks';
 import * as styledMixin from '~/theme/mixins';
 
 import type { ActiveColorArgs } from '~/theme/mixins';
@@ -53,7 +51,7 @@ export type NewItemBarProps = IsVisible & { readonly handleClose: () => void };
 
 const NewItemBar = ({ isVisible, handleClose }: NewItemBarProps) => {
   const pageContext = usePageTypeContext();
-  const dispatch = useDispatch();
+  const addItemAction = useAddItemAction();
 
   return (
     <StyledWrapper
@@ -65,7 +63,7 @@ const NewItemBar = ({ isVisible, handleClose }: NewItemBarProps) => {
       <Formik
         initialValues={{ title: '', content: '', articleUrl: '', twitterName: '' }}
         onSubmit={(values) => {
-          dispatch(addItemAction({ itemVariant: pageContext, itemContent: values }));
+          addItemAction(pageContext, values);
           handleClose();
         }}
       >
