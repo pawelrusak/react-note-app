@@ -5,6 +5,7 @@ import Button from '~/components/atoms/Button/Button';
 import Heading from '~/components/atoms/Heading/Heading';
 import Input from '~/components/atoms/Input/Input';
 import Field from '~/components/molecules/Field/Field';
+import { NEW_ITEM_VARIANTS_KEYS } from '~/constants/data';
 import { TEST_ID } from '~/constants/tests';
 import { usePageTypeContext, useAddItemAction } from '~/hooks';
 import * as styledMixin from '~/theme/mixins';
@@ -53,14 +54,6 @@ const StyledTextArea = styled(Input).attrs(() => ({ as: 'textarea' }))`
   width: 100%;
   height: 30vh;
 `;
-
-const BASE_NEW_ITEM_KEYS = ['title', 'content'] as const;
-
-const NEW_ITEM_VARIANTS_KEYS = {
-  notes: BASE_NEW_ITEM_KEYS,
-  articles: [...BASE_NEW_ITEM_KEYS, 'articleUrl'],
-  twitters: [...BASE_NEW_ITEM_KEYS, 'twitterName'],
-} as const;
 
 export type NewItemBarProps = IsVisible & { readonly handleClose: () => void };
 
