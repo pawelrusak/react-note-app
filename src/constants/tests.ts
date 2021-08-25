@@ -52,7 +52,6 @@ export const TEST_ID = {
   },
   NEW_ITEM_BAR: {
     WRAPPER: 'NewItemBar',
-    TEXTAREA: 'NewItemBar_Textarea',
   },
   SKELETON_CARD: {
     WRAPPER: 'SkeletonCard',
