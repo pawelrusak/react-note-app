@@ -20,6 +20,8 @@ const renderNewItemBar = (
     pageType: stripSlashPrefix(pageTypeOrPath) as ItemVariants,
   });
 
+const getByTitlePlaceholderText = () => screen.getByPlaceholderText(/title/i);
+const getByDescriptionPlaceholderText = () => screen.getByPlaceholderText(/description/i);
 const queryByTwitterPlaceholderText = () => screen.queryByPlaceholderText(/twitter/i);
 const queryByLinkPlaceholderText = () => screen.queryByPlaceholderText(/link/i);
 const queryAllByButtonRole = () => screen.queryAllByRole('button');
@@ -36,6 +38,29 @@ const newItemBuilder = build<NewItem>({
 });
 
 describe('<NewItemBar />', () => {
+  it.each(['notes', 'twitters', 'articles'])(
+    'initially, the form should not contain any errors and button should be enable',
+    (pageType) => {
+      renderNewItemBar(pageType as ItemVariants);
+
+      const [submitButton] = queryAllByButtonRole();
+
+      expect(submitButton).toBeEnabled();
+      expect(getByTitlePlaceholderText()).toBeValid();
+      expect(getByDescriptionPlaceholderText()).toBeValid();
+
+      if (pageType === 'twitters') {
+        expect(queryByTwitterPlaceholderText()).toBeValid();
+      }
+
+      if (pageType === 'articles') {
+        expect(queryByLinkPlaceholderText()).toBeValid();
+      }
+    },
+  );
+
+  it.todo('disable the submit button for combinations of invalid field values');
+
   it.each([['notes'], ['twitters'], ['articles']])('display correctly heading', (pageType) => {
     renderNewItemBar(pageType as ItemVariants);
 
@@ -51,8 +76,8 @@ describe('<NewItemBar />', () => {
 
     renderNewItemBar(routes.notes, mockHandleClose);
 
-    userEvent.type(screen.getByPlaceholderText(/title/i), fakeNewItem.title);
-    userEvent.type(screen.getByPlaceholderText(/description/i), fakeNewItem.content);
+    userEvent.type(getByTitlePlaceholderText(), fakeNewItem.title);
+    userEvent.type(getByDescriptionPlaceholderText(), fakeNewItem.content);
 
     const [submitButton] = queryAllByButtonRole();
 
