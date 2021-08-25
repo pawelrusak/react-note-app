@@ -1,3 +1,4 @@
+import { build, fake } from '@jackfranklin/test-data-bot';
 import { testComponent, render, screen, userEvent, waitFor } from 'testUtils';
 
 import NewItemBar, { NewItemBarProps } from '../NewItemBar/NewItemBar';
@@ -5,7 +6,7 @@ import * as NewItemBarStories from '../NewItemBar/NewItemBar.stories';
 import { routes, RoutesPaths } from '~/routes';
 import { stripSlashPrefix } from '~/utils';
 
-import type { ItemVariants } from '~/commonTypes';
+import type { ItemVariants, NewItem } from '~/commonTypes';
 
 const exampleProps = {
   ...NewItemBarStories.Default.args,
@@ -27,6 +28,13 @@ const getAllByHeadingRole = () => screen.getAllByRole('heading');
 const twitterUsernameInputTestName = 'twitter username input';
 const articleLinkInputTestName = 'twitter username input';
 
+const newItemBuilder = build<NewItem>({
+  fields: {
+    title: fake((faker) => faker.lorem.words()),
+    content: fake((faker) => faker.lorem.sentence()),
+  },
+});
+
 describe('<NewItemBar />', () => {
   it.each([['notes'], ['twitters'], ['articles']])('display correctly heading', (pageType) => {
     renderNewItemBar(pageType as ItemVariants);
@@ -39,8 +47,12 @@ describe('<NewItemBar />', () => {
 
   it('trigger the handleClose prop after submit the form', async () => {
     const mockHandleClose = jest.fn(() => ({}));
+    const fakeNewItem = newItemBuilder();
 
     renderNewItemBar(routes.notes, mockHandleClose);
+
+    userEvent.type(screen.getByPlaceholderText(/title/i), fakeNewItem.title);
+    userEvent.type(screen.getByPlaceholderText(/description/i), fakeNewItem.content);
 
     const [submitButton] = queryAllByButtonRole();
 
