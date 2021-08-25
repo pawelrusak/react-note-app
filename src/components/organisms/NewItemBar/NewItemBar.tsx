@@ -98,9 +98,9 @@ const NewItemBar = ({ isVisible, handleClose }: NewItemBarProps) => {
               />
             )}
             <StyledTextArea
+              placeholder="description"
               name="content"
               as="textarea"
-              data-testid={TEST_ID.NEW_ITEM_BAR.TEXTAREA}
               onChange={handleChange}
               onBlur={handleBlur}
               value={values.content}
