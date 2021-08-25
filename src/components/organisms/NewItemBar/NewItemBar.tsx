@@ -8,6 +8,7 @@ import Field from '~/components/molecules/Field/Field';
 import { TEST_ID } from '~/constants/tests';
 import { usePageTypeContext, useAddItemAction } from '~/hooks';
 import * as styledMixin from '~/theme/mixins';
+import { newItemSchema } from '~/validations';
 
 import type { ActiveColorArgs } from '~/theme/mixins';
 
@@ -66,7 +67,14 @@ const NewItemBar = ({ isVisible, handleClose }: NewItemBarProps) => {
     >
       <Heading big>Create new {pageContext}</Heading>
       <Formik
-        initialValues={{ title: '', content: '', articleUrl: '', twitterName: '' }}
+        validationSchema={newItemSchema}
+        initialValues={{
+          title: '',
+          content: '',
+          variant: pageContext,
+          articleUrl: '',
+          twitterName: '',
+        }}
         onSubmit={(values) => {
           addItemAction(pageContext, values);
           handleClose();
