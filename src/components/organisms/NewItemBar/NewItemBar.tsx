@@ -8,6 +8,7 @@ import Field from '~/components/molecules/Field/Field';
 import { TEST_ID } from '~/constants/tests';
 import { usePageTypeContext, useAddItemAction } from '~/hooks';
 import * as styledMixin from '~/theme/mixins';
+import { hasPropertiesWithTrueValues } from '~/utils';
 import { newItemSchema } from '~/validations';
 
 import type { ActiveColorArgs } from '~/theme/mixins';
@@ -53,6 +54,14 @@ const StyledTextArea = styled(Input).attrs(() => ({ as: 'textarea' }))`
   height: 30vh;
 `;
 
+const BASE_NEW_ITEM_KEYS = ['title', 'content'] as const;
+
+const NEW_ITEM_VARIANTS_KEYS = {
+  notes: BASE_NEW_ITEM_KEYS,
+  articles: [...BASE_NEW_ITEM_KEYS, 'articleUrl'],
+  twitters: [...BASE_NEW_ITEM_KEYS, 'twitterName'],
+} as const;
+
 export type NewItemBarProps = IsVisible & { readonly handleClose: () => void };
 
 const NewItemBar = ({ isVisible, handleClose }: NewItemBarProps) => {
@@ -80,7 +89,7 @@ const NewItemBar = ({ isVisible, handleClose }: NewItemBarProps) => {
           handleClose();
         }}
       >
-        {() => (
+        {({ isSubmitting, touched, isValid }) => (
           <StyledForm>
             <StyledTitleField type="text" name="title" placeholder="title" />
             {pageContext === 'twitters' && (
@@ -94,7 +103,16 @@ const NewItemBar = ({ isVisible, handleClose }: NewItemBarProps) => {
               name="content"
               component={StyledTextArea}
             />
-            <Button type="submit" activecolor={pageContext}>
+            <Button
+              type="submit"
+              pending={isSubmitting}
+              disabled={
+                isSubmitting ||
+                (hasPropertiesWithTrueValues(touched, [...NEW_ITEM_VARIANTS_KEYS[pageContext]]) &&
+                  !isValid)
+              }
+              activecolor={pageContext}
+            >
               Add Note
             </Button>
           </StyledForm>
