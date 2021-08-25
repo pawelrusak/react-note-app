@@ -1,3 +1,7 @@
+import { NEW_ITEM_VARIANTS_KEYS } from '~/constants/data';
+
+import type { ItemVariants, NewItem } from '~/commonTypes';
+
 export const stripPrefix = (str: string, prefix: string) =>
   str.startsWith(prefix) ? str.slice(prefix.length) : str;
 
@@ -34,3 +38,8 @@ export const hasPropertiesWithTrueValues = <T extends UnknownObject, K extends k
   Array.isArray(keys)
     ? keys.every((key) => (keys.includes(key) ? obj[key] === true : false))
     : Object.values(obj).every((value) => value === true);
+
+type NewItemTouches = Partial<Record<keyof NewItem, boolean>>;
+
+export const isNewItemVariantTouched = (newItemTouched: NewItemTouches, variant: ItemVariants) =>
+  hasPropertiesWithTrueValues(newItemTouched, [...NEW_ITEM_VARIANTS_KEYS[variant]]);
