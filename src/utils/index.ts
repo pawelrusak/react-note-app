@@ -22,3 +22,15 @@ export const capitalize = <T extends string>(str: T) =>
 
 export const join = (value: unknown) =>
   Array.isArray(value) ? value.map(String).join('') : String(value);
+
+type UnknownObject = {
+  [key: string]: unknown;
+};
+
+export const hasPropertiesWithTrueValues = <T extends UnknownObject, K extends keyof T>(
+  obj: T,
+  keys?: K[],
+) =>
+  Array.isArray(keys)
+    ? keys.every((key) => (keys.includes(key) ? obj[key] === true : false))
+    : Object.values(obj).every((value) => value === true);
