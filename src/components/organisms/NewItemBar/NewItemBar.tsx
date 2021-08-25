@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import Button from '~/components/atoms/Button/Button';
 import Heading from '~/components/atoms/Heading/Heading';
 import Input from '~/components/atoms/Input/Input';
+import Field from '~/components/molecules/Field/Field';
 import { TEST_ID } from '~/constants/tests';
 import { usePageTypeContext, useAddItemAction } from '~/hooks';
 import * as styledMixin from '~/theme/mixins';
@@ -37,14 +38,18 @@ const StyledForm = styled(Form)`
   flex-direction: column;
 `;
 
-const StyledTextArea = styled(Input)`
-  margin: 30px 0 100px;
-  border-radius: 20px;
-  height: 30vh;
+const StyledTitleField = styled(Field)`
+  margin-top: 30px;
 `;
 
-const StyledInput = styled(Input)`
-  margin-top: 30px;
+const StyledTextAreaField = styled(Field)`
+  margin-bottom: 70px;
+`;
+
+const StyledTextArea = styled(Input).attrs(() => ({ as: 'textarea' }))`
+  border-radius: 20px;
+  width: 100%;
+  height: 30vh;
 `;
 
 export type NewItemBarProps = IsVisible & { readonly handleClose: () => void };
@@ -67,43 +72,19 @@ const NewItemBar = ({ isVisible, handleClose }: NewItemBarProps) => {
           handleClose();
         }}
       >
-        {({ values, handleChange, handleBlur }) => (
+        {() => (
           <StyledForm>
-            <StyledInput
-              type="text"
-              name="title"
-              placeholder="title"
-              onChange={handleChange}
-              onBlur={handleBlur}
-              value={values.title}
-            />
+            <StyledTitleField type="text" name="title" placeholder="title" />
             {pageContext === 'twitters' && (
-              <StyledInput
-                placeholder="twitter name eg. hello_roman"
-                type="text"
-                name="twitterName"
-                onChange={handleChange}
-                onBlur={handleBlur}
-                value={values.twitterName}
-              />
+              <Field placeholder="twitter name eg. hello_roman" type="text" name="twitterName" />
             )}
             {pageContext === 'articles' && (
-              <StyledInput
-                placeholder="link"
-                type="text"
-                name="articleUrl"
-                onChange={handleChange}
-                onBlur={handleBlur}
-                value={values.articleUrl}
-              />
+              <Field placeholder="link" type="text" name="articleUrl" />
             )}
-            <StyledTextArea
+            <StyledTextAreaField
               placeholder="description"
               name="content"
-              as="textarea"
-              onChange={handleChange}
-              onBlur={handleBlur}
-              value={values.content}
+              component={StyledTextArea}
             />
             <Button type="submit" activecolor={pageContext}>
               Add Note
