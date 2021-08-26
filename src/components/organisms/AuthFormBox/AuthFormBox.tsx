@@ -9,6 +9,8 @@ import Field from '~/components/molecules/Field/Field';
 import { routes } from '~/routes';
 import { isAuthCredentialsTouched } from '~/utils';
 
+import type { AuthCredentials } from '~/commonTypes';
+
 const StyledForm = styled(Form)`
   display: flex;
   justify-content: center;
@@ -35,17 +37,12 @@ const StyledLink = styled(Link)`
   margin: 20px 0 50px;
 `;
 
-type AuthFormFields = {
-  email: string;
-  password: string;
-};
-
 export type AuthFormBoxProps = {
   readonly formVariant: 'login' | 'register';
 };
 
 const AuthFormBox = ({ formVariant }: AuthFormBoxProps) => {
-  const { isSubmitting, touched, isValid } = useFormikContext<AuthFormFields>();
+  const { isSubmitting, touched, isValid } = useFormikContext<AuthCredentials>();
 
   return (
     <>
