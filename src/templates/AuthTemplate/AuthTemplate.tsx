@@ -42,4 +42,7 @@ const AuthTemplate = ({ children }: AuthTemplateProps) => (
   </StyledWrapper>
 );
 
+// export for storybook decorators
+AuthTemplate.AuthCard = StyledAuthCard;
+
 export default AuthTemplate;
