@@ -7,6 +7,8 @@ import LoginPage from '../LoginPage/LoginPage';
 import { REGISTERED_USER_CREDENTIALS, AUTH_ERRORS } from '~/constants/tests';
 import { routes } from '~/routes';
 
+import type { AuthCredentials } from '~/commonTypes';
+
 jest.mock('~/services');
 
 const getByLoginPlaceholderText = () => screen.getByPlaceholderText(/login/i);
@@ -28,12 +30,7 @@ const renderLoginPage = () =>
     },
   );
 
-type User = {
-  email: string;
-  password: string;
-};
-
-const userBuilder = build<User>({
+const userBuilder = build<AuthCredentials>({
   fields: {
     email: fake((faker) => faker.internet.email()),
     password: fake((faker) => faker.internet.password()),
