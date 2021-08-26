@@ -1,3 +1,7 @@
+import { routes } from '~/routes';
+
+import type { RoutesPaths } from '~/routes';
+
 /**
  * This constant can be shared between tests and the code base.
  */
@@ -17,4 +21,31 @@ export const AUTH_ERRORS_CODES = {
   EMAIL_ALREADY_IN_USE: 'auth/email-already-in-use',
   WEAK_PASSWORD: 'auth/weak-password',
   INVALID_EMAIL: 'auth/invalid-email',
+} as const;
+
+type AuthFormBoxData = {
+  readonly headingText: string;
+  readonly buttonText: string;
+  readonly linkText: string;
+  readonly linkPath: RoutesPaths;
+};
+
+type AuthFormBoxDataVariants = {
+  readonly login: AuthFormBoxData;
+  readonly register: AuthFormBoxData;
+};
+
+export const AUTH_FORM_BOX_DATA_VARIANTS: AuthFormBoxDataVariants = {
+  login: {
+    headingText: 'Sign in',
+    buttonText: 'sign in',
+    linkText: 'I want my account!',
+    linkPath: routes.register,
+  },
+  register: {
+    headingText: 'Sign up',
+    buttonText: 'register',
+    linkText: 'I want to log in!',
+    linkPath: routes.login,
+  },
 } as const;
