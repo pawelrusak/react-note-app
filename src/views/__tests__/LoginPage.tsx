@@ -7,6 +7,8 @@ import LoginPage from '../LoginPage/LoginPage';
 import { REGISTERED_USER_CREDENTIALS, AUTH_ERRORS } from '~/constants/tests';
 import { routes } from '~/routes';
 
+import type { AuthCredentials } from '~/commonTypes';
+
 jest.mock('~/services');
 
 const getByLoginPlaceholderText = () => screen.getByPlaceholderText(/login/i);
@@ -28,12 +30,7 @@ const renderLoginPage = () =>
     },
   );
 
-type User = {
-  email: string;
-  password: string;
-};
-
-const userBuilder = build<User>({
+const authCredentialsBuilder = build<AuthCredentials>({
   fields: {
     email: fake((faker) => faker.internet.email()),
     password: fake((faker) => faker.internet.password()),
@@ -56,7 +53,7 @@ describe('<LoginPage />', () => {
   });
 
   it('disable the button after submitting an invalid form and enable it after fixing all form errors', async () => {
-    const fakeUser = userBuilder();
+    const authCredentials = authCredentialsBuilder();
 
     renderLoginPage();
 
@@ -68,7 +65,7 @@ describe('<LoginPage />', () => {
     expect(getByLoginPlaceholderText()).toBeInvalid();
     expect(getByPasswordPlaceholderText()).toBeInvalid();
 
-    userEvent.type(getByLoginPlaceholderText(), fakeUser.email);
+    userEvent.type(getByLoginPlaceholderText(), authCredentials.email);
 
     // the submit button should not be enable yet, it is waiting for all form fields to be valid
     await waitFor(() => expect(getByLoginButton()).toBeDisabled());
@@ -76,7 +73,7 @@ describe('<LoginPage />', () => {
     expect(getByLoginPlaceholderText()).toBeValid();
     expect(getByPasswordPlaceholderText()).toBeInvalid();
 
-    userEvent.type(getByPasswordPlaceholderText(), fakeUser.password);
+    userEvent.type(getByPasswordPlaceholderText(), authCredentials.password);
 
     // when all form fields are valid then enable the submit button
     await waitFor(() => expect(getByLoginButton()).toBeEnabled());
@@ -86,12 +83,12 @@ describe('<LoginPage />', () => {
   });
 
   it('the email field should be invalid and have an error message from the server when a unregistered user tries to log in', async () => {
-    const fakeUnregisteredUser = userBuilder();
+    const authCredentialsOfUnregisteredUser = authCredentialsBuilder();
 
     renderLoginPage();
 
-    userEvent.type(getByLoginPlaceholderText(), fakeUnregisteredUser.email);
-    userEvent.type(getByPasswordPlaceholderText(), fakeUnregisteredUser.password);
+    userEvent.type(getByLoginPlaceholderText(), authCredentialsOfUnregisteredUser.email);
+    userEvent.type(getByPasswordPlaceholderText(), authCredentialsOfUnregisteredUser.password);
 
     // submit form
     await waitFor(() => userEvent.click(getByLoginButton()));
@@ -103,7 +100,7 @@ describe('<LoginPage />', () => {
   });
 
   it('the password field should be invalid and have a server error message after a registered user tries to log in with an incorrect password', async () => {
-    const registeredUserWithWrongPassword = userBuilder({
+    const registeredUserCredentialsWithWrongPassword = authCredentialsBuilder({
       overrides: {
         email: REGISTERED_USER_CREDENTIALS.EMAIL,
       },
@@ -111,8 +108,11 @@ describe('<LoginPage />', () => {
 
     renderLoginPage();
 
-    userEvent.type(getByLoginPlaceholderText(), registeredUserWithWrongPassword.email);
-    userEvent.type(getByPasswordPlaceholderText(), registeredUserWithWrongPassword.password);
+    userEvent.type(getByLoginPlaceholderText(), registeredUserCredentialsWithWrongPassword.email);
+    userEvent.type(
+      getByPasswordPlaceholderText(),
+      registeredUserCredentialsWithWrongPassword.password,
+    );
 
     // submit form
     await waitFor(() => userEvent.click(getByLoginButton()));
