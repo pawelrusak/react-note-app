@@ -7,6 +7,7 @@ import Heading from '~/components/atoms/Heading/Heading';
 import Input from '~/components/atoms/Input/Input';
 import Field from '~/components/molecules/Field/Field';
 import { routes } from '~/routes';
+import { isAuthCredentialsTouched } from '~/utils';
 
 const StyledForm = styled(Form)`
   display: flex;
@@ -70,7 +71,7 @@ const AuthFormBox = ({ formVariant }: AuthFormBoxProps) => {
         <Button
           type="submit"
           pending={isSubmitting}
-          disabled={isSubmitting || (touched.email && touched.password && !isValid)}
+          disabled={isSubmitting || (isAuthCredentialsTouched(touched) && !isValid)}
         >
           {formVariant === 'login' && 'sign in'}
           {formVariant === 'register' && 'register'}
