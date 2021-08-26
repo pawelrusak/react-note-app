@@ -1,16 +1,16 @@
 import { Formik, Form } from 'formik';
-import { connect } from 'react-redux';
 import styled from 'styled-components';
 
 import Button from '~/components/atoms/Button/Button';
 import Heading from '~/components/atoms/Heading/Heading';
 import Input from '~/components/atoms/Input/Input';
+import Field from '~/components/molecules/Field/Field';
 import { TEST_ID } from '~/constants/tests';
-import { usePageTypeContext } from '~/hooks';
-import { addItem as addItemAction } from '~/store/items/itemsSlice';
+import { usePageTypeContext, useAddItemAction } from '~/hooks';
 import * as styledMixin from '~/theme/mixins';
+import { isNewItemVariantTouched } from '~/utils';
+import { newItemSchema } from '~/validations';
 
-import type { ItemVariants, NewItem } from '~/commonTypes';
 import type { ActiveColorArgs } from '~/theme/mixins';
 
 type IsVisible = { readonly isVisible: boolean };
@@ -40,27 +40,25 @@ const StyledForm = styled(Form)`
   flex-direction: column;
 `;
 
-const StyledTextArea = styled(Input)`
-  margin: 30px 0 100px;
-  border-radius: 20px;
-  height: 30vh;
-`;
-
-const StyledInput = styled(Input)`
+const StyledTitleField = styled(Field)`
   margin-top: 30px;
 `;
 
-type DispatchProps = {
-  addItem: (itemType: ItemVariants, itemContent: NewItem) => void;
-};
+const StyledTextAreaField = styled(Field)`
+  margin-bottom: 70px;
+`;
 
-// export for StoryBook use
-export type OwnProps = IsVisible & { readonly handleClose: () => void };
+const StyledTextArea = styled(Input).attrs(() => ({ as: 'textarea' }))`
+  border-radius: 20px;
+  width: 100%;
+  height: 30vh;
+`;
 
-export type NewItemBarProps = DispatchProps & OwnProps;
+export type NewItemBarProps = IsVisible & { readonly handleClose: () => void };
 
-const NewItemBar = ({ isVisible, addItem, handleClose }: NewItemBarProps) => {
+const NewItemBar = ({ isVisible, handleClose }: NewItemBarProps) => {
   const pageContext = usePageTypeContext();
+  const addItemAction = useAddItemAction();
 
   return (
     <StyledWrapper
@@ -70,51 +68,39 @@ const NewItemBar = ({ isVisible, addItem, handleClose }: NewItemBarProps) => {
     >
       <Heading big>Create new {pageContext}</Heading>
       <Formik
-        initialValues={{ title: '', content: '', articleUrl: '', twitterName: '' }}
+        validationSchema={newItemSchema}
+        initialValues={{
+          title: '',
+          content: '',
+          variant: pageContext,
+          articleUrl: '',
+          twitterName: '',
+        }}
         onSubmit={(values) => {
-          addItem(pageContext, values);
+          addItemAction(pageContext, values);
           handleClose();
         }}
       >
-        {({ values, handleChange, handleBlur }) => (
+        {({ isSubmitting, touched, isValid }) => (
           <StyledForm>
-            <StyledInput
-              type="text"
-              name="title"
-              placeholder="title"
-              onChange={handleChange}
-              onBlur={handleBlur}
-              value={values.title}
-            />
+            <StyledTitleField type="text" name="title" placeholder="title" />
             {pageContext === 'twitters' && (
-              <StyledInput
-                placeholder="twitter name eg. hello_roman"
-                type="text"
-                name="twitterName"
-                onChange={handleChange}
-                onBlur={handleBlur}
-                value={values.twitterName}
-              />
+              <Field placeholder="twitter name eg. hello_roman" type="text" name="twitterName" />
             )}
             {pageContext === 'articles' && (
-              <StyledInput
-                placeholder="link"
-                type="text"
-                name="articleUrl"
-                onChange={handleChange}
-                onBlur={handleBlur}
-                value={values.articleUrl}
-              />
+              <Field placeholder="link" type="text" name="articleUrl" />
             )}
-            <StyledTextArea
+            <StyledTextAreaField
+              placeholder="description"
               name="content"
-              as="textarea"
-              data-testid={TEST_ID.NEW_ITEM_BAR.TEXTAREA}
-              onChange={handleChange}
-              onBlur={handleBlur}
-              value={values.content}
+              component={StyledTextArea}
             />
-            <Button type="submit" activecolor={pageContext}>
+            <Button
+              type="submit"
+              pending={isSubmitting}
+              disabled={isSubmitting || (isNewItemVariantTouched(touched, pageContext) && !isValid)}
+              activecolor={pageContext}
+            >
               Add Note
             </Button>
           </StyledForm>
@@ -128,8 +114,4 @@ NewItemBar.defaultProps = {
   isVisible: false,
 };
 
-const mapDispatch: DispatchProps = {
-  addItem: (itemVariant, itemContent) => addItemAction({ itemVariant, itemContent }),
-};
-
-export default connect(null, mapDispatch)(NewItemBar);
+export default NewItemBar;

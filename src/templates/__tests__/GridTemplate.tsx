@@ -26,7 +26,7 @@ const renderGridTemplate = (path?: RoutesPaths, pageType?: ItemVariants) =>
 const getAllByHeadingRole = () => screen.getAllByRole('heading');
 const getNewItemBarWrapper = () => screen.getByTestId(TEST_ID.NEW_ITEM_BAR.WRAPPER);
 const getByTitlePlaceholderText = () => screen.getByPlaceholderText(/title/i);
-const getNewItemBarTextarea = () => screen.getByTestId(TEST_ID.NEW_ITEM_BAR.TEXTAREA);
+const getByDescriptionPlaceholderText = () => screen.getByPlaceholderText(/description/i);
 const getByAddNoteNameAndButtonRole = () => screen.getByRole('button', { name: /add note/i });
 const getByToggleNewItemBarNameAndButtonRole = () =>
   screen.getByRole('button', { name: /toggle new item bar/i });
@@ -140,7 +140,7 @@ describe('<GridTemplate />', () => {
 
     // input the values of the note
     userEvent.type(getByTitlePlaceholderText(), fakeNoteItem.title);
-    userEvent.type(getNewItemBarTextarea(), fakeNoteItem.content);
+    userEvent.type(getByDescriptionPlaceholderText(), fakeNoteItem.content);
 
     // submit the note form
     await waitFor(() => userEvent.click(getByAddNoteNameAndButtonRole()));
