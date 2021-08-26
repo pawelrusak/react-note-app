@@ -11,6 +11,8 @@ import {
 } from '~/constants/tests';
 import { routes } from '~/routes';
 
+import type { AuthCredentials } from '~/commonTypes';
+
 jest.mock('~/services');
 
 const getByLoginPlaceholderText = () => screen.getByPlaceholderText(/login/i);
@@ -32,12 +34,7 @@ const renderRegisterPage = () =>
     },
   );
 
-type User = {
-  email: string;
-  password: string;
-};
-
-const userBuilder = build<User>({
+const authCredentialsBuilder = build<AuthCredentials>({
   fields: {
     email: fake((faker) => faker.internet.email()),
     password: fake((faker) => faker.internet.password()),
@@ -60,7 +57,7 @@ describe('<RegisterPage />', () => {
   });
 
   it('disable the button after submitting an invalid form and enable it after fixing all form errors', async () => {
-    const fakeUnregisteredUser = userBuilder();
+    const authCredentialsOfUnregisteredUser = authCredentialsBuilder();
 
     renderRegisterPage();
 
@@ -72,7 +69,7 @@ describe('<RegisterPage />', () => {
     expect(getByLoginPlaceholderText()).toBeInvalid();
     expect(getByPasswordPlaceholderText()).toBeInvalid();
 
-    userEvent.type(getByLoginPlaceholderText(), fakeUnregisteredUser.email);
+    userEvent.type(getByLoginPlaceholderText(), authCredentialsOfUnregisteredUser.email);
 
     // the submit button should not be enable yet, it is waiting for all form fields to be valid
     await waitFor(() => expect(getByRegisterButton()).toBeDisabled());
@@ -80,7 +77,7 @@ describe('<RegisterPage />', () => {
     expect(getByLoginPlaceholderText()).toBeValid();
     expect(getByPasswordPlaceholderText()).toBeInvalid();
 
-    userEvent.type(getByPasswordPlaceholderText(), fakeUnregisteredUser.password);
+    userEvent.type(getByPasswordPlaceholderText(), authCredentialsOfUnregisteredUser.password);
 
     // when all form fields are valid then enable the submit button
     await waitFor(() => expect(getByRegisterButton()).toBeEnabled());
@@ -107,7 +104,7 @@ describe('<RegisterPage />', () => {
   });
 
   it('the password field should be invalid and have a server error message after the user tries to register with a weak password', async () => {
-    const fakeUnregisteredUserWithWeakPassword = userBuilder({
+    const unregisteredUserCredentialsWithWeakPassword = authCredentialsBuilder({
       overrides: {
         password: SPECIAL_VALUE_TO_TEST_WEAK_PASSWORD,
       },
@@ -115,8 +112,11 @@ describe('<RegisterPage />', () => {
 
     renderRegisterPage();
 
-    userEvent.type(getByLoginPlaceholderText(), fakeUnregisteredUserWithWeakPassword.email);
-    userEvent.type(getByPasswordPlaceholderText(), fakeUnregisteredUserWithWeakPassword.password);
+    userEvent.type(getByLoginPlaceholderText(), unregisteredUserCredentialsWithWeakPassword.email);
+    userEvent.type(
+      getByPasswordPlaceholderText(),
+      unregisteredUserCredentialsWithWeakPassword.password,
+    );
 
     // submit form
     await waitFor(() => userEvent.click(getByRegisterButton()));
@@ -128,14 +128,14 @@ describe('<RegisterPage />', () => {
   });
 
   it('submits correct values to registration and redirect to the home page', async () => {
-    const fakeUnregisteredUser = userBuilder();
+    const unregisteredUserCredentials = authCredentialsBuilder();
 
     renderRegisterPage();
 
     expect(queryFakeHomePage()).not.toBeInTheDocument();
 
-    userEvent.type(getByLoginPlaceholderText(), fakeUnregisteredUser.email);
-    userEvent.type(getByPasswordPlaceholderText(), fakeUnregisteredUser.password);
+    userEvent.type(getByLoginPlaceholderText(), unregisteredUserCredentials.email);
+    userEvent.type(getByPasswordPlaceholderText(), unregisteredUserCredentials.password);
 
     // submit form
     await waitFor(() => userEvent.click(getByRegisterButton()));
