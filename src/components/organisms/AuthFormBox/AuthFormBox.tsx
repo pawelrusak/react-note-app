@@ -6,7 +6,7 @@ import Button from '~/components/atoms/Button/Button';
 import Heading from '~/components/atoms/Heading/Heading';
 import Input from '~/components/atoms/Input/Input';
 import Field from '~/components/molecules/Field/Field';
-import { routes } from '~/routes';
+import { AUTH_FORM_BOX_DATA_VARIANTS } from '~/constants/auth';
 import { isAuthCredentialsTouched } from '~/utils';
 
 import type { AuthCredentials } from '~/commonTypes';
@@ -43,13 +43,11 @@ export type AuthFormBoxProps = {
 
 const AuthFormBox = ({ formVariant }: AuthFormBoxProps) => {
   const { isSubmitting, touched, isValid } = useFormikContext<AuthCredentials>();
+  const { headingText, buttonText, linkPath, linkText } = AUTH_FORM_BOX_DATA_VARIANTS[formVariant];
 
   return (
     <>
-      <Heading id="auth-form">
-        {formVariant === 'login' && 'Sign in'}
-        {formVariant === 'register' && 'Sign up'}
-      </Heading>
+      <Heading id="auth-form">{headingText}</Heading>
       <StyledForm aria-labelledby="auth-form">
         <StyledField
           name="email"
@@ -70,12 +68,10 @@ const AuthFormBox = ({ formVariant }: AuthFormBoxProps) => {
           pending={isSubmitting}
           disabled={isSubmitting || (isAuthCredentialsTouched(touched) && !isValid)}
         >
-          {formVariant === 'login' && 'sign in'}
-          {formVariant === 'register' && 'register'}
+          {buttonText}
         </Button>
       </StyledForm>
-      {formVariant === 'login' && <StyledLink to={routes.register}>I want my account!</StyledLink>}
-      {formVariant === 'register' && <StyledLink to={routes.login}>I want to log in!</StyledLink>}
+      <StyledLink to={linkPath}>{linkText}</StyledLink>
     </>
   );
 };
