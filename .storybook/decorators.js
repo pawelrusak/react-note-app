@@ -6,6 +6,7 @@ import StoryRouter from 'storybook-react-router';
 import { itemsPageLinks, gridTemplateLinks, userPageTemplateLinks } from './links';
 import GlobalStyle from '../src/theme/GlobalStyle';
 import GridTemplate from '../src/templates/GridTemplate/GridTemplate';
+import AuthTemplate from '../src/templates/AuthTemplate/AuthTemplate';
 import { storybookStore } from './storybookStore';
 
 export const ThemeDecorator = (Story) => (
@@ -93,6 +94,23 @@ export const CardListGridDecorator = (Story) => (
     <StyledSkeletonGridWrapper>
       <Story />
     </StyledSkeletonGridWrapper>
+  </>
+);
+
+const StyledAuthFormBoxCard = styled(AuthTemplate.AuthCard)`
+  box-shadow: none;
+  border: 2px dashed hsl(0, 0%, 60%);
+`;
+
+export const AuthFormBoxCardDecorator = (Story) => (
+  <>
+    <StyledInfoText>
+      For presentation purpose, the AuthFormBox component is in wrapper element with dashed border
+      in the styled component from AuthTemplate!
+    </StyledInfoText>
+    <StyledAuthFormBoxCard>
+      <Story />
+    </StyledAuthFormBoxCard>
   </>
 );
 

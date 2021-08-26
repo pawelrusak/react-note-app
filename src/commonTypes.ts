@@ -59,6 +59,11 @@ export type NewItem = Omit<Item, 'id' | 'created'>;
  * Other
  *
  */
+export type AuthCredentials = {
+  email: string;
+  password: string;
+};
+
 export type URLParams = {
   id: string;
 };
