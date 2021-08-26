@@ -13,6 +13,7 @@ import * as services from '~/services';
 import { auth } from '~/services/core';
 
 import type firebase from 'firebase/app';
+import type { AuthCredentials } from '~/commonTypes';
 
 export type AuthState = {
   readonly userID: string | null;
@@ -25,13 +26,9 @@ const initialState: AuthState = {
 };
 
 type FirebaseReturnUserCredential = firebase.auth.UserCredential;
-type UserCredential = {
-  email: string;
-  password: string;
-};
 
 type AuthenticateReturn = FirebaseReturnUserCredential;
-type AuthenticateArg = UserCredential;
+type AuthenticateArg = AuthCredentials;
 
 export const authenticate = createAsyncThunk<AuthenticateReturn, AuthenticateArg, AppThunkConfig>(
   `${ACTION_DOMAINS.AUTH}/authenticate`,
@@ -46,7 +43,7 @@ export const authenticate = createAsyncThunk<AuthenticateReturn, AuthenticateArg
 );
 
 type RegisterReturn = FirebaseReturnUserCredential;
-type RegisterArg = UserCredential;
+type RegisterArg = AuthCredentials;
 
 export const register = createAsyncThunk<RegisterReturn, RegisterArg, AppThunkConfig>(
   `${ACTION_DOMAINS.AUTH}/register`,
