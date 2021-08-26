@@ -1,6 +1,8 @@
+import { FormikTouched } from 'formik';
+
 import { NEW_ITEM_VARIANTS_KEYS } from '~/constants/data';
 
-import type { ItemVariants, NewItem } from '~/commonTypes';
+import type { ItemVariants, NewItem, AuthCredentials } from '~/commonTypes';
 
 export const stripPrefix = (str: string, prefix: string) =>
   str.startsWith(prefix) ? str.slice(prefix.length) : str;
@@ -43,3 +45,8 @@ type NewItemTouches = Partial<Record<keyof NewItem, boolean>>;
 
 export const isNewItemVariantTouched = (newItemTouched: NewItemTouches, variant: ItemVariants) =>
   hasPropertiesWithTrueValues(newItemTouched, [...NEW_ITEM_VARIANTS_KEYS[variant]]);
+
+export type AuthCredentialsTouched = FormikTouched<AuthCredentials>;
+
+export const isAuthCredentialsTouched = (authCredentialsTouched: AuthCredentialsTouched) =>
+  hasPropertiesWithTrueValues(authCredentialsTouched, ['email', 'password']);
