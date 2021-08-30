@@ -57,37 +57,37 @@ const StyledTextArea = styled(Input).attrs(() => ({ as: 'textarea' }))`
 export type NewItemBarProps = IsVisible & { readonly handleClose: () => void };
 
 const NewItemBar = ({ isVisible, handleClose }: NewItemBarProps) => {
-  const pageContext = usePageTypeContext();
+  const pageVariant = usePageTypeContext();
   const addItemAction = useAddItemAction();
 
   return (
     <StyledWrapper
       data-testid={TEST_ID.NEW_ITEM_BAR.WRAPPER}
       isVisible={isVisible}
-      activecolor={pageContext}
+      activecolor={pageVariant}
     >
-      <Heading big>Create new {pageContext}</Heading>
+      <Heading big>Create new {pageVariant}</Heading>
       <Formik
         validationSchema={newItemSchema}
         initialValues={{
           title: '',
           content: '',
-          variant: pageContext,
+          variant: pageVariant,
           articleUrl: '',
           twitterName: '',
         }}
         onSubmit={(values) => {
-          addItemAction(pageContext, values);
+          addItemAction(pageVariant, values);
           handleClose();
         }}
       >
         {({ isSubmitting, touched, isValid }) => (
           <StyledForm>
             <StyledTitleField type="text" name="title" placeholder="title" />
-            {pageContext === 'twitters' && (
+            {pageVariant === 'twitters' && (
               <Field placeholder="twitter name eg. hello_roman" type="text" name="twitterName" />
             )}
-            {pageContext === 'articles' && (
+            {pageVariant === 'articles' && (
               <Field placeholder="link" type="text" name="articleUrl" />
             )}
             <StyledTextAreaField
@@ -98,8 +98,8 @@ const NewItemBar = ({ isVisible, handleClose }: NewItemBarProps) => {
             <Button
               type="submit"
               pending={isSubmitting}
-              disabled={isSubmitting || (isNewItemVariantTouched(touched, pageContext) && !isValid)}
-              variant={pageContext}
+              disabled={isSubmitting || (isNewItemVariantTouched(touched, pageVariant) && !isValid)}
+              variant={pageVariant}
             >
               Add Note
             </Button>
