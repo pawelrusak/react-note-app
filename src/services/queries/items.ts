@@ -8,6 +8,7 @@ export const queryGetItemsByTypeAndUserID = (type: ItemVariants, userID: null | 
   getNotesCollectionRef()
     .where('userID', '==', userID)
     .where('type', '==', type)
+    .orderBy('created', 'desc')
     .withConverter(itemConverter)
     .get();
 
