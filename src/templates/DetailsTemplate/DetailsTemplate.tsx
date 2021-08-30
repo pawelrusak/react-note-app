@@ -103,7 +103,7 @@ const DetailsTemplate = ({
             src={`https://unavatar.now.sh/twitter/${twitterName as string}  `}
           />
         )}
-        <Button as={Link} to={`/${pageContext}`} activecolor={pageContext}>
+        <Button as={Link} to={`/${pageContext}`} variant={pageContext}>
           save / close
         </Button>
       </StyledWrapper>

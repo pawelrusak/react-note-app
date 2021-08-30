@@ -99,7 +99,7 @@ const NewItemBar = ({ isVisible, handleClose }: NewItemBarProps) => {
               type="submit"
               pending={isSubmitting}
               disabled={isSubmitting || (isNewItemVariantTouched(touched, pageContext) && !isValid)}
-              activecolor={pageContext}
+              variant={pageContext}
             >
               Add Note
             </Button>
