@@ -128,7 +128,7 @@ describe('<GridTemplate />', () => {
     );
   });
 
-  it('add a new note to store that has been created by the form', async () => {
+  it('add a new note to the storage that was created by the form at the beginning of the array', async () => {
     const fakeNoteItem = noteItemBuilder();
 
     const { store } = renderGridTemplate();
@@ -145,15 +145,16 @@ describe('<GridTemplate />', () => {
     // submit the note form
     await waitFor(() => userEvent.click(getByAddNoteNameAndButtonRole()));
 
-    expect(store.getState().items.notes).toHaveLength(5);
-    expect(store.getState().items.notes).toEqual(
-      expect.arrayContaining([
-        expect.objectContaining({
-          id: expect.any(String) as string,
-          ...fakeNoteItem,
-          created: expect.any(String) as string,
-        }),
-      ]),
+    const { notes } = store.getState().items;
+    const [firstNote] = notes;
+
+    expect(notes).toHaveLength(5);
+    expect(firstNote).toEqual(
+      expect.objectContaining({
+        id: expect.any(String) as string,
+        ...fakeNoteItem,
+        created: expect.any(String) as string,
+      }),
     );
   });
 });

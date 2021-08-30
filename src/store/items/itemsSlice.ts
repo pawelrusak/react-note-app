@@ -104,7 +104,7 @@ const itemsSlice = createSlice({
       .addCase(addItem.fulfilled, (state, action) => {
         // eslint-disable-next-line
         // @ts-expect-error
-        state[action.payload.itemVariant].push({ ...action.payload.data });
+        state[action.payload.itemVariant].unshift({ ...action.payload.data });
       })
       .addCase(removeItem.fulfilled, (state, { payload }) => {
         // eslint-disable-next-line
