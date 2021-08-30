@@ -8,8 +8,8 @@ import type { ItemVariants } from '~/commonTypes';
 const SPINNER_HEIGHT = 18;
 
 export type ButtonProps =
-  | Readonly<{ activecolor?: never; secondary: true; pending?: never }>
-  | Readonly<{ activecolor?: ItemVariants; secondary?: never; pending?: boolean }>;
+  | Readonly<{ variant?: never; secondary: true; pending?: never }>
+  | Readonly<{ variant?: ItemVariants; secondary?: never; pending?: boolean }>;
 
 const Button = styled.button<ButtonProps>`
   display: flex;
@@ -18,7 +18,7 @@ const Button = styled.button<ButtonProps>`
   color: black;
   text-decoration: none;
   padding: 0;
-  ${styledMixin.activecolor}
+  background-color: ${styledMixin.variantColorValue()};
   width: 220px;
   height: 47px;
   border: none;
@@ -30,7 +30,7 @@ const Button = styled.button<ButtonProps>`
   cursor: pointer;
 
   &:hover {
-    ${styledMixin.darkenActiveColor}
+    background-color: ${styledMixin.variantColorValue({ darken: true })};
   }
 
   ${({ secondary }) =>
@@ -47,7 +47,7 @@ const Button = styled.button<ButtonProps>`
         `
       : css`
           &:disabled {
-            ${styledMixin.lightenActiveColor};
+            background-color: ${styledMixin.variantColorValue({ lighten: true })};
             ${styledMixin.lightenBlackText};
             cursor: not-allowed;
           }
@@ -59,7 +59,7 @@ const Button = styled.button<ButtonProps>`
     css`
       &,
       &:hover {
-        ${styledMixin.lightenActiveColor}
+        background-color: ${styledMixin.variantColorValue({ lighten: true })};
         color: transparent;
         position: relative;
         cursor: not-allowed;
