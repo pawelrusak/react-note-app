@@ -15,12 +15,12 @@ export const Default = Template.bind({});
 
 export const Note = Template.bind({});
 Note.args = {
-  activecolor: 'notes',
+  variant: 'notes',
   disabled: false,
   pending: false,
 };
 Note.argTypes = {
-  activecolor: {
+  variant: {
     control: {
       type: 'inline-radio',
       options: ['notes', 'twitters', 'articles'],
@@ -36,7 +36,7 @@ Note.argTypes = {
 export const Twitter = Template.bind({});
 Twitter.args = {
   ...Note.args,
-  activecolor: 'twitters',
+  variant: 'twitters',
 };
 Twitter.argTypes = {
   ...Note.argTypes,
@@ -45,7 +45,7 @@ Twitter.argTypes = {
 export const Article = Template.bind({});
 Article.args = {
   ...Note.args,
-  activecolor: 'articles',
+  variant: 'articles',
 };
 Article.argTypes = {
   ...Note.argTypes,
@@ -61,7 +61,7 @@ Secondary.argTypes = {
       type: 'boolean',
     },
   },
-  activecolor: {
+  variant: {
     table: {
       disable: true,
     },
