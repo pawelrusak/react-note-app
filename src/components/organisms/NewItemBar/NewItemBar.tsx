@@ -13,8 +13,8 @@ import { newItemSchema } from '~/validations';
 
 import type { VariantColorValueProp } from '~/theme/mixins';
 
-type IsVisible = { readonly isVisible: boolean };
-type StyledWrapperProps = Required<VariantColorValueProp> & IsVisible;
+type Visible = { readonly visible: boolean };
+type StyledWrapperProps = Required<VariantColorValueProp> & Visible;
 
 const StyledWrapper = styled.div<StyledWrapperProps>`
   border-left: 10px solid ${styledMixin.variantColorValue()};
@@ -30,7 +30,7 @@ const StyledWrapper = styled.div<StyledWrapperProps>`
   width: 680px;
   background-color: white;
   box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
-  transform: translate(${({ isVisible }) => (isVisible ? '0' : '100%')});
+  transform: translate(${({ visible }) => (visible ? '0' : '100%')});
   ${styledMixin.transitionTransformForNewItemBarAndHisToggleButton};
   overflow-y: scroll;
 `;
@@ -54,16 +54,16 @@ const StyledTextArea = styled(Input).attrs(() => ({ as: 'textarea' }))`
   height: 30vh;
 `;
 
-export type NewItemBarProps = IsVisible & { readonly handleClose: () => void };
+export type NewItemBarProps = Visible & { readonly handleClose: () => void };
 
-const NewItemBar = ({ isVisible, handleClose }: NewItemBarProps) => {
+const NewItemBar = ({ visible, handleClose }: NewItemBarProps) => {
   const pageVariant = usePageTypeContext();
   const addItemAction = useAddItemAction();
 
   return (
     <StyledWrapper
       data-testid={TEST_ID.NEW_ITEM_BAR.WRAPPER}
-      isVisible={isVisible}
+      visible={visible}
       variant={pageVariant}
     >
       <Heading big>Create new {pageVariant}</Heading>
@@ -111,7 +111,7 @@ const NewItemBar = ({ isVisible, handleClose }: NewItemBarProps) => {
 };
 
 NewItemBar.defaultProps = {
-  isVisible: false,
+  visible: false,
 };
 
 export default NewItemBar;
