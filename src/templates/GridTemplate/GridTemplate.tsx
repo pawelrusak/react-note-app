@@ -66,8 +66,8 @@ export type GridTemplateProps = {
 
 const GridTemplate = ({ children }: GridTemplateProps) => {
   const [newItemBarVisible, toggleNewItemBarVisible] = useToggle(false);
-  const pageType = usePageTypeContext();
-  const [search, setSearch] = useSearchState(pageType);
+  const pageVariant = usePageTypeContext();
+  const [search, setSearch] = useSearchState(pageVariant);
 
   return (
     <UserPageTemplate>
@@ -80,7 +80,7 @@ const GridTemplate = ({ children }: GridTemplateProps) => {
             onChange={(event) => setSearch(event.target.value)}
           />
           <StyledHeading big as="h1">
-            {pageType}
+            {pageVariant}
           </StyledHeading>
           <Counter />
         </StyledPageHeader>
@@ -89,7 +89,7 @@ const GridTemplate = ({ children }: GridTemplateProps) => {
           aria-label="toggle new item bar"
           onClick={toggleNewItemBarVisible}
           icon={plusIcon}
-          variant={pageType}
+          variant={pageVariant}
           active={newItemBarVisible}
         />
         <NewItemBar handleClose={toggleNewItemBarVisible} isVisible={newItemBarVisible} />
