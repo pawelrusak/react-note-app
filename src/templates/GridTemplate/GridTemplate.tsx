@@ -92,7 +92,7 @@ const GridTemplate = ({ children }: GridTemplateProps) => {
           variant={pageVariant}
           active={newItemBarVisible}
         />
-        <NewItemBar handleClose={toggleNewItemBarVisible} isVisible={newItemBarVisible} />
+        <NewItemBar handleClose={toggleNewItemBarVisible} visible={newItemBarVisible} />
       </StyledWrapper>
     </UserPageTemplate>
   );
