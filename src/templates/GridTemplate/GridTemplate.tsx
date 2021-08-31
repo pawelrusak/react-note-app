@@ -10,7 +10,7 @@ import { useToggle, usePageTypeContext, useSearchState } from '~/hooks';
 import UserPageTemplate from '~/templates/UserPageTemplate/UserPageTemplate';
 import * as styledMixin from '~/theme/mixins';
 
-import type { ActiveColorArgs } from '~/theme/mixins';
+import type { VariantColorValueProp } from '~/theme/mixins';
 
 const StyledWrapper = styled.div`
   position: relative;
@@ -46,13 +46,13 @@ const StyledHeading = styled(Heading)`
 
 type StyledButtonIconProps = {
   readonly active: boolean;
-} & ActiveColorArgs;
+} & Required<VariantColorValueProp>;
 
 const StyledButtonIcon = styled(ButtonIcon)<StyledButtonIconProps>`
   position: fixed;
   bottom: 40px;
   right: 40px;
-  ${styledMixin.activecolor}
+  background-color: ${styledMixin.variantColorValue()};
   background-size: 35%;
   border-radius: 50px;
   z-index: 10000;
@@ -66,8 +66,8 @@ export type GridTemplateProps = {
 
 const GridTemplate = ({ children }: GridTemplateProps) => {
   const [newItemBarVisible, toggleNewItemBarVisible] = useToggle(false);
-  const pageType = usePageTypeContext();
-  const [search, setSearch] = useSearchState(pageType);
+  const pageVariant = usePageTypeContext();
+  const [search, setSearch] = useSearchState(pageVariant);
 
   return (
     <UserPageTemplate>
@@ -80,7 +80,7 @@ const GridTemplate = ({ children }: GridTemplateProps) => {
             onChange={(event) => setSearch(event.target.value)}
           />
           <StyledHeading big as="h1">
-            {pageType}
+            {pageVariant}
           </StyledHeading>
           <Counter />
         </StyledPageHeader>
@@ -89,10 +89,10 @@ const GridTemplate = ({ children }: GridTemplateProps) => {
           aria-label="toggle new item bar"
           onClick={toggleNewItemBarVisible}
           icon={plusIcon}
-          activecolor={pageType}
+          variant={pageVariant}
           active={newItemBarVisible}
         />
-        <NewItemBar handleClose={toggleNewItemBarVisible} isVisible={newItemBarVisible} />
+        <NewItemBar handleClose={toggleNewItemBarVisible} visible={newItemBarVisible} />
       </StyledWrapper>
     </UserPageTemplate>
   );

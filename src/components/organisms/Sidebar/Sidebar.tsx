@@ -8,16 +8,18 @@ import penIcon from '~/assets/icons/pen.svg';
 import twitterIcon from '~/assets/icons/twitter.svg';
 import ButtonIcon from '~/components/atoms/ButtonIcon/ButtonIcon';
 import { usePageTypeContext, useAuth } from '~/hooks';
-import { activecolor, ActiveColorArgs } from '~/theme/mixins';
+import * as styledMixin from '~/theme/mixins';
 
-const StyledWrapper = styled.nav<Required<ActiveColorArgs>>`
+import type { VariantColorValueProp } from '~/theme/mixins';
+
+const StyledWrapper = styled.nav<Required<VariantColorValueProp>>`
   position: fixed;
   left: 0;
   top: 0;
   padding: 25px 0;
   width: 150px;
   height: 100vh;
-  ${activecolor}
+  background-color: ${styledMixin.variantColorValue()};
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -47,11 +49,11 @@ const StyledLinksList = styled.ul`
 `;
 
 const Sidebar = () => {
-  const pageContext = usePageTypeContext();
+  const pageVariant = usePageTypeContext();
   const { logout } = useAuth();
 
   return (
-    <StyledWrapper activecolor={pageContext}>
+    <StyledWrapper variant={pageVariant}>
       <StyledLogoLink to="/" />
       <StyledLinksList>
         <li>

@@ -68,7 +68,7 @@ const DetailsTemplate = ({
   articleUrl,
   twitterName,
 }: DetailsTemplateProps) => {
-  const pageContext = usePageTypeContext();
+  const pageVariant = usePageTypeContext();
 
   return (
     <UserPageTemplate>
@@ -88,7 +88,7 @@ const DetailsTemplate = ({
         </StyledPageHeader>
 
         <Paragraph>{content}</Paragraph>
-        {pageContext === 'articles' && (
+        {pageVariant === 'articles' && (
           <StyledLink
             data-testid={TEST_ID.DETAILS_TEMPLATE.ARTICLE_LINK}
             href={articleUrl as string}
@@ -96,14 +96,14 @@ const DetailsTemplate = ({
             Open article
           </StyledLink>
         )}
-        {pageContext === 'twitters' && (
+        {pageVariant === 'twitters' && (
           <StyledAvatar
             data-testid={TEST_ID.DETAILS_TEMPLATE.AVATAR}
             alt={title}
             src={`https://unavatar.now.sh/twitter/${twitterName as string}  `}
           />
         )}
-        <Button as={Link} to={`/${pageContext}`} activecolor={pageContext}>
+        <Button as={Link} to={`/${pageVariant}`} variant={pageVariant}>
           save / close
         </Button>
       </StyledWrapper>

@@ -11,13 +11,13 @@ import * as styledMixin from '~/theme/mixins';
 import { isNewItemVariantTouched } from '~/utils';
 import { newItemSchema } from '~/validations';
 
-import type { ActiveColorArgs } from '~/theme/mixins';
+import type { VariantColorValueProp } from '~/theme/mixins';
 
-type IsVisible = { readonly isVisible: boolean };
-type StyledWrapperProps = Required<ActiveColorArgs> & IsVisible;
+type Visible = { readonly visible: boolean };
+type StyledWrapperProps = Required<VariantColorValueProp> & Visible;
 
 const StyledWrapper = styled.div<StyledWrapperProps>`
-  border-left: 10px solid ${({ theme, activecolor }) => theme[activecolor]};
+  border-left: 10px solid ${styledMixin.variantColorValue()};
   z-index: 9999;
   position: fixed;
   display: flex;
@@ -30,7 +30,7 @@ const StyledWrapper = styled.div<StyledWrapperProps>`
   width: 680px;
   background-color: white;
   box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
-  transform: translate(${({ isVisible }) => (isVisible ? '0' : '100%')});
+  transform: translate(${({ visible }) => (visible ? '0' : '100%')});
   ${styledMixin.transitionTransformForNewItemBarAndHisToggleButton};
   overflow-y: scroll;
 `;
@@ -54,40 +54,40 @@ const StyledTextArea = styled(Input).attrs(() => ({ as: 'textarea' }))`
   height: 30vh;
 `;
 
-export type NewItemBarProps = IsVisible & { readonly handleClose: () => void };
+export type NewItemBarProps = Visible & { readonly handleClose: () => void };
 
-const NewItemBar = ({ isVisible, handleClose }: NewItemBarProps) => {
-  const pageContext = usePageTypeContext();
+const NewItemBar = ({ visible, handleClose }: NewItemBarProps) => {
+  const pageVariant = usePageTypeContext();
   const addItemAction = useAddItemAction();
 
   return (
     <StyledWrapper
       data-testid={TEST_ID.NEW_ITEM_BAR.WRAPPER}
-      isVisible={isVisible}
-      activecolor={pageContext}
+      visible={visible}
+      variant={pageVariant}
     >
-      <Heading big>Create new {pageContext}</Heading>
+      <Heading big>Create new {pageVariant}</Heading>
       <Formik
         validationSchema={newItemSchema}
         initialValues={{
           title: '',
           content: '',
-          variant: pageContext,
+          variant: pageVariant,
           articleUrl: '',
           twitterName: '',
         }}
         onSubmit={(values) => {
-          addItemAction(pageContext, values);
+          addItemAction(pageVariant, values);
           handleClose();
         }}
       >
         {({ isSubmitting, touched, isValid }) => (
           <StyledForm>
             <StyledTitleField type="text" name="title" placeholder="title" />
-            {pageContext === 'twitters' && (
+            {pageVariant === 'twitters' && (
               <Field placeholder="twitter name eg. hello_roman" type="text" name="twitterName" />
             )}
-            {pageContext === 'articles' && (
+            {pageVariant === 'articles' && (
               <Field placeholder="link" type="text" name="articleUrl" />
             )}
             <StyledTextAreaField
@@ -98,8 +98,8 @@ const NewItemBar = ({ isVisible, handleClose }: NewItemBarProps) => {
             <Button
               type="submit"
               pending={isSubmitting}
-              disabled={isSubmitting || (isNewItemVariantTouched(touched, pageContext) && !isValid)}
-              activecolor={pageContext}
+              disabled={isSubmitting || (isNewItemVariantTouched(touched, pageVariant) && !isValid)}
+              variant={pageVariant}
             >
               Add Note
             </Button>
@@ -111,7 +111,7 @@ const NewItemBar = ({ isVisible, handleClose }: NewItemBarProps) => {
 };
 
 NewItemBar.defaultProps = {
-  isVisible: false,
+  visible: false,
 };
 
 export default NewItemBar;
