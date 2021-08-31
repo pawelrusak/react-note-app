@@ -125,19 +125,19 @@ const SkeletonCard = ({
   lightenAmount,
   grey,
 }: SkeletonCardProps & typeof defaultProps) => {
-  const itemType = usePageTypeContext();
+  const pageVariant = usePageTypeContext();
 
   return (
     <Card.Wrapper data-testid={TEST_ID.SKELETON_CARD.WRAPPER}>
       <StyledCardHeaderWrapper
         lightenActiveColor={lighten}
         lightenActiveColorAmount={lightenAmount}
-        variant={itemType}
+        variant={pageVariant}
         greyColor={grey}
       >
         <StyledSkeletonHeading dark />
         <StyledSkeletonTime dark />
-        {itemType === 'twitters' && (
+        {pageVariant === 'twitters' && (
           <StyledAvatarSkeleton
             data-testid={TEST_ID.SKELETON_CARD.AVATAR_SKELETON}
             lightenActiveColorAmount={lightenAmount}
@@ -146,7 +146,7 @@ const SkeletonCard = ({
             dark
           />
         )}
-        {itemType === 'articles' && (
+        {pageVariant === 'articles' && (
           <StyledLinkButtonSkeleton
             data-testid={TEST_ID.SKELETON_CARD.ARTICLE_LINK_SKELETON}
             dark
