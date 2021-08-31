@@ -14,7 +14,7 @@ const Template: Story<NewItemBarProps> = (args) => <NewItemBar {...args} />;
 export const Default = Template.bind({});
 Default.args = {
   handleClose: () => ({}),
-  isVisible: true,
+  visible: true,
 };
 
 export const Note = Template.bind({});
