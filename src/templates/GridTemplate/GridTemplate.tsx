@@ -10,7 +10,7 @@ import { useToggle, usePageTypeContext, useSearchState } from '~/hooks';
 import UserPageTemplate from '~/templates/UserPageTemplate/UserPageTemplate';
 import * as styledMixin from '~/theme/mixins';
 
-import type { ActiveColorArgs } from '~/theme/mixins';
+import type { VariantColorValueProp } from '~/theme/mixins';
 
 const StyledWrapper = styled.div`
   position: relative;
@@ -46,13 +46,13 @@ const StyledHeading = styled(Heading)`
 
 type StyledButtonIconProps = {
   readonly active: boolean;
-} & ActiveColorArgs;
+} & Required<VariantColorValueProp>;
 
 const StyledButtonIcon = styled(ButtonIcon)<StyledButtonIconProps>`
   position: fixed;
   bottom: 40px;
   right: 40px;
-  ${styledMixin.activecolor}
+  background-color: ${styledMixin.variantColorValue()};
   background-size: 35%;
   border-radius: 50px;
   z-index: 10000;
@@ -89,7 +89,7 @@ const GridTemplate = ({ children }: GridTemplateProps) => {
           aria-label="toggle new item bar"
           onClick={toggleNewItemBarVisible}
           icon={plusIcon}
-          activecolor={pageType}
+          variant={pageType}
           active={newItemBarVisible}
         />
         <NewItemBar handleClose={toggleNewItemBarVisible} isVisible={newItemBarVisible} />
