@@ -11,13 +11,13 @@ import * as styledMixin from '~/theme/mixins';
 import { isNewItemVariantTouched } from '~/utils';
 import { newItemSchema } from '~/validations';
 
-import type { ActiveColorArgs } from '~/theme/mixins';
+import type { VariantColorValueProp } from '~/theme/mixins';
 
 type IsVisible = { readonly isVisible: boolean };
-type StyledWrapperProps = Required<ActiveColorArgs> & IsVisible;
+type StyledWrapperProps = Required<VariantColorValueProp> & IsVisible;
 
 const StyledWrapper = styled.div<StyledWrapperProps>`
-  border-left: 10px solid ${({ theme, activecolor }) => theme[activecolor]};
+  border-left: 10px solid ${styledMixin.variantColorValue()};
   z-index: 9999;
   position: fixed;
   display: flex;
@@ -64,7 +64,7 @@ const NewItemBar = ({ isVisible, handleClose }: NewItemBarProps) => {
     <StyledWrapper
       data-testid={TEST_ID.NEW_ITEM_BAR.WRAPPER}
       isVisible={isVisible}
-      activecolor={pageVariant}
+      variant={pageVariant}
     >
       <Heading big>Create new {pageVariant}</Heading>
       <Formik
