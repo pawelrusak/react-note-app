@@ -49,11 +49,11 @@ const StyledLinksList = styled.ul`
 `;
 
 const Sidebar = () => {
-  const pageContext = usePageTypeContext();
+  const pageVariant = usePageTypeContext();
   const { logout } = useAuth();
 
   return (
-    <StyledWrapper variant={pageContext}>
+    <StyledWrapper variant={pageVariant}>
       <StyledLogoLink to="/" />
       <StyledLinksList>
         <li>
