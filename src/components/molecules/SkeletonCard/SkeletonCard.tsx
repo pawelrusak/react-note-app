@@ -12,31 +12,29 @@ import type { VariantColorValueProp } from '~/theme/mixins';
 
 const LIGHTEN_ACTIVE_COLOR_AMOUNT = 0.17;
 
-type LightenActiveColor = {
-  readonly lightenActiveColor: boolean;
-  readonly lightenActiveColorAmount: number | string;
+type LightenProps = {
+  readonly lighten: boolean;
+  readonly lightenAmount: number | string;
 };
 
-type GreyColor = {
-  readonly greyColor: boolean;
+type GreyProp = {
+  readonly grey: boolean;
 };
 
-type StyledCardHeaderWrapperProps = LightenActiveColor &
-  Required<VariantColorValueProp> &
-  GreyColor;
+type StyledCardHeaderWrapperProps = LightenProps & Required<VariantColorValueProp> & GreyProp;
 
 const StyledCardHeaderWrapper = styled(Card.HeaderWrapper)<StyledCardHeaderWrapperProps>`
   background-color: ${styledMixin.variantColorValue({ lighten: true })};
 
-  ${({ lightenActiveColor }) =>
-    lightenActiveColor &&
-    css<Required<VariantColorValueProp> & LightenActiveColor>`
-      background-color: ${({ variant, theme, lightenActiveColorAmount }) =>
-        lightenMixin(lightenActiveColorAmount, theme[variant])};
+  ${({ lighten }) =>
+    lighten &&
+    css<Required<VariantColorValueProp> & LightenProps>`
+      background-color: ${({ variant, theme, lightenAmount }) =>
+        lightenMixin(lightenAmount, theme[variant])};
     `}
 
-  ${({ greyColor }) =>
-    greyColor &&
+  ${({ grey }) =>
+    grey &&
     css`
       background-color: ${({ theme }) => theme.grey100};
     `}
@@ -54,22 +52,22 @@ const StyledSkeletonTime = styled(Skeleton)`
   height: ${({ theme }) => theme.fontSize.xs};
 `;
 
-type StyledAvatarSkeletonProps = LightenActiveColor & GreyColor;
+type StyledAvatarSkeletonProps = LightenProps & GreyProp;
 
 const StyledAvatarSkeleton = styled(Skeleton)<StyledAvatarSkeletonProps>`
   margin: 0;
   width: 86px;
   height: 86px;
   border: 5px solid
-    ${({ theme, lightenActiveColor, lightenActiveColorAmount }) =>
-      lightenMixin(lightenActiveColor ? lightenActiveColorAmount : 0.1, theme.twitters)};
+    ${({ theme, lighten, lightenAmount }) =>
+      lightenMixin(lighten ? lightenAmount : 0.1, theme.twitters)};
   border-radius: 50%;
   position: absolute;
   right: 25px;
   top: 25px;
 
-  ${({ greyColor }) =>
-    greyColor &&
+  ${({ grey }) =>
+    grey &&
     css`
       border-color: ${({ theme }) => theme.grey100};
     `}
@@ -94,11 +92,7 @@ const StyledSecondaryButtonSkeleton = styled(Skeleton)`
   border-radius: 50px;
 `;
 
-type BaseSkeletonCardProps = {
-  readonly lighten?: boolean;
-  readonly lightenAmount?: number | string;
-  readonly grey?: boolean;
-};
+type BaseSkeletonCardProps = Partial<LightenProps & GreyProp>;
 
 type SkeletonCardWithoutProps = Never<BaseSkeletonCardProps>;
 type SkeletonCardWithOnlyGreyProp = RequiredOnlyWithNever<BaseSkeletonCardProps, 'grey'>;
@@ -130,19 +124,19 @@ const SkeletonCard = ({
   return (
     <Card.Wrapper data-testid={TEST_ID.SKELETON_CARD.WRAPPER}>
       <StyledCardHeaderWrapper
-        lightenActiveColor={lighten}
-        lightenActiveColorAmount={lightenAmount}
+        lighten={lighten}
+        lightenAmount={lightenAmount}
         variant={pageVariant}
-        greyColor={grey}
+        grey={grey}
       >
         <StyledSkeletonHeading dark />
         <StyledSkeletonTime dark />
         {pageVariant === 'twitters' && (
           <StyledAvatarSkeleton
             data-testid={TEST_ID.SKELETON_CARD.AVATAR_SKELETON}
-            lightenActiveColorAmount={lightenAmount}
-            lightenActiveColor={lighten}
-            greyColor={grey}
+            lightenAmount={lightenAmount}
+            lighten={lighten}
+            grey={grey}
             dark
           />
         )}
