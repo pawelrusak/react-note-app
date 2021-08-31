@@ -169,8 +169,8 @@ const defaultCardProps = {
 };
 
 const Card = ({ id, title, created, twitterName, articleUrl, content }: CardProps) => {
-  const itemType = usePageTypeContext();
-  const URLPathToDetails = `${itemType}/${id}`;
+  const pageVariant = usePageTypeContext();
+  const URLPathToDetails = `${pageVariant}/${id}`;
   const historyPush = useHistoryPush(URLPathToDetails);
   const removeItem = useRemoveItemAction();
 
@@ -179,21 +179,21 @@ const Card = ({ id, title, created, twitterName, articleUrl, content }: CardProp
       <HeaderWrapperWithHover
         data-testid={TEST_ID.CARD.HEADER}
         onClick={historyPush}
-        variant={itemType}
+        variant={pageVariant}
       >
         <StyledHeading data-testid={TEST_ID.CARD.TITLE}>{title}</StyledHeading>
         <DateInfo data-testid={TEST_ID.CARD.DATE_INFO} date={created} />
-        {itemType === 'twitters' && (
+        {pageVariant === 'twitters' && (
           <StyledAvatar src={`https://unavatar.now.sh/twitter/${twitterName || ''}`} />
         )}
-        {itemType === 'articles' && (
+        {pageVariant === 'articles' && (
           <StyledArticleLink data-testid={TEST_ID.CARD.ARTICLE_LINK} href={articleUrl || ''} />
         )}
       </HeaderWrapperWithHover>
       <ContentWrapper>
         <StyledContentParagraph>{content}</StyledContentParagraph>
         <StyledContentLink to={URLPathToDetails}>read more</StyledContentLink>
-        <Button onClick={() => removeItem(itemType, id)} secondary>
+        <Button onClick={() => removeItem(pageVariant, id)} secondary>
           REMOVE
         </Button>
       </ContentWrapper>
