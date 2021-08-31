@@ -8,7 +8,7 @@ import { usePageTypeContext } from '~/hooks';
 import * as styledMixin from '~/theme/mixins';
 
 import type { RequiredOnlyWithNever, Never } from '~/commonTypes';
-import type { ActiveColorArgs } from '~/theme/mixins';
+import type { VariantColorValueProp } from '~/theme/mixins';
 
 const LIGHTEN_ACTIVE_COLOR_AMOUNT = 0.17;
 
@@ -21,16 +21,18 @@ type GreyColor = {
   readonly greyColor: boolean;
 };
 
-type StyledCardHeaderWrapperProps = LightenActiveColor & Required<ActiveColorArgs> & GreyColor;
+type StyledCardHeaderWrapperProps = LightenActiveColor &
+  Required<VariantColorValueProp> &
+  GreyColor;
 
 const StyledCardHeaderWrapper = styled(Card.HeaderWrapper)<StyledCardHeaderWrapperProps>`
-  ${styledMixin.lightenActiveColor};
+  background-color: ${styledMixin.variantColorValue({ lighten: true })};
 
   ${({ lightenActiveColor }) =>
     lightenActiveColor &&
-    css<Required<ActiveColorArgs> & LightenActiveColor>`
-      background-color: ${({ activecolor, theme, lightenActiveColorAmount }) =>
-        lightenMixin(lightenActiveColorAmount, theme[activecolor])};
+    css<Required<VariantColorValueProp> & LightenActiveColor>`
+      background-color: ${({ variant, theme, lightenActiveColorAmount }) =>
+        lightenMixin(lightenActiveColorAmount, theme[variant])};
     `}
 
   ${({ greyColor }) =>
@@ -130,7 +132,7 @@ const SkeletonCard = ({
       <StyledCardHeaderWrapper
         lightenActiveColor={lighten}
         lightenActiveColorAmount={lightenAmount}
-        activecolor={itemType}
+        variant={itemType}
         greyColor={grey}
       >
         <StyledSkeletonHeading dark />
