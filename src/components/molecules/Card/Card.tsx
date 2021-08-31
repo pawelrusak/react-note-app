@@ -12,7 +12,7 @@ import { useHistoryPush, useRemoveItemAction, usePageTypeContext } from '~/hooks
 import * as styledMixin from '~/theme/mixins';
 
 import type { Item } from '~/commonTypes';
-import type { ActiveColorArgs } from '~/theme/mixins';
+import type { VariantColorValueProp } from '~/theme/mixins';
 
 const StyledWrapper = styled.div`
   min-height: 380px;
@@ -35,22 +35,18 @@ const StyledWrapperWithHover = styled(StyledWrapper)`
   }
 `;
 
-type HeaderWrapperProps = ActiveColorArgs;
-
-const HeaderWrapper = styled.div<HeaderWrapperProps>`
+const HeaderWrapper = styled.div<VariantColorValueProp>`
   position: relative;
   padding: 17px 30px;
-  ${styledMixin.activecolor}
+  background-color: ${styledMixin.variantColorValue()};
 
   &:first-of-type {
     z-index: 9999;
   }
 `;
 
-type HeaderWrapperWithHoverProps = ActiveColorArgs;
-
 // create new component because the base one is reuse in others places
-const HeaderWrapperWithHover = styled(HeaderWrapper)<HeaderWrapperWithHoverProps>`
+const HeaderWrapperWithHover = styled(HeaderWrapper)<VariantColorValueProp>`
   cursor: pointer;
 
   @media (prefers-reduced-motion: no-preference) {
@@ -59,7 +55,7 @@ const HeaderWrapperWithHover = styled(HeaderWrapper)<HeaderWrapperWithHoverProps
   }
 
   &:hover {
-    ${styledMixin.darkenActiveColor}
+    background-color: ${styledMixin.variantColorValue({ darken: true })};
   }
 `;
 
@@ -183,7 +179,7 @@ const Card = ({ id, title, created, twitterName, articleUrl, content }: CardProp
       <HeaderWrapperWithHover
         data-testid={TEST_ID.CARD.HEADER}
         onClick={historyPush}
-        activecolor={itemType}
+        variant={itemType}
       >
         <StyledHeading data-testid={TEST_ID.CARD.TITLE}>{title}</StyledHeading>
         <DateInfo data-testid={TEST_ID.CARD.DATE_INFO} date={created} />
