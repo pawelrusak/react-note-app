@@ -9,7 +9,6 @@ jest.mock('~/services');
 const renderTwitters = () =>
   render(<Twitters />, {
     path: routes.twitters,
-    pageType: 'twitters',
   });
 
 fetchItemsTestSuite('<Twitters />', {

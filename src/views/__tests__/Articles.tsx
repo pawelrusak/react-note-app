@@ -9,7 +9,6 @@ jest.mock('~/services');
 const renderArticles = () =>
   render(<Articles />, {
     path: routes.articles,
-    pageType: 'articles',
   });
 
 fetchItemsTestSuite('<Articles />', {
