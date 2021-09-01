@@ -5,13 +5,14 @@ import { fakeStateWithDataAndLoggedInUser } from 'testUtils/fakers';
 import GridTemplate from '../GridTemplate/GridTemplate';
 import { ItemVariants } from '~/commonTypes';
 import { TEST_ID } from '~/constants/tests';
+import { routes } from '~/routes';
 
 import type { NoteItem } from '~/commonTypes';
 import type { RoutesPaths } from '~/routes';
 
 jest.mock('~/services');
 
-const renderGridTemplate = (path?: RoutesPaths, pageType?: ItemVariants) =>
+const renderGridTemplate = (path: RoutesPaths = routes.notes, pageType?: ItemVariants) =>
   render(
     <GridTemplate>
       <></>
