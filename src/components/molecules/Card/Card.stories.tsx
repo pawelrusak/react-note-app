@@ -48,11 +48,29 @@ Twitter.parameters = {
   pageVariant: 'twitters',
 };
 
+export const TwitterWithLongContent = Template.bind({});
+TwitterWithLongContent.args = {
+  ...NoteWithLongContent.args,
+  twitterName: Twitter.args.twitterName as string,
+} as CardProps;
+TwitterWithLongContent.parameters = {
+  pageVariant: 'twitters',
+};
+
 export const Article = Template.bind({});
 Article.args = {
   ...Note.args,
   articleUrl: 'https://youtube.com/helloroman',
 } as CardProps;
 Article.parameters = {
+  pageVariant: 'articles',
+};
+
+export const ArticleWithLongContent = Template.bind({});
+ArticleWithLongContent.args = {
+  ...NoteWithLongContent.args,
+  articleUrl: Article.args.articleUrl as string,
+} as CardProps;
+ArticleWithLongContent.parameters = {
   pageVariant: 'articles',
 };
