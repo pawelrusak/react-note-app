@@ -27,7 +27,6 @@ const renderDetailsPage = (
     ...render(<Route path={routes[itemType]} component={DetailsPage} />, {
       initialState,
       path: itemPath,
-      pageType: pluralItemTypeName,
     }),
     detailsPageData: item,
   };

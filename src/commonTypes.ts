@@ -1,3 +1,4 @@
+import { routes } from '~/routes';
 /*
  *
  * GENERICS
@@ -86,3 +87,6 @@ export type CSSSizeUnitVariants =
   | 'vh'
   | 'vmin'
   | 'vmax';
+
+type Routes = typeof routes;
+export type RoutesVariantRootPaths = Routes['notes'] | Routes['twitters'] | Routes['articles'];

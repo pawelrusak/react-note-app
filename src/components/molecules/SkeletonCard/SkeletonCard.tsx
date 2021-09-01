@@ -4,7 +4,7 @@ import styled, { css } from 'styled-components';
 import Skeleton from '~/components/atoms/Skeleton/Skeleton';
 import Card from '~/components/molecules/Card/Card';
 import { TEST_ID } from '~/constants/tests';
-import { usePageTypeContext } from '~/hooks';
+import { useCurrentPageVariant } from '~/hooks';
 import * as styledMixin from '~/theme/mixins';
 
 import type { RequiredOnlyWithNever, Never } from '~/commonTypes';
@@ -119,7 +119,7 @@ const SkeletonCard = ({
   lightenAmount,
   grey,
 }: SkeletonCardProps & typeof defaultProps) => {
-  const pageVariant = usePageTypeContext();
+  const pageVariant = useCurrentPageVariant();
 
   return (
     <Card.Wrapper data-testid={TEST_ID.SKELETON_CARD.WRAPPER}>

@@ -19,7 +19,7 @@ Note.args = {
   ...CardStories.Note.args,
 };
 Note.parameters = {
-  pageContext: 'notes',
+  pageVariant: 'notes',
 };
 
 export const Twitter = Template.bind({});
@@ -27,7 +27,7 @@ Twitter.args = {
   ...CardStories.Twitter.args,
 };
 Twitter.parameters = {
-  pageContext: 'twitters',
+  pageVariant: 'twitters',
 };
 
 export const Article = Template.bind({});
@@ -35,5 +35,5 @@ Article.args = {
   ...CardStories.Article.args,
 };
 Article.parameters = {
-  pageContext: 'articles',
+  pageVariant: 'articles',
 };

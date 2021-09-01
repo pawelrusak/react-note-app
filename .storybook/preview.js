@@ -1,4 +1,4 @@
-import { PageContextDecorator, ThemeDecorator, GlobalStyleDecorator } from './decorators';
+import { ThemeDecorator, GlobalStyleDecorator, PageVariantDecorator } from './decorators';
 
 export const parameters = {
   actions: { argTypesRegex: '^on[A-Z].*' },
@@ -10,4 +10,4 @@ export const parameters = {
   },
 };
 
-export const decorators = [ThemeDecorator, GlobalStyleDecorator, PageContextDecorator];
+export const decorators = [ThemeDecorator, GlobalStyleDecorator, PageVariantDecorator];

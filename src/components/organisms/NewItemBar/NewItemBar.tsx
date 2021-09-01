@@ -6,7 +6,7 @@ import Heading from '~/components/atoms/Heading/Heading';
 import Input from '~/components/atoms/Input/Input';
 import Field from '~/components/molecules/Field/Field';
 import { TEST_ID } from '~/constants/tests';
-import { usePageTypeContext, useAddItemAction } from '~/hooks';
+import { useCurrentPageVariant, useAddItemAction } from '~/hooks';
 import * as styledMixin from '~/theme/mixins';
 import { isNewItemVariantTouched } from '~/utils';
 import { newItemSchema } from '~/validations';
@@ -57,7 +57,7 @@ const StyledTextArea = styled(Input).attrs(() => ({ as: 'textarea' }))`
 export type NewItemBarProps = Visible & { readonly handleClose: () => void };
 
 const NewItemBar = ({ visible, handleClose }: NewItemBarProps) => {
-  const pageVariant = usePageTypeContext();
+  const pageVariant = useCurrentPageVariant();
   const addItemAction = useAddItemAction();
 
   return (

@@ -32,7 +32,7 @@ Note.args = {
   pathname: routes.note,
 };
 Note.parameters = {
-  pageContext: 'notes',
+  pageVariant: 'notes',
 };
 
 export const Twitter = Template.bind({});
@@ -41,7 +41,7 @@ Twitter.args = {
   pathname: routes.twitter,
 };
 Twitter.parameters = {
-  pageContext: 'twitters',
+  pageVariant: 'twitters',
 };
 
 export const Article = Template.bind({});
@@ -50,5 +50,5 @@ Article.args = {
   pathname: routes.article,
 };
 Article.parameters = {
-  pageContext: 'articles',
+  pageVariant: 'articles',
 };

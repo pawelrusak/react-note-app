@@ -12,7 +12,7 @@ export default {
   component: Notes,
   decorators: [StoryRouter(itemsPageLinks, { initialEntries: [routes.notes] }), StoreDecorator],
   parameters: {
-    pageContext: 'notes',
+    pageVariant: 'notes',
   },
 } as Meta;
 

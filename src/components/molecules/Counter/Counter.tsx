@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import Paragraph from '~/components/atoms/Paragraph/Paragraph';
 import Skeleton from '~/components/atoms/Skeleton/Skeleton';
 import { TEST_ID } from '~/constants/tests';
-import { useItemsStatus, usePageTypeContext, useCounter } from '~/hooks';
+import { useItemsStatus, useCurrentPageVariant, useCounter } from '~/hooks';
 
 const StyledParagraph = styled(Paragraph)`
   margin: 0;
@@ -31,15 +31,15 @@ const StyledAdditionalInfo = styled.span`
 `;
 
 const Counter = () => {
-  const pageType = usePageTypeContext();
+  const pageVariant = useCurrentPageVariant();
   const { isLoading } = useItemsStatus();
-  const { currentNumber, isSearching, totalNumber } = useCounter(pageType);
+  const { currentNumber, isSearching, totalNumber } = useCounter(pageVariant);
 
   return isLoading() ? (
     <StyledSkeleton data-testid={TEST_ID.COUNTER.SKELETON} />
   ) : (
     <StyledParagraph data-testid={TEST_ID.COUNTER.PARAGRAPH}>
-      {pluralize(pageType, currentNumber, true)}{' '}
+      {pluralize(pageVariant, currentNumber, true)}{' '}
       {isSearching() && <StyledAdditionalInfo>total {totalNumber}</StyledAdditionalInfo>}
     </StyledParagraph>
   );

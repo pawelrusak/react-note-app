@@ -10,7 +10,8 @@ type CurrentPageVariant = {
   currentPageVariant: ItemVariants | undefined;
 };
 
-const CurrentPageVariantContext = createContext<CurrentPageVariant | undefined>(undefined);
+// Export for storybook only
+export const CurrentPageVariantContext = createContext<CurrentPageVariant | undefined>(undefined);
 
 type ContextProviderProps = {
   children: React.ReactNode;

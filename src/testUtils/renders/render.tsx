@@ -5,17 +5,15 @@ import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
 
-import PageContext from '~/context';
+import { CurrentPageVariantProvider } from '~/context';
 import rootReducer from '~/store/reducers';
 import { theme } from '~/theme/mainTheme';
 
 import type { RenderOptions as RtlRenderOptions } from '@testing-library/react';
-import type { ItemVariants } from '~/commonTypes';
 import type { RootState } from '~/store';
 
 type RenderOptions = {
   path?: string;
-  pageType?: ItemVariants;
   store?: AppStore;
   initialState?: RootState | null;
 } & RtlRenderOptions;
@@ -24,7 +22,6 @@ export const render = (
   ui: React.ReactElement,
   {
     path = '/',
-    pageType = 'notes',
     initialState,
     store = initialState === null || initialState === undefined
       ? configureStore({ reducer: rootReducer })
@@ -37,9 +34,9 @@ export const render = (
   const Wrapper: React.FC = ({ children }): React.ReactElement => (
     <BrowserRouter>
       <Provider store={store}>
-        <PageContext.Provider value={pageType}>
+        <CurrentPageVariantProvider>
           <ThemeProvider theme={theme}>{children}</ThemeProvider>
-        </PageContext.Provider>
+        </CurrentPageVariantProvider>
       </Provider>
     </BrowserRouter>
   );

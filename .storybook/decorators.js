@@ -1,6 +1,6 @@
 import styled, { ThemeProvider } from 'styled-components';
 import { theme } from '../src/theme/mainTheme';
-import PageContext from '../src/context';
+import { CurrentPageVariantContext } from '../src/context/currentPageVariant';
 import { Provider } from 'react-redux';
 import StoryRouter from 'storybook-react-router';
 import { itemsPageLinks, gridTemplateLinks, userPageTemplateLinks } from './links';
@@ -22,10 +22,10 @@ export const GlobalStyleDecorator = (Story) => (
   </>
 );
 
-export const PageContextDecorator = (Story, { parameters: { pageContext } }) => (
-  <PageContext.Provider value={pageContext}>
+export const PageVariantDecorator = (Story, { parameters: { pageVariant } }) => (
+  <CurrentPageVariantContext.Provider value={{ currentPageVariant: pageVariant }}>
     <Story />
-  </PageContext.Provider>
+  </CurrentPageVariantContext.Provider>
 );
 
 export const StoreDecorator = (Story, args) => (

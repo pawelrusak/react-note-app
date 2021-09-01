@@ -7,7 +7,7 @@ import logoutIcon from '~/assets/icons/logout.svg';
 import penIcon from '~/assets/icons/pen.svg';
 import twitterIcon from '~/assets/icons/twitter.svg';
 import ButtonIcon from '~/components/atoms/ButtonIcon/ButtonIcon';
-import { usePageTypeContext, useAuth } from '~/hooks';
+import { useCurrentPageVariant, useAuth } from '~/hooks';
 import * as styledMixin from '~/theme/mixins';
 
 import type { VariantColorValueProp } from '~/theme/mixins';
@@ -49,7 +49,7 @@ const StyledLinksList = styled.ul`
 `;
 
 const Sidebar = () => {
-  const pageVariant = usePageTypeContext();
+  const pageVariant = useCurrentPageVariant();
   const { logout } = useAuth();
 
   return (

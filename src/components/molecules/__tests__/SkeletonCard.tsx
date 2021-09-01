@@ -2,17 +2,11 @@ import { render, screen, testComponent } from 'testUtils';
 
 import SkeletonCard from '../SkeletonCard/SkeletonCard';
 import { TEST_ID } from '~/constants/tests';
+import { routes } from '~/routes';
 
-type SkeletonCardType = 'Note' | 'Twitter' | 'Article';
+import type { RoutesVariantRootPaths } from '~/commonTypes';
 
-const renderSkeletonCard = (cardType: SkeletonCardType) => {
-  const itemType = cardType.toLowerCase() as 'note' | 'twitter' | 'article';
-  const pageType = `${itemType}s` as const;
-
-  return {
-    ...render(<SkeletonCard />, { pageType }),
-  };
-};
+const renderSkeletonCard = (path: RoutesVariantRootPaths) => render(<SkeletonCard />, { path });
 
 const querySkeletonCardAvatarSkeleton = () =>
   screen.queryByTestId(TEST_ID.SKELETON_CARD.AVATAR_SKELETON);
@@ -25,17 +19,21 @@ const TEST_NAME = {
 };
 
 describe('<SkeletonCard />', () => {
-  testComponent(() => renderSkeletonCard('Note'), { suffixTestNames: 'when is note page' })
+  testComponent(() => renderSkeletonCard(routes.notes), { suffixTestNames: 'when is note page' })
     .not.toBeInTheDocument(TEST_NAME.TWITTER_AVATAR_SKELETON, querySkeletonCardAvatarSkeleton)
     .not.toBeInTheDocument(TEST_NAME.ARTICLE_LINK_SKELETON, querySkeletonCardArticleLinkSkeleton)
     .run();
 
-  testComponent(() => renderSkeletonCard('Twitter'), { suffixTestNames: 'when is twitter page' })
+  testComponent(() => renderSkeletonCard(routes.twitters), {
+    suffixTestNames: 'when is twitter page',
+  })
     .toBeInTheDocument(TEST_NAME.TWITTER_AVATAR_SKELETON, querySkeletonCardAvatarSkeleton)
     .not.toBeInTheDocument(TEST_NAME.ARTICLE_LINK_SKELETON, querySkeletonCardArticleLinkSkeleton)
     .run();
 
-  testComponent(() => renderSkeletonCard('Article'), { suffixTestNames: 'when is article page' })
+  testComponent(() => renderSkeletonCard(routes.articles), {
+    suffixTestNames: 'when is article page',
+  })
     .toBeInTheDocument(TEST_NAME.ARTICLE_LINK_SKELETON, querySkeletonCardArticleLinkSkeleton)
     .not.toBeInTheDocument(TEST_NAME.TWITTER_AVATAR_SKELETON, querySkeletonCardAvatarSkeleton)
     .run();

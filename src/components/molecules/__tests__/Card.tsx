@@ -14,8 +14,8 @@ type CardType = 'Note' | 'Twitter' | 'Article';
 
 const renderCard = (cardType: CardType) => {
   const cardData = CardStories[cardType]?.args as Item;
-  const itemType = cardType.toLowerCase() as 'note' | 'twitter' | 'article';
-  const pageType = `${itemType}s` as const;
+  const itemType = cardType.toLowerCase() as Lowercase<CardType>;
+  const path = routes[`${itemType}s` as const];
   const pathToDetailsPageWithGivenId = routes[itemType].replace(':id', cardData.id);
 
   const FakeDetailsPage = () => (
@@ -25,13 +25,10 @@ const renderCard = (cardType: CardType) => {
   return {
     ...render(
       <Switch>
-        <Route exact path={routes[pageType]} render={() => <Card {...cardData} />} />
+        <Route exact path={path} render={() => <Card {...cardData} />} />
         <Route exact path={pathToDetailsPageWithGivenId} component={FakeDetailsPage} />
       </Switch>,
-      {
-        path: routes[pageType],
-        pageType,
-      },
+      { path },
     ),
     cardData,
   };

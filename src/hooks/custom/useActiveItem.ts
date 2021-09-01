@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
 import { useItemSelector } from './useItemSelector';
-import { usePageTypeContext } from './usePageTypeContext';
+import { useCurrentPageVariant } from '~/context';
 import { fetchItem } from '~/services';
 
 import type { Item, URLParams } from '~/commonTypes';
@@ -19,9 +19,9 @@ const emptyItem: DetailsItem = {
 
 export const useActiveItem = () => {
   const [activeItem, setActiveItem] = useState<DetailsItem>(emptyItem);
-  const pageType = usePageTypeContext();
+  const pageVariant = useCurrentPageVariant();
   const { id: itemID } = useParams<URLParams>();
-  const storeActiveItem = useItemSelector(pageType, itemID);
+  const storeActiveItem = useItemSelector(pageVariant, itemID);
 
   useEffect(() => {
     const fetchDataItem = async () => {
