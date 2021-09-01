@@ -13,6 +13,7 @@ export default {
   decorators: [StoryRouter(itemsPageLinks, { initialEntries: [routes.twitters] }), StoreDecorator],
   parameters: {
     pageContext: 'twitters',
+    pageVariant: 'twitters',
   },
 } as Meta;
 

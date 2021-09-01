@@ -13,6 +13,7 @@ export default {
   decorators: [StoryRouter(itemsPageLinks, { initialEntries: [routes.notes] }), StoreDecorator],
   parameters: {
     pageContext: 'notes',
+    pageVariant: 'notes',
   },
 } as Meta;
 
