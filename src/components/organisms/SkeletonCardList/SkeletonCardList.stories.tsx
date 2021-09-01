@@ -12,14 +12,9 @@ export default {
 
 const Template: Story = (args) => <SkeletonCardList {...args} />;
 
-export const Default = Template.bind({});
-Default.args = {
-  length: 6,
-};
-
 export const Note = Template.bind({});
 Note.args = {
-  ...Default.args,
+  length: 6,
 };
 Note.parameters = {
   pageVariant: 'notes',
@@ -27,7 +22,7 @@ Note.parameters = {
 
 export const LightenNote = Template.bind({});
 LightenNote.args = {
-  ...Default.args,
+  ...Note.args,
   lighten: true,
   lightenAmount: 0.17,
 };
@@ -42,7 +37,7 @@ LightenNote.parameters = {
 
 export const GreyNote = Template.bind({});
 GreyNote.args = {
-  ...Default.args,
+  ...Note.args,
   grey: true,
 };
 GreyNote.parameters = {
@@ -51,7 +46,7 @@ GreyNote.parameters = {
 
 export const Twitter = Template.bind({});
 Twitter.args = {
-  ...Default.args,
+  ...Note.args,
 };
 Twitter.parameters = {
   pageVariant: 'twitters',
@@ -59,7 +54,7 @@ Twitter.parameters = {
 
 export const LightenTwitter = Template.bind({});
 LightenTwitter.args = {
-  ...Default.args,
+  ...Note.args,
   ...LightenNote.args,
 };
 LightenTwitter.argTypes = {
@@ -71,7 +66,7 @@ LightenTwitter.parameters = {
 
 export const GreyTwitter = Template.bind({});
 GreyTwitter.args = {
-  ...Default.args,
+  ...Note.args,
   grey: true,
 };
 GreyTwitter.parameters = {
@@ -80,7 +75,7 @@ GreyTwitter.parameters = {
 
 export const Article = Template.bind({});
 Article.args = {
-  ...Default.args,
+  ...Note.args,
 };
 Article.parameters = {
   pageVariant: 'articles',
@@ -88,7 +83,7 @@ Article.parameters = {
 
 export const LightenArticle = Template.bind({});
 LightenArticle.args = {
-  ...Default.args,
+  ...Note.args,
   ...LightenNote.args,
 };
 LightenArticle.argTypes = {
@@ -100,7 +95,7 @@ LightenArticle.parameters = {
 
 export const GreyArticle = Template.bind({});
 GreyArticle.args = {
-  ...Default.args,
+  ...Note.args,
   grey: true,
 };
 GreyArticle.parameters = {
