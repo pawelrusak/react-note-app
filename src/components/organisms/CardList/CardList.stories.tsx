@@ -32,7 +32,7 @@ LoadingNote.args = {
   variant: 'notes',
 };
 LoadingNote.parameters = {
-  pageContext: 'notes',
+  pageVariant: 'notes',
   state: 'loading',
 };
 
@@ -41,7 +41,7 @@ SucceededNote.args = {
   ...LoadingNote.args,
 };
 SucceededNote.parameters = {
-  pageContext: 'notes',
+  pageVariant: 'notes',
 };
 
 export const LoadingTwitter = Template.bind({});
@@ -49,7 +49,7 @@ LoadingTwitter.args = {
   variant: 'twitters',
 };
 LoadingTwitter.parameters = {
-  pageContext: 'twitters',
+  pageVariant: 'twitters',
   state: 'loading',
 };
 
@@ -58,7 +58,7 @@ SucceededTwitter.args = {
   ...LoadingTwitter.args,
 };
 SucceededTwitter.parameters = {
-  pageContext: 'twitters',
+  pageVariant: 'twitters',
 };
 
 export const LoadingArticle = Template.bind({});
@@ -66,7 +66,7 @@ LoadingArticle.args = {
   variant: 'articles',
 };
 LoadingArticle.parameters = {
-  pageContext: 'articles',
+  pageVariant: 'articles',
   state: 'loading',
 };
 
@@ -75,5 +75,5 @@ SucceededArticle.args = {
   ...LoadingArticle.args,
 };
 SucceededArticle.parameters = {
-  pageContext: 'articles',
+  pageVariant: 'articles',
 };
