@@ -12,8 +12,6 @@ export default {
 
 const Template: Story = (args) => <SkeletonCard {...args} />;
 
-export const Default = Template.bind({});
-
 export const Note = Template.bind({});
 Note.parameters = {
   pageVariant: 'notes',
