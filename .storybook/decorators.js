@@ -23,12 +23,6 @@ export const GlobalStyleDecorator = (Story) => (
   </>
 );
 
-export const PageContextDecorator = (Story, { parameters: { pageContext } }) => (
-  <PageContext.Provider value={pageContext}>
-    <Story />
-  </PageContext.Provider>
-);
-
 export const PageVariantDecorator = (Story, { parameters: { pageVariant } }) => (
   <CurrentPageVariantContext.Provider value={{ currentPageVariant: pageVariant }}>
     <Story />
