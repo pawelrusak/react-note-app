@@ -14,36 +14,34 @@ export default {
 
 const Template: Story<CardProps> = (args) => <Card {...args} />;
 
-export const Default = Template.bind({});
-Default.args = {
+export const Note = Template.bind({});
+Note.args = {
   id: '8885d2d6-b081-4342-8232-e889affa9d93',
   title: 'My best note ever',
   created: getEarlierDateOfDay(3).toISOString(),
   content:
     'Miles Dewey Davis III (May 26, 1926 - September 28, 1991) was an American jazz trumpeter, bandleader, and composer.',
 };
+Note.parameters = {
+  pageVariant: 'notes',
+};
 
-export const WithLongContent = Template.bind({});
-WithLongContent.args = {
-  ...Default.args,
+export const NoteWithLongContent = Template.bind({});
+NoteWithLongContent.args = {
+  ...Note.args,
   content:
-    `${Default.args.content as string} He is among the most influential and acclaimed ` +
+    `${Note.args.content as string} He is among the most influential and acclaimed ` +
     'figures in the history of jazz and 20th-century music. Davis adopted a ' +
     'variety of musical directions in a five-decade career that kept him at ' +
     'the forefront of many major stylistic developments in jazz.',
 };
-
-export const Note = Template.bind({});
-Note.args = {
-  ...Default.args,
-};
-Note.parameters = {
+NoteWithLongContent.parameters = {
   pageVariant: 'notes',
 };
 
 export const Twitter = Template.bind({});
 Twitter.args = {
-  ...Default.args,
+  ...Note.args,
   twitterName: 'hello_roman',
 } as CardProps;
 Twitter.parameters = {
@@ -52,7 +50,7 @@ Twitter.parameters = {
 
 export const Article = Template.bind({});
 Article.args = {
-  ...Default.args,
+  ...Note.args,
   articleUrl: 'https://youtube.com/helloroman',
 } as CardProps;
 Article.parameters = {
