@@ -1,23 +1,29 @@
 import { build, fake } from '@jackfranklin/test-data-bot';
-import { testComponent, render, screen, userEvent, waitFor } from 'testUtils';
+import {
+  testComponent,
+  render,
+  screen,
+  userEvent,
+  waitFor,
+  getPairOfPathsAndPageTypes,
+} from 'testUtils';
 
 import NewItemBar, { NewItemBarProps } from '../NewItemBar/NewItemBar';
 import * as NewItemBarStories from '../NewItemBar/NewItemBar.stories';
-import { routes, RoutesPaths } from '~/routes';
-import { stripSlashPrefix } from '~/utils';
+import { routes } from '~/routes';
 
-import type { ItemVariants, NewItem } from '~/commonTypes';
+import type { NewItem, RoutesVariantRootPaths } from '~/commonTypes';
 
 const exampleProps = {
   ...NewItemBarStories.Default.args,
 } as NewItemBarProps;
 
 const renderNewItemBar = (
-  pageTypeOrPath: ItemVariants | RoutesPaths,
+  path: RoutesVariantRootPaths,
   handleCloseProp = exampleProps.handleClose,
 ) =>
   render(<NewItemBar {...exampleProps} handleClose={handleCloseProp} />, {
-    pageType: stripSlashPrefix(pageTypeOrPath) as ItemVariants,
+    path,
   });
 
 const getByTitlePlaceholderText = () => screen.getByPlaceholderText(/title/i);
@@ -38,10 +44,10 @@ const newItemBuilder = build<NewItem>({
 });
 
 describe('<NewItemBar />', () => {
-  it.each(['notes', 'twitters', 'articles'])(
+  it.each([routes.notes, routes.twitters, routes.articles])(
     'initially, the form should not contain any errors and button should be enable',
-    (pageType) => {
-      renderNewItemBar(pageType as ItemVariants);
+    (path) => {
+      renderNewItemBar(path);
 
       const [submitButton] = queryAllByButtonRole();
 
@@ -49,11 +55,11 @@ describe('<NewItemBar />', () => {
       expect(getByTitlePlaceholderText()).toBeValid();
       expect(getByDescriptionPlaceholderText()).toBeValid();
 
-      if (pageType === 'twitters') {
+      if (path === routes.twitters) {
         expect(queryByTwitterPlaceholderText()).toBeValid();
       }
 
-      if (pageType === 'articles') {
+      if (path === routes.articles) {
         expect(queryByLinkPlaceholderText()).toBeValid();
       }
     },
@@ -61,13 +67,12 @@ describe('<NewItemBar />', () => {
 
   it.todo('disable the submit button for combinations of invalid field values');
 
-  it.each([['notes'], ['twitters'], ['articles']])('display correctly heading', (pageType) => {
-    renderNewItemBar(pageType as ItemVariants);
+  it.each(getPairOfPathsAndPageTypes())('display correctly heading', (path, variant) => {
+    renderNewItemBar(path);
 
-    const newItemBarHeadingContent = pageType;
     const [newBarItemHeading] = getAllByHeadingRole();
 
-    expect(newBarItemHeading).toHaveTextContent(newItemBarHeadingContent);
+    expect(newBarItemHeading).toHaveTextContent(variant);
   });
 
   it('trigger the handleClose prop after submit the form', async () => {
