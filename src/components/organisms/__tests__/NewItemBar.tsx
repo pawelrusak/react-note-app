@@ -15,7 +15,7 @@ import { routes } from '~/routes';
 import type { NewItem, RoutesVariantRootPaths } from '~/commonTypes';
 
 const exampleProps = {
-  ...NewItemBarStories.Default.args,
+  ...NewItemBarStories.Note.args,
 } as NewItemBarProps;
 
 const renderNewItemBar = (
