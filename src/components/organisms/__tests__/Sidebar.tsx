@@ -2,12 +2,16 @@ import { render, userEvent, screen, waitFor } from 'testUtils';
 import { fakeStateWithDataAndLoggedInUser } from 'testUtils/fakers';
 
 import Sidebar from '../Sidebar/Sidebar';
+import { routes } from '~/routes';
 
 jest.mock('~/services');
 
 describe('<Sidebar />', () => {
   it('sets the "userID" in the auth state to null when the logout button is clicked', async () => {
-    const { store } = render(<Sidebar />, { initialState: fakeStateWithDataAndLoggedInUser });
+    const { store } = render(<Sidebar />, {
+      initialState: fakeStateWithDataAndLoggedInUser,
+      path: routes.notes,
+    });
 
     await waitFor(() => userEvent.click(screen.getByRole('button', { name: /logout/i })));
 
