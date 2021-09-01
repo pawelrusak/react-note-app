@@ -1,6 +1,5 @@
 import styled, { ThemeProvider } from 'styled-components';
 import { theme } from '../src/theme/mainTheme';
-import PageContext from '../src/context';
 import { CurrentPageVariantContext } from '../src/context/currentPageVariant';
 import { Provider } from 'react-redux';
 import StoryRouter from 'storybook-react-router';
