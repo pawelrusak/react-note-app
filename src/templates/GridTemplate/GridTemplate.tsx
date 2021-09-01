@@ -6,7 +6,7 @@ import Heading from '~/components/atoms/Heading/Heading';
 import Input from '~/components/atoms/Input/Input';
 import Counter from '~/components/molecules/Counter/Counter';
 import NewItemBar from '~/components/organisms/NewItemBar/NewItemBar';
-import { useToggle, usePageTypeContext, useSearchState } from '~/hooks';
+import { useToggle, useCurrentPageVariant, useSearchState } from '~/hooks';
 import UserPageTemplate from '~/templates/UserPageTemplate/UserPageTemplate';
 import * as styledMixin from '~/theme/mixins';
 
@@ -66,7 +66,7 @@ export type GridTemplateProps = {
 
 const GridTemplate = ({ children }: GridTemplateProps) => {
   const [newItemBarVisible, toggleNewItemBarVisible] = useToggle(false);
-  const pageVariant = usePageTypeContext();
+  const pageVariant = useCurrentPageVariant();
   const [search, setSearch] = useSearchState(pageVariant);
 
   return (
