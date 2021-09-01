@@ -2,11 +2,12 @@ import { render, screen, getRandomNaturalNumber } from 'testUtils';
 
 import SkeletonCardList from '../SkeletonCardList/SkeletonCardList';
 import { TEST_ID } from '~/constants/tests';
+import { routes } from '~/routes';
 
 const getAllSkeletonCard = () => screen.getAllByTestId(TEST_ID.SKELETON_CARD.WRAPPER);
 
-const renderSkeletonCardList = (length: number | undefined = undefined) =>
-  render(<SkeletonCardList length={length} />);
+const renderSkeletonCardList = (length?: number) =>
+  render(<SkeletonCardList length={length} />, { path: routes.notes });
 
 /**
  * I intentionally omit tests for other variants of the skeleton card list because they are
