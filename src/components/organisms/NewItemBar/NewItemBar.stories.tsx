@@ -22,7 +22,7 @@ Note.args = {
   ...Default.args,
 };
 Note.parameters = {
-  pageContext: 'notes',
+  pageVariant: 'notes',
 };
 
 export const Twitter = Template.bind({});
@@ -30,7 +30,7 @@ Twitter.args = {
   ...Default.args,
 };
 Twitter.parameters = {
-  pageContext: 'twitters',
+  pageVariant: 'twitters',
 };
 
 export const Articles = Template.bind({});
@@ -38,5 +38,5 @@ Articles.args = {
   ...Default.args,
 };
 Articles.parameters = {
-  pageContext: 'articles',
+  pageVariant: 'articles',
 };
