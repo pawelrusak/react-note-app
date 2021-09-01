@@ -38,7 +38,7 @@ Note.args = {
   ...Default.args,
 };
 Note.parameters = {
-  pageContext: 'notes',
+  pageVariant: 'notes',
 };
 
 export const Twitter = Template.bind({});
@@ -47,7 +47,7 @@ Twitter.args = {
   twitterName: 'hello_roman',
 } as CardProps;
 Twitter.parameters = {
-  pageContext: 'twitters',
+  pageVariant: 'twitters',
 };
 
 export const Article = Template.bind({});
@@ -56,5 +56,5 @@ Article.args = {
   articleUrl: 'https://youtube.com/helloroman',
 } as CardProps;
 Article.parameters = {
-  pageContext: 'articles',
+  pageVariant: 'articles',
 };
