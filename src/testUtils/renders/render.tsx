@@ -5,7 +5,7 @@ import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
 
-import PageContext from '~/context';
+import PageContext, { CurrentPageVariantProvider } from '~/context';
 import rootReducer from '~/store/reducers';
 import { theme } from '~/theme/mainTheme';
 
@@ -38,7 +38,9 @@ export const render = (
     <BrowserRouter>
       <Provider store={store}>
         <PageContext.Provider value={pageType}>
-          <ThemeProvider theme={theme}>{children}</ThemeProvider>
+          <CurrentPageVariantProvider>
+            <ThemeProvider theme={theme}>{children}</ThemeProvider>
+          </CurrentPageVariantProvider>
         </PageContext.Provider>
       </Provider>
     </BrowserRouter>
