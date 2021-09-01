@@ -13,58 +13,58 @@ const Template: Story = () => <Counter />;
 
 export const OneNote = Template.bind({});
 OneNote.parameters = {
-  pageContext: 'notes',
+  pageVariant: 'notes',
 };
 
 export const OneTwitter = Template.bind({});
 OneTwitter.parameters = {
-  pageContext: 'twitters',
+  pageVariant: 'twitters',
 };
 
 export const OneArticle = Template.bind({});
 OneArticle.parameters = {
-  pageContext: 'articles',
+  pageVariant: 'articles',
 };
 
 export const ManyNotes = Template.bind({});
 ManyNotes.parameters = {
   state: 'many',
-  pageContext: 'notes',
+  pageVariant: 'notes',
 };
 
 export const ManyTwitters = Template.bind({});
 ManyTwitters.parameters = {
   state: 'many',
-  pageContext: 'twitters',
+  pageVariant: 'twitters',
 };
 
 export const ManyArticles = Template.bind({});
 ManyArticles.parameters = {
   state: 'many',
-  pageContext: 'articles',
+  pageVariant: 'articles',
 };
 
 export const NotesSearch = Template.bind({});
 NotesSearch.parameters = {
   state: 'search',
-  pageContext: 'notes',
+  pageVariant: 'notes',
 };
 
 export const TwittersSearch = Template.bind({});
 TwittersSearch.parameters = {
   state: 'search',
-  pageContext: 'twitters',
+  pageVariant: 'twitters',
 };
 
 export const ArticlesSearch = Template.bind({});
 ArticlesSearch.parameters = {
   state: 'search',
-  pageContext: 'articles',
+  pageVariant: 'articles',
 };
 
-/* visually identical for each variant */
+/* visually identical for all variants */
 export const Loading = Template.bind({});
 Loading.parameters = {
   state: 'loading',
-  pageContext: 'notes',
+  pageVariant: 'notes',
 };
