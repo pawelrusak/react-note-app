@@ -2,7 +2,6 @@ export * from 'react-use';
 export { useItemsStatus } from './custom/useItemsStatus';
 export { useHistoryPush } from './custom/useHistoryPush';
 export { useRemoveItemAction } from './custom/useRemoveItemAction';
-export { useCurrentPageType } from './custom/useCurrentPageType';
 export { useCurrentPageVariant } from '~/context';
 export { useFetchItems } from './custom/useFetchItems';
 export { useActiveItem } from './custom/useActiveItem';
