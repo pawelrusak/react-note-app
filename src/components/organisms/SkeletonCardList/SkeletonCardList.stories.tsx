@@ -22,7 +22,7 @@ Note.args = {
   ...Default.args,
 };
 Note.parameters = {
-  pageContext: 'notes',
+  pageVariant: 'notes',
 };
 
 export const LightenNote = Template.bind({});
@@ -37,7 +37,7 @@ LightenNote.argTypes = {
   },
 };
 LightenNote.parameters = {
-  pageContext: 'notes',
+  pageVariant: 'notes',
 };
 
 export const GreyNote = Template.bind({});
@@ -46,7 +46,7 @@ GreyNote.args = {
   grey: true,
 };
 GreyNote.parameters = {
-  pageContext: 'notes',
+  pageVariant: 'notes',
 };
 
 export const Twitter = Template.bind({});
@@ -54,7 +54,7 @@ Twitter.args = {
   ...Default.args,
 };
 Twitter.parameters = {
-  pageContext: 'twitters',
+  pageVariant: 'twitters',
 };
 
 export const LightenTwitter = Template.bind({});
@@ -66,7 +66,7 @@ LightenTwitter.argTypes = {
   ...LightenNote.argTypes,
 };
 LightenTwitter.parameters = {
-  pageContext: 'twitters',
+  pageVariant: 'twitters',
 };
 
 export const GreyTwitter = Template.bind({});
@@ -75,7 +75,7 @@ GreyTwitter.args = {
   grey: true,
 };
 GreyTwitter.parameters = {
-  pageContext: 'twitters',
+  pageVariant: 'twitters',
 };
 
 export const Article = Template.bind({});
@@ -83,7 +83,7 @@ Article.args = {
   ...Default.args,
 };
 Article.parameters = {
-  pageContext: 'articles',
+  pageVariant: 'articles',
 };
 
 export const LightenArticle = Template.bind({});
@@ -95,7 +95,7 @@ LightenArticle.argTypes = {
   ...LightenNote.argTypes,
 };
 LightenArticle.parameters = {
-  pageContext: 'articles',
+  pageVariant: 'articles',
 };
 
 export const GreyArticle = Template.bind({});
@@ -104,5 +104,5 @@ GreyArticle.args = {
   grey: true,
 };
 GreyArticle.parameters = {
-  pageContext: 'articles',
+  pageVariant: 'articles',
 };
