@@ -6,7 +6,7 @@ import Heading from '~/components/atoms/Heading/Heading';
 import Paragraph from '~/components/atoms/Paragraph/Paragraph';
 import Time from '~/components/atoms/Time/Time';
 import { TEST_ID } from '~/constants/tests';
-import { usePageTypeContext } from '~/hooks';
+import { useCurrentPageVariant } from '~/hooks';
 import UserPageTemplate from '~/templates/UserPageTemplate/UserPageTemplate';
 
 import type { Item } from '~/commonTypes';
@@ -68,7 +68,7 @@ const DetailsTemplate = ({
   articleUrl,
   twitterName,
 }: DetailsTemplateProps) => {
-  const pageVariant = usePageTypeContext();
+  const pageVariant = useCurrentPageVariant();
 
   return (
     <UserPageTemplate>
