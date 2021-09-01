@@ -3,23 +3,20 @@ import { render, screen, userEvent, getPairOfPathsAndPageTypes, waitFor } from '
 import { fakeStateWithDataAndLoggedInUser } from 'testUtils/fakers';
 
 import GridTemplate from '../GridTemplate/GridTemplate';
-import { ItemVariants } from '~/commonTypes';
 import { TEST_ID } from '~/constants/tests';
 import { routes } from '~/routes';
 
-import type { NoteItem } from '~/commonTypes';
-import type { RoutesPaths } from '~/routes';
+import type { NoteItem, RoutesVariantRootPaths } from '~/commonTypes';
 
 jest.mock('~/services');
 
-const renderGridTemplate = (path: RoutesPaths = routes.notes, pageType?: ItemVariants) =>
+const renderGridTemplate = (path: RoutesVariantRootPaths = routes.notes) =>
   render(
     <GridTemplate>
       <></>
     </GridTemplate>,
     {
       path,
-      pageType,
       initialState: fakeStateWithDataAndLoggedInUser,
     },
   );
@@ -53,23 +50,23 @@ const noteItemBuilder = build<Omit<NoteItem, 'id' | 'created'>>({
 describe('<GridTemplate />', () => {
   it.each(getPairOfPathsAndPageTypes())(
     'for the "%s" url path should display the heading with the "%s" text content',
-    (path, pageType) => {
-      renderGridTemplate(path, pageType);
+    (path, pageVariant) => {
+      renderGridTemplate(path);
 
       const [gridTemplateHeading] = getAllByHeadingRole();
 
-      expect(gridTemplateHeading).toHaveTextContent(pageType);
+      expect(gridTemplateHeading).toHaveTextContent(pageVariant);
     },
   );
 
   it.each(getPairOfPathsAndPageTypes())(
     'for the "%s" url path should display paragraph with /[0-9]+ %s/ text content',
-    (path, pageTypeText) => {
-      renderGridTemplate(path, pageTypeText);
+    (path, pageVariant) => {
+      renderGridTemplate(path);
 
       const paragraphContentRegex = /[0-9]+ (notes|twitters|articles)$/;
 
-      expect(screen.getByText(paragraphContentRegex)).toHaveTextContent(pageTypeText);
+      expect(screen.getByText(paragraphContentRegex)).toHaveTextContent(pageVariant);
     },
   );
 
