@@ -8,7 +8,7 @@ import Heading from '~/components/atoms/Heading/Heading';
 import Paragraph from '~/components/atoms/Paragraph/Paragraph';
 import Time from '~/components/atoms/Time/Time';
 import { TEST_ID } from '~/constants/tests';
-import { useHistoryPush, useRemoveItemAction, usePageTypeContext } from '~/hooks';
+import { useHistoryPush, useRemoveItemAction, useCurrentPageVariant } from '~/hooks';
 import * as styledMixin from '~/theme/mixins';
 
 import type { Item } from '~/commonTypes';
@@ -169,7 +169,7 @@ const defaultCardProps = {
 };
 
 const Card = ({ id, title, created, twitterName, articleUrl, content }: CardProps) => {
-  const pageVariant = usePageTypeContext();
+  const pageVariant = useCurrentPageVariant();
   const URLPathToDetails = `${pageVariant}/${id}`;
   const historyPush = useHistoryPush(URLPathToDetails);
   const removeItem = useRemoveItemAction();
