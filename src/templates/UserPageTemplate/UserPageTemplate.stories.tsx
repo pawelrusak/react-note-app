@@ -20,20 +20,17 @@ const Template: Story<UserPageTemplateProps> = () => (
 export const Note = Template.bind({});
 Note.decorators = [UserPageTemplateRouterDecorator(routes.notes)];
 Note.parameters = {
-  pageContext: 'notes',
   pageVariant: 'notes',
 };
 
 export const Twitter = Template.bind({});
 Twitter.decorators = [UserPageTemplateRouterDecorator(routes.twitters)];
 Twitter.parameters = {
-  pageContext: 'twitters',
   pageVariant: 'twitters',
 };
 
 export const Article = Template.bind({});
 Article.decorators = [UserPageTemplateRouterDecorator(routes.articles)];
 Article.parameters = {
-  pageContext: 'articles',
   pageVariant: 'articles',
 };

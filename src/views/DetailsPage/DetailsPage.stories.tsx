@@ -32,7 +32,6 @@ Note.args = {
   pathname: routes.note,
 };
 Note.parameters = {
-  pageContext: 'notes',
   pageVariant: 'notes',
 };
 
@@ -42,7 +41,6 @@ Twitter.args = {
   pathname: routes.twitter,
 };
 Twitter.parameters = {
-  pageContext: 'twitters',
   pageVariant: 'twitters',
 };
 
@@ -52,6 +50,5 @@ Article.args = {
   pathname: routes.article,
 };
 Article.parameters = {
-  pageContext: 'articles',
   pageVariant: 'articles',
 };

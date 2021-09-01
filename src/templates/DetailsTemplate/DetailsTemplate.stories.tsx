@@ -19,7 +19,6 @@ Note.args = {
   ...CardStories.Note.args,
 };
 Note.parameters = {
-  pageContext: 'notes',
   pageVariant: 'notes',
 };
 
@@ -28,7 +27,6 @@ Twitter.args = {
   ...CardStories.Twitter.args,
 };
 Twitter.parameters = {
-  pageContext: 'twitters',
   pageVariant: 'twitters',
 };
 
@@ -37,6 +35,5 @@ Article.args = {
   ...CardStories.Article.args,
 };
 Article.parameters = {
-  pageContext: 'articles',
   pageVariant: 'articles',
 };

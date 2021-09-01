@@ -11,7 +11,6 @@ export default {
   component: Articles,
   decorators: [StoryRouter(itemsPageLinks, { initialEntries: [routes.articles] }), StoreDecorator],
   parameters: {
-    pageContext: 'articles',
     pageVariant: 'articles',
   },
 } as Meta;

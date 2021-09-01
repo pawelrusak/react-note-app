@@ -11,15 +11,10 @@ export default {
 
 const Template: Story<NewItemBarProps> = (args) => <NewItemBar {...args} />;
 
-export const Default = Template.bind({});
-Default.args = {
-  handleClose: () => ({}),
-  visible: true,
-};
-
 export const Note = Template.bind({});
 Note.args = {
-  ...Default.args,
+  handleClose: () => ({}),
+  visible: true,
 };
 Note.parameters = {
   pageVariant: 'notes',
@@ -27,7 +22,7 @@ Note.parameters = {
 
 export const Twitter = Template.bind({});
 Twitter.args = {
-  ...Default.args,
+  ...Note.args,
 };
 Twitter.parameters = {
   pageVariant: 'twitters',
@@ -35,7 +30,7 @@ Twitter.parameters = {
 
 export const Articles = Template.bind({});
 Articles.args = {
-  ...Default.args,
+  ...Note.args,
 };
 Articles.parameters = {
   pageVariant: 'articles',
