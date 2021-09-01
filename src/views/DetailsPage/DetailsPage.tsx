@@ -1,17 +1,17 @@
 import pluralize from 'pluralize';
 
-import { useActiveItem, useCurrentPageType } from '~/hooks';
+import { useActiveItem, useCurrentPageVariant } from '~/hooks';
 import DetailsTemplate from '~/templates/DetailsTemplate/DetailsTemplate';
 import { DocumentTitle } from '~/utils/components';
 
 const DetailsPage = () => {
   const activeItem = useActiveItem();
-  const pageType = useCurrentPageType();
+  const pageVariant = useCurrentPageVariant();
 
   return (
     <>
       <DocumentTitle capitalize>
-        {pluralize.singular(pageType)}: &quot;{activeItem.title}&quot;
+        {pluralize.singular(pageVariant)}: &quot;{activeItem.title}&quot;
       </DocumentTitle>
 
       <DetailsTemplate
