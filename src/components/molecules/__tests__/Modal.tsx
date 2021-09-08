@@ -3,14 +3,6 @@ import { render, screen } from 'testUtils';
 import Modal, { ModalProps } from '../Modal/Modal';
 import { theme } from '~/theme/mainTheme';
 
-let portalRoot = document.getElementById('portal-root');
-
-if (!portalRoot) {
-  portalRoot = document.createElement('div');
-  portalRoot.id = 'portal-root';
-  document.body.appendChild(portalRoot);
-}
-
 const MODAL_TEST_ID = {
   TEST_ELEMENT: 'Modal_TestElement',
   HEADER: 'Modal_Header',
