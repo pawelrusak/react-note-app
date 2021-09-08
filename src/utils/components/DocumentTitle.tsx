@@ -7,7 +7,7 @@ type DocumentTitleProps = {
   readonly children: string | string[];
 };
 
-export const DocumentTitle = ({ capitalize, children }: DocumentTitleProps) => (
+const DocumentTitle = ({ capitalize, children }: DocumentTitleProps) => (
   <Helmet>
     <title>{capitalize ? capitalizeUtils(join(children)) : children}</title>
   </Helmet>
@@ -16,3 +16,5 @@ export const DocumentTitle = ({ capitalize, children }: DocumentTitleProps) => (
 DocumentTitle.defaultProps = {
   capitalize: false,
 };
+
+export default DocumentTitle;
