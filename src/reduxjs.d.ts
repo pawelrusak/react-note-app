@@ -5,18 +5,20 @@ import store from '~/store';
 import type { Store } from '@reduxjs/toolkit';
 import type { AuthState } from '~/store/auth/authSlice';
 import type { ItemsState } from '~/store/items/itemsSlice';
+import type { SearchState } from '~/store/search/searchSlice';
 
 declare module '@reduxjs/toolkit' {
-  export type RootState = {
+  export type AppState = {
     auth: AuthState;
     items: ItemsState;
+    search: SearchState;
   };
 
   export type RootDispatch = typeof store.dispatch;
 
-  export type AppStore = Store<RootState>;
+  export type AppStore = Store<AppState>;
 
-  export type AppThunk<A extends Action, S = RootState, R = void, E = unknown> = ThunkAction<
+  export type AppThunk<A extends Action, S = AppState, R = void, E = unknown> = ThunkAction<
     R,
     S,
     E,
@@ -24,6 +26,6 @@ declare module '@reduxjs/toolkit' {
   >;
 
   export type AppThunkConfig = {
-    state: RootState;
+    state: AppState;
   };
 }
