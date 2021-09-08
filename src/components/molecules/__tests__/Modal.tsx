@@ -1,4 +1,4 @@
-import { render, screen } from 'testUtils';
+import { render, screen, userEvent } from 'testUtils';
 
 import Modal, { ModalProps } from '../Modal/Modal';
 import { theme } from '~/theme/mainTheme';
@@ -10,9 +10,9 @@ const MODAL_TEST_ID = {
 
 type RenderModalProps = Partial<Omit<ModalProps, 'children'>>;
 
-const renderModal = ({ variant = 'notes', show = true }: RenderModalProps = {}) =>
+const renderModal = ({ variant = 'notes', show = true, ...props }: RenderModalProps = {}) =>
   render(
-    <Modal variant={variant} show={show}>
+    <Modal variant={variant} show={show} {...props}>
       <Modal.Header data-testid={MODAL_TEST_ID.HEADER} />
       <Modal.PrimaryButton />
       <div data-testid={MODAL_TEST_ID.TEST_ELEMENT} />
@@ -58,4 +58,16 @@ describe('<Modal />', () => {
       expect(screen.getByRole('button')).toHaveStyle(variantBackgroundColor);
     },
   );
+
+  it('should call the onClickOutside property when click outside the modal container', () => {
+    const clickOutside = jest.fn();
+
+    renderModal({ onClickOutside: clickOutside });
+
+    expect(clickOutside).not.toHaveBeenCalled();
+
+    userEvent.click(document.body);
+
+    expect(clickOutside).toHaveBeenCalledTimes(1);
+  });
 });
