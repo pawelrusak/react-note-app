@@ -1,8 +1,10 @@
+import { useRef } from 'react';
 import styled from 'styled-components';
 
 import Button from '~/components/atoms/Button/Button';
 import Heading from '~/components/atoms/Heading/Heading';
 import Paragraph from '~/components/atoms/Paragraph/Paragraph';
+import { useClickAway } from '~/hooks';
 import * as styledMixin from '~/theme/mixins';
 import { Portal } from '~/utils/components';
 
@@ -133,16 +135,28 @@ export type ModalProps = {
   readonly show: boolean;
   readonly variant: ItemVariants;
   readonly children?: React.ReactNode;
+  readonly onClickOutside?: () => void;
 };
 
-const Modal = ({ show, variant, children }: ModalProps) =>
-  show ? (
+const Modal = ({ show, variant, children, onClickOutside }: ModalProps) => {
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  useClickAway(containerRef, () => {
+    if (onClickOutside) {
+      onClickOutside();
+    }
+  });
+
+  return show ? (
     <Portal>
       <StyledWrapper>
-        <StyledContainer variant={variant}>{children}</StyledContainer>
+        <StyledContainer ref={containerRef} variant={variant}>
+          {children}
+        </StyledContainer>
       </StyledWrapper>
     </Portal>
   ) : null;
+};
 
 Modal.Header = StyledHeader;
 Modal.Title = StyledTitle;
