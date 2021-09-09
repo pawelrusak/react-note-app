@@ -5,6 +5,11 @@ import type { Meta, Story } from '@storybook/react';
 export default {
   title: 'Molecules/Modal',
   component: Modal,
+  argTypes: {
+    onClickOutside: {
+      action: 'clicked',
+    },
+  },
 } as Meta;
 
 type AdditionalModalStoryProps = Readonly<{

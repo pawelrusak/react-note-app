@@ -135,15 +135,17 @@ export type ModalProps = {
   readonly show: boolean;
   readonly variant: ItemVariants;
   readonly children?: React.ReactNode;
-  readonly onClickOutside?: () => void;
+  readonly onClickOutside?: (event: React.MouseEvent) => void;
 };
 
 const Modal = ({ show, variant, children, onClickOutside }: ModalProps) => {
   const containerRef = useRef<HTMLDivElement>(null);
 
-  useClickAway(containerRef, () => {
+  // eslint-disable-next-line
+  // @ts-expect-error
+  useClickAway<React.MouseEvent>(containerRef, (event) => {
     if (onClickOutside) {
-      onClickOutside();
+      onClickOutside(event);
     }
   });
 
