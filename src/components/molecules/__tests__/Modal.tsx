@@ -59,7 +59,7 @@ describe('<Modal />', () => {
     },
   );
 
-  it('should call the onClickOutside property when click outside the modal container', () => {
+  it('should call the onClickOutside property with the mouse event when clicked outside the modal container', () => {
     const clickOutside = jest.fn();
 
     renderModal({ onClickOutside: clickOutside });
@@ -69,5 +69,6 @@ describe('<Modal />', () => {
     userEvent.click(document.body);
 
     expect(clickOutside).toHaveBeenCalledTimes(1);
+    expect(clickOutside).toHaveBeenCalledWith(new MouseEvent('mousedown'));
   });
 });
