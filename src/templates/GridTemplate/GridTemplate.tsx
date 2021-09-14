@@ -55,7 +55,7 @@ const StyledButtonIcon = styled(ButtonIcon)<StyledButtonIconProps>`
   background-color: ${styledMixin.variantColorValue()};
   background-size: 35%;
   border-radius: 50px;
-  z-index: ${({ theme }) => theme.zIndex.gridTemplateButtonIcon};
+  ${styledMixin.zIndexDeclaration('gridTemplateButtonIcon')};
   transform: rotate(${({ active }) => (active ? '-45deg' : '0')});
   ${styledMixin.transitionTransformForNewItemBarAndHisToggleButton}
 `;
