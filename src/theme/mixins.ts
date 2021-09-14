@@ -1,6 +1,9 @@
 import * as polished from 'polished';
 import { css } from 'styled-components';
 
+import { isNumber } from '~/utils/guards';
+
+import type { DefaultTheme } from 'styled-components';
 import type { ItemVariants } from '~/commonTypes';
 
 export const lightenBlack = css`
@@ -41,4 +44,11 @@ export const variantColorValue = ({
 
 export const transitionTransformForNewItemBarAndHisToggleButton = css`
   transition: transform 0.25s ease-in-out;
+`;
+
+type ZIndexDefaultTheme = DefaultTheme['zIndex'];
+type ZIndexDefaultThemeKeys = keyof ZIndexDefaultTheme;
+
+export const zIndexDeclaration = (themeZIndex: ZIndexDefaultThemeKeys | number) => css`
+  z-index: ${({ theme }) => (isNumber(themeZIndex) ? themeZIndex : theme.zIndex[themeZIndex])};
 `;
