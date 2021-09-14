@@ -1,5 +1,4 @@
 import { darken } from 'polished';
-import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
@@ -10,7 +9,7 @@ import Paragraph from '~/components/atoms/Paragraph/Paragraph';
 import Time from '~/components/atoms/Time/Time';
 import ConfirmationModal from '~/components/molecules/ConfirmationModal/ConfirmationModal';
 import { TEST_ID } from '~/constants/tests';
-import { useHistoryPush, useRemoveItemAction, useCurrentPageVariant } from '~/hooks';
+import { useHistoryPush, useCurrentPageVariant, useConfirmationModal } from '~/hooks';
 import * as styledMixin from '~/theme/mixins';
 
 import type { Item } from '~/commonTypes';
@@ -174,13 +173,7 @@ const Card = ({ id, title, created, twitterName, articleUrl, content }: CardProp
   const pageVariant = useCurrentPageVariant();
   const URLPathToDetails = `${pageVariant}/${id}`;
   const historyPush = useHistoryPush(URLPathToDetails);
-  const removeItem = useRemoveItemAction();
-  const [show, setShow] = useState<boolean>(false);
-
-  const handleConfirm = () => {
-    setShow(false);
-    removeItem(pageVariant, id);
-  };
+  const { isOpen, closeModal, openModal, removeItemAction } = useConfirmationModal();
 
   return (
     <StyledWrapperWithHover>
@@ -201,14 +194,14 @@ const Card = ({ id, title, created, twitterName, articleUrl, content }: CardProp
       <ContentWrapper>
         <StyledContentParagraph>{content}</StyledContentParagraph>
         <StyledContentLink to={URLPathToDetails}>read more</StyledContentLink>
-        <Button onClick={() => setShow(true)} secondary>
+        <Button onClick={openModal} secondary>
           REMOVE
         </Button>
         <ConfirmationModal
-          show={show}
+          show={isOpen()}
           variant={pageVariant}
-          onConfirm={handleConfirm}
-          onCancel={() => setShow(false)}
+          onConfirm={() => removeItemAction(pageVariant, id)}
+          onCancel={closeModal}
         />
       </ContentWrapper>
     </StyledWrapperWithHover>
