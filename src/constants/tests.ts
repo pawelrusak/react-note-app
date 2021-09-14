@@ -58,4 +58,7 @@ export const TEST_ID = {
     AVATAR_SKELETON: 'SkeletonCard_AvatarSkeleton',
     ARTICLE_LINK_SKELETON: 'SkeletonCard_ArticleLinkSkeleton',
   },
+  CONFIRMATION_MODAL: {
+    REMOVE_BUTTON: 'ConfirmationModal_RemoveButton',
+  },
 } as const;

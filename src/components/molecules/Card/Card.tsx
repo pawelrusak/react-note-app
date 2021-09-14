@@ -7,8 +7,9 @@ import Button from '~/components/atoms/Button/Button';
 import Heading from '~/components/atoms/Heading/Heading';
 import Paragraph from '~/components/atoms/Paragraph/Paragraph';
 import Time from '~/components/atoms/Time/Time';
+import ConfirmationModal from '~/components/molecules/ConfirmationModal/ConfirmationModal';
 import { TEST_ID } from '~/constants/tests';
-import { useHistoryPush, useRemoveItemAction, useCurrentPageVariant } from '~/hooks';
+import { useHistoryPush, useCurrentPageVariant, useConfirmationModal } from '~/hooks';
 import * as styledMixin from '~/theme/mixins';
 
 import type { Item } from '~/commonTypes';
@@ -41,7 +42,7 @@ const HeaderWrapper = styled.div<VariantColorValueProp>`
   background-color: ${styledMixin.variantColorValue()};
 
   &:first-of-type {
-    z-index: 9999;
+    ${styledMixin.zIndexDeclaration('cardHeader')};
   }
 `;
 
@@ -172,7 +173,7 @@ const Card = ({ id, title, created, twitterName, articleUrl, content }: CardProp
   const pageVariant = useCurrentPageVariant();
   const URLPathToDetails = `${pageVariant}/${id}`;
   const historyPush = useHistoryPush(URLPathToDetails);
-  const removeItem = useRemoveItemAction();
+  const { isOpen, closeModal, openModal, removeItemAction } = useConfirmationModal();
 
   return (
     <StyledWrapperWithHover>
@@ -193,9 +194,15 @@ const Card = ({ id, title, created, twitterName, articleUrl, content }: CardProp
       <ContentWrapper>
         <StyledContentParagraph>{content}</StyledContentParagraph>
         <StyledContentLink to={URLPathToDetails}>read more</StyledContentLink>
-        <Button onClick={() => removeItem(pageVariant, id)} secondary>
+        <Button onClick={openModal} secondary>
           REMOVE
         </Button>
+        <ConfirmationModal
+          show={isOpen()}
+          variant={pageVariant}
+          onConfirm={() => removeItemAction(pageVariant, id)}
+          onCancel={closeModal}
+        />
       </ContentWrapper>
     </StyledWrapperWithHover>
   );

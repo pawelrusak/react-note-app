@@ -27,5 +27,11 @@ declare module 'styled-components' {
       l: string;
       xl: string;
     };
+    zIndex: {
+      cardHeader: number;
+      newItemBar: number;
+      gridTemplateButtonIcon: number;
+      modal: number;
+    };
   }
 }

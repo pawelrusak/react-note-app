@@ -23,4 +23,10 @@ export const theme: DefaultTheme = {
     l: '2.4rem',
     xl: '4rem',
   },
+  zIndex: {
+    cardHeader: 1000,
+    newItemBar: 1010,
+    gridTemplateButtonIcon: 1020,
+    modal: 1050,
+  },
 };

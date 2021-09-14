@@ -12,7 +12,7 @@ jest.mock('~/services');
 
 type CardType = 'Note' | 'Twitter' | 'Article';
 
-const renderCard = (cardType: CardType) => {
+const renderCard = (cardType: CardType = 'Note') => {
   const cardData = CardStories[cardType]?.args as Item;
   const itemType = cardType.toLowerCase() as Lowercase<CardType>;
   const path = routes[`${itemType}s` as const];
@@ -35,6 +35,9 @@ const renderCard = (cardType: CardType) => {
 };
 
 const getCardHeader = () => screen.getByTestId(TEST_ID.CARD.HEADER);
+const getByRemoveButtonRole = () => screen.getByRole('button', { name: /remove/i });
+const queryByHeadingOfConfirmationModal = () =>
+  screen.queryByRole('heading', { name: /are you sure?/i });
 const queryByImgRole = () => screen.queryByRole('img');
 const queryCardArticleLink = () => screen.queryByTestId(TEST_ID.CARD.ARTICLE_LINK);
 const queryFakeDetailsPage = () => screen.queryByTestId('FakeDetailsPage');
@@ -63,6 +66,39 @@ describe('<Card />', () => {
 
     expect(queryCardDateInfo()).toBeInTheDocument();
     expect(queryCardDateInfo()).toHaveTextContent(/3 days/i);
+  });
+
+  it('open the confirmation modal when the "remove" button was clicked', () => {
+    renderCard();
+
+    // shouldn't initially display the confirmation modal
+    expect(queryByHeadingOfConfirmationModal()).not.toBeInTheDocument();
+
+    userEvent.click(getByRemoveButtonRole());
+
+    expect(queryByHeadingOfConfirmationModal()).toBeInTheDocument();
+  });
+
+  it('close the opened confirmation modal when the "no, wait" button is clicked', () => {
+    renderCard();
+
+    // open the confirmation modal
+    userEvent.click(getByRemoveButtonRole());
+
+    userEvent.click(screen.getByRole('button', { name: /no, wait/i }));
+
+    expect(queryByHeadingOfConfirmationModal()).not.toBeInTheDocument();
+  });
+
+  it('close the opened confirmation modal when the user clicked outside the confirmation modal', () => {
+    renderCard();
+
+    // open the confirmation modal
+    userEvent.click(getByRemoveButtonRole());
+
+    userEvent.click(document.body);
+
+    expect(queryByHeadingOfConfirmationModal()).not.toBeInTheDocument();
   });
 
   testComponent(() => renderCard('Note'), { suffixTestNames: 'when is note page' })
