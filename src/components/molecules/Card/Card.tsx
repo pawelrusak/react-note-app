@@ -1,4 +1,5 @@
 import { darken } from 'polished';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
@@ -7,6 +8,7 @@ import Button from '~/components/atoms/Button/Button';
 import Heading from '~/components/atoms/Heading/Heading';
 import Paragraph from '~/components/atoms/Paragraph/Paragraph';
 import Time from '~/components/atoms/Time/Time';
+import ConfirmationModal from '~/components/molecules/ConfirmationModal/ConfirmationModal';
 import { TEST_ID } from '~/constants/tests';
 import { useHistoryPush, useRemoveItemAction, useCurrentPageVariant } from '~/hooks';
 import * as styledMixin from '~/theme/mixins';
@@ -173,6 +175,12 @@ const Card = ({ id, title, created, twitterName, articleUrl, content }: CardProp
   const URLPathToDetails = `${pageVariant}/${id}`;
   const historyPush = useHistoryPush(URLPathToDetails);
   const removeItem = useRemoveItemAction();
+  const [show, setShow] = useState<boolean>(false);
+
+  const handleConfirm = () => {
+    setShow(false);
+    removeItem(pageVariant, id);
+  };
 
   return (
     <StyledWrapperWithHover>
@@ -193,9 +201,15 @@ const Card = ({ id, title, created, twitterName, articleUrl, content }: CardProp
       <ContentWrapper>
         <StyledContentParagraph>{content}</StyledContentParagraph>
         <StyledContentLink to={URLPathToDetails}>read more</StyledContentLink>
-        <Button onClick={() => removeItem(pageVariant, id)} secondary>
+        <Button onClick={() => setShow(true)} secondary>
           REMOVE
         </Button>
+        <ConfirmationModal
+          show={show}
+          variant={pageVariant}
+          onConfirm={handleConfirm}
+          onCancel={() => setShow(false)}
+        />
       </ContentWrapper>
     </StyledWrapperWithHover>
   );
