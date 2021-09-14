@@ -27,6 +27,8 @@ export const fetchItemsTestSuite = (
   const firstItemsTitle = itemsData[0].title;
 
   const getAllCardHeaders = () => screen.getAllByTestId(TEST_ID.CARD.HEADER);
+  const getConfirmationModalRemoveButton = () =>
+    screen.getByTestId(TEST_ID.CONFIRMATION_MODAL.REMOVE_BUTTON);
   const getByFirstItemsTitle = () => screen.queryByText(firstItemsTitle);
   const findAllByRemoveButtons = () => screen.findAllByRole('button', { name: /remove/i });
   const findAllCardHeader = () => screen.findAllByTestId(TEST_ID.CARD.HEADER);
@@ -89,7 +91,7 @@ export const fetchItemsTestSuite = (
       }
     });
 
-    it('delete first card after clicking its the "remove" button', async () => {
+    it('delete first card after clicking its the "remove" button in the  confirmation modal of card', async () => {
       render();
 
       expect(await findAllCardHeader()).toHaveLength(4);
@@ -97,7 +99,14 @@ export const fetchItemsTestSuite = (
 
       const [firstCardItemRemoveButton] = await findAllByRemoveButtons();
 
+      // open the confirmation modal
       await waitFor(() => userEvent.click(firstCardItemRemoveButton));
+
+      // confirm the delete item action
+      await waitFor(() => userEvent.click(getConfirmationModalRemoveButton()));
+
+      // the confirmation modal should be closed
+      expect(screen.queryByRole('heading', { name: /Are you sure?/i })).not.toBeInTheDocument();
 
       expect(getAllCardHeaders()).toHaveLength(3);
       expect(getByFirstItemsTitle()).not.toBeInTheDocument();
