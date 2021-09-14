@@ -41,7 +41,7 @@ const HeaderWrapper = styled.div<VariantColorValueProp>`
   background-color: ${styledMixin.variantColorValue()};
 
   &:first-of-type {
-    z-index: 9999;
+    z-index: ${({ theme }) => theme.zIndex.cardHeader};
   }
 `;
 

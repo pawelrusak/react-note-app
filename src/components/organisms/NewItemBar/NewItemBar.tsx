@@ -18,7 +18,7 @@ type StyledWrapperProps = Required<VariantColorValueProp> & Visible;
 
 const StyledWrapper = styled.div<StyledWrapperProps>`
   border-left: 10px solid ${styledMixin.variantColorValue()};
-  z-index: 9999;
+  z-index: ${({ theme }) => theme.zIndex.newItemBar};
   position: fixed;
   display: flex;
   padding: 100px 90px;

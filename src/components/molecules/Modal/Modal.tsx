@@ -19,7 +19,7 @@ const StyledWrapper = styled.div`
   bottom: 0;
   display: grid;
   place-items: center;
-  z-index: 1000;
+  z-index: ${({ theme }) => theme.zIndex.modal};
   background: rgba(10, 10, 10, 0.45);
 `;
 
