@@ -32,6 +32,7 @@ const queryByTwitterPlaceholderText = () => screen.queryByPlaceholderText(/twitt
 const queryByLinkPlaceholderText = () => screen.queryByPlaceholderText(/link/i);
 const queryAllByButtonRole = () => screen.queryAllByRole('button');
 const getAllByHeadingRole = () => screen.getAllByRole('heading');
+const getByAddNoteButtonRole = () => screen.getByRole('button', { name: /add note/i });
 
 const twitterUsernameInputTestName = 'twitter username input';
 const articleLinkInputTestName = 'twitter username input';
@@ -75,7 +76,7 @@ describe('<NewItemBar />', () => {
     expect(newBarItemHeading).toHaveTextContent(variant);
   });
 
-  it('trigger the handleClose prop after submit the form', async () => {
+  it('trigger the handleClose prop and prepare form after submit the form', async () => {
     const mockHandleClose = jest.fn(() => ({}));
     const fakeNewItem = newItemBuilder();
 
@@ -84,10 +85,16 @@ describe('<NewItemBar />', () => {
     userEvent.type(getByTitlePlaceholderText(), fakeNewItem.title);
     userEvent.type(getByDescriptionPlaceholderText(), fakeNewItem.content);
 
-    const [submitButton] = queryAllByButtonRole();
+    await waitFor(() => userEvent.click(getByAddNoteButtonRole()));
 
-    await waitFor(() => userEvent.click(submitButton));
+    // prepare form:
+    // 1. Enable the submit button
+    expect(getByAddNoteButtonRole()).toBeEnabled();
+    // 2. Reset form fields
+    expect(getByDescriptionPlaceholderText()).toHaveValue('');
+    expect(getByDescriptionPlaceholderText()).toHaveValue('');
 
+    // trigger the handleClose prop
     expect(mockHandleClose).toHaveBeenCalledTimes(1);
   });
 
