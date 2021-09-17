@@ -30,7 +30,6 @@ const getByTitlePlaceholderText = () => screen.getByPlaceholderText(/title/i);
 const getByDescriptionPlaceholderText = () => screen.getByPlaceholderText(/description/i);
 const queryByTwitterPlaceholderText = () => screen.queryByPlaceholderText(/twitter/i);
 const queryByLinkPlaceholderText = () => screen.queryByPlaceholderText(/link/i);
-const queryAllByButtonRole = () => screen.queryAllByRole('button');
 const getAllByHeadingRole = () => screen.getAllByRole('heading');
 const getByAddNoteButtonRole = () => screen.getByRole('button', { name: /add note/i });
 
@@ -50,9 +49,7 @@ describe('<NewItemBar />', () => {
     (path) => {
       renderNewItemBar(path);
 
-      const [submitButton] = queryAllByButtonRole();
-
-      expect(submitButton).toBeEnabled();
+      expect(getByAddNoteButtonRole()).toBeEnabled();
       expect(getByTitlePlaceholderText()).toBeValid();
       expect(getByDescriptionPlaceholderText()).toBeValid();
 
