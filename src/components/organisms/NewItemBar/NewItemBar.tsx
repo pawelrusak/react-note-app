@@ -76,8 +76,18 @@ const NewItemBar = ({ visible, handleClose }: NewItemBarProps) => {
           articleUrl: '',
           twitterName: '',
         }}
-        onSubmit={(values) => {
+        onSubmit={(values, actions) => {
           addItemAction(pageVariant, values);
+          actions.setSubmitting(false);
+          actions.resetForm({
+            values: {
+              title: '',
+              content: '',
+              articleUrl: '',
+              twitterName: '',
+              variant: pageVariant,
+            },
+          });
           handleClose();
         }}
       >
