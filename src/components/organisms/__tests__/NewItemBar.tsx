@@ -30,11 +30,13 @@ const getByTitlePlaceholderText = () => screen.getByPlaceholderText(/title/i);
 const getByDescriptionPlaceholderText = () => screen.getByPlaceholderText(/description/i);
 const queryByTwitterPlaceholderText = () => screen.queryByPlaceholderText(/twitter/i);
 const queryByLinkPlaceholderText = () => screen.queryByPlaceholderText(/link/i);
-const queryAllByButtonRole = () => screen.queryAllByRole('button');
 const getAllByHeadingRole = () => screen.getAllByRole('heading');
+const getByAddNoteButtonRole = () => screen.getByRole('button', { name: /add note/i });
 
-const twitterUsernameInputTestName = 'twitter username input';
-const articleLinkInputTestName = 'twitter username input';
+const TEST_NAME = {
+  TWITTER_NAME_INPUT: 'twitter user input',
+  ARTICLE_URL_INPUT: 'article URL input',
+};
 
 const newItemBuilder = build<NewItem>({
   fields: {
@@ -49,9 +51,7 @@ describe('<NewItemBar />', () => {
     (path) => {
       renderNewItemBar(path);
 
-      const [submitButton] = queryAllByButtonRole();
-
-      expect(submitButton).toBeEnabled();
+      expect(getByAddNoteButtonRole()).toBeEnabled();
       expect(getByTitlePlaceholderText()).toBeValid();
       expect(getByDescriptionPlaceholderText()).toBeValid();
 
@@ -75,7 +75,7 @@ describe('<NewItemBar />', () => {
     expect(newBarItemHeading).toHaveTextContent(variant);
   });
 
-  it('trigger the handleClose prop after submit the form', async () => {
+  it('trigger the handleClose prop and prepare form after submit the form', async () => {
     const mockHandleClose = jest.fn(() => ({}));
     const fakeNewItem = newItemBuilder();
 
@@ -84,31 +84,37 @@ describe('<NewItemBar />', () => {
     userEvent.type(getByTitlePlaceholderText(), fakeNewItem.title);
     userEvent.type(getByDescriptionPlaceholderText(), fakeNewItem.content);
 
-    const [submitButton] = queryAllByButtonRole();
+    await waitFor(() => userEvent.click(getByAddNoteButtonRole()));
 
-    await waitFor(() => userEvent.click(submitButton));
+    // prepare form:
+    // 1. Enable the submit button
+    expect(getByAddNoteButtonRole()).toBeEnabled();
+    // 2. Reset form fields
+    expect(getByDescriptionPlaceholderText()).toHaveValue('');
+    expect(getByDescriptionPlaceholderText()).toHaveValue('');
 
+    // trigger the handleClose prop
     expect(mockHandleClose).toHaveBeenCalledTimes(1);
   });
 
   testComponent(() => renderNewItemBar(routes.notes), {
     suffixTestNames: 'when is note page',
   })
-    .not.toBeInTheDocument(twitterUsernameInputTestName, queryByTwitterPlaceholderText)
-    .not.toBeInTheDocument(articleLinkInputTestName, queryByLinkPlaceholderText)
+    .not.toBeInTheDocument(TEST_NAME.TWITTER_NAME_INPUT, queryByTwitterPlaceholderText)
+    .not.toBeInTheDocument(TEST_NAME.ARTICLE_URL_INPUT, queryByLinkPlaceholderText)
     .run();
 
   testComponent(() => renderNewItemBar(routes.twitters), {
     suffixTestNames: 'when is twitter page',
   })
-    .toBeInTheDocument(twitterUsernameInputTestName, queryByTwitterPlaceholderText)
-    .not.toBeInTheDocument(articleLinkInputTestName, queryByLinkPlaceholderText)
+    .toBeInTheDocument(TEST_NAME.TWITTER_NAME_INPUT, queryByTwitterPlaceholderText)
+    .not.toBeInTheDocument(TEST_NAME.ARTICLE_URL_INPUT, queryByLinkPlaceholderText)
     .run();
 
   testComponent(() => renderNewItemBar(routes.articles), {
     suffixTestNames: 'when is article page',
   })
-    .toBeInTheDocument(articleLinkInputTestName, queryByLinkPlaceholderText)
-    .not.toBeInTheDocument(twitterUsernameInputTestName, queryByTwitterPlaceholderText)
+    .toBeInTheDocument(TEST_NAME.ARTICLE_URL_INPUT, queryByLinkPlaceholderText)
+    .not.toBeInTheDocument(TEST_NAME.TWITTER_NAME_INPUT, queryByTwitterPlaceholderText)
     .run();
 });
