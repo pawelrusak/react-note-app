@@ -33,8 +33,10 @@ const queryByLinkPlaceholderText = () => screen.queryByPlaceholderText(/link/i);
 const getAllByHeadingRole = () => screen.getAllByRole('heading');
 const getByAddNoteButtonRole = () => screen.getByRole('button', { name: /add note/i });
 
-const twitterUsernameInputTestName = 'twitter username input';
-const articleLinkInputTestName = 'twitter username input';
+const TEST_NAME = {
+  TWITTER_NAME_INPUT: 'twitter user input',
+  ARTICLE_URL_INPUT: 'article URL input',
+};
 
 const newItemBuilder = build<NewItem>({
   fields: {
@@ -98,21 +100,21 @@ describe('<NewItemBar />', () => {
   testComponent(() => renderNewItemBar(routes.notes), {
     suffixTestNames: 'when is note page',
   })
-    .not.toBeInTheDocument(twitterUsernameInputTestName, queryByTwitterPlaceholderText)
-    .not.toBeInTheDocument(articleLinkInputTestName, queryByLinkPlaceholderText)
+    .not.toBeInTheDocument(TEST_NAME.TWITTER_NAME_INPUT, queryByTwitterPlaceholderText)
+    .not.toBeInTheDocument(TEST_NAME.ARTICLE_URL_INPUT, queryByLinkPlaceholderText)
     .run();
 
   testComponent(() => renderNewItemBar(routes.twitters), {
     suffixTestNames: 'when is twitter page',
   })
-    .toBeInTheDocument(twitterUsernameInputTestName, queryByTwitterPlaceholderText)
-    .not.toBeInTheDocument(articleLinkInputTestName, queryByLinkPlaceholderText)
+    .toBeInTheDocument(TEST_NAME.TWITTER_NAME_INPUT, queryByTwitterPlaceholderText)
+    .not.toBeInTheDocument(TEST_NAME.ARTICLE_URL_INPUT, queryByLinkPlaceholderText)
     .run();
 
   testComponent(() => renderNewItemBar(routes.articles), {
     suffixTestNames: 'when is article page',
   })
-    .toBeInTheDocument(articleLinkInputTestName, queryByLinkPlaceholderText)
-    .not.toBeInTheDocument(twitterUsernameInputTestName, queryByTwitterPlaceholderText)
+    .toBeInTheDocument(TEST_NAME.ARTICLE_URL_INPUT, queryByLinkPlaceholderText)
+    .not.toBeInTheDocument(TEST_NAME.TWITTER_NAME_INPUT, queryByTwitterPlaceholderText)
     .run();
 });
