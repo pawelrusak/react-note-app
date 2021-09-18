@@ -28,7 +28,7 @@ export type RequiredOnlyWithNever<T, K extends keyof T> = Pick<Required<T>, K> &
  * VARIANTS
  *
  */
-export type ItemVariants = 'notes' | 'twitters' | 'articles';
+export type Variants = 'notes' | 'twitters' | 'articles';
 
 /*
  *

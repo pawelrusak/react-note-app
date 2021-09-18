@@ -1,9 +1,9 @@
 import firebase from 'firebase/app';
 
-import type { ItemVariants, Item, Modify, Writeable, NewItem } from '~/commonTypes';
+import type { Variants, Item, Modify, Writeable, NewItem } from '~/commonTypes';
 
 export type DocumentItemQueryArgs = {
-  type: ItemVariants;
+  type: Variants;
   userID: null | string;
 };
 

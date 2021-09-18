@@ -4,7 +4,7 @@ import { css } from 'styled-components';
 import { isNumber } from '~/utils/guards';
 
 import type { DefaultTheme } from 'styled-components';
-import type { ItemVariants } from '~/commonTypes';
+import type { Variants } from '~/commonTypes';
 
 export const lightenBlack = css`
   ${({ theme }) => polished.lighten(0.3, theme.black)}
@@ -15,7 +15,7 @@ export const lightenBlackText = css`
 `;
 
 export type VariantColorValueProp = {
-  readonly variant?: ItemVariants;
+  readonly variant?: Variants;
 };
 
 type VariantColorValueArgs = {

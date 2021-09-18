@@ -8,7 +8,7 @@ import { useClickAway } from '~/hooks';
 import * as styledMixin from '~/theme/mixins';
 import { Portal } from '~/utils/components';
 
-import type { ItemVariants } from '~/commonTypes';
+import type { Variants } from '~/commonTypes';
 import type { VariantColorValueProp } from '~/theme/mixins';
 
 const StyledWrapper = styled.div`
@@ -133,7 +133,7 @@ const StyledDescription = styled(Paragraph)`
 
 export type ModalProps = {
   readonly show: boolean;
-  readonly variant: ItemVariants;
+  readonly variant: Variants;
   readonly children?: React.ReactNode;
   readonly onClickOutside?: (event: React.MouseEvent) => void;
 };

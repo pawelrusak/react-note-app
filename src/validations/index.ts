@@ -1,19 +1,19 @@
 import * as yup from 'yup';
 
 import type { SchemaOf } from 'yup';
-import type { NewItem, ItemVariants } from '~/commonTypes';
+import type { NewItem, Variants } from '~/commonTypes';
 
 export const authSchema = yup.object().shape({
   email: yup.string().email().required(),
   password: yup.string().min(6).max(50).required(),
 });
 
-type NewItemSchema = SchemaOf<NewItem & { variant: ItemVariants }>;
+type NewItemSchema = SchemaOf<NewItem & { variant: Variants }>;
 
 export const newItemSchema: NewItemSchema = yup.object().shape({
   title: yup.string().max(50).required(),
   content: yup.string().max(5000).required(),
-  variant: yup.mixed().oneOf<ItemVariants>(['notes', 'twitters', 'articles']).defined(),
+  variant: yup.mixed().oneOf<Variants>(['notes', 'twitters', 'articles']).defined(),
   /**
    * {@link https://help.twitter.com/en/managing-your-account/twitter-username-rules Twitter username rules}
    */

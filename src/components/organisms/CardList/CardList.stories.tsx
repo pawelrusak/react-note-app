@@ -4,7 +4,7 @@ import CardList, { CardListProps } from './CardList';
 import ViewPlaceholder from '~~/.storybook/components/ViewPlaceholder';
 import { StoreDecorator, CardListGridDecorator } from '~~/.storybook/decorators';
 
-import type { ItemVariants } from '~/commonTypes';
+import type { Variants } from '~/commonTypes';
 
 export default {
   title: 'Organisms/CardList',
@@ -19,7 +19,7 @@ export default {
   decorators: [StoreDecorator, CardListGridDecorator],
 } as Meta;
 
-const Template: Story<CardListProps<ItemVariants>> = (args) => (
+const Template: Story<CardListProps<Variants>> = (args) => (
   <CardList {...args}>
     {({ data }) =>
       data.map((_, index) => <ViewPlaceholder label={`${index + 1} <Card /> goes here!`} />)

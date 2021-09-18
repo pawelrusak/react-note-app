@@ -8,7 +8,7 @@ import {
   SPECIAL_VALUE_TO_TEST_WEAK_PASSWORD,
 } from '~/constants/tests';
 
-import type { ItemVariants } from '~/commonTypes';
+import type { Variants } from '~/commonTypes';
 
 export const removeItem = async () => {
   try {
@@ -18,7 +18,7 @@ export const removeItem = async () => {
   }
 };
 
-export const fetchItems = async ({ type }: { type: ItemVariants }) => {
+export const fetchItems = async ({ type }: { type: Variants }) => {
   try {
     const data = fakeItemsData[type];
 
