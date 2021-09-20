@@ -7,7 +7,7 @@ import {
 } from './queries/items';
 
 import type { NewDocumentItem, DocumentItemQueryArgs } from './servicesTypes';
-import type { Item } from '~/commonTypes';
+import type { Item, Variants } from '~/commonTypes';
 
 export const authenticateUser = (email: string, password: string) =>
   auth.signInWithEmailAndPassword(email, password);
@@ -28,10 +28,10 @@ export const fetchItems = async ({ type, userID }: DocumentItemQueryArgs) => {
   }
 };
 
-export const fetchItem = async (id: string) => {
+export const fetchItem = async <V extends Variants>(id: string) => {
   try {
     const itemSnap = await queryGetItemByID(id);
-    const data = itemSnap.data() as Item;
+    const data = itemSnap.data() as Item<V>;
 
     return Promise.resolve({ data });
   } catch (error) {
