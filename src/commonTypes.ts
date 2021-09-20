@@ -51,7 +51,11 @@ export type TwitterItem = Modify<NoteItem, { readonly twitterName: string | null
 
 export type ArticleItem = Modify<NoteItem, { readonly articleUrl: string | null }>;
 
-export type Item = NoteItem | TwitterItem | ArticleItem;
+export type Item<T extends Variants = Variants> = {
+  notes: NoteItem;
+  twitters: TwitterItem;
+  articles: ArticleItem;
+}[T];
 
 export type NewItem = Omit<Item, 'id' | 'created'>;
 
