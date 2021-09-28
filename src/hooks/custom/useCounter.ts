@@ -8,7 +8,7 @@ import {
 
 import type { Variants } from '~/commonTypes';
 
-export const useCounter = <T extends Variants>(variant: T) => {
+export const useCounter = <V extends Variants>(variant: V) => {
   const searchedItems = useSelector(searchItemsByVariantSelector(variant));
   const items = useSelector(itemVariantSelector(variant));
   const searchQuery = useSelector(searchVariantSelector(variant));
