@@ -18,9 +18,9 @@ export const removeItem = async () => {
   }
 };
 
-export const fetchItems = async ({ type }: { type: Variants }) => {
+export const fetchItems = async ({ variant }: { variant: Variants }) => {
   try {
-    const data = fakeItemsData[type];
+    const data = fakeItemsData[variant];
 
     return Promise.resolve({ data });
   } catch (error) {
