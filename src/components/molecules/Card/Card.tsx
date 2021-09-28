@@ -12,7 +12,7 @@ import { TEST_ID } from '~/constants/tests';
 import { useHistoryPush, useCurrentPageVariant, useConfirmationModal } from '~/hooks';
 import * as styledMixin from '~/theme/mixins';
 
-import type { Item } from '~/commonTypes';
+import type { Variants, Item } from '~/commonTypes';
 import type { VariantColorValueProp } from '~/theme/mixins';
 
 const StyledWrapper = styled.div`
@@ -162,14 +162,21 @@ const StyledContentLink = styled(Link)`
   }
 `;
 
-export type CardProps = Item;
+export type CardProps<V extends Variants> = Item<V>;
 
 const defaultCardProps = {
   twitterName: null,
   articleUrl: null,
 };
 
-const Card = ({ id, title, created, twitterName, articleUrl, content }: CardProps) => {
+const Card = <V extends Variants>({
+  id,
+  title,
+  created,
+  twitterName,
+  articleUrl,
+  content,
+}: CardProps<V>) => {
   const pageVariant = useCurrentPageVariant();
   const URLPathToDetails = `${pageVariant}/${id}`;
   const historyPush = useHistoryPush(URLPathToDetails);

@@ -5,6 +5,7 @@ import { getEarlierDateOfDay } from '~/utils';
 import { StoreDecorator, CardWrapperDecorator } from '~~/.storybook/decorators';
 
 import type { Meta, Story } from '@storybook/react';
+import type { Variants } from '~/commonTypes';
 
 export default {
   title: 'Molecules/Card',
@@ -12,7 +13,7 @@ export default {
   decorators: [StoryRouter(), StoreDecorator, CardWrapperDecorator],
 } as Meta;
 
-const Template: Story<CardProps> = (args) => <Card {...args} />;
+const Template: Story<CardProps<Variants>> = (args) => <Card {...args} />;
 
 export const Note = Template.bind({});
 Note.args = {
@@ -43,7 +44,7 @@ export const Twitter = Template.bind({});
 Twitter.args = {
   ...Note.args,
   twitterName: 'hello_roman',
-} as CardProps;
+} as CardProps<'twitters'>;
 Twitter.parameters = {
   pageVariant: 'twitters',
 };
@@ -52,7 +53,7 @@ export const TwitterWithLongContent = Template.bind({});
 TwitterWithLongContent.args = {
   ...NoteWithLongContent.args,
   twitterName: Twitter.args.twitterName as string,
-} as CardProps;
+} as CardProps<'twitters'>;
 TwitterWithLongContent.parameters = {
   pageVariant: 'twitters',
 };
@@ -61,7 +62,7 @@ export const Article = Template.bind({});
 Article.args = {
   ...Note.args,
   articleUrl: 'https://youtube.com/helloroman',
-} as CardProps;
+} as CardProps<'articles'>;
 Article.parameters = {
   pageVariant: 'articles',
 };
@@ -70,7 +71,7 @@ export const ArticleWithLongContent = Template.bind({});
 ArticleWithLongContent.args = {
   ...NoteWithLongContent.args,
   articleUrl: Article.args.articleUrl as string,
-} as CardProps;
+} as CardProps<'articles'>;
 ArticleWithLongContent.parameters = {
   pageVariant: 'articles',
 };
