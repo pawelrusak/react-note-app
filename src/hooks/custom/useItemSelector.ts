@@ -4,5 +4,5 @@ import { itemByTypeAndIDSelector } from '~/store/items/itemsSelectors';
 
 import type { Variants } from '~/commonTypes';
 
-export const useItemSelector = (itemType: Variants, itemID: string) =>
-  useSelector(itemByTypeAndIDSelector(itemType, itemID));
+export const useItemSelector = <V extends Variants>(itemType: V, itemID: string) =>
+  useSelector(itemByTypeAndIDSelector<V>(itemType, itemID));
