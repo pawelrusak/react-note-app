@@ -3,12 +3,12 @@ import { createSlice, createAsyncThunk, AppThunkConfig } from '@reduxjs/toolkit'
 import { ACTION_DOMAINS } from '~/constants/actionDomains';
 import * as services from '~/services';
 
-import type { Item, NewItem, NoteItem, ArticleItem, TwitterItem, Variants } from '~/commonTypes';
+import type { Item, NewItem, Variants } from '~/commonTypes';
 
 export type ItemsState = {
-  notes: NoteItem[];
-  twitters: TwitterItem[];
-  articles: ArticleItem[];
+  notes: Item<'notes'>[];
+  twitters: Item<'twitters'>[];
+  articles: Item<'articles'>[];
   isLoading: boolean;
 };
 

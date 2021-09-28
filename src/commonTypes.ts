@@ -35,7 +35,7 @@ export type Variants = 'notes' | 'twitters' | 'articles';
  * ITEMS
  *
  */
-export type NoteItem = {
+type NoteItem = {
   readonly id: string;
   readonly title: string;
   readonly content: string;
@@ -47,9 +47,9 @@ export type NoteItem = {
   readonly articleUrl?: never;
 };
 
-export type TwitterItem = Modify<NoteItem, { readonly twitterName: string | null }>;
+type TwitterItem = Modify<NoteItem, { readonly twitterName: string | null }>;
 
-export type ArticleItem = Modify<NoteItem, { readonly articleUrl: string | null }>;
+type ArticleItem = Modify<NoteItem, { readonly articleUrl: string | null }>;
 
 export type Item<V extends Variants = Variants> = {
   notes: NoteItem;

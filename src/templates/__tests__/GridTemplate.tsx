@@ -6,7 +6,7 @@ import GridTemplate from '../GridTemplate/GridTemplate';
 import { TEST_ID } from '~/constants/tests';
 import { routes } from '~/routes';
 
-import type { NoteItem, RoutesVariantRootPaths } from '~/commonTypes';
+import type { Item, RoutesVariantRootPaths } from '~/commonTypes';
 
 jest.mock('~/services');
 
@@ -40,7 +40,7 @@ const CSS_STYLES = {
   },
 } as const;
 
-const noteItemBuilder = build<Omit<NoteItem, 'id' | 'created'>>({
+const noteItemBuilder = build<Omit<Item<'notes'>, 'id' | 'created'>>({
   fields: {
     title: fake((faker) => faker.lorem.words()),
     content: fake((faker) => faker.lorem.sentence()),
