@@ -1,5 +1,14 @@
+import firebase from 'firebase';
+
 import { db } from '../core';
 
-export const getNotesCollectionRef = () => db.collection('notes');
+import type { DocumentItem } from '../servicesTypes';
+import type { Variants } from '~/commonTypes';
 
-export const getNoteDocumentRefById = (id: string) => getNotesCollectionRef().doc(id);
+export const getNotesCollectionRef = <
+  V extends Variants = Variants,
+  T extends DocumentItem<V> = DocumentItem<V>,
+>() => db.collection('notes') as firebase.firestore.CollectionReference<T>;
+
+export const getNoteDocumentRefById = <V extends Variants = Variants>(id: string) =>
+  getNotesCollectionRef<V>().doc(id);

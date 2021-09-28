@@ -17,10 +17,13 @@ export const register = (email: string, password: string) =>
 
 export const logout = () => auth.signOut();
 
-export const fetchItems = async ({ type, userID }: DocumentItemQueryArgs) => {
+export const fetchItems = async <V extends Variants = Variants>({
+  type,
+  userID,
+}: DocumentItemQueryArgs<V>) => {
   try {
-    const itemsSnap = await queryGetItemsByTypeAndUserID(type, userID);
-    const data = itemsSnap.docs.map((item) => item.data()) as Item[];
+    const itemsSnap = await queryGetItemsByTypeAndUserID<V>(type, userID);
+    const data = itemsSnap.docs.map((item) => item.data()) as Item<V>[];
 
     return Promise.resolve({ data });
   } catch (error) {
@@ -41,18 +44,22 @@ export const fetchItem = async <V extends Variants>(id: string) => {
 
 export const removeItem = async (id: string) => {
   try {
-    const response = await queryRemoveItemByID(id);
+    await queryRemoveItemByID(id);
 
-    return Promise.resolve(response);
+    return Promise.resolve();
   } catch (error) {
     return Promise.reject(error);
   }
 };
 
-export const addItem = async ({ userID, type, ...itemContent }: NewDocumentItem) => {
+export const addItem = async <V extends Variants>({
+  userID,
+  type,
+  ...itemContent
+}: NewDocumentItem<V>) => {
   try {
     const documentReference = await queryAddItem({ userID, type, ...itemContent });
-    const { data } = await fetchItem(documentReference.id);
+    const { data } = await fetchItem<V>(documentReference.id);
 
     return Promise.resolve({ data });
   } catch (error) {
