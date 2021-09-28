@@ -1,10 +1,11 @@
 import type { Variants, Item } from '~/commonTypes';
+
 import type { RootState } from '~/store';
 
 export const itemByTypeAndIDSelector =
-  <T extends Variants>(itemType: T, itemID: string) =>
+  <T extends Variants>(variant: T, itemID: string) =>
   (store: RootState) =>
-    (store.items[itemType] as Item[] | undefined)?.find((item) => item.id === itemID);
+    (store.items[variant] as Item<T>[]).find((item) => item.id === itemID);
 
 export const itemVariantSelector =
   <T extends Variants>(variant: T) =>
