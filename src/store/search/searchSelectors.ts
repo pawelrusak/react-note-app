@@ -15,7 +15,7 @@ export const searchItemsByVariantSelector = <T extends Variants>(variant: T) =>
     itemVariantSelector(variant),
     searchVariantSelector(variant),
     (items, filter) => {
-      return (items as Item[]).filter(({ title }) =>
+      return (items as Item<T>[]).filter(({ title }) =>
         title.toLowerCase().includes(filter.toLowerCase()),
       ) as ItemsState[T];
     },
