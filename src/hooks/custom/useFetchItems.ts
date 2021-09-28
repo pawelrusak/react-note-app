@@ -14,14 +14,14 @@ type UseFetchItemsReturn<V extends Variants> = {
   isLoading: () => boolean;
 };
 
-export const useFetchItems = <V extends Variants>(itemVariant: V): UseFetchItemsReturn<V> => {
-  const searchedItems = useSelector(searchItemsByVariantSelector(itemVariant));
+export const useFetchItems = <V extends Variants>(variant: V): UseFetchItemsReturn<V> => {
+  const searchedItems = useSelector(searchItemsByVariantSelector(variant));
   const { isLoading } = useItemsStatus();
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchItems({ itemVariant }));
-  }, [dispatch, itemVariant]);
+    dispatch(fetchItems({ variant }));
+  }, [dispatch, variant]);
 
   return {
     data: searchedItems,
