@@ -9,20 +9,19 @@ import { searchItemsByVariantSelector } from '~/store/search/searchSelectors';
 import type { Variants } from '~/commonTypes';
 import type { ItemsState } from '~/store';
 
-type UseFetchItemsReturn<T extends Variants> = {
-  data: ItemsState[T];
+type UseFetchItemsReturn<V extends Variants> = {
+  data: ItemsState[V];
   isLoading: () => boolean;
 };
 
-export const useFetchItems = <T extends Variants>(itemVariant: T): UseFetchItemsReturn<T> => {
+export const useFetchItems = <V extends Variants>(itemVariant: V): UseFetchItemsReturn<V> => {
   const searchedItems = useSelector(searchItemsByVariantSelector(itemVariant));
   const { isLoading } = useItemsStatus();
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(fetchItems({ itemVariant }));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [dispatch, itemVariant]);
 
   return {
     data: searchedItems,
