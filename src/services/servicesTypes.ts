@@ -3,7 +3,7 @@ import firebase from 'firebase/app';
 import type { Variants, Item, Modify, Writeable, NewItem } from '~/commonTypes';
 
 export type DocumentItemQueryArgs<V extends Variants = Variants> = {
-  type: V;
+  variant: V;
   userID: null | string;
 };
 

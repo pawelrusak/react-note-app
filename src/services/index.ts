@@ -18,11 +18,11 @@ export const register = (email: string, password: string) =>
 export const logout = () => auth.signOut();
 
 export const fetchItems = async <V extends Variants = Variants>({
-  type,
+  variant,
   userID,
 }: DocumentItemQueryArgs<V>) => {
   try {
-    const itemsSnap = await queryGetItemsByTypeAndUserID<V>(type, userID);
+    const itemsSnap = await queryGetItemsByTypeAndUserID<V>(variant, userID);
     const data = itemsSnap.docs.map((item) => item.data()) as Item<V>[];
 
     return Promise.resolve({ data });
@@ -54,11 +54,11 @@ export const removeItem = async (id: string) => {
 
 export const addItem = async <V extends Variants>({
   userID,
-  type,
+  variant,
   ...itemContent
 }: NewDocumentItem<V>) => {
   try {
-    const documentReference = await queryAddItem({ userID, type, ...itemContent });
+    const documentReference = await queryAddItem({ userID, variant, ...itemContent });
     const { data } = await fetchItem<V>(documentReference.id);
 
     return Promise.resolve({ data });

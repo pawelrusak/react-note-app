@@ -32,7 +32,7 @@ export const fetchItems = createAsyncThunk<FetchItemsReturn, FetchItemsArg, AppT
   async ({ itemVariant }, { getState, rejectWithValue }) => {
     try {
       const { data } = await services.fetchItems({
-        type: itemVariant,
+        variant: itemVariant,
         userID: getState().auth.userID,
       });
 
@@ -51,7 +51,7 @@ export const addItem = createAsyncThunk<AddItemReturn, AddItemArg, AppThunkConfi
   async ({ itemVariant, itemContent }, { getState, rejectWithValue }) => {
     try {
       const { data } = await services.addItem({
-        type: itemVariant,
+        variant: itemVariant,
         userID: getState().auth.userID,
         ...itemContent,
       });
