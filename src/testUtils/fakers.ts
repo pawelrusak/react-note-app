@@ -8,7 +8,9 @@ const dayEarlier = getEarlierDateOfDay(1).toISOString();
 const fiveDaysEarlier = getEarlierDateOfDay(5).toISOString();
 const tenDaysEarlier = getEarlierDateOfDay(10).toISOString();
 
-export const fakeItemsData = {
+type FakeItemsData = Omit<RootState['items'], 'isLoading'>;
+
+export const fakeItemsData: FakeItemsData = {
   twitters: [
     {
       id: '1',
