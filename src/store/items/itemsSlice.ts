@@ -3,19 +3,12 @@ import { createSlice, createAsyncThunk, AppThunkConfig } from '@reduxjs/toolkit'
 import { ACTION_DOMAINS } from '~/constants/actionDomains';
 import * as services from '~/services';
 
-import type {
-  Item,
-  NewItem,
-  NoteItem,
-  ArticleItem,
-  TwitterItem,
-  ItemVariants,
-} from '~/commonTypes';
+import type { Item, NewItem, Variants } from '~/commonTypes';
 
 export type ItemsState = {
-  notes: NoteItem[];
-  twitters: TwitterItem[];
-  articles: ArticleItem[];
+  notes: Item<'notes'>[];
+  twitters: Item<'twitters'>[];
+  articles: Item<'articles'>[];
   isLoading: boolean;
 };
 
@@ -28,22 +21,22 @@ const initialState: ItemsState = {
 
 // eslint-disable-next-line @typescript-eslint/ban-types
 type ObjectWithItemVariant<T extends object | never = never> = {
-  itemVariant: ItemVariants;
+  variant: Variants;
 } & T;
 
 type FetchItemsReturn = ObjectWithItemVariant<{ data: Item[] }>;
-type FetchItemsArg = { itemVariant: ItemVariants };
+type FetchItemsArg = { variant: Variants };
 
 export const fetchItems = createAsyncThunk<FetchItemsReturn, FetchItemsArg, AppThunkConfig>(
   `${ACTION_DOMAINS.ITEMS}/fetchItems`,
-  async ({ itemVariant }, { getState, rejectWithValue }) => {
+  async ({ variant }, { getState, rejectWithValue }) => {
     try {
       const { data } = await services.fetchItems({
-        type: itemVariant,
+        variant,
         userID: getState().auth.userID,
       });
 
-      return { data, itemVariant };
+      return { data, variant };
     } catch (error) {
       return rejectWithValue(error);
     }
@@ -51,35 +44,35 @@ export const fetchItems = createAsyncThunk<FetchItemsReturn, FetchItemsArg, AppT
 );
 
 type AddItemReturn = ObjectWithItemVariant<{ data: Item }>;
-type AddItemArg = ObjectWithItemVariant<{ itemContent: NewItem }>;
+type AddItemArg = ObjectWithItemVariant<{ newItem: NewItem }>;
 
 export const addItem = createAsyncThunk<AddItemReturn, AddItemArg, AppThunkConfig>(
   `${ACTION_DOMAINS.ITEMS}/addItem`,
-  async ({ itemVariant, itemContent }, { getState, rejectWithValue }) => {
+  async ({ variant, newItem }, { getState, rejectWithValue }) => {
     try {
       const { data } = await services.addItem({
-        type: itemVariant,
+        variant,
         userID: getState().auth.userID,
-        ...itemContent,
+        ...newItem,
       });
 
-      return { data, itemVariant };
+      return { data, variant };
     } catch (error) {
       return rejectWithValue(error);
     }
   },
 );
 
-type RemoveItemReturn = ObjectWithItemVariant<{ id: string }>;
+type RemoveItemReturn = ObjectWithItemVariant<{ id: Item['id'] }>;
 type RemoveItemArg = RemoveItemReturn;
 
 export const removeItem = createAsyncThunk<RemoveItemReturn, RemoveItemArg, AppThunkConfig>(
   `${ACTION_DOMAINS.ITEMS}/removeItem`,
-  async ({ itemVariant, id }, { rejectWithValue }) => {
+  async ({ variant, id }, { rejectWithValue }) => {
     try {
       await services.removeItem(id);
 
-      return { itemVariant, id };
+      return { variant, id };
     } catch (error) {
       return rejectWithValue(error);
     }
@@ -99,17 +92,17 @@ const itemsSlice = createSlice({
         state.isLoading = false;
         // eslint-disable-next-line
         // @ts-expect-error
-        state[payload.itemVariant] = [...payload.data];
+        state[payload.variant] = [...payload.data];
       })
       .addCase(addItem.fulfilled, (state, action) => {
         // eslint-disable-next-line
         // @ts-expect-error
-        state[action.payload.itemVariant].unshift({ ...action.payload.data });
+        state[action.payload.variant].unshift({ ...action.payload.data });
       })
       .addCase(removeItem.fulfilled, (state, { payload }) => {
         // eslint-disable-next-line
         // @ts-expect-error
-        state[payload.itemVariant] = (state[payload.itemVariant] as Item[]).filter(
+        state[payload.variant] = (state[payload.variant] as Item[]).filter(
           (item) => item.id !== payload.id,
         );
       }),

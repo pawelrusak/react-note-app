@@ -28,14 +28,14 @@ export type RequiredOnlyWithNever<T, K extends keyof T> = Pick<Required<T>, K> &
  * VARIANTS
  *
  */
-export type ItemVariants = 'notes' | 'twitters' | 'articles';
+export type Variants = 'notes' | 'twitters' | 'articles';
 
 /*
  *
  * ITEMS
  *
  */
-export type NoteItem = {
+type NoteItem = {
   readonly id: string;
   readonly title: string;
   readonly content: string;
@@ -47,13 +47,17 @@ export type NoteItem = {
   readonly articleUrl?: never;
 };
 
-export type TwitterItem = Modify<NoteItem, { readonly twitterName: string | null }>;
+type TwitterItem = Modify<NoteItem, { readonly twitterName: string | null }>;
 
-export type ArticleItem = Modify<NoteItem, { readonly articleUrl: string | null }>;
+type ArticleItem = Modify<NoteItem, { readonly articleUrl: string | null }>;
 
-export type Item = NoteItem | TwitterItem | ArticleItem;
+export type Item<V extends Variants = Variants> = {
+  notes: NoteItem;
+  twitters: TwitterItem;
+  articles: ArticleItem;
+}[V];
 
-export type NewItem = Omit<Item, 'id' | 'created'>;
+export type NewItem<V extends Variants = Variants> = Omit<Item<V>, 'id' | 'created'>;
 
 /*
  *

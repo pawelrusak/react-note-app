@@ -2,9 +2,9 @@ import { useState } from 'react';
 
 import { useRemoveItemAction } from './useRemoveItemAction';
 
-import type { ItemVariants } from '~/commonTypes';
+import type { Variants, Item } from '~/commonTypes';
 
-export const useConfirmationModal = () => {
+export const useConfirmationModal = <V extends Variants>() => {
   const [open, setOpen] = useState<boolean>(false);
   const removeItem = useRemoveItemAction();
 
@@ -14,7 +14,7 @@ export const useConfirmationModal = () => {
 
   const openModal = () => setOpen(true);
 
-  const removeItemAction = <T extends ItemVariants>(variant: T, id: string) => {
+  const removeItemAction = (variant: V, id: Item['id']) => {
     closeModal();
     removeItem(variant, id);
   };

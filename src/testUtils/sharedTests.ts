@@ -12,11 +12,11 @@ import { fakeItemsData } from 'testUtils/fakers';
 import { TEST_ID } from '~/constants/tests';
 import { capitalize } from '~/utils';
 
-import type { ItemVariants } from '~/commonTypes';
+import type { Variants } from '~/commonTypes';
 
 type FetchItemsTestSuiteConfigArgs = {
   render(): ReturnType<typeof renderWithProviders>;
-  variant: ItemVariants;
+  variant: Variants;
 };
 
 export const fetchItemsTestSuite = (

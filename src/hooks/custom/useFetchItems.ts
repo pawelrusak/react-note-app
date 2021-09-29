@@ -2,26 +2,26 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { useItemsStatus } from './useItemsStatus';
-import { ItemVariants } from '~/commonTypes';
+
 import { fetchItems } from '~/store/items/itemsSlice';
 import { searchItemsByVariantSelector } from '~/store/search/searchSelectors';
 
+import type { Variants } from '~/commonTypes';
 import type { ItemsState } from '~/store';
 
-type UseFetchItemsReturn<T extends ItemVariants> = {
-  data: ItemsState[T];
+type UseFetchItemsReturn<V extends Variants> = {
+  data: ItemsState[V];
   isLoading: () => boolean;
 };
 
-export const useFetchItems = <T extends ItemVariants>(itemVariant: T): UseFetchItemsReturn<T> => {
-  const searchedItems = useSelector(searchItemsByVariantSelector(itemVariant));
+export const useFetchItems = <V extends Variants>(variant: V): UseFetchItemsReturn<V> => {
+  const searchedItems = useSelector(searchItemsByVariantSelector(variant));
   const { isLoading } = useItemsStatus();
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchItems({ itemVariant }));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+    dispatch(fetchItems({ variant }));
+  }, [dispatch, variant]);
 
   return {
     data: searchedItems,

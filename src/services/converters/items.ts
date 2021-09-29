@@ -9,7 +9,7 @@ export const itemConverter = {
     return {
       ...data,
       userID: data.userID,
-      type: data.type,
+      type: data.variant,
       created: serverTimestamp(),
     };
   },

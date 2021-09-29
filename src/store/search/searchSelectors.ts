@@ -1,21 +1,21 @@
 import { createDraftSafeSelector } from '@reduxjs/toolkit';
 
-import { ItemVariants, Item } from '~/commonTypes';
 import { itemVariantSelector } from '~/store/items/itemsSelectors';
 
+import type { Variants, Item } from '~/commonTypes';
 import type { RootState, ItemsState } from '~/store';
 
 export const searchVariantSelector =
-  <T extends ItemVariants>(variant: T) =>
+  <T extends Variants>(variant: T) =>
   (state: RootState) =>
     state.search[variant];
 
-export const searchItemsByVariantSelector = <T extends ItemVariants>(variant: T) =>
+export const searchItemsByVariantSelector = <T extends Variants>(variant: T) =>
   createDraftSafeSelector(
     itemVariantSelector(variant),
     searchVariantSelector(variant),
     (items, filter) => {
-      return (items as Item[]).filter(({ title }) =>
+      return (items as Item<T>[]).filter(({ title }) =>
         title.toLowerCase().includes(filter.toLowerCase()),
       ) as ItemsState[T];
     },

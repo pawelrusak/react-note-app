@@ -36,9 +36,7 @@ export const useActiveItem = () => {
 
     // eslint-disable-next-line no-unused-expressions, @typescript-eslint/no-floating-promises
     storeActiveItem ? setActiveItem({ ...storeActiveItem }) : fetchDataItem();
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [itemID, storeActiveItem]);
 
   return activeItem;
 };
