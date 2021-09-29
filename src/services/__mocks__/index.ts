@@ -8,7 +8,8 @@ import {
   SPECIAL_VALUE_TO_TEST_WEAK_PASSWORD,
 } from '~/constants/tests';
 
-import type { Variants } from '~/commonTypes';
+import type { DocumentItemQueryArgs, NewDocumentItem } from '../servicesTypes';
+import type { Variants, Item } from '~/commonTypes';
 
 export const removeItem = async () => {
   try {
@@ -18,9 +19,9 @@ export const removeItem = async () => {
   }
 };
 
-export const fetchItems = async ({ variant }: { variant: Variants }) => {
+export const fetchItems = async <V extends Variants>({ variant }: DocumentItemQueryArgs<V>) => {
   try {
-    const data = fakeItemsData[variant];
+    const data = fakeItemsData[variant] as Item<V>[];
 
     return Promise.resolve({ data });
   } catch (error) {
@@ -40,7 +41,7 @@ export const fetchItem = async (id: string) => {
   }
 };
 
-export const addItem = async ({ ...itemContent }) => {
+export const addItem = async <V extends Variants>({ ...itemContent }: NewDocumentItem<V>) => {
   try {
     const data = {
       id: nanoid(),
