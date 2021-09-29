@@ -10,5 +10,6 @@ export const getNotesCollectionRef = <
   T extends DocumentItem<V> = DocumentItem<V>,
 >() => db.collection('notes') as firebase.firestore.CollectionReference<T>;
 
-export const getNoteDocumentRefById = <V extends Variants = Variants>(id: string) =>
-  getNotesCollectionRef<V>().doc(id);
+export const getNoteDocumentRefById = <V extends Variants = Variants>(
+  id: Exclude<DocumentItem['id'], undefined>,
+) => getNotesCollectionRef<V>().doc(id);

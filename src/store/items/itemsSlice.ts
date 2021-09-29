@@ -63,7 +63,7 @@ export const addItem = createAsyncThunk<AddItemReturn, AddItemArg, AppThunkConfi
   },
 );
 
-type RemoveItemReturn = ObjectWithItemVariant<{ id: string }>;
+type RemoveItemReturn = ObjectWithItemVariant<{ id: Item['id'] }>;
 type RemoveItemArg = RemoveItemReturn;
 
 export const removeItem = createAsyncThunk<RemoveItemReturn, RemoveItemArg, AppThunkConfig>(

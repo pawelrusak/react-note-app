@@ -31,7 +31,7 @@ export const fetchItems = async <V extends Variants = Variants>({
   }
 };
 
-export const fetchItem = async <V extends Variants>(id: string) => {
+export const fetchItem = async <V extends Variants>(id: Item['id']) => {
   try {
     const itemSnap = await queryGetItemByID(id);
     const data = itemSnap.data() as Item<V>;
@@ -42,7 +42,7 @@ export const fetchItem = async <V extends Variants>(id: string) => {
   }
 };
 
-export const removeItem = async (id: string) => {
+export const removeItem = async (id: Item['id']) => {
   try {
     await queryRemoveItemByID(id);
 
