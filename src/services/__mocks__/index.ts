@@ -9,7 +9,7 @@ import {
 } from '~/constants/tests';
 
 import type { DocumentItemQueryArgs, NewDocumentItem } from '../servicesTypes';
-import type { Variants, Item } from '~/commonTypes';
+import type { Variants, Item, AuthCredentials } from '~/commonTypes';
 
 export const removeItem = async () => {
   try {
@@ -29,7 +29,7 @@ export const fetchItems = async <V extends Variants>({ variant }: DocumentItemQu
   }
 };
 
-export const fetchItem = async (id: string) => {
+export const fetchItem = async (id: Item['id']) => {
   try {
     const { notes } = fakeStateWithData.items;
 
@@ -55,15 +55,21 @@ export const addItem = async <V extends Variants>({ ...itemContent }: NewDocumen
   }
 };
 
-const isEmailBelongsToRegisterUser = (email: string) => {
+const isEmailBelongsToRegisterUser = (email: AuthCredentials['email']) => {
   return REGISTERED_USER_CREDENTIALS.EMAIL === email;
 };
 
-const isRegisterUserButWithWrongPassword = (email: string, password: string) => {
+const isRegisterUserButWithWrongPassword = (
+  email: AuthCredentials['email'],
+  password: AuthCredentials['password'],
+) => {
   return isEmailBelongsToRegisterUser(email) && REGISTERED_USER_CREDENTIALS.PASSWORD !== password;
 };
 
-export const authenticateUser = async (email: string, password: string) => {
+export const authenticateUser = async (
+  email: AuthCredentials['email'],
+  password: AuthCredentials['password'],
+) => {
   try {
     if (!isEmailBelongsToRegisterUser(email)) {
       throw AUTH_ERRORS.USER_NOT_FOUND;
@@ -81,7 +87,7 @@ export const authenticateUser = async (email: string, password: string) => {
   }
 };
 
-const isValidEmail = (email: string) => {
+const isValidEmail = (email: AuthCredentials['email']) => {
   return yup.string().email().required().isValidSync(email);
 };
 /**
@@ -90,14 +96,17 @@ const isValidEmail = (email: string) => {
  *
  * @see {@link https://firebase.google.com/docs/reference/android/com/google/firebase/auth/FirebaseAuthWeakPasswordException}
  */
-const isStrongPassword = (password: string) => {
+const isStrongPassword = (password: AuthCredentials['password']) => {
   const MIN_PASSWORD_LENGTH = 6;
   const passwordLongEnough = yup.string().min(MIN_PASSWORD_LENGTH).required().isValidSync(password);
 
   return passwordLongEnough && SPECIAL_VALUE_TO_TEST_WEAK_PASSWORD !== password;
 };
 
-export const register = async (email: string, password: string) => {
+export const register = async (
+  email: AuthCredentials['email'],
+  password: AuthCredentials['password'],
+) => {
   try {
     if (isEmailBelongsToRegisterUser(email)) {
       throw AUTH_ERRORS.EMAIL_ALREADY_IN_USE;
