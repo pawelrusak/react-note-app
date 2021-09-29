@@ -7,12 +7,14 @@ import {
 } from './queries/items';
 
 import type { NewDocumentItem, DocumentItemQueryArgs } from './servicesTypes';
-import type { Item, Variants } from '~/commonTypes';
+import type { Item, Variants, AuthCredentials } from '~/commonTypes';
 
-export const authenticateUser = (email: string, password: string) =>
-  auth.signInWithEmailAndPassword(email, password);
+export const authenticateUser = (
+  email: AuthCredentials['email'],
+  password: AuthCredentials['password'],
+) => auth.signInWithEmailAndPassword(email, password);
 
-export const register = (email: string, password: string) =>
+export const register = (email: AuthCredentials['email'], password: AuthCredentials['password']) =>
   auth.createUserWithEmailAndPassword(email, password);
 
 export const logout = () => auth.signOut();
