@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk, AppThunkConfig } from '@reduxjs/toolkit';
 
+import { Status } from '~/commonTypes';
 import { ACTION_DOMAINS } from '~/constants/actionDomains';
 import * as services from '~/services';
 
@@ -9,14 +10,14 @@ export type ItemsState = {
   notes: Item<'notes'>[];
   twitters: Item<'twitters'>[];
   articles: Item<'articles'>[];
-  isLoading: boolean;
+  status: Status;
 };
 
 const initialState: ItemsState = {
   notes: [],
   twitters: [],
   articles: [],
-  isLoading: false,
+  status: Status.Idle,
 };
 
 // eslint-disable-next-line @typescript-eslint/ban-types
@@ -86,10 +87,10 @@ const itemsSlice = createSlice({
   extraReducers: (builder) =>
     builder
       .addCase(fetchItems.pending, (state) => {
-        state.isLoading = true;
+        state.status = Status.Loading;
       })
       .addCase(fetchItems.fulfilled, (state, { payload }) => {
-        state.isLoading = false;
+        state.status = Status.Succeeded;
         // eslint-disable-next-line
         // @ts-expect-error
         state[payload.variant] = [...payload.data];
