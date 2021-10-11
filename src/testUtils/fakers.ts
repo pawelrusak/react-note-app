@@ -119,7 +119,6 @@ export const fakeStateWithData: RootState = {
   },
   auth: {
     userID: null,
-    isLoading: false,
   },
   search: {
     notes: '',
