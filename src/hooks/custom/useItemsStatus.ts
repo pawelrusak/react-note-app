@@ -1,9 +1,9 @@
 import { useSelector } from 'react-redux';
 
-import type { RootState } from '~/store';
+import { itemsStatusSelector } from '~/store/items/itemsSelectors';
 
 export const useItemsStatus = () => {
-  const status = useSelector((state: RootState) => state.items.status);
+  const status = useSelector(itemsStatusSelector());
 
   return {
     isLoading: () => status === 'idle' || status === 'loading',
