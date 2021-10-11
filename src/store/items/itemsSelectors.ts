@@ -11,3 +11,5 @@ export const itemVariantSelector =
   <T extends Variants>(variant: T) =>
   (state: RootState) =>
     state.items[variant];
+
+export const itemsStatusSelector = () => (state: RootState) => state.items.status;

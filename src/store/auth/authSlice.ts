@@ -17,12 +17,10 @@ import type { AuthCredentials } from '~/commonTypes';
 
 export type AuthState = {
   readonly userID: string | null;
-  readonly isLoading: boolean;
 };
 
 const initialState: AuthState = {
   userID: process.env.NODE_ENV === 'test' ? null : authPersist.getUserID(),
-  isLoading: false,
 };
 
 type FirebaseReturnUserCredential = firebase.auth.UserCredential;

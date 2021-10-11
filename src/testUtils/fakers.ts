@@ -1,5 +1,6 @@
 import { nanoid } from '@reduxjs/toolkit';
 
+import { Status } from '~/commonTypes';
 import { getEarlierDateOfDay } from '~/utils';
 
 import type { RootState } from '~/store';
@@ -8,7 +9,7 @@ const dayEarlier = getEarlierDateOfDay(1).toISOString();
 const fiveDaysEarlier = getEarlierDateOfDay(5).toISOString();
 const tenDaysEarlier = getEarlierDateOfDay(10).toISOString();
 
-type FakeItemsData = Omit<RootState['items'], 'isLoading'>;
+type FakeItemsData = Omit<RootState['items'], 'status'>;
 
 export const fakeItemsData: FakeItemsData = {
   twitters: [
@@ -114,11 +115,10 @@ export const fakeItemsData: FakeItemsData = {
 export const fakeStateWithData: RootState = {
   items: {
     ...fakeItemsData,
-    isLoading: false,
+    status: Status.Succeeded,
   },
   auth: {
     userID: null,
-    isLoading: false,
   },
   search: {
     notes: '',
@@ -140,7 +140,7 @@ export const fakeStateWithoutData: RootState = {
     notes: [],
     twitters: [],
     articles: [],
-    isLoading: false,
+    status: Status.Idle,
   },
   auth: {
     ...fakeStateWithData.auth,

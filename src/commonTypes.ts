@@ -94,3 +94,10 @@ export type CSSSizeUnitVariants =
 
 type Routes = typeof routes;
 export type RoutesVariantRootPaths = Routes['notes'] | Routes['twitters'] | Routes['articles'];
+
+export enum Status {
+  Idle = 'idle',
+  Loading = 'loading',
+  Succeeded = 'succeeded',
+  Failed = 'failed',
+}

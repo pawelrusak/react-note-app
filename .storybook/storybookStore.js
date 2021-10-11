@@ -34,11 +34,10 @@ const initialState = {
         twitterName: 'hello_roman',
       },
     ],
-    isLoading: false,
+    status: 'succeeded',
   },
   auth: {
     userID: null,
-    isLoading: false,
   },
   search: {
     notes: '',
@@ -58,27 +57,27 @@ export const storybookStore = (state) => {
           notes: [],
           articles: [],
           twitters: [],
-          isLoading: true,
+          status: 'loading',
         },
       };
       return mockStore(loadingState);
     }
     case 'many': {
-      const loadingState = {
+      const manyState = {
         ...initialState,
         items: {
           ...fakeItemsData,
-          isLoading: false,
+          status: 'succeeded',
         },
       };
-      return mockStore(loadingState);
+      return mockStore(manyState);
     }
     case 'search': {
-      const loadingState = {
+      const searchState = {
         ...initialState,
         items: {
           ...fakeItemsData,
-          isLoading: false,
+          status: 'succeeded',
         },
         search: {
           notes: 'e',
@@ -87,7 +86,7 @@ export const storybookStore = (state) => {
         },
       };
 
-      return mockStore(loadingState);
+      return mockStore(searchState);
     }
     default:
       return mockStore(initialState);
