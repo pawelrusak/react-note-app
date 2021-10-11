@@ -38,7 +38,6 @@ const initialState = {
   },
   auth: {
     userID: null,
-    isLoading: false,
   },
   search: {
     notes: '',
