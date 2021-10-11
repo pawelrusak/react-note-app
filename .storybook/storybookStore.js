@@ -34,7 +34,7 @@ const initialState = {
         twitterName: 'hello_roman',
       },
     ],
-    status: 'idle',
+    status: 'succeeded',
   },
   auth: {
     userID: null,
