@@ -15,6 +15,7 @@ const DetailsPage = () => {
       </DocumentTitle>
 
       <DetailsTemplate
+        id={activeItem.id}
         title={activeItem.title}
         created={activeItem.created}
         content={activeItem.content}

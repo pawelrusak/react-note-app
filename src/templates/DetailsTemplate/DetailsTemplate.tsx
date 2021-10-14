@@ -1,15 +1,18 @@
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 
 import Button from '~/components/atoms/Button/Button';
 import Heading from '~/components/atoms/Heading/Heading';
 import Paragraph from '~/components/atoms/Paragraph/Paragraph';
+import TextButton from '~/components/atoms/TextButton/TextButton';
 import Time from '~/components/atoms/Time/Time';
+import ConfirmationModal from '~/components/molecules/ConfirmationModal/ConfirmationModal';
 import { TEST_ID } from '~/constants/tests';
-import { useCurrentPageVariant } from '~/hooks';
+import { useCurrentPageVariant, useConfirmationModal } from '~/hooks';
+import { routes } from '~/routes';
 import UserPageTemplate from '~/templates/UserPageTemplate/UserPageTemplate';
 
-import type { Item } from '~/commonTypes';
+import type { DetailsItem } from '~/commonTypes';
 
 const StyledWrapper = styled.div`
   padding: 25px 150px 25px 70px;
@@ -59,9 +62,14 @@ const StyledAvatar = styled.img`
   border-radius: 50%;
 `;
 
-export type DetailsTemplateProps = Omit<Item, 'id'>;
+const RemoveButton = styled(TextButton)`
+  margin-top: 1.9rem;
+`;
+
+export type DetailsTemplateProps = DetailsItem;
 
 const DetailsTemplate = ({
+  id,
   title,
   created,
   content,
@@ -69,6 +77,13 @@ const DetailsTemplate = ({
   twitterName,
 }: DetailsTemplateProps) => {
   const pageVariant = useCurrentPageVariant();
+  const { isOpen, closeModal, openModal, removeItemAction } = useConfirmationModal();
+  const history = useHistory();
+
+  const handleConfirm = () => {
+    removeItemAction(pageVariant, id);
+    history.replace(routes[pageVariant]);
+  };
 
   return (
     <UserPageTemplate>
@@ -106,6 +121,13 @@ const DetailsTemplate = ({
         <Button as={Link} to={`/${pageVariant}`} variant={pageVariant}>
           save / close
         </Button>
+        <RemoveButton onClick={openModal}>remove note</RemoveButton>
+        <ConfirmationModal
+          variant={pageVariant}
+          show={isOpen()}
+          onCancel={closeModal}
+          onConfirm={handleConfirm}
+        />
       </StyledWrapper>
     </UserPageTemplate>
   );
@@ -115,6 +137,7 @@ const DetailsTemplate = ({
  * @todo check if this code can be removed
  */
 DetailsTemplate.defaultProps = {
+  id: '',
   title: '',
   created: '',
   content: '',
