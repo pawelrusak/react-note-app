@@ -5,11 +5,10 @@ import { useItemSelector } from './useItemSelector';
 import { useCurrentPageVariant } from '~/context';
 import { fetchItem } from '~/services';
 
-import type { Item, URLParams } from '~/commonTypes';
-
-type DetailsItem = Omit<Item, 'id'>;
+import type { URLParams, DetailsItem } from '~/commonTypes';
 
 const emptyItem: DetailsItem = {
+  id: '',
   title: '',
   content: '',
   created: '',
