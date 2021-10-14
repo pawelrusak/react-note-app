@@ -12,6 +12,7 @@ declare module 'styled-components' {
     grey200: string;
     grey300: string;
     grey500: string;
+    grey700: string;
     black: string;
     red100: string;
     red200: string;
