@@ -1,6 +1,6 @@
 import dayjs from 'dayjs';
-import { Route } from 'react-router-dom';
-import { render, screen, waitFor, testComponent } from 'testUtils';
+import { Route, Switch } from 'react-router-dom';
+import { render, screen, waitFor, testComponent, userEvent } from 'testUtils';
 import { fakeStateWithData } from 'testUtils/fakers';
 
 import DetailsPage from '../DetailsPage/DetailsPage';
@@ -23,11 +23,19 @@ const renderDetailsPage = (
   const [item] = fakeStateWithData.items[pluralItemTypeName];
   const itemPath = routes[itemType].replace(':id', item.id);
 
+  const FakeItemsPage = () => <div data-testid="FakeItemsPage">{itemType}</div>;
+
   return {
-    ...render(<Route path={routes[itemType]} component={DetailsPage} />, {
-      initialState,
-      path: itemPath,
-    }),
+    ...render(
+      <Switch>
+        <Route path={routes[itemType]} component={DetailsPage} />
+        <Route path={routes[pluralItemTypeName]} component={FakeItemsPage} />
+      </Switch>,
+      {
+        initialState,
+        path: itemPath,
+      },
+    ),
     detailsPageData: item,
   };
 };
@@ -45,6 +53,10 @@ const queryDetailsTemplateArticleLink = () =>
   screen.queryByTestId(TEST_ID.DETAILS_TEMPLATE.ARTICLE_LINK);
 const queryDetailsTemplateAvatar = () => screen.queryByTestId(TEST_ID.DETAILS_TEMPLATE.AVATAR);
 const queryDetailsTemplateDateInfo = () => screen.queryByTestId(TEST_ID.DETAILS_TEMPLATE.DATE_INFO);
+const getByRemoveNoteButtonRole = () => screen.getByRole('button', { name: /remove/i });
+const queryByConfirmationModalHeadingRole = () =>
+  screen.queryByRole('heading', { name: /are you sure?/i });
+const queryFakeItemsPage = () => screen.queryByTestId('FakeItemsPage');
 
 const mocksFetchItem = () => jest.spyOn(services, 'fetchItem');
 
@@ -86,7 +98,7 @@ describe('<DetailsPage />', () => {
     mockFetchItem.mockRestore();
   });
 
-  it.each(['note', 'article', 'twitter'] as const)('has a correctly formatted date', (variant) => {
+  it.each(DETAILS_PAGE_VARIANTS)('has a correctly formatted date', (variant) => {
     const { detailsPageData } = renderDetailsPage(variant);
 
     const itemCreatedDate = new Date(detailsPageData.created);
@@ -95,6 +107,60 @@ describe('<DetailsPage />', () => {
     expect(queryDetailsTemplateDateInfo()).toBeInTheDocument();
     expect(queryDetailsTemplateDateInfo()).toHaveTextContent(formattedItemCreatedDate);
   });
+
+  it('open the confirmation modal when the "remove" button was clicked', () => {
+    renderDetailsPage('note');
+
+    // shouldn't initially display the confirmation modal
+    expect(queryByConfirmationModalHeadingRole()).not.toBeInTheDocument();
+
+    userEvent.click(getByRemoveNoteButtonRole());
+
+    expect(queryByConfirmationModalHeadingRole()).toBeInTheDocument();
+  });
+
+  it('close the opened confirmation modal when the "no, wait" button is clicked', () => {
+    renderDetailsPage('note');
+
+    // open the confirmation modal
+    userEvent.click(getByRemoveNoteButtonRole());
+
+    userEvent.click(screen.getByRole('button', { name: /no, wait/i }));
+
+    expect(queryByConfirmationModalHeadingRole()).not.toBeInTheDocument();
+  });
+
+  it('close the opened confirmation modal when the user clicked outside the confirmation modal', () => {
+    renderDetailsPage('note');
+
+    // open the confirmation modal
+    userEvent.click(getByRemoveNoteButtonRole());
+
+    userEvent.click(document.body);
+
+    expect(queryByConfirmationModalHeadingRole()).not.toBeInTheDocument();
+  });
+
+  it.each(DETAILS_PAGE_VARIANTS)(
+    'remove detail items (first item) from the store and redirect to the specified page after confirming the removal action',
+    async (variant) => {
+      const { store, detailsPageData } = renderDetailsPage(variant);
+
+      // open the confirmation modal
+      userEvent.click(getByRemoveNoteButtonRole());
+
+      userEvent.click(screen.getByTestId('ConfirmationModal_RemoveButton'));
+
+      // redirect to the specified items page
+      expect(queryFakeItemsPage()).toBeInTheDocument();
+      expect(queryFakeItemsPage()).toHaveTextContent(variant);
+
+      // remove specified items from store
+      await waitFor(() => {
+        expect(store.getState().items[`${variant}s`]).not.toIncludeAnyMembers([detailsPageData]);
+      });
+    },
+  );
 
   testComponent(() => renderDetailsPage('note'), { suffixTestNames: 'when is note page' })
     .not.toBeInTheDocument(articleLinkTestName, queryDetailsTemplateArticleLink)
