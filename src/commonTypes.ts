@@ -59,9 +59,17 @@ export type Item<V extends Variants = Variants> = {
 
 export type NewItem<V extends Variants = Variants> = Omit<Item<V>, 'id' | 'created'>;
 
+export type DetailsItem = Modify<
+  NoteItem,
+  Partial<{
+    readonly articleUrl: string | null;
+    readonly twitterName: string | null;
+  }>
+>;
+
 /*
  *
- * Other
+ * OTHER
  *
  */
 export type AuthCredentials = {
