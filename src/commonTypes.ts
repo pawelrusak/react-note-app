@@ -47,9 +47,17 @@ type NoteItem = {
   readonly articleUrl?: never;
 };
 
-type TwitterItem = Modify<NoteItem, { readonly twitterName: string | null }>;
+type TwitterNameProp = {
+  readonly twitterName: string | null;
+};
 
-type ArticleItem = Modify<NoteItem, { readonly articleUrl: string | null }>;
+type ArticleUrlProp = {
+  readonly articleUrl: string | null;
+};
+
+type TwitterItem = Modify<NoteItem, TwitterNameProp>;
+
+type ArticleItem = Modify<NoteItem, ArticleUrlProp>;
 
 export type Item<V extends Variants = Variants> = {
   notes: NoteItem;
@@ -59,13 +67,7 @@ export type Item<V extends Variants = Variants> = {
 
 export type NewItem<V extends Variants = Variants> = Omit<Item<V>, 'id' | 'created'>;
 
-export type DetailsItem = Modify<
-  NoteItem,
-  Partial<{
-    readonly articleUrl: string | null;
-    readonly twitterName: string | null;
-  }>
->;
+export type DetailsItem = Modify<NoteItem, Partial<TwitterNameProp & ArticleUrlProp>>;
 
 /*
  *
