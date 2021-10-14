@@ -149,7 +149,7 @@ describe('<DetailsPage />', () => {
       // open the confirmation modal
       userEvent.click(getByRemoveNoteButtonRole());
 
-      userEvent.click(screen.getByTestId('ConfirmationModal_RemoveButton'));
+      userEvent.click(screen.getByTestId(TEST_ID.CONFIRMATION_MODAL.REMOVE_BUTTON));
 
       // redirect to the specified items page
       expect(queryFakeItemsPage()).toBeInTheDocument();
