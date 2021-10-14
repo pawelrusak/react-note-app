@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 const TextButton = styled.button`
-  color: #434343;
+  color: ${({ theme }) => theme.grey700};
   font-weight: ${({ theme }) => theme.bold};
   font-size: 1.5rem;
   text-transform: lowercase;
