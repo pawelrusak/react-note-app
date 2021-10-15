@@ -54,7 +54,8 @@ const queryByNoteItemTitleText = () => screen.queryByText(noteItem.title);
 const queryByNoteItemContentText = () => screen.queryByText(noteItem.content);
 const queryDetailsTemplateArticleLink = () =>
   screen.queryByTestId(TEST_ID.DETAILS_TEMPLATE.ARTICLE_LINK);
-const queryDetailsTemplateTwitterLink = () => screen.queryByTestId('DetailsTemplate_TwitterLink');
+const queryDetailsTemplateTwitterLink = () =>
+  screen.queryByTestId(TEST_ID.DETAILS_TEMPLATE.TWITTER_LINK);
 const queryDetailsTemplateAvatar = () => screen.queryByTestId(TEST_ID.DETAILS_TEMPLATE.AVATAR);
 const queryDetailsTemplateDateInfo = () => screen.queryByTestId(TEST_ID.DETAILS_TEMPLATE.DATE_INFO);
 const getByRemoveNoteButtonRole = () => screen.getByRole('button', { name: /remove/i });

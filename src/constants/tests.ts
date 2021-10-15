@@ -44,6 +44,7 @@ export const TEST_ID = {
   DETAILS_TEMPLATE: {
     DATE_INFO: 'DetailsTemplate_DateInfo',
     ARTICLE_LINK: 'DetailsTemplate_ArticleLink',
+    TWITTER_LINK: 'DetailsTemplate_TwitterLink',
     AVATAR: 'DetailsTemplate_Avatar',
   },
   GRID_TEMPLATE: {
