@@ -44,13 +44,18 @@ const [noteItem] = fakeStateWithData.items.notes;
 const [articleItem] = fakeStateWithData.items.articles;
 const [twitterItem] = fakeStateWithData.items.twitters;
 
-const twitterAvatarTestName = 'twitter avatar';
-const articleLinkTestName = 'article link';
+const TEST_NAME = {
+  TWITTER_AVATAR: 'twitter avatar',
+  ARTICLE_LINK: 'article link',
+  TWITTER_LINK: 'twitter link',
+};
 
 const queryByNoteItemTitleText = () => screen.queryByText(noteItem.title);
 const queryByNoteItemContentText = () => screen.queryByText(noteItem.content);
 const queryDetailsTemplateArticleLink = () =>
   screen.queryByTestId(TEST_ID.DETAILS_TEMPLATE.ARTICLE_LINK);
+const queryDetailsTemplateTwitterLink = () =>
+  screen.queryByTestId(TEST_ID.DETAILS_TEMPLATE.TWITTER_LINK);
 const queryDetailsTemplateAvatar = () => screen.queryByTestId(TEST_ID.DETAILS_TEMPLATE.AVATAR);
 const queryDetailsTemplateDateInfo = () => screen.queryByTestId(TEST_ID.DETAILS_TEMPLATE.DATE_INFO);
 const getByRemoveNoteButtonRole = () => screen.getByRole('button', { name: /remove/i });
@@ -163,19 +168,23 @@ describe('<DetailsPage />', () => {
   );
 
   testComponent(() => renderDetailsPage('note'), { suffixTestNames: 'when is note page' })
-    .not.toBeInTheDocument(articleLinkTestName, queryDetailsTemplateArticleLink)
-    .not.toBeInTheDocument(twitterAvatarTestName, queryDetailsTemplateAvatar)
+    .not.toBeInTheDocument(TEST_NAME.ARTICLE_LINK, queryDetailsTemplateArticleLink)
+    .not.toBeInTheDocument(TEST_NAME.TWITTER_AVATAR, queryDetailsTemplateAvatar)
+    .not.toBeInTheDocument(TEST_NAME.TWITTER_LINK, queryDetailsTemplateTwitterLink)
     .run();
 
   testComponent(() => renderDetailsPage('article'), { suffixTestNames: 'when is article page' })
-    .toBeInTheDocument(articleLinkTestName, queryDetailsTemplateArticleLink)
+    .toBeInTheDocument(TEST_NAME.ARTICLE_LINK, queryDetailsTemplateArticleLink)
     .withAttribute('href', articleItem.articleUrl)
-    .not.toBeInTheDocument(twitterAvatarTestName, queryDetailsTemplateAvatar)
+    .not.toBeInTheDocument(TEST_NAME.TWITTER_AVATAR, queryDetailsTemplateAvatar)
+    .not.toBeInTheDocument(TEST_NAME.TWITTER_LINK, queryDetailsTemplateTwitterLink)
     .run();
 
   testComponent(() => renderDetailsPage('twitter'), { suffixTestNames: 'when is twitter page' })
-    .toBeInTheDocument(twitterAvatarTestName, queryDetailsTemplateAvatar)
+    .toBeInTheDocument(TEST_NAME.TWITTER_AVATAR, queryDetailsTemplateAvatar)
     .withAttribute('src', expect.stringContaining(twitterItem.twitterName as string))
-    .not.toBeInTheDocument(articleLinkTestName, queryDetailsTemplateArticleLink)
+    .toBeInTheDocument(TEST_NAME.TWITTER_LINK, queryDetailsTemplateTwitterLink)
+    .withAttribute('href', `https://twitter.com/${twitterItem.twitterName as string}`)
+    .not.toBeInTheDocument(TEST_NAME.ARTICLE_LINK, queryDetailsTemplateArticleLink)
     .run();
 });
