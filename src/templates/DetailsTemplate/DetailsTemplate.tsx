@@ -162,4 +162,9 @@ DetailsTemplate.defaultProps = {
   twitterName: '',
 };
 
+DetailsTemplate.Wrapper = StyledWrapper;
+DetailsTemplate.PageHeader = StyledPageHeader;
+DetailsTemplate.Avatar = StyledAvatar;
+DetailsTemplate.Heading = StyledHeading;
+
 export default DetailsTemplate;
