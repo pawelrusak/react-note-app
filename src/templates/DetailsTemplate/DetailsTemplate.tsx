@@ -122,6 +122,7 @@ const DetailsTemplate = ({
             <StyledLink
               as="a"
               href={`https://twitter.com/${twitterName as string}`}
+              data-testid="DetailsTemplate_TwitterLink"
               target="_blank"
               rel="noopener"
             >
