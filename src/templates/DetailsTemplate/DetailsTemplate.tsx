@@ -118,11 +118,21 @@ const DetailsTemplate = ({
           </StyledLink>
         )}
         {pageVariant === 'twitters' && (
-          <StyledAvatar
-            data-testid={TEST_ID.DETAILS_TEMPLATE.AVATAR}
-            alt={title}
-            src={`https://unavatar.now.sh/twitter/${twitterName as string}  `}
-          />
+          <>
+            <StyledLink
+              as="a"
+              href={`https://twitter.com/${twitterName as string}`}
+              target="_blank"
+              rel="noopener"
+            >
+              Open this twitter
+            </StyledLink>
+            <StyledAvatar
+              data-testid={TEST_ID.DETAILS_TEMPLATE.AVATAR}
+              alt={title}
+              src={`https://unavatar.now.sh/twitter/${twitterName as string}  `}
+            />
+          </>
         )}
         <SaveButton as={Link} to={`/${pageVariant}`} variant={pageVariant}>
           save / close
