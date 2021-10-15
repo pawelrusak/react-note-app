@@ -111,6 +111,8 @@ const DetailsTemplate = ({
             as="a"
             href={articleUrl as string}
             data-testid={TEST_ID.DETAILS_TEMPLATE.ARTICLE_LINK}
+            target="_blank"
+            rel="noopener"
           >
             Open this article
           </StyledLink>
