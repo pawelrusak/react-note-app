@@ -3,6 +3,7 @@ import styled from 'styled-components';
 
 import Button from '~/components/atoms/Button/Button';
 import Skeleton from '~/components/atoms/Skeleton/Skeleton';
+import { TEST_ID } from '~/constants/tests';
 import { useCurrentPageVariant } from '~/hooks';
 import DetailsTemplate from '~/templates/DetailsTemplate/DetailsTemplate';
 import UserPageTemplate from '~/templates/UserPageTemplate/UserPageTemplate';
@@ -69,14 +70,17 @@ const SkeletonDetailsTemplate = () => {
           <StyledSkeletonParagraph dark width="17rem" />
         </DetailsTemplate.PageHeader>
         {pageVariant === 'twitters' && (
-          <StyledAvatarSkeleton dark data-testid="SkeletonDetailsTemplate_AvatarSkeleton" />
+          <StyledAvatarSkeleton
+            dark
+            data-testid={TEST_ID.SKELETON_DETAILS_TEMPLATE.AVATAR_SKELETON}
+          />
         )}
         <Skeleton width="90%" />
         <Skeleton width="95%" />
         <Skeleton width="85%" />
         <Skeleton width="75%" />
         {(pageVariant === 'articles' || pageVariant === 'twitters') && (
-          <StyledLinkSkeleton dark data-testid="SkeletonDetailsTemplate_LinkSkeleton" />
+          <StyledLinkSkeleton dark data-testid={TEST_ID.SKELETON_DETAILS_TEMPLATE.LINK_SKELETON} />
         )}
         <StyledButton as="div" variant={pageVariant}>
           <StyledSkeletonButtonText dark />

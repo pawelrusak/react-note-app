@@ -4,7 +4,7 @@ export const SPECIAL_VALUE_TO_TEST_WEAK_PASSWORD = 'special.variable.for.testing
 
 export const REGISTERED_USER_CREDENTIALS = {
   EMAIL: 'valid.example@email.com',
-  PASSWORD: 'password', // the best password in the world
+  PASSWORD: 'password',
 } as const;
 
 export const AUTH_ERRORS = {
@@ -46,6 +46,10 @@ export const TEST_ID = {
     ARTICLE_LINK: 'DetailsTemplate_ArticleLink',
     TWITTER_LINK: 'DetailsTemplate_TwitterLink',
     AVATAR: 'DetailsTemplate_Avatar',
+  },
+  SKELETON_DETAILS_TEMPLATE: {
+    LINK_SKELETON: 'SkeletonDetailsTemplate_LinkSkeleton',
+    AVATAR_SKELETON: 'SkeletonDetailsTemplate_AvatarSkeleton',
   },
   GRID_TEMPLATE: {
     COUNTER: 'GridTemplate_Counter',
