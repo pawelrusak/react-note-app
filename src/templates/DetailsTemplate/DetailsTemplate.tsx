@@ -25,32 +25,27 @@ const StyledWrapper = styled.div`
 `;
 
 const StyledPageHeader = styled.div`
-  margin: 25px 0 50px 0;
+  margin: 2.5rem 0 4rem;
 `;
 
 const StyledHeading = styled(Heading)`
-  margin: 25px 0 0 0;
-
-  ::first-letter {
-    text-transform: uppercase;
-  }
+  margin: 2.5rem 0 2.5rem;
 `;
 
 const StyledParagraph = styled.p`
-  color: #434343;
+  color: ${({ theme }) => theme.grey700};
   font-weight: ${({ theme }) => theme.bold};
   font-size: 1.5rem;
   text-transform: uppercase;
-  margin: 0;
+  margin-bottom: 2.5rem;
 `;
 
-const StyledLink = styled.a`
-  display: block;
-  font-weight: ${({ theme }) => theme.bold};
-  font-size: ${({ theme }) => theme.fontSize.xs};
-  color: black;
+const StyledLink = styled(TextButton)`
+  display: inline-block;
   text-transform: uppercase;
-  margin: 20px 0 50px;
+  color: ${({ theme }) => theme.black};
+  font-size: ${({ theme }) => theme.fontSize.s};
+  text-decoration: none;
 `;
 
 const StyledAvatar = styled.img`
@@ -64,6 +59,15 @@ const StyledAvatar = styled.img`
 
 const RemoveButton = styled(TextButton)`
   margin-top: 1.9rem;
+`;
+
+const StyledContent = styled(Paragraph)`
+  line-height: ${({ theme }) => theme.lineHeight};
+  margin-bottom: 2rem;
+`;
+
+const SaveButton = styled(Button)`
+  margin-top: 5rem;
 `;
 
 export type DetailsTemplateProps = DetailsItem;
@@ -101,14 +105,14 @@ const DetailsTemplate = ({
             />
           </StyledParagraph>
         </StyledPageHeader>
-
-        <Paragraph>{content}</Paragraph>
+        <StyledContent>{content}</StyledContent>
         {pageVariant === 'articles' && (
           <StyledLink
-            data-testid={TEST_ID.DETAILS_TEMPLATE.ARTICLE_LINK}
+            as="a"
             href={articleUrl as string}
+            data-testid={TEST_ID.DETAILS_TEMPLATE.ARTICLE_LINK}
           >
-            Open article
+            Open this article
           </StyledLink>
         )}
         {pageVariant === 'twitters' && (
@@ -118,9 +122,9 @@ const DetailsTemplate = ({
             src={`https://unavatar.now.sh/twitter/${twitterName as string}  `}
           />
         )}
-        <Button as={Link} to={`/${pageVariant}`} variant={pageVariant}>
+        <SaveButton as={Link} to={`/${pageVariant}`} variant={pageVariant}>
           save / close
-        </Button>
+        </SaveButton>
         <RemoveButton onClick={openModal}>remove note</RemoveButton>
         <ConfirmationModal
           variant={pageVariant}
