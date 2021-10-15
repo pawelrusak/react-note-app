@@ -68,12 +68,16 @@ const SkeletonDetailsTemplate = () => {
           <StyledSkeletonHeading dark width="37rem" />
           <StyledSkeletonParagraph dark width="17rem" />
         </DetailsTemplate.PageHeader>
-        {pageVariant === 'twitters' && <StyledAvatarSkeleton dark />}
+        {pageVariant === 'twitters' && (
+          <StyledAvatarSkeleton dark data-testid="SkeletonDetailsTemplate_AvatarSkeleton" />
+        )}
         <Skeleton width="90%" />
         <Skeleton width="95%" />
         <Skeleton width="85%" />
         <Skeleton width="75%" />
-        {(pageVariant === 'articles' || pageVariant === 'twitters') && <StyledLinkSkeleton dark />}
+        {(pageVariant === 'articles' || pageVariant === 'twitters') && (
+          <StyledLinkSkeleton dark data-testid="SkeletonDetailsTemplate_LinkSkeleton" />
+        )}
         <StyledButton as="div" variant={pageVariant}>
           <StyledSkeletonButtonText dark />
         </StyledButton>
