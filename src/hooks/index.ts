@@ -10,3 +10,4 @@ export { useSearchState } from './custom/useSearchState';
 export { useCounter } from './custom/useCounter';
 export { useAddItemAction } from './custom/useAddItemAction';
 export { useConfirmationModal } from './custom/useConfirmationModal';
+export { useDetailsItem } from './custom/useDetailsItem';
