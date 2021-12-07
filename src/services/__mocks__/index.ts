@@ -35,6 +35,10 @@ export const fetchItem = async (id: Item['id']) => {
 
     const data = notes.find((item) => item.id === id);
 
+    if (data === undefined) {
+      throw new Error('No details item found');
+    }
+
     return Promise.resolve({ data });
   } catch (error) {
     return Promise.reject(error);
