@@ -140,7 +140,7 @@ export const fakeStateWithoutData: RootState = {
     notes: [],
     twitters: [],
     articles: [],
-    status: Status.Idle,
+    status: Status.Succeeded,
   },
   auth: {
     ...fakeStateWithData.auth,
