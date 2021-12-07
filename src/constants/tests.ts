@@ -48,6 +48,7 @@ export const TEST_ID = {
     AVATAR: 'DetailsTemplate_Avatar',
   },
   SKELETON_DETAILS_TEMPLATE: {
+    WRAPPER: 'SkeletonDetailsTemplate',
     LINK_SKELETON: 'SkeletonDetailsTemplate_LinkSkeleton',
     AVATAR_SKELETON: 'SkeletonDetailsTemplate_AvatarSkeleton',
   },

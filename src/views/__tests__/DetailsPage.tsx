@@ -1,7 +1,7 @@
 import dayjs from 'dayjs';
 import { Route, Switch } from 'react-router-dom';
 import { render, screen, waitFor, testComponent, userEvent } from 'testUtils';
-import { fakeStateWithData } from 'testUtils/fakers';
+import { fakeStateWithData, fakeStateWithoutData } from 'testUtils/fakers';
 
 import DetailsPage from '../DetailsPage/DetailsPage';
 import { TEST_ID } from '~/constants/tests';
@@ -18,10 +18,14 @@ type ItemType = 'note' | 'article' | 'twitter';
 const renderDetailsPage = (
   itemType: ItemType,
   initialState: RootState | null = fakeStateWithData,
+  detailsItemId?: string,
 ) => {
   const pluralItemTypeName = `${itemType}s` as const;
   const [item] = fakeStateWithData.items[pluralItemTypeName];
-  const itemPath = routes[itemType].replace(':id', item.id);
+  const itemPath = routes[itemType].replace(
+    ':id',
+    detailsItemId === undefined ? item.id : detailsItemId,
+  );
 
   const FakeItemsPage = () => <div data-testid="FakeItemsPage">{itemType}</div>;
 
@@ -52,16 +56,23 @@ const TEST_NAME = {
 
 const queryByNoteItemTitleText = () => screen.queryByText(noteItem.title);
 const queryByNoteItemContentText = () => screen.queryByText(noteItem.content);
+
 const queryDetailsTemplateArticleLink = () =>
   screen.queryByTestId(TEST_ID.DETAILS_TEMPLATE.ARTICLE_LINK);
 const queryDetailsTemplateTwitterLink = () =>
   screen.queryByTestId(TEST_ID.DETAILS_TEMPLATE.TWITTER_LINK);
 const queryDetailsTemplateAvatar = () => screen.queryByTestId(TEST_ID.DETAILS_TEMPLATE.AVATAR);
 const queryDetailsTemplateDateInfo = () => screen.queryByTestId(TEST_ID.DETAILS_TEMPLATE.DATE_INFO);
+const querySkeletonDetailsTemplateWrapper = () =>
+  screen.queryByTestId(TEST_ID.SKELETON_DETAILS_TEMPLATE.WRAPPER);
 const getByRemoveNoteButtonRole = () => screen.getByRole('button', { name: /remove/i });
 const queryByConfirmationModalHeadingRole = () =>
   screen.queryByRole('heading', { name: /are you sure?/i });
 const queryFakeItemsPage = () => screen.queryByTestId('FakeItemsPage');
+const findHeadingWithNoNoteFoundText = () =>
+  screen.findByRole('heading', {
+    name: /no note found./i,
+  });
 
 const mocksFetchItem = () => jest.spyOn(services, 'fetchItem');
 
@@ -74,6 +85,12 @@ describe('<DetailsPage />', () => {
     const detailsPageDocumentTitle = `${capitalize(variant)}: "${detailsPageData.title}"`;
 
     await waitFor(() => expect(document.title).toBe(detailsPageDocumentTitle));
+  });
+
+  it('display <SkeletonDetailsTemplate/> while fetch data', async () => {
+    renderDetailsPage('note', fakeStateWithoutData);
+
+    await waitFor(() => expect(querySkeletonDetailsTemplateWrapper()).toBeInTheDocument());
   });
 
   it('send a request to service if there is no item in store and display him', async () => {
@@ -101,6 +118,12 @@ describe('<DetailsPage />', () => {
     expect(queryByNoteItemContentText()).toBeInTheDocument();
 
     mockFetchItem.mockRestore();
+  });
+
+  it('display information about the empty note state when there is no data', async () => {
+    renderDetailsPage('note', null, 'fake-id-of-a-non-existing-note');
+
+    expect(await findHeadingWithNoNoteFoundText()).toBeInTheDocument();
   });
 
   it.each(DETAILS_PAGE_VARIANTS)('has a correctly formatted date', (variant) => {
