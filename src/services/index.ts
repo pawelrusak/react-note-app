@@ -38,6 +38,10 @@ export const fetchItem = async <V extends Variants>(id: Item['id']) => {
     const itemSnap = await queryGetItemByID(id);
     const data = itemSnap.data() as Item<V>;
 
+    if (!itemSnap.exists) {
+      throw new Error('No details item found');
+    }
+
     return Promise.resolve({ data });
   } catch (error) {
     return Promise.reject(error);
