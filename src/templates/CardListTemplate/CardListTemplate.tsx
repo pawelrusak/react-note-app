@@ -60,11 +60,11 @@ const StyledButtonIcon = styled(ButtonIcon)<StyledButtonIconProps>`
   ${styledMixin.transitionTransformForNewItemBarAndHisToggleButton}
 `;
 
-export type GridTemplateProps = {
+export type CardListTemplateProps = {
   readonly children: React.ReactNode;
 };
 
-const GridTemplate = ({ children }: GridTemplateProps) => {
+const CardListTemplate = ({ children }: CardListTemplateProps) => {
   const [newItemBarVisible, toggleNewItemBarVisible] = useToggle(false);
   const pageVariant = useCurrentPageVariant();
   const [search, setSearch] = useSearchState(pageVariant);
@@ -98,6 +98,6 @@ const GridTemplate = ({ children }: GridTemplateProps) => {
   );
 };
 
-GridTemplate.Grid = StyledGrid;
+CardListTemplate.Grid = StyledGrid;
 
-export default GridTemplate;
+export default CardListTemplate;

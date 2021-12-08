@@ -2,7 +2,7 @@ import { build, fake } from '@jackfranklin/test-data-bot';
 import { render, screen, userEvent, getPairOfPathsAndPageTypes, waitFor } from 'testUtils';
 import { fakeStateWithDataAndLoggedInUser } from 'testUtils/fakers';
 
-import GridTemplate from '../GridTemplate/GridTemplate';
+import GridTemplate from '../CardListTemplate/CardListTemplate';
 import { TEST_ID } from '~/constants/tests';
 import { routes } from '~/routes';
 

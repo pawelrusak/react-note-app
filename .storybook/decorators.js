@@ -5,7 +5,7 @@ import { Provider } from 'react-redux';
 import StoryRouter from 'storybook-react-router';
 import { itemsPageLinks, gridTemplateLinks, userPageTemplateLinks } from './links';
 import GlobalStyle from '../src/theme/GlobalStyle';
-import GridTemplate from '../src/templates/GridTemplate/GridTemplate';
+import GridTemplate from '../src/templates/CardListTemplate/CardListTemplate';
 import AuthTemplate from '../src/templates/AuthTemplate/AuthTemplate';
 import { storybookStore } from './storybookStore';
 

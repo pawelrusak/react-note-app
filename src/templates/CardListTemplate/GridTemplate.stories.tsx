@@ -1,4 +1,4 @@
-import GridTemplate, { GridTemplateProps } from './GridTemplate';
+import GridTemplate, { CardListTemplateProps } from './CardListTemplate';
 import { routes } from '~/routes';
 import ViewPlaceholder from '~~/.storybook/components/ViewPlaceholder';
 import { StoreDecorator, GridTemplateRouterDecorator } from '~~/.storybook/decorators';
@@ -11,7 +11,7 @@ export default {
   decorators: [StoreDecorator],
 } as Meta;
 
-const Template: Story<GridTemplateProps> = () => (
+const Template: Story<CardListTemplateProps> = () => (
   <GridTemplate>
     <ViewPlaceholder />
   </GridTemplate>
