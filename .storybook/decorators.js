@@ -3,9 +3,9 @@ import { theme } from '../src/theme/mainTheme';
 import { CurrentPageVariantContext } from '../src/context/currentPageVariant';
 import { Provider } from 'react-redux';
 import StoryRouter from 'storybook-react-router';
-import { itemsPageLinks, gridTemplateLinks, userPageTemplateLinks } from './links';
+import { itemsPageLinks, cardListTemplateLinks, userPageTemplateLinks } from './links';
 import GlobalStyle from '../src/theme/GlobalStyle';
-import GridTemplate from '../src/templates/CardListTemplate/CardListTemplate';
+import CardListTemplate from '../src/templates/CardListTemplate/CardListTemplate';
 import AuthTemplate from '../src/templates/AuthTemplate/AuthTemplate';
 import { storybookStore } from './storybookStore';
 
@@ -68,7 +68,7 @@ export const SkeletonWrapperDecorator = (Story) => (
   </>
 );
 
-const StyledSkeletonGridWrapper = styled(GridTemplate.Grid)`
+const StyledSkeletonGridWrapper = styled(CardListTemplate.Grid)`
   padding: 1rem;
   border: 2px dashed hsl(0, 0%, 60%);
 `;
@@ -124,8 +124,8 @@ export const DetailsPageRouterDecorator = (detailsPagePathname) => {
   return StoryRouter(itemsPageLinks, { initialEntries: [detailsPagePath] });
 };
 
-export const GridTemplateRouterDecorator = (currentPathname) => {
-  return StoryRouter(gridTemplateLinks, { initialEntries: [currentPathname] });
+export const CardListTemplateRouterDecorator = (currentPathname) => {
+  return StoryRouter(cardListTemplateLinks, { initialEntries: [currentPathname] });
 };
 
 export const UserPageTemplateRouterDecorator = (currentPathname) => {
