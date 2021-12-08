@@ -1,6 +1,6 @@
 import Card from '~/components/molecules/Card/Card';
 import CardList from '~/components/organisms/CardList/CardList';
-import GridTemplate from '~/templates/GridTemplate/GridTemplate';
+import GridTemplate from '~/templates/CardListTemplate/CardListTemplate';
 import { DocumentTitle } from '~/utils/components';
 
 const Articles = () => (

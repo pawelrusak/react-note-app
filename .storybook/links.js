@@ -1,9 +1,6 @@
 import { linkTo } from '@storybook/addon-links';
 import { routes } from '../src/routes';
 
-/**
- * @todo Create util function to create links set object like userPageTemplateLinks, gridTemplateLinks etc.
- */
 export const sidebarLinks = {
   [routes.notes]: linkTo('Organisms/Sidebar', 'Note'),
   [routes.articles]: linkTo('Organisms/Sidebar', 'Article'),
@@ -22,10 +19,10 @@ export const authPageLinks = {
   [routes.register]: linkTo('Views/RegisterPage'),
 };
 
-export const gridTemplateLinks = {
-  [routes.notes]: linkTo('Templates/GridTemplate', 'Note'),
-  [routes.twitters]: linkTo('Templates/GridTemplate', 'Twitter'),
-  [routes.articles]: linkTo('Templates/GridTemplate', 'Article'),
+export const cardListTemplateLinks = {
+  [routes.notes]: linkTo('Templates/CardListTemplate', 'NoteSucceeded'),
+  [routes.twitters]: linkTo('Templates/CardListTemplate', 'TwitterSucceeded'),
+  [routes.articles]: linkTo('Templates/CardListTemplate', 'ArticleSucceeded'),
   [routes.login]: linkTo('Templates/AuthTemplate'),
 };
 
