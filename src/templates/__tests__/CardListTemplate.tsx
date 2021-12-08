@@ -2,7 +2,7 @@ import { build, fake } from '@jackfranklin/test-data-bot';
 import { render, screen, userEvent, getPairOfPathsAndPageTypes, waitFor } from 'testUtils';
 import { fakeStateWithDataAndLoggedInUser } from 'testUtils/fakers';
 
-import GridTemplate from '../CardListTemplate/CardListTemplate';
+import CardListTemplate from '../CardListTemplate/CardListTemplate';
 import { TEST_ID } from '~/constants/tests';
 import { routes } from '~/routes';
 
@@ -10,11 +10,11 @@ import type { Item, RoutesVariantRootPaths } from '~/commonTypes';
 
 jest.mock('~/services');
 
-const renderGridTemplate = (path: RoutesVariantRootPaths = routes.notes) =>
+const renderCardListTemplate = (path: RoutesVariantRootPaths = routes.notes) =>
   render(
-    <GridTemplate>
+    <CardListTemplate>
       <></>
-    </GridTemplate>,
+    </CardListTemplate>,
     {
       path,
       initialState: fakeStateWithDataAndLoggedInUser,
@@ -47,11 +47,11 @@ const noteItemBuilder = build<Omit<Item<'notes'>, 'id' | 'created'>>({
   },
 });
 
-describe('<GridTemplate />', () => {
+describe('<CardListTemplate />', () => {
   it.each(getPairOfPathsAndPageTypes())(
     'for the "%s" url path should display the heading with the "%s" text content',
     (path, pageVariant) => {
-      renderGridTemplate(path);
+      renderCardListTemplate(path);
 
       const [gridTemplateHeading] = getAllByHeadingRole();
 
@@ -62,7 +62,7 @@ describe('<GridTemplate />', () => {
   it.each(getPairOfPathsAndPageTypes())(
     'for the "%s" url path should display paragraph with /[0-9]+ %s/ text content',
     (path, pageVariant) => {
-      renderGridTemplate(path);
+      renderCardListTemplate(path);
 
       const paragraphContentRegex = /[0-9]+ (notes|twitters|articles)$/;
 
@@ -74,7 +74,7 @@ describe('<GridTemplate />', () => {
    * @todo Disable skipping test after fix the bar accessibility. Now the bar is always visible from accessibility perspective
    */
   it.skip('toggles the visibility of the bar after click his button', () => {
-    renderGridTemplate();
+    renderCardListTemplate();
 
     const newItemBar = getNewItemBarWrapper();
 
@@ -102,7 +102,7 @@ describe('<GridTemplate />', () => {
    * @deprecated The test will be removed the test if accessibility fix.
    */
   it('toggles the transform property of the bar after click his button', () => {
-    renderGridTemplate();
+    renderCardListTemplate();
 
     const newItemBar = getNewItemBarWrapper();
 
@@ -129,7 +129,7 @@ describe('<GridTemplate />', () => {
   it('add a new note to the storage that was created by the form at the beginning of the array', async () => {
     const fakeNoteItem = noteItemBuilder();
 
-    const { store } = renderGridTemplate();
+    const { store } = renderCardListTemplate();
 
     expect(store.getState().items.notes).toHaveLength(4);
 
