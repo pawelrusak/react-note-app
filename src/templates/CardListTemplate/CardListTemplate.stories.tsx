@@ -1,4 +1,4 @@
-import GridTemplate, { CardListTemplateProps } from './CardListTemplate';
+import CardListTemplate, { CardListTemplateProps } from './CardListTemplate';
 import { routes } from '~/routes';
 import ViewPlaceholder from '~~/.storybook/components/ViewPlaceholder';
 import { StoreDecorator, GridTemplateRouterDecorator } from '~~/.storybook/decorators';
@@ -6,15 +6,15 @@ import { StoreDecorator, GridTemplateRouterDecorator } from '~~/.storybook/decor
 import type { Meta, Story } from '@storybook/react';
 
 export default {
-  title: 'Templates/GridTemplate',
-  component: GridTemplate,
+  title: 'Templates/CardListTemplate',
+  component: CardListTemplate,
   decorators: [StoreDecorator],
 } as Meta;
 
 const Template: Story<CardListTemplateProps> = () => (
-  <GridTemplate>
+  <CardListTemplate>
     <ViewPlaceholder />
-  </GridTemplate>
+  </CardListTemplate>
 );
 
 export const NoteSucceeded = Template.bind({});
