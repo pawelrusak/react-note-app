@@ -52,10 +52,6 @@ export const TEST_ID = {
     LINK_SKELETON: 'SkeletonDetailsTemplate_LinkSkeleton',
     AVATAR_SKELETON: 'SkeletonDetailsTemplate_AvatarSkeleton',
   },
-  GRID_TEMPLATE: {
-    COUNTER: 'GridTemplate_Counter',
-    SKELETON_COUNTER: 'GridTemplate_SkeletonCounter',
-  },
   NEW_ITEM_BAR: {
     WRAPPER: 'NewItemBar',
   },
