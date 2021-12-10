@@ -1,13 +1,13 @@
 import Card from '~/components/molecules/Card/Card';
 import CardList from '~/components/organisms/CardList/CardList';
-import GridTemplate from '~/templates/CardListTemplate/CardListTemplate';
+import CardListTemplate from '~/templates/CardListTemplate/CardListTemplate';
 import { DocumentTitle } from '~/utils/components';
 
 const Articles = () => (
   <>
     <DocumentTitle>Articles</DocumentTitle>
 
-    <GridTemplate>
+    <CardListTemplate>
       <CardList variant="articles">
         {({ data: articles }) =>
           articles.map(({ id, title, content, articleUrl, created }) => (
@@ -22,7 +22,7 @@ const Articles = () => (
           ))
         }
       </CardList>
-    </GridTemplate>
+    </CardListTemplate>
   </>
 );
 
