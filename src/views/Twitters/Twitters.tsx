@@ -1,13 +1,13 @@
 import Card from '~/components/molecules/Card/Card';
 import CardList from '~/components/organisms/CardList/CardList';
-import GridTemplate from '~/templates/CardListTemplate/CardListTemplate';
+import CardListTemplate from '~/templates/CardListTemplate/CardListTemplate';
 import { DocumentTitle } from '~/utils/components';
 
 const Twitters = () => (
   <>
     <DocumentTitle>Twitters</DocumentTitle>
 
-    <GridTemplate>
+    <CardListTemplate>
       <CardList variant="twitters">
         {({ data: twitters }) =>
           twitters.map(({ id, title, content, twitterName, created }) => (
@@ -22,7 +22,7 @@ const Twitters = () => (
           ))
         }
       </CardList>
-    </GridTemplate>
+    </CardListTemplate>
   </>
 );
 
