@@ -5,7 +5,7 @@ import { Provider } from 'react-redux';
 import StoryRouter from 'storybook-react-router';
 import { itemsPageLinks, cardListTemplateLinks, userPageTemplateLinks } from './links';
 import GlobalStyle from '../src/theme/GlobalStyle';
-import CardListTemplate from '../src/templates/CardListTemplate/CardListTemplate';
+import CardList from '../src/components/organisms/CardList/CardList';
 import AuthTemplate from '../src/templates/AuthTemplate/AuthTemplate';
 import { storybookStore } from './storybookStore';
 
@@ -68,7 +68,7 @@ export const SkeletonWrapperDecorator = (Story) => (
   </>
 );
 
-const StyledSkeletonGridWrapper = styled(CardListTemplate.Grid)`
+const StyledSkeletonGridWrapper = styled(CardList.Grid)`
   padding: 1rem;
   border: 2px dashed hsl(0, 0%, 60%);
 `;
