@@ -22,7 +22,9 @@ export default {
 const Template: Story<CardListProps<Variants>> = (args) => (
   <CardList {...args}>
     {({ data }) =>
-      data.map((_, index) => <ViewPlaceholder label={`${index + 1} <Card /> goes here!`} />)
+      data.map(({ id }, index) => (
+        <ViewPlaceholder key={id} label={`${index + 1} <Card /> goes here!`} />
+      ))
     }
   </CardList>
 );
