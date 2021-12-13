@@ -5,7 +5,7 @@ import { Provider } from 'react-redux';
 import StoryRouter from 'storybook-react-router';
 import { itemsPageLinks, cardListTemplateLinks, userPageTemplateLinks } from './links';
 import GlobalStyle from '../src/theme/GlobalStyle';
-import CardListTemplate from '../src/templates/CardListTemplate/CardListTemplate';
+import CardList from '../src/components/organisms/CardList/CardList';
 import AuthTemplate from '../src/templates/AuthTemplate/AuthTemplate';
 import { storybookStore } from './storybookStore';
 
@@ -68,7 +68,7 @@ export const SkeletonWrapperDecorator = (Story) => (
   </>
 );
 
-const StyledSkeletonGridWrapper = styled(CardListTemplate.Grid)`
+const StyledSkeletonGridWrapper = styled(CardList.Grid)`
   padding: 1rem;
   border: 2px dashed hsl(0, 0%, 60%);
 `;
@@ -77,19 +77,7 @@ export const SkeletonCardListGridDecorator = (Story) => (
   <>
     <StyledInfoText>
       For presentation purpose, the SkeletonCartList component is in wrapper element with dashed
-      border, 1rem padding and in the css grid from GridTemplate!
-    </StyledInfoText>
-    <StyledSkeletonGridWrapper>
-      <Story />
-    </StyledSkeletonGridWrapper>
-  </>
-);
-
-export const CardListGridDecorator = (Story) => (
-  <>
-    <StyledInfoText>
-      For presentation purpose, the CartList component is in wrapper element with dashed border,
-      1rem padding and in the css grid from GridTemplate!
+      border, 1rem padding and in the css grid from CardList component!
     </StyledInfoText>
     <StyledSkeletonGridWrapper>
       <Story />

@@ -2,7 +2,7 @@ import { Meta, Story } from '@storybook/react';
 
 import CardList, { CardListProps } from './CardList';
 import ViewPlaceholder from '~~/.storybook/components/ViewPlaceholder';
-import { StoreDecorator, CardListGridDecorator } from '~~/.storybook/decorators';
+import { StoreDecorator } from '~~/.storybook/decorators';
 
 import type { Variants } from '~/commonTypes';
 
@@ -16,13 +16,15 @@ export default {
       },
     },
   },
-  decorators: [StoreDecorator, CardListGridDecorator],
+  decorators: [StoreDecorator],
 } as Meta;
 
 const Template: Story<CardListProps<Variants>> = (args) => (
   <CardList {...args}>
     {({ data }) =>
-      data.map((_, index) => <ViewPlaceholder label={`${index + 1} <Card /> goes here!`} />)
+      data.map(({ id }, index) => (
+        <ViewPlaceholder key={id} label={`${index + 1} <Card /> goes here!`} />
+      ))
     }
   </CardList>
 );
