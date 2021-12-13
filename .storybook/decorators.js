@@ -85,18 +85,6 @@ export const SkeletonCardListGridDecorator = (Story) => (
   </>
 );
 
-export const CardListGridDecorator = (Story) => (
-  <>
-    <StyledInfoText>
-      For presentation purpose, the CartList component is in wrapper element with dashed border,
-      1rem padding and in the css grid from GridTemplate!
-    </StyledInfoText>
-    <StyledSkeletonGridWrapper>
-      <Story />
-    </StyledSkeletonGridWrapper>
-  </>
-);
-
 const StyledAuthFormBoxCard = styled(AuthTemplate.AuthCard)`
   box-shadow: none;
   border: 2px dashed hsl(0, 0%, 60%);
