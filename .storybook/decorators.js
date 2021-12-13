@@ -77,7 +77,7 @@ export const SkeletonCardListGridDecorator = (Story) => (
   <>
     <StyledInfoText>
       For presentation purpose, the SkeletonCartList component is in wrapper element with dashed
-      border, 1rem padding and in the css grid from GridTemplate!
+      border, 1rem padding and in the css grid from CardList component!
     </StyledInfoText>
     <StyledSkeletonGridWrapper>
       <Story />
