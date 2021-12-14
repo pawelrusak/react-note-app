@@ -46,6 +46,15 @@ SucceededNote.parameters = {
   pageVariant: 'notes',
 };
 
+export const NoNote = Template.bind({});
+NoNote.args = {
+  ...LoadingNote.args,
+};
+NoNote.parameters = {
+  pageVariant: 'notes',
+  state: 'empty',
+};
+
 export const LoadingTwitter = Template.bind({});
 LoadingTwitter.args = {
   variant: 'twitters',
@@ -63,6 +72,15 @@ SucceededTwitter.parameters = {
   pageVariant: 'twitters',
 };
 
+export const NoTwitter = Template.bind({});
+NoTwitter.args = {
+  ...LoadingNote.args,
+};
+NoTwitter.parameters = {
+  pageVariant: 'twitters',
+  state: 'empty',
+};
+
 export const LoadingArticle = Template.bind({});
 LoadingArticle.args = {
   variant: 'articles',
@@ -78,4 +96,13 @@ SucceededArticle.args = {
 };
 SucceededArticle.parameters = {
   pageVariant: 'articles',
+};
+
+export const NoArticle = Template.bind({});
+NoArticle.args = {
+  ...LoadingNote.args,
+};
+NoArticle.parameters = {
+  pageVariant: 'articles',
+  state: 'empty',
 };

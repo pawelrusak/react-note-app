@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 
+import Heading from '~/components/atoms/Heading/Heading';
 import SkeletonCardList from '~/components/organisms/SkeletonCardList/SkeletonCardList';
 import { useFetchItems } from '~/hooks';
 
@@ -23,15 +24,41 @@ const StyledGrid = styled.div`
   }
 `;
 
+const StyledEmptyStateTitle = styled(Heading)`
+  color: ${({ theme }) => theme.grey500};
+  font-size: 3.2rem;
+  margin-top: 0;
+`;
+
+const StyledEmptyStateWrapper = styled.div`
+  display: grid;
+  place-items: center;
+  min-height: 100%;
+`;
+
 export type CardListProps<T extends Variants> = {
   readonly variant: T;
   readonly children: Children<T>;
 };
 
 const CardList = <T extends Variants>({ variant, children }: CardListProps<T>) => {
-  const { data, isLoading } = useFetchItems(variant);
+  const { data, isLoading, isSucceeded } = useFetchItems(variant);
 
-  return <StyledGrid>{isLoading() ? <SkeletonCardList lighten /> : children({ data })}</StyledGrid>;
+  return (
+    <>
+      {isLoading() && (
+        <StyledGrid>
+          <SkeletonCardList lighten />
+        </StyledGrid>
+      )}
+      {isSucceeded() && data.length !== 0 && <StyledGrid>{children({ data })}</StyledGrid>}
+      {isSucceeded() && data.length === 0 && (
+        <StyledEmptyStateWrapper>
+          <StyledEmptyStateTitle as="h2">You have no {variant}</StyledEmptyStateTitle>
+        </StyledEmptyStateWrapper>
+      )}
+    </>
+  );
 };
 
 CardList.Grid = StyledGrid;

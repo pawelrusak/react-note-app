@@ -88,6 +88,18 @@ export const storybookStore = (state) => {
 
       return mockStore(searchState);
     }
+    case 'empty': {
+      const emptyState = {
+        ...initialState,
+        items: {
+          notes: [],
+          articles: [],
+          twitters: [],
+          status: 'succeeded',
+        },
+      };
+      return mockStore(emptyState);
+    }
     default:
       return mockStore(initialState);
   }
