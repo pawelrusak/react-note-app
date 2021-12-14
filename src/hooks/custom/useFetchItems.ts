@@ -12,11 +12,12 @@ import type { ItemsState } from '~/store';
 type UseFetchItemsReturn<V extends Variants> = {
   data: ItemsState[V];
   isLoading: () => boolean;
+  isSucceeded: () => boolean;
 };
 
 export const useFetchItems = <V extends Variants>(variant: V): UseFetchItemsReturn<V> => {
   const searchedItems = useSelector(searchItemsByVariantSelector(variant));
-  const { isLoading } = useItemsStatus();
+  const { isLoading, isSucceeded } = useItemsStatus();
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -26,5 +27,6 @@ export const useFetchItems = <V extends Variants>(variant: V): UseFetchItemsRetu
   return {
     data: searchedItems,
     isLoading,
+    isSucceeded,
   };
 };
