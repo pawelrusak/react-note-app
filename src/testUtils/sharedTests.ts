@@ -10,6 +10,7 @@ import {
 import { fakeItemsData } from 'testUtils/fakers';
 
 import { TEST_ID } from '~/constants/tests';
+import * as services from '~/services';
 import { capitalize } from '~/utils';
 
 import type { Variants } from '~/commonTypes';
@@ -39,6 +40,10 @@ export const fetchItemsTestSuite = (
   const queryCounterParagraph = () => screen.queryByTestId(TEST_ID.COUNTER.PARAGRAPH);
   const queryAllCardTitles = () => screen.queryAllByTestId(TEST_ID.CARD.TITLE);
   const queryCounterSkeleton = () => screen.queryByTestId(TEST_ID.COUNTER.SKELETON);
+  const findHeadingWithYouHaveNoNoteTypeText = () =>
+    screen.findByRole('heading', {
+      name: /you have no (notes|twitters|articles)/i,
+    });
 
   const loremBuilder = build<{ word: string }>({
     fields: {
@@ -190,6 +195,19 @@ export const fetchItemsTestSuite = (
       const numberOfTotalItems = fakeItemsData[variant].length;
 
       expect(await findCounterParagraph()).not.toHaveTextContent(`total ${numberOfTotalItems}`);
+    });
+
+    it('display information about the empty state when there is no data', async () => {
+      const fetchItems = jest
+        .spyOn(services, 'fetchItems')
+        .mockImplementation(() => Promise.resolve({ data: [] }));
+
+      render();
+
+      expect(await findHeadingWithYouHaveNoNoteTypeText()).toBeInTheDocument();
+      expect(await findHeadingWithYouHaveNoNoteTypeText()).toHaveTextContent(variant);
+
+      fetchItems.mockRestore();
     });
   });
 };
