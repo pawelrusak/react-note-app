@@ -15,6 +15,9 @@ import type { VariantColorValueProp } from '~/theme/mixins';
 const StyledWrapper = styled.div`
   position: relative;
   padding: 25px 150px 25px 70px;
+  height: 100vh;
+  display: grid;
+  grid-template-rows: auto 1fr;
 `;
 
 const StyledPageHeader = styled.div`
