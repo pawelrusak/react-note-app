@@ -23,4 +23,9 @@ Loading.parameters = {
   state: 'loading',
 };
 
+export const Empty = Template.bind({});
+Empty.parameters = {
+  state: 'empty',
+};
+
 export const Succeeded = Template.bind({});
