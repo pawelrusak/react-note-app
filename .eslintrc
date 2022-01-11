@@ -83,7 +83,8 @@
         "src/**/__tests__/**/*.js",
         "src/**/?(*.)+(spec|test).js",
         "src/**/__tests__/**/*.ts?(x)",
-        "src/**/?(*.)+(spec|test).ts?(x)"
+        "src/**/?(*.)+(spec|test).ts?(x)",
+        "src/testUtils/sharedTests.ts"
       ],
       "extends": [
         "plugin:jest/style", 
@@ -99,7 +100,14 @@
             2,
             {
               "testIdPattern": "^(([A-Z][a-z]+)+$)?$"
-             }
+            }
+          ],
+          "jest/consistent-test-it": [
+            "error", 
+            {
+              "fn": "it", 
+              "withinDescribe": "it"
+            }
           ]
       }
     },
