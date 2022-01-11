@@ -55,7 +55,7 @@ export const fetchItemsTestSuite = (
     titles.filter((title) => title?.toLowerCase().includes(searchText.toLowerCase()));
 
   describe(testSuiteName, () => {
-    test('display correct document title ', async () => {
+    it('display correct document title ', async () => {
       render();
 
       const capitalizedTitle = capitalize(variant);

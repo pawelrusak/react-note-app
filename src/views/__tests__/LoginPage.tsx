@@ -38,7 +38,7 @@ const authCredentialsBuilder = build<AuthCredentials>({
 });
 
 describe('<LoginPage />', () => {
-  test('display correct document title ', async () => {
+  it('display correct document title ', async () => {
     renderLoginPage();
 
     await waitFor(() => expect(document.title).toBe('Login'));
