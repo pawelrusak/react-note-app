@@ -9,6 +9,7 @@ import twitterIcon from '~/assets/icons/twitter.svg';
 import ButtonIcon from '~/components/atoms/ButtonIcon/ButtonIcon';
 import { useCurrentPageVariant, useAuth } from '~/hooks';
 import * as styledMixin from '~/theme/mixins';
+import { VisuallyHidden } from '~/utils';
 
 import type { VariantColorValueProp } from '~/theme/mixins';
 
@@ -54,19 +55,29 @@ const Sidebar = () => {
 
   return (
     <StyledWrapper variant={pageVariant}>
-      <StyledLogoLink to="/" />
+      <StyledLogoLink to="/">
+        <VisuallyHidden>FavNote.</VisuallyHidden>
+      </StyledLogoLink>
       <StyledLinksList>
         <li>
-          <ButtonIcon as={NavLink} to="/notes" icon={penIcon} activeClassName="active" />
+          <ButtonIcon as={NavLink} to="/notes" icon={penIcon} activeClassName="active">
+            <VisuallyHidden>Basic notes</VisuallyHidden>
+          </ButtonIcon>
         </li>
         <li>
-          <ButtonIcon as={NavLink} to="/twitters" icon={twitterIcon} activeClassName="active" />
+          <ButtonIcon as={NavLink} to="/twitters" icon={twitterIcon} activeClassName="active">
+            <VisuallyHidden>Twitter notes</VisuallyHidden>
+          </ButtonIcon>
         </li>
         <li>
-          <ButtonIcon as={NavLink} to="/articles" icon={bulbIcon} activeClassName="active" />
+          <ButtonIcon as={NavLink} to="/articles" icon={bulbIcon} activeClassName="active">
+            <VisuallyHidden>Article notes</VisuallyHidden>
+          </ButtonIcon>
         </li>
       </StyledLinksList>
-      <StyledLogoutButton aria-label="logout" type="button" onClick={logout} icon={logoutIcon} />
+      <StyledLogoutButton type="button" onClick={logout} icon={logoutIcon}>
+        <VisuallyHidden>Logout</VisuallyHidden>
+      </StyledLogoutButton>
     </StyledWrapper>
   );
 };

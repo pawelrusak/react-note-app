@@ -9,6 +9,7 @@ import NewItemBar from '~/components/organisms/NewItemBar/NewItemBar';
 import { useToggle, useCurrentPageVariant, useSearchState } from '~/hooks';
 import UserPageTemplate from '~/templates/UserPageTemplate/UserPageTemplate';
 import * as styledMixin from '~/theme/mixins';
+import { VisuallyHidden } from '~/utils';
 
 import type { VariantColorValueProp } from '~/theme/mixins';
 
@@ -74,12 +75,13 @@ const CardListTemplate = ({ children }: CardListTemplateProps) => {
         </StyledPageHeader>
         {children}
         <StyledButtonIcon
-          aria-label="toggle new item bar"
           onClick={toggleNewItemBarVisible}
           icon={plusIcon}
           variant={pageVariant}
           active={newItemBarVisible}
-        />
+        >
+          <VisuallyHidden>Toggle new item bar</VisuallyHidden>
+        </StyledButtonIcon>
         <NewItemBar handleClose={toggleNewItemBarVisible} visible={newItemBarVisible} />
       </StyledWrapper>
     </UserPageTemplate>

@@ -63,6 +63,7 @@
     ]
   },
   "dependencies": {
+    "@reach/visually-hidden": "^0.16.0",
     "@reduxjs/toolkit": "^1.6.0",
     "@types/jest": "^26.0.23",
     "@types/node": "^15.3.1",
