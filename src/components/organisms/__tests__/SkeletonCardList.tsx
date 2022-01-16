@@ -1,7 +1,7 @@
 import { render, screen, getRandomNaturalNumber } from 'testUtils';
 
 import SkeletonCardList from '../SkeletonCardList/SkeletonCardList';
-import { TEST_ID } from '~/constants/tests';
+import { TEST_ID } from '~/constants';
 import { routes } from '~/routes';
 
 const getAllSkeletonCard = () => screen.getAllByTestId(TEST_ID.SKELETON_CARD.WRAPPER);

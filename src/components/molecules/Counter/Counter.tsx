@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 import Paragraph from '~/components/atoms/Paragraph/Paragraph';
 import Skeleton from '~/components/atoms/Skeleton/Skeleton';
-import { TEST_ID } from '~/constants/tests';
+import { TEST_ID } from '~/constants';
 import { useItemsStatus, useCurrentPageVariant, useCounter } from '~/hooks';
 
 const StyledParagraph = styled(Paragraph)`

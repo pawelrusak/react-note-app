@@ -3,7 +3,7 @@ import { render, screen, userEvent, testComponent } from 'testUtils';
 
 import Card from '../Card/Card';
 import * as CardStories from '../Card/Card.stories';
-import { TEST_ID } from '~/constants/tests';
+import { TEST_ID } from '~/constants';
 import { routes } from '~/routes';
 
 import type { Item } from '~/commonTypes';

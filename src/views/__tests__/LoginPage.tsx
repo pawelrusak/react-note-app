@@ -4,7 +4,7 @@ import { render, screen, waitFor, userEvent } from 'testUtils';
 import { fakeStateWithNotLoggedInUser } from 'testUtils/fakers';
 
 import LoginPage from '../LoginPage/LoginPage';
-import { REGISTERED_USER_CREDENTIALS, AUTH_ERRORS } from '~/constants/tests';
+import { REGISTERED_USER_CREDENTIALS, AUTH_ERRORS } from '~/constants';
 import { routes } from '~/routes';
 
 import type { AuthCredentials } from '~/commonTypes';

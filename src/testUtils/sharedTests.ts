@@ -9,7 +9,7 @@ import {
 } from 'testUtils';
 import { fakeItemsData } from 'testUtils/fakers';
 
-import { TEST_ID } from '~/constants/tests';
+import { TEST_ID } from '~/constants';
 import * as services from '~/services';
 import { capitalize } from '~/utils';
 

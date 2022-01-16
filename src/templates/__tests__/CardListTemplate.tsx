@@ -3,7 +3,7 @@ import { render, screen, userEvent, getPairOfPathsAndPageTypes, waitFor } from '
 import { fakeStateWithDataAndLoggedInUser } from 'testUtils/fakers';
 
 import CardListTemplate from '../CardListTemplate/CardListTemplate';
-import { TEST_ID } from '~/constants/tests';
+import { TEST_ID } from '~/constants';
 import { routes } from '~/routes';
 
 import type { Item, RoutesVariantRootPaths } from '~/commonTypes';

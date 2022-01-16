@@ -8,7 +8,7 @@ import Heading from '~/components/atoms/Heading/Heading';
 import Paragraph from '~/components/atoms/Paragraph/Paragraph';
 import Time from '~/components/atoms/Time/Time';
 import ConfirmationModal from '~/components/molecules/ConfirmationModal/ConfirmationModal';
-import { TEST_ID } from '~/constants/tests';
+import { TEST_ID } from '~/constants';
 import { useHistoryPush, useCurrentPageVariant, useConfirmationModal } from '~/hooks';
 import * as styledMixin from '~/theme/mixins';
 

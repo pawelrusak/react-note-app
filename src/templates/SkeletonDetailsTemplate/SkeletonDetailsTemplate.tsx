@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 import Button from '~/components/atoms/Button/Button';
 import Skeleton from '~/components/atoms/Skeleton/Skeleton';
-import { TEST_ID } from '~/constants/tests';
+import { TEST_ID } from '~/constants';
 import { useCurrentPageVariant } from '~/hooks';
 import DetailsTemplate from '~/templates/DetailsTemplate/DetailsTemplate';
 import UserPageTemplate from '~/templates/UserPageTemplate/UserPageTemplate';

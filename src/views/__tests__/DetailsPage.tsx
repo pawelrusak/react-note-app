@@ -4,7 +4,7 @@ import { render, screen, waitFor, testComponent, userEvent } from 'testUtils';
 import { fakeStateWithData, fakeStateWithoutData } from 'testUtils/fakers';
 
 import DetailsPage from '../DetailsPage/DetailsPage';
-import { TEST_ID } from '~/constants/tests';
+import { TEST_ID } from '~/constants';
 import { routes } from '~/routes';
 import * as services from '~/services';
 import { capitalize } from '~/utils';

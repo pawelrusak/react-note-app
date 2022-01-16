@@ -5,7 +5,7 @@ import Button from '~/components/atoms/Button/Button';
 import Heading from '~/components/atoms/Heading/Heading';
 import Input from '~/components/atoms/Input/Input';
 import Field from '~/components/molecules/Field/Field';
-import { TEST_ID } from '~/constants/tests';
+import { TEST_ID } from '~/constants';
 import { useCurrentPageVariant, useAddItemAction } from '~/hooks';
 import * as styledMixin from '~/theme/mixins';
 import { isNewItemVariantTouched } from '~/utils';
