@@ -2,6 +2,7 @@ import styled from 'styled-components';
 
 import logoImg from '~/assets/icons/logo.svg';
 import Heading from '~/components/atoms/Heading/Heading';
+import { VisuallyHidden } from '~/utils';
 
 const StyledWrapper = styled.div`
   width: 100%;
@@ -36,7 +37,10 @@ export type AuthTemplateProps = {
 
 const AuthTemplate = ({ children }: AuthTemplateProps) => (
   <StyledWrapper>
-    <StyledLogo src={logoImg} alt="" />
+    <h1>
+      <StyledLogo src={logoImg} aria-hidden alt="FavNote." />
+      <VisuallyHidden>FavNote.</VisuallyHidden>
+    </h1>
     <Heading>Your new favorite online notes experience</Heading>
     <StyledAuthCard>{children}</StyledAuthCard>
   </StyledWrapper>
