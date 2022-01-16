@@ -1,6 +1,6 @@
 import { FormikTouched } from 'formik';
 
-import { NEW_ITEM_VARIANTS_KEYS } from '~/constants/data';
+import { NEW_ITEM_VARIANTS_KEYS } from '~/constants';
 
 import type { Variants, NewItem, AuthCredentials } from '~/commonTypes';
 
