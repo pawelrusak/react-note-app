@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk, AppThunkConfig } from '@reduxjs/toolkit';
 
 import { Status } from '~/commonTypes';
-import { ACTION_DOMAINS } from '~/constants/actionDomains';
+import { ACTION_DOMAINS } from '~/constants';
 import * as services from '~/services';
 
 import type { Item, NewItem, Variants } from '~/commonTypes';

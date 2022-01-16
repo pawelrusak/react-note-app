@@ -1,5 +1,5 @@
 import Modal, { ModalProps } from '~/components/molecules/Modal/Modal';
-import { TEST_ID } from '~/constants/tests';
+import { TEST_ID } from '~/constants';
 
 export type ConfirmationModalProps = {
   onConfirm: (event: React.MouseEvent) => void;

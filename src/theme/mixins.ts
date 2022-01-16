@@ -1,7 +1,7 @@
 import * as polished from 'polished';
 import { css } from 'styled-components';
 
-import { isNumber } from '~/utils/guards';
+import { isNumber } from '~/utils';
 
 import type { DefaultTheme } from 'styled-components';
 import type { Variants } from '~/commonTypes';

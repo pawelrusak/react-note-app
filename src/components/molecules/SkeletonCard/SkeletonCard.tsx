@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components';
 
 import Skeleton from '~/components/atoms/Skeleton/Skeleton';
 import Card from '~/components/molecules/Card/Card';
-import { TEST_ID } from '~/constants/tests';
+import { TEST_ID } from '~/constants';
 import { useCurrentPageVariant } from '~/hooks';
 import * as styledMixin from '~/theme/mixins';
 

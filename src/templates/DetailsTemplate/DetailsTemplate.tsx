@@ -7,7 +7,7 @@ import Paragraph from '~/components/atoms/Paragraph/Paragraph';
 import TextButton from '~/components/atoms/TextButton/TextButton';
 import Time from '~/components/atoms/Time/Time';
 import ConfirmationModal from '~/components/molecules/ConfirmationModal/ConfirmationModal';
-import { TEST_ID } from '~/constants/tests';
+import { TEST_ID } from '~/constants';
 import { useCurrentPageVariant, useConfirmationModal } from '~/hooks';
 import { routes } from '~/routes';
 import UserPageTemplate from '~/templates/UserPageTemplate/UserPageTemplate';

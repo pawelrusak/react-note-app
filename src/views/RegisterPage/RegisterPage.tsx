@@ -2,7 +2,7 @@ import { Formik } from 'formik';
 import { Redirect } from 'react-router-dom';
 
 import AuthFormBox from '~/components/organisms/AuthFormBox/AuthFormBox';
-import { AUTH_ERRORS_CODES } from '~/constants/auth';
+import { AUTH_ERRORS_CODES } from '~/constants';
 import { useAuth } from '~/hooks';
 import { routes } from '~/routes';
 import AuthTemplate from '~/templates/AuthTemplate/AuthTemplate';

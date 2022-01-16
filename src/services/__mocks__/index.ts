@@ -6,7 +6,7 @@ import {
   AUTH_ERRORS,
   REGISTERED_USER_CREDENTIALS,
   SPECIAL_VALUE_TO_TEST_WEAK_PASSWORD,
-} from '~/constants/tests';
+} from '~/constants';
 
 import type { DocumentItemQueryArgs, NewDocumentItem } from '../servicesTypes';
 import type { Variants, Item, AuthCredentials } from '~/commonTypes';

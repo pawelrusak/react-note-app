@@ -1,7 +1,7 @@
 import { render, screen, testComponent } from 'testUtils';
 
 import SkeletonCard from '../SkeletonCard/SkeletonCard';
-import { TEST_ID } from '~/constants/tests';
+import { TEST_ID } from '~/constants';
 import { routes } from '~/routes';
 
 import type { RoutesVariantRootPaths } from '~/commonTypes';

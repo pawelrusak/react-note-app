@@ -6,7 +6,7 @@ import Button from '~/components/atoms/Button/Button';
 import Heading from '~/components/atoms/Heading/Heading';
 import Input from '~/components/atoms/Input/Input';
 import Field from '~/components/molecules/Field/Field';
-import { AUTH_FORM_BOX_DATA_VARIANTS } from '~/constants/auth';
+import { AUTH_FORM_BOX_DATA_VARIANTS } from '~/constants';
 import { isAuthCredentialsTouched } from '~/utils';
 
 import type { AuthCredentials } from '~/commonTypes';
