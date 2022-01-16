@@ -1,5 +1,5 @@
 import { serverTimestamp } from '../core';
-import { isArticleItem, isTwitterItem } from '~/utils/guards';
+import { isArticleItem, isTwitterItem } from '~/utils';
 
 import type { DocumentItem, NewDocumentItem, FirestoreDocumentItem } from '../servicesTypes';
 import type firebase from 'firebase/app';
