@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { ACTION_DOMAINS } from '~/constants/actionDomains';
+import { ACTION_DOMAINS } from '~/constants';
 
 import type { Variants } from '~/commonTypes';
 

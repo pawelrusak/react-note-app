@@ -8,7 +8,7 @@ import {
 } from '@reduxjs/toolkit';
 
 import authPersist from './authPersist';
-import { ACTION_DOMAINS } from '~/constants/actionDomains';
+import { ACTION_DOMAINS } from '~/constants';
 import * as services from '~/services';
 import { auth } from '~/services/core';
 
