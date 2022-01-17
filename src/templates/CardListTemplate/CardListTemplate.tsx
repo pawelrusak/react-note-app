@@ -13,7 +13,7 @@ import { VisuallyHidden } from '~/utils';
 
 import type { VariantColorValueProp } from '~/theme/mixins';
 
-const StyledWrapper = styled.div`
+const StyledMain = styled.main`
   position: relative;
   padding: 25px 150px 25px 70px;
   height: 100vh;
@@ -21,7 +21,7 @@ const StyledWrapper = styled.div`
   grid-template-rows: auto 1fr;
 `;
 
-const StyledPageHeader = styled.div`
+const StyledMainHeader = styled.header`
   margin: 25px 0 50px 0;
 `;
 
@@ -60,30 +60,38 @@ const CardListTemplate = ({ children }: CardListTemplateProps) => {
 
   return (
     <UserPageTemplate>
-      <StyledWrapper>
-        <StyledPageHeader>
-          <Input
-            search
-            placeholder="Search"
-            value={search}
-            onChange={(event) => setSearch(event.target.value)}
-          />
+      <StyledMain>
+        <StyledMainHeader>
+          <form role="search">
+            <p>
+              <VisuallyHidden as="label" htmlFor="search-input" />
+              <Input
+                id="search-input"
+                type="search"
+                search
+                placeholder="Search"
+                value={search}
+                onChange={(event) => setSearch(event.target.value)}
+              />
+            </p>
+          </form>
           <StyledHeading big as="h1">
             {pageVariant}
           </StyledHeading>
           <Counter />
-        </StyledPageHeader>
+        </StyledMainHeader>
         {children}
         <StyledButtonIcon
-          onClick={toggleNewItemBarVisible}
+          type="button"
           icon={plusIcon}
           variant={pageVariant}
           active={newItemBarVisible}
+          onClick={toggleNewItemBarVisible}
         >
           <VisuallyHidden>Toggle new item bar</VisuallyHidden>
         </StyledButtonIcon>
         <NewItemBar handleClose={toggleNewItemBarVisible} visible={newItemBarVisible} />
-      </StyledWrapper>
+      </StyledMain>
     </UserPageTemplate>
   );
 };
