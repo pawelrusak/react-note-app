@@ -13,18 +13,17 @@ import { VisuallyHidden } from '~/utils';
 
 import type { VariantColorValueProp } from '~/theme/mixins';
 
-const StyledWrapper = styled.nav<Required<VariantColorValueProp>>`
+const StyledHeader = styled.header<Required<VariantColorValueProp>>`
   position: fixed;
   left: 0;
   top: 0;
+  background-color: ${styledMixin.variantColorValue()};
+`;
+
+const StyledNav = styled.nav`
   padding: 25px 0;
   width: 150px;
   height: 100vh;
-  background-color: ${styledMixin.variantColorValue()};
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
 `;
 
 const StyledLogoLink = styled(NavLink)`
@@ -36,11 +35,6 @@ const StyledLogoLink = styled(NavLink)`
   background-position: 50% 50%;
   background-size: 80%;
   border: none;
-  margin-bottom: 10vh;
-`;
-
-const StyledLogoutButton = styled(ButtonIcon)`
-  margin-top: auto;
 `;
 
 const StyledLinksList = styled.ul`
@@ -49,36 +43,63 @@ const StyledLinksList = styled.ul`
   list-style: none;
 `;
 
+const StyledMainLinksList = styled(StyledLinksList)`
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+const StyledLogoListItem = styled.li`
+  margin-bottom: 10vh;
+`;
+
+const StyledLogoutListItem = styled.li`
+  margin-top: auto;
+`;
+
 const Sidebar = () => {
   const pageVariant = useCurrentPageVariant();
   const { logout } = useAuth();
 
   return (
-    <StyledWrapper variant={pageVariant}>
-      <StyledLogoLink to="/">
-        <VisuallyHidden>FavNote.</VisuallyHidden>
-      </StyledLogoLink>
-      <StyledLinksList>
-        <li>
-          <ButtonIcon as={NavLink} to="/notes" icon={penIcon} activeClassName="active">
-            <VisuallyHidden>Basic notes</VisuallyHidden>
-          </ButtonIcon>
-        </li>
-        <li>
-          <ButtonIcon as={NavLink} to="/twitters" icon={twitterIcon} activeClassName="active">
-            <VisuallyHidden>Twitter notes</VisuallyHidden>
-          </ButtonIcon>
-        </li>
-        <li>
-          <ButtonIcon as={NavLink} to="/articles" icon={bulbIcon} activeClassName="active">
-            <VisuallyHidden>Article notes</VisuallyHidden>
-          </ButtonIcon>
-        </li>
-      </StyledLinksList>
-      <StyledLogoutButton type="button" onClick={logout} icon={logoutIcon}>
-        <VisuallyHidden>Logout</VisuallyHidden>
-      </StyledLogoutButton>
-    </StyledWrapper>
+    <StyledHeader variant={pageVariant}>
+      <StyledNav>
+        <StyledMainLinksList>
+          <StyledLogoListItem>
+            <StyledLogoLink to="/">
+              <VisuallyHidden>FavNote.</VisuallyHidden>
+            </StyledLogoLink>
+          </StyledLogoListItem>
+          <li>
+            <VisuallyHidden>Types of notes</VisuallyHidden>
+            <StyledLinksList>
+              <li>
+                <ButtonIcon as={NavLink} to="/notes" icon={penIcon} activeClassName="active">
+                  <VisuallyHidden>Basic notes</VisuallyHidden>
+                </ButtonIcon>
+              </li>
+              <li>
+                <ButtonIcon as={NavLink} to="/twitters" icon={twitterIcon} activeClassName="active">
+                  <VisuallyHidden>Twitter notes</VisuallyHidden>
+                </ButtonIcon>
+              </li>
+              <li>
+                <ButtonIcon as={NavLink} to="/articles" icon={bulbIcon} activeClassName="active">
+                  <VisuallyHidden>Article notes</VisuallyHidden>
+                </ButtonIcon>
+              </li>
+            </StyledLinksList>
+          </li>
+          <StyledLogoutListItem>
+            <ButtonIcon type="button" onClick={logout} icon={logoutIcon}>
+              <VisuallyHidden>Logout</VisuallyHidden>
+            </ButtonIcon>
+          </StyledLogoutListItem>
+        </StyledMainLinksList>
+      </StyledNav>
+    </StyledHeader>
   );
 };
 
