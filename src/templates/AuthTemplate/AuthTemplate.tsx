@@ -14,6 +14,10 @@ const StyledWrapper = styled.div`
   justify-content: center;
 `;
 
+const StyledHeader = styled.header`
+  text-align: center;
+`;
+
 const StyledLogo = styled.img`
   width: 200px;
   height: auto;
@@ -26,7 +30,7 @@ const StyledAuthCard = styled.div`
   border-radius: 10px;
   box-shadow: 0 10px 20px -10px rgba(0, 0, 0, 0.2);
   display: flex;
-  flex-direction: column;
+  /* flex-direction: column; */
   align-items: center;
   justify-content: center;
 `;
@@ -37,11 +41,13 @@ export type AuthTemplateProps = {
 
 const AuthTemplate = ({ children }: AuthTemplateProps) => (
   <StyledWrapper>
-    <h1>
-      <StyledLogo src={logoImg} aria-hidden alt="FavNote." />
-      <VisuallyHidden>FavNote.</VisuallyHidden>
-    </h1>
-    <Heading>Your new favorite online notes experience</Heading>
+    <StyledHeader>
+      <h1>
+        <StyledLogo src={logoImg} aria-hidden alt="FavNote." />
+        <VisuallyHidden>FavNote.</VisuallyHidden>
+      </h1>
+      <Heading as="p">Your new favorite online notes experience</Heading>
+    </StyledHeader>
     <StyledAuthCard>{children}</StyledAuthCard>
   </StyledWrapper>
 );

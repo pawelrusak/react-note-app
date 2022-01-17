@@ -36,14 +36,11 @@ const StyledWrapperWithHover = styled(StyledWrapper)`
   }
 `;
 
-const HeaderWrapper = styled.div<VariantColorValueProp>`
+const HeaderWrapper = styled.header<VariantColorValueProp>`
   position: relative;
   padding: 17px 30px;
   background-color: ${styledMixin.variantColorValue()};
-
-  &:first-of-type {
-    ${styledMixin.zIndexDeclaration('cardHeader')};
-  }
+  ${styledMixin.zIndexDeclaration('cardHeader')};
 `;
 
 // create new component because the base one is reuse in others places
@@ -60,7 +57,8 @@ const HeaderWrapperWithHover = styled(HeaderWrapper)<VariantColorValueProp>`
   }
 `;
 
-const ContentWrapper = styled(HeaderWrapper)`
+const ContentWrapper = styled.div`
+  padding: 17px 30px;
   background-color: white;
   display: flex;
   flex-direction: column;
@@ -111,7 +109,7 @@ const StyledArticleLink = styled.a`
 /**
  * @todo Should I add a fallback for IE?
  */
-const StyledContentParagraph = styled(Paragraph)`
+const StyledParagraph = styled(Paragraph)`
   display: -webkit-box;
   -webkit-line-clamp: 4;
   -webkit-box-orient: vertical;
@@ -127,7 +125,7 @@ const StyledContentParagraph = styled(Paragraph)`
   }
 `;
 
-const StyledContentLink = styled(Link)`
+const StyledDetailsLink = styled(Link)`
   text-transform: uppercase;
   font-weight: ${({ theme }) => theme.bold};
   text-decoration: none;
@@ -183,13 +181,15 @@ const Card = <V extends Variants>({
   const { isOpen, closeModal, openModal, removeItemAction } = useConfirmationModal();
 
   return (
-    <StyledWrapperWithHover>
+    <StyledWrapperWithHover as="article">
       <HeaderWrapperWithHover
         data-testid={TEST_ID.CARD.HEADER}
         onClick={historyPush}
         variant={pageVariant}
       >
-        <StyledHeading data-testid={TEST_ID.CARD.TITLE}>{title}</StyledHeading>
+        <StyledHeading data-testid={TEST_ID.CARD.TITLE} as="h3">
+          {title}
+        </StyledHeading>
         <DateInfo data-testid={TEST_ID.CARD.DATE_INFO} date={created} />
         {pageVariant === 'twitters' && (
           <StyledAvatar src={`https://unavatar.now.sh/twitter/${twitterName || ''}`} />
@@ -199,8 +199,8 @@ const Card = <V extends Variants>({
         )}
       </HeaderWrapperWithHover>
       <ContentWrapper>
-        <StyledContentParagraph>{content}</StyledContentParagraph>
-        <StyledContentLink to={URLPathToDetails}>read more</StyledContentLink>
+        <StyledParagraph>{content}</StyledParagraph>
+        <StyledDetailsLink to={URLPathToDetails}>read more</StyledDetailsLink>
         <Button onClick={openModal} secondary>
           REMOVE
         </Button>

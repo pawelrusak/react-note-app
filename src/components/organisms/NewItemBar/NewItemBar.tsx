@@ -65,8 +65,10 @@ const NewItemBar = ({ visible, handleClose }: NewItemBarProps) => {
       data-testid={TEST_ID.NEW_ITEM_BAR.WRAPPER}
       visible={visible}
       variant={pageVariant}
+      role="dialog"
+      aria-labelledby="new-item-bar"
+      aria-modal="true"
     >
-      <Heading big>Create new {pageVariant}</Heading>
       <Formik
         validationSchema={newItemSchema}
         initialValues={{
@@ -93,6 +95,11 @@ const NewItemBar = ({ visible, handleClose }: NewItemBarProps) => {
       >
         {({ isSubmitting, touched, isValid }) => (
           <StyledForm>
+            <header>
+              <Heading big as="h2" id="new-item-bar">
+                Create new {pageVariant}
+              </Heading>
+            </header>
             <StyledTitleField type="text" name="title" placeholder="title" />
             {pageVariant === 'twitters' && (
               <Field placeholder="twitter name eg. hello_roman" type="text" name="twitterName" />

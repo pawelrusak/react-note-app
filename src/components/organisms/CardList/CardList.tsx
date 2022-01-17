@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import Heading from '~/components/atoms/Heading/Heading';
 import SkeletonCardList from '~/components/organisms/SkeletonCardList/SkeletonCardList';
 import { useFetchItems } from '~/hooks';
+import { VisuallyHidden } from '~/utils';
 
 import type { Variants } from '~/commonTypes';
 import type { ItemsState } from '~/store';
@@ -30,7 +31,7 @@ const StyledEmptyStateTitle = styled(Heading)`
   margin-top: 0;
 `;
 
-const StyledEmptyStateWrapper = styled.div`
+const StyledEmptyStateWrapper = styled.section`
   display: grid;
   place-items: center;
   min-height: 100%;
@@ -51,7 +52,12 @@ const CardList = <T extends Variants>({ variant, children }: CardListProps<T>) =
           <SkeletonCardList lighten />
         </StyledGrid>
       )}
-      {isSucceeded() && data.length !== 0 && <StyledGrid>{children({ data })}</StyledGrid>}
+      {isSucceeded() && data.length !== 0 && (
+        <StyledGrid as="section">
+          <VisuallyHidden as="h2">List of yours notes</VisuallyHidden>
+          {children({ data })}
+        </StyledGrid>
+      )}
       {isSucceeded() && data.length === 0 && (
         <StyledEmptyStateWrapper>
           <StyledEmptyStateTitle as="h2">You have no {variant}</StyledEmptyStateTitle>
