@@ -11,6 +11,13 @@ import { isAuthCredentialsTouched } from '~/utils';
 
 import type { AuthCredentials } from '~/commonTypes';
 
+const StyledMain = styled.main`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+`;
+
 const StyledForm = styled(Form)`
   display: flex;
   justify-content: center;
@@ -46,8 +53,10 @@ const AuthFormBox = ({ formVariant }: AuthFormBoxProps) => {
   const { headingText, buttonText, linkPath, linkText } = AUTH_FORM_BOX_DATA_VARIANTS[formVariant];
 
   return (
-    <>
-      <Heading id="auth-form">{headingText}</Heading>
+    <StyledMain>
+      <Heading as="h2" id="auth-form">
+        {headingText}
+      </Heading>
       <StyledForm aria-labelledby="auth-form">
         <StyledField
           name="email"
@@ -72,7 +81,7 @@ const AuthFormBox = ({ formVariant }: AuthFormBoxProps) => {
         </Button>
       </StyledForm>
       <StyledLink to={linkPath}>{linkText}</StyledLink>
-    </>
+    </StyledMain>
   );
 };
 
