@@ -14,7 +14,7 @@ import UserPageTemplate from '~/templates/UserPageTemplate/UserPageTemplate';
 
 import type { DetailsItem } from '~/commonTypes';
 
-const StyledWrapper = styled.div`
+const StyledArticleWrapper = styled.article`
   padding: 25px 150px 25px 70px;
   max-width: 50vw;
   position: relative;
@@ -24,7 +24,7 @@ const StyledWrapper = styled.div`
   }
 `;
 
-const StyledPageHeader = styled.div`
+const StyledPageHeader = styled.header`
   margin: 2.5rem 0 4rem;
 `;
 
@@ -91,7 +91,7 @@ const DetailsTemplate = ({
 
   return (
     <UserPageTemplate>
-      <StyledWrapper>
+      <StyledArticleWrapper>
         <StyledPageHeader>
           <StyledHeading big as="h1">
             {title}
@@ -104,6 +104,13 @@ const DetailsTemplate = ({
               format="DD/MM/YYYY"
             />
           </StyledParagraph>
+          {pageVariant === 'twitters' && (
+            <StyledAvatar
+              data-testid={TEST_ID.DETAILS_TEMPLATE.AVATAR}
+              alt={title}
+              src={`https://unavatar.now.sh/twitter/${twitterName as string}  `}
+            />
+          )}
         </StyledPageHeader>
         <StyledContent>{content}</StyledContent>
         {pageVariant === 'articles' && (
@@ -118,22 +125,15 @@ const DetailsTemplate = ({
           </StyledLink>
         )}
         {pageVariant === 'twitters' && (
-          <>
-            <StyledLink
-              as="a"
-              href={`https://twitter.com/${twitterName as string}`}
-              data-testid={TEST_ID.DETAILS_TEMPLATE.TWITTER_LINK}
-              target="_blank"
-              rel="noopener"
-            >
-              Open this twitter
-            </StyledLink>
-            <StyledAvatar
-              data-testid={TEST_ID.DETAILS_TEMPLATE.AVATAR}
-              alt={title}
-              src={`https://unavatar.now.sh/twitter/${twitterName as string}  `}
-            />
-          </>
+          <StyledLink
+            as="a"
+            href={`https://twitter.com/${twitterName as string}`}
+            data-testid={TEST_ID.DETAILS_TEMPLATE.TWITTER_LINK}
+            target="_blank"
+            rel="noopener"
+          >
+            Open this twitter
+          </StyledLink>
         )}
         <SaveButton as={Link} to={`/${pageVariant}`} variant={pageVariant}>
           save / close
@@ -145,7 +145,7 @@ const DetailsTemplate = ({
           onCancel={closeModal}
           onConfirm={handleConfirm}
         />
-      </StyledWrapper>
+      </StyledArticleWrapper>
     </UserPageTemplate>
   );
 };
@@ -162,8 +162,9 @@ DetailsTemplate.defaultProps = {
   twitterName: '',
 };
 
-DetailsTemplate.Wrapper = StyledWrapper;
+DetailsTemplate.Wrapper = StyledArticleWrapper;
 DetailsTemplate.PageHeader = StyledPageHeader;
+// @todo to remove
 DetailsTemplate.Avatar = StyledAvatar;
 DetailsTemplate.Heading = StyledHeading;
 
