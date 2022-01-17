@@ -64,8 +64,8 @@ const SkeletonDetailsTemplate = () => {
 
   return (
     <UserPageTemplate>
-      <DetailsTemplate.Wrapper data-testid={TEST_ID.SKELETON_DETAILS_TEMPLATE.WRAPPER}>
-        <DetailsTemplate.PageHeader>
+      <DetailsTemplate.Wrapper as="div" data-testid={TEST_ID.SKELETON_DETAILS_TEMPLATE.WRAPPER}>
+        <DetailsTemplate.PageHeader as="div">
           <StyledSkeletonHeading dark width="37rem" />
           <StyledSkeletonParagraph dark width="17rem" />
         </DetailsTemplate.PageHeader>
