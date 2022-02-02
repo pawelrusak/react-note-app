@@ -3,10 +3,10 @@ import styled from 'styled-components';
 import plusIcon from '~/assets/icons/plus.svg';
 import ButtonIcon from '~/components/atoms/ButtonIcon/ButtonIcon';
 import Heading from '~/components/atoms/Heading/Heading';
-import Input from '~/components/atoms/Input/Input';
 import Counter from '~/components/molecules/Counter/Counter';
+import Search from '~/components/molecules/Search/Search';
 import NewItemBar from '~/components/organisms/NewItemBar/NewItemBar';
-import { useToggle, useCurrentPageVariant, useSearchState } from '~/hooks';
+import { useToggle, useCurrentPageVariant } from '~/hooks';
 import UserPageTemplate from '~/templates/UserPageTemplate/UserPageTemplate';
 import * as styledMixin from '~/theme/mixins';
 import { VisuallyHidden } from '~/utils';
@@ -56,25 +56,12 @@ export type CardListTemplateProps = {
 const CardListTemplate = ({ children }: CardListTemplateProps) => {
   const [newItemBarVisible, toggleNewItemBarVisible] = useToggle(false);
   const pageVariant = useCurrentPageVariant();
-  const [search, setSearch] = useSearchState(pageVariant);
 
   return (
     <UserPageTemplate>
       <StyledMain>
         <StyledMainHeader>
-          <form role="search">
-            <p>
-              <VisuallyHidden as="label" htmlFor="search-input" />
-              <Input
-                id="search-input"
-                type="search"
-                search
-                placeholder="Search"
-                value={search}
-                onChange={(event) => setSearch(event.target.value)}
-              />
-            </p>
-          </form>
+          <Search />
           <StyledHeading big as="h1">
             {pageVariant}
           </StyledHeading>
