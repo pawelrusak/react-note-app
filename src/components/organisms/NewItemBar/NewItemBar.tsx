@@ -1,14 +1,10 @@
-import { Formik, Form } from 'formik';
+import { Formik } from 'formik';
 import styled from 'styled-components';
 
-import Button from '~/components/atoms/Button/Button';
-import Heading from '~/components/atoms/Heading/Heading';
-import Input from '~/components/atoms/Input/Input';
-import Field from '~/components/molecules/Field/Field';
+import NewItemForm from '~/components/organisms/NewItemForm/NewItemForm';
 import { TEST_ID } from '~/constants';
 import { useCurrentPageVariant, useAddItemAction } from '~/hooks';
 import * as styledMixin from '~/theme/mixins';
-import { isNewItemVariantTouched } from '~/utils';
 import { newItemSchema } from '~/validations';
 
 import type { VariantColorValueProp } from '~/theme/mixins';
@@ -35,30 +31,19 @@ const StyledWrapper = styled.div<StyledWrapperProps>`
   overflow-y: scroll;
 `;
 
-const StyledForm = styled(Form)`
-  display: flex;
-  flex-direction: column;
-`;
-
-const StyledTitleField = styled(Field)`
-  margin-top: 30px;
-`;
-
-const StyledTextAreaField = styled(Field)`
-  margin-bottom: 70px;
-`;
-
-const StyledTextArea = styled(Input).attrs(() => ({ as: 'textarea' }))`
-  border-radius: 20px;
-  width: 100%;
-  height: 30vh;
-`;
-
 export type NewItemBarProps = Visible & { readonly handleClose: () => void };
 
 const NewItemBar = ({ visible, handleClose }: NewItemBarProps) => {
   const pageVariant = useCurrentPageVariant();
   const addItemAction = useAddItemAction();
+
+  const initialValues = {
+    title: '',
+    content: '',
+    articleUrl: '',
+    twitterName: '',
+    variant: pageVariant,
+  };
 
   return (
     <StyledWrapper
@@ -71,57 +56,17 @@ const NewItemBar = ({ visible, handleClose }: NewItemBarProps) => {
     >
       <Formik
         validationSchema={newItemSchema}
-        initialValues={{
-          title: '',
-          content: '',
-          variant: pageVariant,
-          articleUrl: '',
-          twitterName: '',
-        }}
+        initialValues={initialValues}
         onSubmit={(values, actions) => {
           addItemAction(pageVariant, values);
           actions.setSubmitting(false);
           actions.resetForm({
-            values: {
-              title: '',
-              content: '',
-              articleUrl: '',
-              twitterName: '',
-              variant: pageVariant,
-            },
+            values: initialValues,
           });
           handleClose();
         }}
       >
-        {({ isSubmitting, touched, isValid }) => (
-          <StyledForm>
-            <header>
-              <Heading big as="h2" id="new-item-bar">
-                Create new {pageVariant}
-              </Heading>
-            </header>
-            <StyledTitleField type="text" name="title" placeholder="title" />
-            {pageVariant === 'twitters' && (
-              <Field placeholder="twitter name eg. hello_roman" type="text" name="twitterName" />
-            )}
-            {pageVariant === 'articles' && (
-              <Field placeholder="link" type="text" name="articleUrl" />
-            )}
-            <StyledTextAreaField
-              placeholder="description"
-              name="content"
-              component={StyledTextArea}
-            />
-            <Button
-              type="submit"
-              pending={isSubmitting}
-              disabled={isSubmitting || (isNewItemVariantTouched(touched, pageVariant) && !isValid)}
-              variant={pageVariant}
-            >
-              Add Note
-            </Button>
-          </StyledForm>
-        )}
+        <NewItemForm formVariant={pageVariant} />
       </Formik>
     </StyledWrapper>
   );
