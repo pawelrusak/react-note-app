@@ -152,8 +152,6 @@ const DetailsTemplate = ({
 
 DetailsTemplate.Wrapper = StyledArticleWrapper;
 DetailsTemplate.PageHeader = StyledPageHeader;
-// @todo to remove
-DetailsTemplate.Avatar = StyledAvatar;
 DetailsTemplate.Heading = StyledHeading;
 
 export default DetailsTemplate;
