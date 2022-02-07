@@ -150,22 +150,8 @@ const DetailsTemplate = ({
   );
 };
 
-/**
- * @todo check if this code can be removed
- */
-DetailsTemplate.defaultProps = {
-  id: '',
-  title: '',
-  created: '',
-  content: '',
-  articleUrl: '',
-  twitterName: '',
-};
-
 DetailsTemplate.Wrapper = StyledArticleWrapper;
 DetailsTemplate.PageHeader = StyledPageHeader;
-// @todo to remove
-DetailsTemplate.Avatar = StyledAvatar;
 DetailsTemplate.Heading = StyledHeading;
 
 export default DetailsTemplate;

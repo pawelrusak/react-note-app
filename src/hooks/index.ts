@@ -4,7 +4,6 @@ export { useHistoryPush } from './custom/useHistoryPush';
 export { useRemoveItemAction } from './custom/useRemoveItemAction';
 export { useCurrentPageVariant } from '~/context';
 export { useFetchItems } from './custom/useFetchItems';
-export { useActiveItem } from './custom/useActiveItem';
 export { useAuth } from './custom/useAuth';
 export { useSearchState } from './custom/useSearchState';
 export { useCounter } from './custom/useCounter';
