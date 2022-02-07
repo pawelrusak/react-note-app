@@ -102,6 +102,24 @@ export const AuthFormBoxCardDecorator = (Story) => (
   </>
 );
 
+const StyledNewItemFormWrapper = styled.div`
+  box-shadow: none;
+  border: 2px dashed hsl(0, 0%, 60%);
+  width: 50rem;
+  padding: 1.6rem;
+`;
+
+export const NewItemFormDecorator = (Story) => (
+  <>
+    <StyledInfoText>
+      For presentation purpose, the NewItemForm component is in wrapper element with dashed border!
+    </StyledInfoText>
+    <StyledNewItemFormWrapper>
+      <Story />
+    </StyledNewItemFormWrapper>
+  </>
+);
+
 export const DetailsPageRouterDecorator = (detailsPagePathname) => {
   /**
    * Hard code sample note id from 'store/__mocks__'
