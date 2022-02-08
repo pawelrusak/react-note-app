@@ -6,7 +6,7 @@ import Button from '~/components/atoms/Button/Button';
 import Heading from '~/components/atoms/Heading/Heading';
 import Input from '~/components/atoms/Input/Input';
 import Field from '~/components/molecules/Field/Field';
-import { AUTH_FORM_BOX_DATA_VARIANTS } from '~/constants';
+import { AUTH_FORM_DATA_VARIANTS } from '~/constants';
 import { isAuthCredentialsTouched } from '~/utils';
 
 import type { AuthCredentials } from '~/commonTypes';
@@ -50,7 +50,7 @@ export type AuthFormProps = {
 
 const AuthForm = ({ formVariant }: AuthFormProps) => {
   const { isSubmitting, touched, isValid } = useFormikContext<AuthCredentials>();
-  const { headingText, buttonText, linkPath, linkText } = AUTH_FORM_BOX_DATA_VARIANTS[formVariant];
+  const { headingText, buttonText, linkPath, linkText } = AUTH_FORM_DATA_VARIANTS[formVariant];
 
   return (
     <StyledMain>
