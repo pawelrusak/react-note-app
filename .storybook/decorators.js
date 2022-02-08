@@ -85,20 +85,20 @@ export const SkeletonCardListGridDecorator = (Story) => (
   </>
 );
 
-const StyledAuthFormBoxCard = styled(AuthTemplate.AuthCard)`
+const StyledAuthFormCard = styled(AuthTemplate.AuthCard)`
   box-shadow: none;
   border: 2px dashed hsl(0, 0%, 60%);
 `;
 
-export const AuthFormBoxCardDecorator = (Story) => (
+export const AuthFormCardDecorator = (Story) => (
   <>
     <StyledInfoText>
-      For presentation purpose, the AuthFormBox component is in wrapper element with dashed border
-      in the styled component from AuthTemplate!
+      For presentation purpose, the AuthForm component is in wrapper element with dashed border in
+      the styled component from AuthTemplate!
     </StyledInfoText>
-    <StyledAuthFormBoxCard>
+    <StyledAuthFormCard>
       <Story />
-    </StyledAuthFormBoxCard>
+    </StyledAuthFormCard>
   </>
 );
 
