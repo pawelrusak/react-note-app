@@ -23,19 +23,19 @@ export const AUTH_ERRORS_CODES = {
   INVALID_EMAIL: 'auth/invalid-email',
 } as const;
 
-type AuthFormBoxData = {
+type AuthFormData = {
   readonly headingText: string;
   readonly buttonText: string;
   readonly linkText: string;
   readonly linkPath: RoutesPaths;
 };
 
-type AuthFormBoxDataVariants = {
-  readonly login: AuthFormBoxData;
-  readonly register: AuthFormBoxData;
+type AuthFormDataVariants = {
+  readonly login: AuthFormData;
+  readonly register: AuthFormData;
 };
 
-export const AUTH_FORM_BOX_DATA_VARIANTS: AuthFormBoxDataVariants = {
+export const AUTH_FORM_DATA_VARIANTS: AuthFormDataVariants = {
   login: {
     headingText: 'Sign in',
     buttonText: 'sign in',
