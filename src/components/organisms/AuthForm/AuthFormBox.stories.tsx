@@ -1,7 +1,7 @@
 import withFormik from 'storybook-formik';
 import StoryRouter from 'storybook-react-router';
 
-import AuthFormBox, { AuthFormBoxProps } from './AuthFormBox';
+import AuthFormBox, { AuthFormProps } from './AuthForm';
 import { authSchema } from '~/validations';
 import { AuthFormBoxCardDecorator } from '~~/.storybook/decorators';
 
@@ -13,7 +13,7 @@ export default {
   decorators: [AuthFormBoxCardDecorator, StoryRouter(), withFormik],
 } as Meta;
 
-const Template: Story<AuthFormBoxProps> = (args) => <AuthFormBox {...args} />;
+const Template: Story<AuthFormProps> = (args) => <AuthFormBox {...args} />;
 
 export const Login = Template.bind({});
 Login.args = {

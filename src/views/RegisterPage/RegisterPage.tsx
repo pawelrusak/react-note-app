@@ -1,7 +1,7 @@
 import { Formik } from 'formik';
 import { Redirect } from 'react-router-dom';
 
-import AuthFormBox from '~/components/organisms/AuthFormBox/AuthFormBox';
+import AuthForm from '~/components/organisms/AuthForm/AuthForm';
 import { AUTH_ERRORS_CODES } from '~/constants';
 import { useAuth } from '~/hooks';
 import { routes } from '~/routes';
@@ -41,7 +41,7 @@ const RegisterPage = () => {
             }
           }}
         >
-          <AuthFormBox formVariant="register" />
+          <AuthForm formVariant="register" />
         </Formik>
       </AuthTemplate>
     </>

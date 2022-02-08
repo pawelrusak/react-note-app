@@ -44,11 +44,11 @@ const StyledLink = styled(Link)`
   margin: 20px 0 50px;
 `;
 
-export type AuthFormBoxProps = {
+export type AuthFormProps = {
   readonly formVariant: 'login' | 'register';
 };
 
-const AuthFormBox = ({ formVariant }: AuthFormBoxProps) => {
+const AuthForm = ({ formVariant }: AuthFormProps) => {
   const { isSubmitting, touched, isValid } = useFormikContext<AuthCredentials>();
   const { headingText, buttonText, linkPath, linkText } = AUTH_FORM_BOX_DATA_VARIANTS[formVariant];
 
@@ -85,4 +85,4 @@ const AuthFormBox = ({ formVariant }: AuthFormBoxProps) => {
   );
 };
 
-export default AuthFormBox;
+export default AuthForm;
