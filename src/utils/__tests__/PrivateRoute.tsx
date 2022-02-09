@@ -2,7 +2,7 @@ import { Switch } from 'react-router-dom';
 import { render } from 'testUtils';
 import { fakeStateWithNotLoggedInUser } from 'testUtils/fakers';
 
-import PrivateRoute from '../PrivateRoute';
+import PrivateRoute from '../components/PrivateRoute';
 import { routes } from '~/constants';
 import Notes from '~/views/Notes/Notes';
 
