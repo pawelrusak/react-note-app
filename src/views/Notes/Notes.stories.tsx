@@ -1,7 +1,7 @@
 import StoryRouter from 'storybook-react-router';
 
 import Notes from './Notes';
-import { routes } from '~/constants';
+import { ROUTES_PATHS } from '~/constants';
 import { StoreDecorator } from '~~/.storybook/decorators';
 import { itemsPageLinks } from '~~/.storybook/links';
 
@@ -10,7 +10,10 @@ import type { Meta, Story } from '@storybook/react';
 export default {
   title: 'Views/Notes',
   component: Notes,
-  decorators: [StoryRouter(itemsPageLinks, { initialEntries: [routes.notes] }), StoreDecorator],
+  decorators: [
+    StoryRouter(itemsPageLinks, { initialEntries: [ROUTES_PATHS.notes] }),
+    StoreDecorator,
+  ],
   parameters: {
     pageVariant: 'notes',
   },

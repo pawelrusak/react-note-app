@@ -1,6 +1,6 @@
 import { Route, Redirect, RouteProps, useLocation } from 'react-router-dom';
 
-import { routes } from '~/constants';
+import { ROUTES_PATHS } from '~/constants';
 import { useAuth } from '~/hooks';
 
 type PrivateRouteProps = RouteProps;
@@ -13,7 +13,7 @@ const PrivateRoute = (props: PrivateRouteProps) => {
     return (
       <Redirect
         to={{
-          pathname: routes.login,
+          pathname: ROUTES_PATHS.login,
           state: {
             from: location,
           },

@@ -8,7 +8,7 @@ import LoginPage from './LoginPage/LoginPage';
 import Notes from './Notes/Notes';
 import RegisterPage from './RegisterPage/RegisterPage';
 import Twitters from './Twitters/Twitters';
-import { routes } from '~/constants';
+import { ROUTES_PATHS } from '~/constants';
 import store from '~/store';
 import MainTemplate from '~/templates/MainTemplate/MainTemplate';
 import { PrivateRoute } from '~/utils/components';
@@ -21,15 +21,15 @@ const Root = () => (
       <BrowserRouter>
         <MainTemplate>
           <Switch>
-            <Route exact path={routes.login} component={LoginPage} />
-            <Route exact path={routes.register} component={RegisterPage} />
-            <PrivateRoute exact path={routes.home} render={() => <Redirect to="/notes" />} />
-            <PrivateRoute exact path={routes.notes} component={Notes} />
-            <PrivateRoute path={routes.note} component={DetailsPage} />
-            <PrivateRoute exact path={routes.articles} component={Articles} />
-            <PrivateRoute path={routes.article} component={DetailsPage} />
-            <PrivateRoute exact path={routes.twitters} component={Twitters} />
-            <PrivateRoute path={routes.twitter} component={DetailsPage} />
+            <Route exact path={ROUTES_PATHS.login} component={LoginPage} />
+            <Route exact path={ROUTES_PATHS.register} component={RegisterPage} />
+            <PrivateRoute exact path={ROUTES_PATHS.home} render={() => <Redirect to="/notes" />} />
+            <PrivateRoute exact path={ROUTES_PATHS.notes} component={Notes} />
+            <PrivateRoute path={ROUTES_PATHS.note} component={DetailsPage} />
+            <PrivateRoute exact path={ROUTES_PATHS.articles} component={Articles} />
+            <PrivateRoute path={ROUTES_PATHS.article} component={DetailsPage} />
+            <PrivateRoute exact path={ROUTES_PATHS.twitters} component={Twitters} />
+            <PrivateRoute path={ROUTES_PATHS.twitter} component={DetailsPage} />
           </Switch>
         </MainTemplate>
       </BrowserRouter>

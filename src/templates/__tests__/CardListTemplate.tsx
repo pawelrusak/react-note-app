@@ -3,13 +3,13 @@ import { render, screen, userEvent, getPairOfPathsAndPageTypes, waitFor } from '
 import { fakeStateWithDataAndLoggedInUser } from 'testUtils/fakers';
 
 import CardListTemplate from '../CardListTemplate/CardListTemplate';
-import { TEST_ID, routes } from '~/constants';
+import { TEST_ID, ROUTES_PATHS } from '~/constants';
 
 import type { Item, RoutesVariantRootPaths } from '~/commonTypes';
 
 jest.mock('~/services');
 
-const renderCardListTemplate = (path: RoutesVariantRootPaths = routes.notes) =>
+const renderCardListTemplate = (path: RoutesVariantRootPaths = ROUTES_PATHS.notes) =>
   render(
     <CardListTemplate>
       <></>

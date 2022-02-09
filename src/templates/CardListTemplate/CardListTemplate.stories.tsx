@@ -1,5 +1,5 @@
 import CardListTemplate, { CardListTemplateProps } from './CardListTemplate';
-import { routes } from '~/constants';
+import { ROUTES_PATHS } from '~/constants';
 import ViewPlaceholder from '~~/.storybook/components/ViewPlaceholder';
 import { StoreDecorator, CardListTemplateRouterDecorator } from '~~/.storybook/decorators';
 
@@ -18,39 +18,39 @@ const Template: Story<CardListTemplateProps> = () => (
 );
 
 export const NoteSucceeded = Template.bind({});
-NoteSucceeded.decorators = [CardListTemplateRouterDecorator(routes.notes)];
+NoteSucceeded.decorators = [CardListTemplateRouterDecorator(ROUTES_PATHS.notes)];
 NoteSucceeded.parameters = {
   pageVariant: 'notes',
 };
 
 export const NoteLoading = Template.bind({});
-NoteLoading.decorators = [CardListTemplateRouterDecorator(routes.notes)];
+NoteLoading.decorators = [CardListTemplateRouterDecorator(ROUTES_PATHS.notes)];
 NoteLoading.parameters = {
   state: 'loading',
   pageVariant: 'notes',
 };
 
 export const TwitterSucceeded = Template.bind({});
-TwitterSucceeded.decorators = [CardListTemplateRouterDecorator(routes.twitters)];
+TwitterSucceeded.decorators = [CardListTemplateRouterDecorator(ROUTES_PATHS.twitters)];
 TwitterSucceeded.parameters = {
   pageVariant: 'twitters',
 };
 
 export const TwitterLoading = Template.bind({});
-TwitterLoading.decorators = [CardListTemplateRouterDecorator(routes.twitters)];
+TwitterLoading.decorators = [CardListTemplateRouterDecorator(ROUTES_PATHS.twitters)];
 TwitterLoading.parameters = {
   state: 'loading',
   pageVariant: 'twitters',
 };
 
 export const ArticleSucceeded = Template.bind({});
-ArticleSucceeded.decorators = [CardListTemplateRouterDecorator(routes.articles)];
+ArticleSucceeded.decorators = [CardListTemplateRouterDecorator(ROUTES_PATHS.articles)];
 ArticleSucceeded.parameters = {
   pageVariant: 'articles',
 };
 
 export const ArticleLoading = Template.bind({});
-ArticleLoading.decorators = [CardListTemplateRouterDecorator(routes.articles)];
+ArticleLoading.decorators = [CardListTemplateRouterDecorator(ROUTES_PATHS.articles)];
 ArticleLoading.parameters = {
   state: 'loading',
   pageVariant: 'articles',

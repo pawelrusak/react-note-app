@@ -1,11 +1,11 @@
-import { routes } from '~/constants';
+import { ROUTES_PATHS } from '~/constants';
 import { stripSlashPrefix } from '~/utils';
 
 export const getPairOfPathsAndPageTypes = () =>
   [
-    [routes.notes, stripSlashPrefix(routes.notes) as 'notes'],
-    [routes.twitters, stripSlashPrefix(routes.twitters) as 'twitters'],
-    [routes.articles, stripSlashPrefix(routes.articles) as 'articles'],
+    [ROUTES_PATHS.notes, stripSlashPrefix(ROUTES_PATHS.notes) as 'notes'],
+    [ROUTES_PATHS.twitters, stripSlashPrefix(ROUTES_PATHS.twitters) as 'twitters'],
+    [ROUTES_PATHS.articles, stripSlashPrefix(ROUTES_PATHS.articles) as 'articles'],
   ] as const;
 
 export const getRandomNaturalNumber = (max = 10, min = 1) => {

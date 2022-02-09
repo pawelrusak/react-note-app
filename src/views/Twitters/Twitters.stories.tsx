@@ -1,7 +1,7 @@
 import StoryRouter from 'storybook-react-router';
 
 import Twitters from './Twitters';
-import { routes } from '~/constants';
+import { ROUTES_PATHS } from '~/constants';
 import { StoreDecorator } from '~~/.storybook/decorators';
 import { itemsPageLinks } from '~~/.storybook/links';
 
@@ -10,7 +10,10 @@ import type { Meta, Story } from '@storybook/react';
 export default {
   title: 'Views/Twitters',
   component: Twitters,
-  decorators: [StoryRouter(itemsPageLinks, { initialEntries: [routes.twitters] }), StoreDecorator],
+  decorators: [
+    StoryRouter(itemsPageLinks, { initialEntries: [ROUTES_PATHS.twitters] }),
+    StoreDecorator,
+  ],
   parameters: {
     pageVariant: 'twitters',
   },

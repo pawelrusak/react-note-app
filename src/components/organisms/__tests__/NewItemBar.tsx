@@ -10,7 +10,7 @@ import {
 
 import NewItemBar, { NewItemBarProps } from '../NewItemBar/NewItemBar';
 import * as NewItemBarStories from '../NewItemBar/NewItemBar.stories';
-import { routes } from '~/constants';
+import { ROUTES_PATHS } from '~/constants';
 
 import type { NewItem, RoutesVariantRootPaths } from '~/commonTypes';
 
@@ -46,7 +46,7 @@ const newItemBuilder = build<NewItem>({
 });
 
 describe('<NewItemBar />', () => {
-  it.each([routes.notes, routes.twitters, routes.articles])(
+  it.each([ROUTES_PATHS.notes, ROUTES_PATHS.twitters, ROUTES_PATHS.articles])(
     'initially, the form should not contain any errors and button should be enable',
     (path) => {
       renderNewItemBar(path);
@@ -55,11 +55,11 @@ describe('<NewItemBar />', () => {
       expect(getByTitlePlaceholderText()).toBeValid();
       expect(getByDescriptionPlaceholderText()).toBeValid();
 
-      if (path === routes.twitters) {
+      if (path === ROUTES_PATHS.twitters) {
         expect(queryByTwitterPlaceholderText()).toBeValid();
       }
 
-      if (path === routes.articles) {
+      if (path === ROUTES_PATHS.articles) {
         expect(queryByLinkPlaceholderText()).toBeValid();
       }
     },
@@ -79,7 +79,7 @@ describe('<NewItemBar />', () => {
     const mockHandleClose = jest.fn(() => ({}));
     const fakeNewItem = newItemBuilder();
 
-    renderNewItemBar(routes.notes, mockHandleClose);
+    renderNewItemBar(ROUTES_PATHS.notes, mockHandleClose);
 
     userEvent.type(getByTitlePlaceholderText(), fakeNewItem.title);
     userEvent.type(getByDescriptionPlaceholderText(), fakeNewItem.content);
@@ -97,21 +97,21 @@ describe('<NewItemBar />', () => {
     expect(mockHandleClose).toHaveBeenCalledTimes(1);
   });
 
-  testComponent(() => renderNewItemBar(routes.notes), {
+  testComponent(() => renderNewItemBar(ROUTES_PATHS.notes), {
     suffixTestNames: 'when is note page',
   })
     .not.toBeInTheDocument(TEST_NAME.TWITTER_NAME_INPUT, queryByTwitterPlaceholderText)
     .not.toBeInTheDocument(TEST_NAME.ARTICLE_URL_INPUT, queryByLinkPlaceholderText)
     .run();
 
-  testComponent(() => renderNewItemBar(routes.twitters), {
+  testComponent(() => renderNewItemBar(ROUTES_PATHS.twitters), {
     suffixTestNames: 'when is twitter page',
   })
     .toBeInTheDocument(TEST_NAME.TWITTER_NAME_INPUT, queryByTwitterPlaceholderText)
     .not.toBeInTheDocument(TEST_NAME.ARTICLE_URL_INPUT, queryByLinkPlaceholderText)
     .run();
 
-  testComponent(() => renderNewItemBar(routes.articles), {
+  testComponent(() => renderNewItemBar(ROUTES_PATHS.articles), {
     suffixTestNames: 'when is article page',
   })
     .toBeInTheDocument(TEST_NAME.ARTICLE_URL_INPUT, queryByLinkPlaceholderText)

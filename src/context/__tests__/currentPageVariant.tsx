@@ -3,7 +3,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { getPairOfPathsAndPageTypes } from 'testUtils';
 
 import { useCurrentPageVariant, CurrentPageVariantProvider } from '../currentPageVariant';
-import { routes } from '~/constants';
+import { ROUTES_PATHS } from '~/constants';
 
 const renderCurrentPageVariantHook = (path: string) => {
   window.history.pushState({}, 'Test page', path);
@@ -21,7 +21,7 @@ const renderCurrentPageVariantHook = (path: string) => {
   };
 };
 
-const NO_VARIANTS_ROUTES_PATHS = [routes.home, routes.login, routes.register];
+const NO_VARIANTS_ROUTES_PATHS = [ROUTES_PATHS.home, ROUTES_PATHS.login, ROUTES_PATHS.register];
 
 describe('CurrentPageVariant Context', () => {
   it('if Current Page Variant Hook is used without <CurrentPageVariantProvider/> then throw error', () => {

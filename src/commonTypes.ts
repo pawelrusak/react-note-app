@@ -1,4 +1,4 @@
-import { routes } from '~/constants';
+import { ROUTES_PATHS } from '~/constants';
 /*
  *
  * GENERICS
@@ -113,10 +113,10 @@ export enum Status {
  * Routes
  *
  */
-type Routes = typeof routes;
+type Routes = typeof ROUTES_PATHS;
 
 export type RoutesVariantRootPaths = Routes['notes'] | Routes['twitters'] | Routes['articles'];
 
-export type RoutesKeys = keyof typeof routes;
+export type RoutesKeys = keyof typeof ROUTES_PATHS;
 
 export type RoutesPaths = Routes[RoutesKeys];

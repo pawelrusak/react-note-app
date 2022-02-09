@@ -7,7 +7,7 @@ import Paragraph from '~/components/atoms/Paragraph/Paragraph';
 import TextButton from '~/components/atoms/TextButton/TextButton';
 import Time from '~/components/atoms/Time/Time';
 import ConfirmationModal from '~/components/molecules/ConfirmationModal/ConfirmationModal';
-import { TEST_ID, routes } from '~/constants';
+import { TEST_ID, ROUTES_PATHS } from '~/constants';
 import { useCurrentPageVariant, useConfirmationModal } from '~/hooks';
 
 import UserPageTemplate from '~/templates/UserPageTemplate/UserPageTemplate';
@@ -86,7 +86,7 @@ const DetailsTemplate = ({
 
   const handleConfirm = () => {
     removeItemAction(pageVariant, id);
-    history.replace(routes[pageVariant]);
+    history.replace(ROUTES_PATHS[pageVariant]);
   };
 
   return (

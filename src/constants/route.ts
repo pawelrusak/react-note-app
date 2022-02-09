@@ -1,4 +1,4 @@
-export const routes = {
+export const ROUTES_PATHS = {
   home: '/',
   notes: '/notes',
   note: '/notes/:id',

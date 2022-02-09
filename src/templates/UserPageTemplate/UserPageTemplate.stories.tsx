@@ -1,5 +1,5 @@
 import UserPageTemplate, { UserPageTemplateProps } from './UserPageTemplate';
-import { routes } from '~/constants';
+import { ROUTES_PATHS } from '~/constants';
 import ViewPlaceholder from '~~/.storybook/components/ViewPlaceholder';
 import { UserPageTemplateRouterDecorator, StoreDecorator } from '~~/.storybook/decorators';
 
@@ -18,19 +18,19 @@ const Template: Story<UserPageTemplateProps> = () => (
 );
 
 export const Note = Template.bind({});
-Note.decorators = [UserPageTemplateRouterDecorator(routes.notes)];
+Note.decorators = [UserPageTemplateRouterDecorator(ROUTES_PATHS.notes)];
 Note.parameters = {
   pageVariant: 'notes',
 };
 
 export const Twitter = Template.bind({});
-Twitter.decorators = [UserPageTemplateRouterDecorator(routes.twitters)];
+Twitter.decorators = [UserPageTemplateRouterDecorator(ROUTES_PATHS.twitters)];
 Twitter.parameters = {
   pageVariant: 'twitters',
 };
 
 export const Article = Template.bind({});
-Article.decorators = [UserPageTemplateRouterDecorator(routes.articles)];
+Article.decorators = [UserPageTemplateRouterDecorator(ROUTES_PATHS.articles)];
 Article.parameters = {
   pageVariant: 'articles',
 };

@@ -1,7 +1,7 @@
 import { render, screen, testComponent } from 'testUtils';
 
 import SkeletonDetailsTemplate from '../SkeletonDetailsTemplate/SkeletonDetailsTemplate';
-import { TEST_ID, routes } from '~/constants';
+import { TEST_ID, ROUTES_PATHS } from '~/constants';
 
 import type { RoutesVariantRootPaths } from '~/commonTypes';
 
@@ -19,7 +19,7 @@ const TEST_NAME = {
 };
 
 describe('<SkeletonDetailsTemplate />', () => {
-  testComponent(() => renderSkeletonDetailsTemplate(routes.notes), {
+  testComponent(() => renderSkeletonDetailsTemplate(ROUTES_PATHS.notes), {
     suffixTestNames: 'when is note page',
   })
     .not.toBeInTheDocument(
@@ -29,7 +29,7 @@ describe('<SkeletonDetailsTemplate />', () => {
     .not.toBeInTheDocument(TEST_NAME.LINK_SKELETON, querySkeletonDetailsTemplateLinkSkeleton)
     .run();
 
-  testComponent(() => renderSkeletonDetailsTemplate(routes.twitters), {
+  testComponent(() => renderSkeletonDetailsTemplate(ROUTES_PATHS.twitters), {
     suffixTestNames: 'when is twitter page',
   })
     .toBeInTheDocument(
@@ -39,7 +39,7 @@ describe('<SkeletonDetailsTemplate />', () => {
     .toBeInTheDocument(TEST_NAME.LINK_SKELETON, querySkeletonDetailsTemplateLinkSkeleton)
     .run();
 
-  testComponent(() => renderSkeletonDetailsTemplate(routes.articles), {
+  testComponent(() => renderSkeletonDetailsTemplate(ROUTES_PATHS.articles), {
     suffixTestNames: 'when is article page',
   })
     .toBeInTheDocument(TEST_NAME.LINK_SKELETON, querySkeletonDetailsTemplateLinkSkeleton)
