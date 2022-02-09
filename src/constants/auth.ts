@@ -1,6 +1,6 @@
-import { routes } from '~/routes';
+import { ROUTES_PATHS } from './route';
 
-import type { RoutesPaths } from '~/routes';
+import type { RoutesPaths } from '~/commonTypes';
 
 /**
  * This constant can be shared between tests and the code base.
@@ -40,12 +40,12 @@ export const AUTH_FORM_DATA_VARIANTS: AuthFormDataVariants = {
     headingText: 'Sign in',
     buttonText: 'sign in',
     linkText: 'I want my account!',
-    linkPath: routes.register,
+    linkPath: ROUTES_PATHS.register,
   },
   register: {
     headingText: 'Sign up',
     buttonText: 'register',
     linkText: 'I want to log in!',
-    linkPath: routes.login,
+    linkPath: ROUTES_PATHS.login,
   },
 } as const;

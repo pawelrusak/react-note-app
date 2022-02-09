@@ -1,4 +1,4 @@
-import { routes } from '~/routes';
+import { ROUTES_PATHS } from '~/constants';
 /*
  *
  * GENERICS
@@ -102,12 +102,21 @@ export type CSSSizeUnitVariants =
   | 'vmin'
   | 'vmax';
 
-type Routes = typeof routes;
-export type RoutesVariantRootPaths = Routes['notes'] | Routes['twitters'] | Routes['articles'];
-
 export enum Status {
   Idle = 'idle',
   Loading = 'loading',
   Succeeded = 'succeeded',
   Failed = 'failed',
 }
+/*
+ *
+ * Routes
+ *
+ */
+type Routes = typeof ROUTES_PATHS;
+
+export type RoutesVariantRootPaths = Routes['notes'] | Routes['twitters'] | Routes['articles'];
+
+export type RoutesKeys = keyof typeof ROUTES_PATHS;
+
+export type RoutesPaths = Routes[RoutesKeys];

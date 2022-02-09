@@ -1,4 +1,4 @@
-export const routes = {
+export const ROUTES_PATHS = {
   home: '/',
   notes: '/notes',
   note: '/notes/:id',
@@ -9,7 +9,3 @@ export const routes = {
   login: '/login',
   register: '/register',
 } as const;
-
-export type RoutesKeys = keyof typeof routes;
-
-export type RoutesPaths = typeof routes[RoutesKeys];

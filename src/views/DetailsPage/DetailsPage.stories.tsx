@@ -2,7 +2,7 @@ import { Route } from 'react-router-dom';
 import StoryRouter from 'storybook-react-router';
 
 import DetailsPage from './DetailsPage';
-import { routes } from '~/routes';
+import { ROUTES_PATHS } from '~/constants';
 import { StoreDecorator, DetailsPageRouterDecorator } from '~~/.storybook/decorators';
 
 import type { Meta, Story } from '@storybook/react';
@@ -20,34 +20,37 @@ export default {
   },
 } as Meta;
 
-type DetailsPagePaths = typeof routes.note | typeof routes.twitter | typeof routes.article;
+type DetailsPagePaths =
+  | typeof ROUTES_PATHS.note
+  | typeof ROUTES_PATHS.twitter
+  | typeof ROUTES_PATHS.article;
 
 const Template: Story = ({ pathname }) => (
   <Route path={pathname as DetailsPagePaths} component={DetailsPage} />
 );
 
 export const Note = Template.bind({});
-Note.decorators = [DetailsPageRouterDecorator(routes.note)];
+Note.decorators = [DetailsPageRouterDecorator(ROUTES_PATHS.note)];
 Note.args = {
-  pathname: routes.note,
+  pathname: ROUTES_PATHS.note,
 };
 Note.parameters = {
   pageVariant: 'notes',
 };
 
 export const Twitter = Template.bind({});
-Twitter.decorators = [DetailsPageRouterDecorator(routes.twitter)];
+Twitter.decorators = [DetailsPageRouterDecorator(ROUTES_PATHS.twitter)];
 Twitter.args = {
-  pathname: routes.twitter,
+  pathname: ROUTES_PATHS.twitter,
 };
 Twitter.parameters = {
   pageVariant: 'twitters',
 };
 
 export const Article = Template.bind({});
-Article.decorators = [DetailsPageRouterDecorator(routes.article)];
+Article.decorators = [DetailsPageRouterDecorator(ROUTES_PATHS.article)];
 Article.args = {
-  pathname: routes.article,
+  pathname: ROUTES_PATHS.article,
 };
 Article.parameters = {
   pageVariant: 'articles',

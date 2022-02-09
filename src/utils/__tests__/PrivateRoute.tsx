@@ -2,8 +2,8 @@ import { Switch } from 'react-router-dom';
 import { render } from 'testUtils';
 import { fakeStateWithNotLoggedInUser } from 'testUtils/fakers';
 
-import { routes } from '../index';
-import PrivateRoute from '../PrivateRoute';
+import PrivateRoute from '../components/PrivateRoute';
+import { ROUTES_PATHS } from '~/constants';
 import Notes from '~/views/Notes/Notes';
 
 describe('<PrivateRoute />', () => {
@@ -17,14 +17,14 @@ describe('<PrivateRoute />', () => {
 
     render(
       <Switch>
-        <PrivateRoute path={routes.notes} component={Notes} />
+        <PrivateRoute path={ROUTES_PATHS.notes} component={Notes} />
       </Switch>,
       {
-        path: routes.notes,
+        path: ROUTES_PATHS.notes,
         initialState: fakeStateWithNotLoggedInUser,
       },
     );
 
-    expect(window.location.pathname).toBe(routes.login);
+    expect(window.location.pathname).toBe(ROUTES_PATHS.login);
   });
 });

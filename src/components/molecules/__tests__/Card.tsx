@@ -3,8 +3,7 @@ import { render, screen, userEvent, testComponent } from 'testUtils';
 
 import Card from '../Card/Card';
 import * as CardStories from '../Card/Card.stories';
-import { TEST_ID } from '~/constants';
-import { routes } from '~/routes';
+import { TEST_ID, ROUTES_PATHS } from '~/constants';
 
 import type { Item } from '~/commonTypes';
 
@@ -15,8 +14,8 @@ type CardType = 'Note' | 'Twitter' | 'Article';
 const renderCard = (cardType: CardType = 'Note') => {
   const cardData = CardStories[cardType]?.args as Item;
   const itemType = cardType.toLowerCase() as Lowercase<CardType>;
-  const path = routes[`${itemType}s` as const];
-  const pathToDetailsPageWithGivenId = routes[itemType].replace(':id', cardData.id);
+  const path = ROUTES_PATHS[`${itemType}s` as const];
+  const pathToDetailsPageWithGivenId = ROUTES_PATHS[itemType].replace(':id', cardData.id);
 
   const FakeDetailsPage = () => (
     <div data-testid="FakeDetailsPage">{`${cardType}:${cardData.id}`}</div>

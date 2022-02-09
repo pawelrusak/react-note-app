@@ -2,9 +2,8 @@ import { Formik } from 'formik';
 import { Redirect } from 'react-router-dom';
 
 import AuthForm from '~/components/organisms/AuthForm/AuthForm';
-import { AUTH_ERRORS_CODES } from '~/constants';
+import { AUTH_ERRORS_CODES, ROUTES_PATHS } from '~/constants';
 import { useAuth } from '~/hooks';
-import { routes } from '~/routes';
 import AuthTemplate from '~/templates/AuthTemplate/AuthTemplate';
 import { DocumentTitle } from '~/utils/components';
 import * as validation from '~/validations';
@@ -15,7 +14,7 @@ const LoginPage = () => {
   const { userID, authenticate } = useAuth();
 
   if (userID) {
-    return <Redirect to={routes.home} />;
+    return <Redirect to={ROUTES_PATHS.home} />;
   }
 
   return (

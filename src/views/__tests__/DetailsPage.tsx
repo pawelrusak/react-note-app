@@ -4,8 +4,7 @@ import { render, screen, waitFor, testComponent, userEvent } from 'testUtils';
 import { fakeStateWithData, fakeStateWithoutData } from 'testUtils/fakers';
 
 import DetailsPage from '../DetailsPage/DetailsPage';
-import { TEST_ID } from '~/constants';
-import { routes } from '~/routes';
+import { TEST_ID, ROUTES_PATHS } from '~/constants';
 import * as services from '~/services';
 import { capitalize } from '~/utils';
 
@@ -22,7 +21,7 @@ const renderDetailsPage = (
 ) => {
   const pluralItemTypeName = `${itemType}s` as const;
   const [item] = fakeStateWithData.items[pluralItemTypeName];
-  const itemPath = routes[itemType].replace(
+  const itemPath = ROUTES_PATHS[itemType].replace(
     ':id',
     detailsItemId === undefined ? item.id : detailsItemId,
   );
@@ -32,8 +31,8 @@ const renderDetailsPage = (
   return {
     ...render(
       <Switch>
-        <Route path={routes[itemType]} component={DetailsPage} />
-        <Route path={routes[pluralItemTypeName]} component={FakeItemsPage} />
+        <Route path={ROUTES_PATHS[itemType]} component={DetailsPage} />
+        <Route path={ROUTES_PATHS[pluralItemTypeName]} component={FakeItemsPage} />
       </Switch>,
       {
         initialState,

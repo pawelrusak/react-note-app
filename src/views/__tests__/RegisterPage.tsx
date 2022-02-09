@@ -8,8 +8,8 @@ import {
   REGISTERED_USER_CREDENTIALS,
   AUTH_ERRORS,
   SPECIAL_VALUE_TO_TEST_WEAK_PASSWORD,
+  ROUTES_PATHS,
 } from '~/constants';
-import { routes } from '~/routes';
 
 import type { AuthCredentials } from '~/commonTypes';
 
@@ -25,12 +25,12 @@ const FakeHomePage = () => <div data-testid="FakeHomePage">Home Page</div>;
 const renderRegisterPage = () =>
   render(
     <Switch>
-      <Route exact path={routes.register} component={RegisterPage} />
-      <Route exact path={routes.home} component={FakeHomePage} />
+      <Route exact path={ROUTES_PATHS.register} component={RegisterPage} />
+      <Route exact path={ROUTES_PATHS.home} component={FakeHomePage} />
     </Switch>,
     {
       initialState: fakeStateWithNotLoggedInUser,
-      path: routes.register,
+      path: ROUTES_PATHS.register,
     },
   );
 

@@ -4,8 +4,7 @@ import { render, screen, waitFor, userEvent } from 'testUtils';
 import { fakeStateWithNotLoggedInUser } from 'testUtils/fakers';
 
 import LoginPage from '../LoginPage/LoginPage';
-import { REGISTERED_USER_CREDENTIALS, AUTH_ERRORS } from '~/constants';
-import { routes } from '~/routes';
+import { REGISTERED_USER_CREDENTIALS, AUTH_ERRORS, ROUTES_PATHS } from '~/constants';
 
 import type { AuthCredentials } from '~/commonTypes';
 
@@ -21,12 +20,12 @@ const FakeHomePage = () => <div data-testid="FakeHomePage">Home Page</div>;
 const renderLoginPage = () =>
   render(
     <Switch>
-      <Route exact path={routes.login} component={LoginPage} />
-      <Route exact path={routes.home} component={FakeHomePage} />
+      <Route exact path={ROUTES_PATHS.login} component={LoginPage} />
+      <Route exact path={ROUTES_PATHS.home} component={FakeHomePage} />
     </Switch>,
     {
       initialState: fakeStateWithNotLoggedInUser,
-      path: routes.login,
+      path: ROUTES_PATHS.login,
     },
   );
 
