@@ -1,6 +1,6 @@
 import { Route, Redirect, RouteProps, useLocation } from 'react-router-dom';
 
-import { routes } from './index';
+import { routes } from '~/constants';
 import { useAuth } from '~/hooks';
 
 type PrivateRouteProps = RouteProps;

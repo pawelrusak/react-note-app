@@ -1,4 +1,4 @@
-import { routes } from '~/routes';
+import { routes } from '~/constants';
 import { stripSlashPrefix } from '~/utils';
 
 export const getPairOfPathsAndPageTypes = () =>

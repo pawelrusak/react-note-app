@@ -10,7 +10,7 @@ import {
 
 import NewItemBar, { NewItemBarProps } from '../NewItemBar/NewItemBar';
 import * as NewItemBarStories from '../NewItemBar/NewItemBar.stories';
-import { routes } from '~/routes';
+import { routes } from '~/constants';
 
 import type { NewItem, RoutesVariantRootPaths } from '~/commonTypes';
 

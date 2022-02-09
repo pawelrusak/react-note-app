@@ -2,7 +2,7 @@ import { render } from 'testUtils';
 import { fetchItemsTestSuite } from 'testUtils/sharedTests';
 
 import Articles from '../Articles/Articles';
-import { routes } from '~/routes';
+import { routes } from '~/constants';
 
 jest.mock('~/services');
 

@@ -1,5 +1,5 @@
 import CardListTemplate, { CardListTemplateProps } from './CardListTemplate';
-import { routes } from '~/routes';
+import { routes } from '~/constants';
 import ViewPlaceholder from '~~/.storybook/components/ViewPlaceholder';
 import { StoreDecorator, CardListTemplateRouterDecorator } from '~~/.storybook/decorators';
 

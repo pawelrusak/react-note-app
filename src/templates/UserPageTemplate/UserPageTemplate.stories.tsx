@@ -1,5 +1,5 @@
 import UserPageTemplate, { UserPageTemplateProps } from './UserPageTemplate';
-import { routes } from '~/routes';
+import { routes } from '~/constants';
 import ViewPlaceholder from '~~/.storybook/components/ViewPlaceholder';
 import { UserPageTemplateRouterDecorator, StoreDecorator } from '~~/.storybook/decorators';
 

@@ -2,7 +2,7 @@ import { Route } from 'react-router-dom';
 import StoryRouter from 'storybook-react-router';
 
 import DetailsPage from './DetailsPage';
-import { routes } from '~/routes';
+import { routes } from '~/constants';
 import { StoreDecorator, DetailsPageRouterDecorator } from '~~/.storybook/decorators';
 
 import type { Meta, Story } from '@storybook/react';

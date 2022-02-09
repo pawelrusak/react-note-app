@@ -1,7 +1,7 @@
 import StoryRouter from 'storybook-react-router';
 
 import Sidebar from './Sidebar';
-import { routes } from '~/routes';
+import { routes } from '~/constants';
 import { StoreDecorator } from '~~/.storybook/decorators';
 import { sidebarLinks } from '~~/.storybook/links';
 

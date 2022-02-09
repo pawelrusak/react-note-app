@@ -1,4 +1,5 @@
-import { routes } from '~/routes';
+// eslint-disable-next-line
+import { routes } from './route';
 
 import type { RoutesPaths } from '~/routes';
 

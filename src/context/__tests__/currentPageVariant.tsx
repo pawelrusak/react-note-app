@@ -3,7 +3,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { getPairOfPathsAndPageTypes } from 'testUtils';
 
 import { useCurrentPageVariant, CurrentPageVariantProvider } from '../currentPageVariant';
-import { routes } from '~/routes';
+import { routes } from '~/constants';
 
 const renderCurrentPageVariantHook = (path: string) => {
   window.history.pushState({}, 'Test page', path);

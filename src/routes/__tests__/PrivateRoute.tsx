@@ -2,8 +2,8 @@ import { Switch } from 'react-router-dom';
 import { render } from 'testUtils';
 import { fakeStateWithNotLoggedInUser } from 'testUtils/fakers';
 
-import { routes } from '../index';
 import PrivateRoute from '../PrivateRoute';
+import { routes } from '~/constants';
 import Notes from '~/views/Notes/Notes';
 
 describe('<PrivateRoute />', () => {

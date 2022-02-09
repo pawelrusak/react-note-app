@@ -2,7 +2,7 @@ import { Meta, Story } from '@storybook/react';
 import StoryRouter from 'storybook-react-router';
 
 import Articles from './Articles';
-import { routes } from '~/routes';
+import { routes } from '~/constants';
 import { StoreDecorator } from '~~/.storybook/decorators';
 import { itemsPageLinks } from '~~/.storybook/links';
 

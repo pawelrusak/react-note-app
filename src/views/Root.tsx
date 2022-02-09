@@ -8,7 +8,7 @@ import LoginPage from './LoginPage/LoginPage';
 import Notes from './Notes/Notes';
 import RegisterPage from './RegisterPage/RegisterPage';
 import Twitters from './Twitters/Twitters';
-import { routes } from '~/routes';
+import { routes } from '~/constants';
 import PrivateRoute from '~/routes/PrivateRoute';
 import store from '~/store';
 import MainTemplate from '~/templates/MainTemplate/MainTemplate';

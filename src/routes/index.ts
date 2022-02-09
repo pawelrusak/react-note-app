@@ -1,14 +1,4 @@
-export const routes = {
-  home: '/',
-  notes: '/notes',
-  note: '/notes/:id',
-  twitters: '/twitters',
-  twitter: '/twitters/:id',
-  articles: '/articles',
-  article: '/articles/:id',
-  login: '/login',
-  register: '/register',
-} as const;
+import type { routes } from '~/constants';
 
 export type RoutesKeys = keyof typeof routes;
 

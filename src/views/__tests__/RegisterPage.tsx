@@ -8,8 +8,8 @@ import {
   REGISTERED_USER_CREDENTIALS,
   AUTH_ERRORS,
   SPECIAL_VALUE_TO_TEST_WEAK_PASSWORD,
+  routes,
 } from '~/constants';
-import { routes } from '~/routes';
 
 import type { AuthCredentials } from '~/commonTypes';
 

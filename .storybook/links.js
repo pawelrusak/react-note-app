@@ -1,5 +1,5 @@
 import { linkTo } from '@storybook/addon-links';
-import { routes } from '../src/routes';
+import { routes } from '../src/constants';
 
 export const sidebarLinks = {
   [routes.notes]: linkTo('Organisms/Sidebar', 'Note'),
