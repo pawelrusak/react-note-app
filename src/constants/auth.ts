@@ -1,7 +1,6 @@
-// eslint-disable-next-line
 import { routes } from './route';
 
-import type { RoutesPaths } from '~/routes';
+import type { RoutesPaths } from '~/commonTypes';
 
 /**
  * This constant can be shared between tests and the code base.

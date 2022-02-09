@@ -102,12 +102,21 @@ export type CSSSizeUnitVariants =
   | 'vmin'
   | 'vmax';
 
-type Routes = typeof routes;
-export type RoutesVariantRootPaths = Routes['notes'] | Routes['twitters'] | Routes['articles'];
-
 export enum Status {
   Idle = 'idle',
   Loading = 'loading',
   Succeeded = 'succeeded',
   Failed = 'failed',
 }
+/*
+ *
+ * Routes
+ *
+ */
+type Routes = typeof routes;
+
+export type RoutesVariantRootPaths = Routes['notes'] | Routes['twitters'] | Routes['articles'];
+
+export type RoutesKeys = keyof typeof routes;
+
+export type RoutesPaths = Routes[RoutesKeys];
