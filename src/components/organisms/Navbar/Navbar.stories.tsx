@@ -1,6 +1,6 @@
 import StoryRouter from 'storybook-react-router';
 
-import Sidebar from './Navbar';
+import Navbar from './Navbar';
 import { ROUTES_PATHS } from '~/constants';
 import { StoreDecorator } from '~~/.storybook/decorators';
 import { navbarLinks } from '~~/.storybook/links';
@@ -8,12 +8,12 @@ import { navbarLinks } from '~~/.storybook/links';
 import type { Meta, Story } from '@storybook/react';
 
 export default {
-  title: 'Organisms/Sidebar',
-  component: Sidebar,
+  title: 'Organisms/Navbar',
+  component: Navbar,
   decorators: [StoreDecorator],
 } as Meta;
 
-const Template: Story = (args) => <Sidebar {...args} />;
+const Template: Story = (args) => <Navbar {...args} />;
 
 export const Note = Template.bind({});
 Note.decorators = [StoryRouter(navbarLinks, { initialEntries: [ROUTES_PATHS.notes] })];
