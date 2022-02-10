@@ -1,14 +1,14 @@
 import { render, userEvent, screen, waitFor } from 'testUtils';
 import { fakeStateWithDataAndLoggedInUser } from 'testUtils/fakers';
 
-import Sidebar from '../Navbar/Navbar';
+import Navbar from '../Navbar/Navbar';
 import { ROUTES_PATHS } from '~/constants';
 
 jest.mock('~/services');
 
-describe('<Sidebar />', () => {
+describe('<Navbar />', () => {
   it('sets the "userID" in the auth state to null when the logout button is clicked', async () => {
-    const { store } = render(<Sidebar />, {
+    const { store } = render(<Navbar />, {
       initialState: fakeStateWithDataAndLoggedInUser,
       path: ROUTES_PATHS.notes,
     });
