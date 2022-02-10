@@ -1,7 +1,7 @@
 import { render, userEvent, screen, waitFor } from 'testUtils';
 import { fakeStateWithDataAndLoggedInUser } from 'testUtils/fakers';
 
-import Sidebar from '../Sidebar/Sidebar';
+import Sidebar from '../Navbar/Navbar';
 import { ROUTES_PATHS } from '~/constants';
 
 jest.mock('~/services');
