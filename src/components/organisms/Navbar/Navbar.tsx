@@ -59,7 +59,7 @@ const StyledLogoutListItem = styled.li`
   margin-top: auto;
 `;
 
-const Sidebar = () => {
+const Navbar = () => {
   const pageVariant = useCurrentPageVariant();
   const { logout } = useAuth();
 
@@ -103,4 +103,4 @@ const Sidebar = () => {
   );
 };
 
-export default Sidebar;
+export default Navbar;

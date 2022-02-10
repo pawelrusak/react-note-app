@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import Sidebar from '~/components/organisms/Sidebar/Sidebar';
+import Navbar from '~/components/organisms/Navbar/Navbar';
 
 const StyledWrapper = styled.div`
   padding-left: 150px;
@@ -12,7 +12,7 @@ export type UserPageTemplateProps = {
 
 const UserPageTemplate = ({ children }: UserPageTemplateProps) => (
   <StyledWrapper>
-    <Sidebar />
+    <Navbar />
     {children}
   </StyledWrapper>
 );

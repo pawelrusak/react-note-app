@@ -1,10 +1,10 @@
 import { linkTo } from '@storybook/addon-links';
 import { ROUTES_PATHS } from '../src/constants';
 
-export const sidebarLinks = {
-  [ROUTES_PATHS.notes]: linkTo('Organisms/Sidebar', 'Note'),
-  [ROUTES_PATHS.articles]: linkTo('Organisms/Sidebar', 'Article'),
-  [ROUTES_PATHS.twitters]: linkTo('Organisms/Sidebar', 'Twitter'),
+export const navbarLinks = {
+  [ROUTES_PATHS.notes]: linkTo('Organisms/Navbar', 'Note'),
+  [ROUTES_PATHS.articles]: linkTo('Organisms/Navbar', 'Article'),
+  [ROUTES_PATHS.twitters]: linkTo('Organisms/Navbar', 'Twitter'),
 };
 
 export const itemsPageLinks = {
