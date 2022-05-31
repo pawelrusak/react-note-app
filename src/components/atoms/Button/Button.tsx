@@ -1,3 +1,4 @@
+import * as polished from 'polished';
 import styled, { css } from 'styled-components';
 
 import * as styledKeyframe from '~/theme/keyframes';
@@ -12,22 +13,24 @@ export type ButtonProps =
   | Readonly<{ variant?: Variants; secondary?: never; pending?: boolean }>;
 
 const Button = styled.button<ButtonProps>`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: black;
-  text-decoration: none;
-  padding: 0;
   background-color: ${styledMixin.variantColorValue()};
-  width: 220px;
-  height: 47px;
+  border-radius: 5rem;
   border: none;
-  border-radius: 50px;
-  font-family: 'Montserrat';
-  font-weight: 600;
-  font-size: 16px;
-  text-transform: uppercase;
   cursor: pointer;
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: ${({ theme }) => theme.bold};
+  font-size: 1.6rem;
+  line-height: 1.6rem;
+  padding: 1.6rem 3.2rem;
+  min-width: 22.5rem;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: ${({ theme }) => theme.black};
+
+  @media (prefers-reduced-motion: no-preference) {
+    transition: background-color 0.15s ease-in-out;
+  }
 
   &:hover {
     background-color: ${styledMixin.variantColorValue({ darken: true })};
@@ -36,13 +39,15 @@ const Button = styled.button<ButtonProps>`
   ${({ secondary }) =>
     secondary
       ? css`
-          background-color: hsl(0, 0%, 90%);
-          width: 105px;
-          height: 30px;
-          font-size: 10px;
+          font-size: 1rem;
+          line-height: 1rem;
+          padding: 1.1rem 2.2rem;
+          min-width: 10.6rem;
+          background-color: ${({ theme }) => theme.grey200};
 
           &:hover {
-            background-color: hsl(0, 0%, 90%);
+            background-color: ${({ theme }) => theme.grey200};
+            background-color: ${({ theme }) => polished.darken(0.075, theme.grey200)};
           }
         `
       : css`
