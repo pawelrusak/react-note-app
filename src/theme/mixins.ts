@@ -1,5 +1,6 @@
 import * as polished from 'polished';
 import { css } from 'styled-components';
+import { generateMedia, pxToEm } from 'styled-media-query';
 
 import { isNumber } from '~/utils';
 
@@ -52,3 +53,15 @@ type ZIndexDefaultThemeKeys = keyof ZIndexDefaultTheme;
 export const zIndexDeclaration = (themeZIndex: ZIndexDefaultThemeKeys | number) => css`
   z-index: ${({ theme }) => (isNumber(themeZIndex) ? themeZIndex : theme.zIndex[themeZIndex])};
 `;
+
+const breakpointsInPx = {
+  tiny: '600px',
+  small: '900px',
+  medium: '1200px',
+  large: '1600px',
+  huge: '1800px',
+};
+
+export const breakpointsInEm = pxToEm(breakpointsInPx);
+
+export const media = generateMedia(breakpointsInEm);
