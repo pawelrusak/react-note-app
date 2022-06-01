@@ -55,11 +55,11 @@ export const zIndexDeclaration = (themeZIndex: ZIndexDefaultThemeKeys | number) 
 `;
 
 const breakpointsInPx = {
-  tiny: '600px',
-  small: '900px',
-  medium: '1200px',
-  large: '1600px',
-  huge: '1800px',
+  xs: '600px',
+  sm: '900px',
+  md: '1200px',
+  lg: '1600px',
+  xl: '1800px',
 };
 
 export const breakpointsInEm = pxToEm(breakpointsInPx);
