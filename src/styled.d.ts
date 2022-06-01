@@ -18,7 +18,7 @@ declare module 'styled-components' {
     red200: string;
     red300: string;
     lineHeight: string | number;
-    light: number;
+    normal: number;
     bold: number;
     fontSize: {
       xxs: string;
