@@ -7,15 +7,32 @@ import Heading from '~/components/atoms/Heading/Heading';
 import Input from '~/components/atoms/Input/Input';
 import Field from '~/components/molecules/Field/Field';
 import { AUTH_FORM_DATA_VARIANTS } from '~/constants';
+import { media } from '~/theme/mixins';
 import { isAuthCredentialsTouched } from '~/utils';
 
 import type { AuthCredentials } from '~/commonTypes';
+
+const StyledHeading = styled(Heading)`
+  font-size: 3.3rem;
+  line-height: 4rem;
+  margin-bottom: 3rem;
+
+  ${media.greaterThan('xs')`
+    margin-bottom: 4rem;
+  `}
+
+  ${media.greaterThan('xl')`
+    font-size: 3.8rem;
+    margin-bottom: 8rem;
+  `}
+`;
 
 const StyledMain = styled.main`
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  width: 100%;
 `;
 
 const StyledForm = styled(Form)`
@@ -23,16 +40,30 @@ const StyledForm = styled(Form)`
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  width: 100%;
 `;
 
 const StyledInput = styled(Input)`
-  height: 40px;
+  min-width: auto;
   width: 100%;
 `;
 
 const StyledField = styled(Field)`
   display: block;
-  width: 300px;
+  align-self: stretch;
+`;
+
+const StyledButton = styled(Button)`
+  margin-bottom: 1.58rem;
+
+  ${media.greaterThan('xs')`
+    margin-top: 0.7rem;
+  `}
+
+  ${media.greaterThan('xl')`
+    margin-top: 4rem;
+    margin-bottom: 2.6rem;
+  `}
 `;
 
 const StyledLink = styled(Link)`
@@ -41,7 +72,6 @@ const StyledLink = styled(Link)`
   font-size: ${({ theme }) => theme.fontSize.xs};
   color: black;
   text-transform: uppercase;
-  margin: 20px 0 50px;
 `;
 
 export type AuthFormProps = {
@@ -54,9 +84,9 @@ const AuthForm = ({ formVariant }: AuthFormProps) => {
 
   return (
     <StyledMain>
-      <Heading as="h2" id="auth-form">
+      <StyledHeading as="h2" id="auth-form">
         {headingText}
-      </Heading>
+      </StyledHeading>
       <StyledForm aria-labelledby="auth-form">
         <StyledField
           name="email"
@@ -72,13 +102,13 @@ const AuthForm = ({ formVariant }: AuthFormProps) => {
           component={StyledInput}
           aria-required="true"
         />
-        <Button
+        <StyledButton
           type="submit"
           pending={isSubmitting}
           disabled={isSubmitting || (isAuthCredentialsTouched(touched) && !isValid)}
         >
           {buttonText}
-        </Button>
+        </StyledButton>
       </StyledForm>
       <StyledLink to={linkPath}>{linkText}</StyledLink>
     </StyledMain>
