@@ -13,6 +13,7 @@ export type ButtonProps =
   | Readonly<{ variant?: Variants; secondary?: never; pending?: boolean }>;
 
 const Button = styled.button<ButtonProps>`
+  display: block;
   background-color: ${styledMixin.variantColorValue()};
   border-radius: 5rem;
   border: none;
@@ -24,8 +25,10 @@ const Button = styled.button<ButtonProps>`
   line-height: 1.6rem;
   padding: 1.6rem 3.2rem;
   min-width: 22.5rem;
+  width: fit-content;
   text-transform: uppercase;
   text-decoration: none;
+  text-align: center;
   color: ${({ theme }) => theme.black};
 
   @media (prefers-reduced-motion: no-preference) {
