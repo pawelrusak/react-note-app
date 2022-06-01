@@ -1,4 +1,4 @@
-import { lighten } from 'polished';
+import { lighten, transparentize } from 'polished';
 import styled, { css } from 'styled-components';
 
 import magnifierIcon from '~/assets/icons/magnifier.svg';
@@ -29,8 +29,9 @@ const Input = styled.input<InputProps>`
   border: none;
 
   &::placeholder {
-    color: hsla(0, 0%, 51%, 0.6);
-    color: ${({ theme }) => theme.grey300};
+    // color: hsla(0, 0%, 51%, 0.6);
+    // color: ${({ theme }) => theme.grey300};
+    color: ${({ theme }) => transparentize(0.4, theme.grey500)};
     ${({ label }) =>
       label &&
       css`
@@ -55,7 +56,8 @@ const Input = styled.input<InputProps>`
      * This decision may change later.
      */
     outline: none;
-    box-shadow: 0 0 0 2px hsl(0, 0%, 51%, 0.8);
+    // box-shadow: 0 0 0 2px hsl(0, 0%, 51%, 0.8);
+    box-shadow: 0 0 0 2px ${({ theme }) => transparentize(0.2, theme.grey500)};
   }
 
   ${({ search }) =>
@@ -88,7 +90,7 @@ const Input = styled.input<InputProps>`
       }
 
       &:focus {
-        box-shadow: 0 0 0 1px ${({ theme }) => theme.red200};
+        box-shadow: 0 0 0 2px ${({ theme }) => transparentize(0.4, theme.red200)};
       }
     `}
 `;
