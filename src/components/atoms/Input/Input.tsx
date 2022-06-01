@@ -4,27 +4,44 @@ import styled, { css } from 'styled-components';
 import magnifierIcon from '~/assets/icons/magnifier.svg';
 import { shake } from '~/theme/keyframes';
 
+/**
+ * @todo Remove the 'label' property after implement the floating label
+ */
 export type InputProps =
-  | { readonly search: true; readonly invalid?: never }
-  | { readonly search?: false; readonly invalid?: boolean };
+  | { readonly search: true; readonly invalid?: never; label?: boolean }
+  | { readonly search?: false; readonly invalid?: boolean; label?: boolean };
 
 const Input = styled.input<InputProps>`
-  padding: 15px 30px;
-  font-size: ${({ theme }) => theme.fontSize.s};
-  font-weight: ${({ theme }) => theme.light};
-  background-color: ${({ theme }) => theme.grey100};
-  border: none;
-  border-radius: 50px;
   box-sizing: border-box;
+  padding: 1.55rem 3.5rem;
+  min-width: 37.4rem;
+
+  border-radius: 5rem;
+  background-color: ${({ theme }) => theme.grey100};
+  color: ${({ theme }) => theme.black};
+  cursor: text;
+
+  font-style: normal;
+  font-weight: ${({ theme }) => theme.normal};
+  font-size: ${({ theme }) => theme.fontSize.s};
+  line-height: 1;
+
+  border: none;
 
   &::placeholder {
-    text-transform: uppercase;
-    letter-spacing: 1px;
+    color: hsla(0, 0%, 51%, 0.6);
     color: ${({ theme }) => theme.grey300};
+    ${({ label }) =>
+      label &&
+      css`
+        font-weight: ${({ theme }) => theme.bold};
+        text-transform: uppercase;
+        color: ${({ theme }) => theme.grey500};
+      `}
   }
 
   &:hover {
-    box-shadow: 0 0 0 1px ${({ theme }) => lighten(0.18, theme.grey300)};
+    box-shadow: 0 0 0 1px ${({ theme }) => theme.grey500};
   }
 
   &:focus {
@@ -38,17 +55,18 @@ const Input = styled.input<InputProps>`
      * This decision may change later.
      */
     outline: none;
-    box-shadow: 0 0 0 1px ${({ theme }) => theme.grey300};
+    box-shadow: 0 0 0 2px hsl(0, 0%, 51%, 0.8);
   }
 
   ${({ search }) =>
     search &&
     css`
-      padding: 10px 20px 10px 40px;
+      padding: 1.15rem 2rem 1.15rem 4.3rem;
       font-size: ${({ theme }) => theme.fontSize.xs};
+      min-width: 23.4rem;
       background-image: url(${magnifierIcon});
-      background-size: 15px;
-      background-position: 15px 50%;
+      background-size: 1.5rem;
+      background-position: 1.4rem 50%;
       background-repeat: no-repeat;
     `}
 
