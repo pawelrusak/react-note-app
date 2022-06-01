@@ -13,18 +13,39 @@ const Template: Story<StoryInputProps> = (args) => <Input {...args} />;
 
 export const Default = Template.bind({});
 Default.args = {
-  placeholder: 'login',
+  placeholder: 'Login',
   search: false,
+  label: false,
+};
+
+export const WithLabel = Template.bind({});
+WithLabel.args = {
+  ...Default.args,
+  label: true,
 };
 
 export const Search = Template.bind({});
 Search.args = {
-  placeholder: 'search',
+  placeholder: 'Search',
   search: true,
+  label: false,
+};
+
+export const SearchWithLabel = Template.bind({});
+SearchWithLabel.args = {
+  ...Search.args,
+  label: true,
 };
 
 export const Invalid = Template.bind({});
 Invalid.args = {
-  placeholder: 'invalid',
+  ...Default.args,
+  placeholder: 'Invalid',
   invalid: true,
+};
+
+export const InvalidWithLabel = Template.bind({});
+InvalidWithLabel.args = {
+  ...Invalid.args,
+  label: true,
 };
