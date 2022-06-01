@@ -11,7 +11,7 @@ type StyledWrapperProps = {
 const StyledWrapper = styled.p<StyledWrapperProps>`
   display: inline-block;
   // Styles for better the negative space for invalid and valid state
-  margin-bottom: ${({ invalid }) => (invalid ? '22px' : '30px')};
+  margin-bottom: ${({ invalid }) => (invalid ? '2.2rem' : '3rem')};
   margin-top: 0;
 `;
 
@@ -21,7 +21,7 @@ const StyledInput = styled(Input)`
 
 const StyledErrorMessage = styled.span`
   display: block;
-  padding: 8px 30px 0;
+  padding: 0.8rem 3.5rem 0;
   color: ${({ theme }) => theme.red300};
   font-size: ${({ theme }) => theme.fontSize.xs};
   font-weight: ${({ theme }) => theme.bold};
