@@ -64,4 +64,4 @@ const breakpointsInPx = {
 
 export const breakpointsInEm = pxToEm(breakpointsInPx);
 
-export const media = generateMedia(breakpointsInEm);
+export const media = generateMedia<typeof breakpointsInPx, DefaultTheme>(breakpointsInEm);
