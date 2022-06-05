@@ -32,6 +32,7 @@ declare module 'styled-components' {
       cardHeader: number;
       newItemBar: number;
       gridTemplateButtonIcon: number;
+      navbar: number;
       modal: number;
     };
   }

@@ -28,6 +28,7 @@ export const theme: DefaultTheme = {
     cardHeader: 1000,
     newItemBar: 1010,
     gridTemplateButtonIcon: 1020,
+    navbar: 1030,
     modal: 1050,
   },
 };
