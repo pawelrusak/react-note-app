@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import Heading from '~/components/atoms/Heading/Heading';
 import SkeletonCardList from '~/components/organisms/SkeletonCardList/SkeletonCardList';
 import { useFetchItems } from '~/hooks';
+import { media } from '~/theme/mixins';
 import { VisuallyHidden } from '~/utils';
 
 import type { Variants } from '~/commonTypes';
@@ -11,18 +12,24 @@ import type { ItemsState } from '~/store';
 type Children<T extends Variants> = ({ data }: { data: ItemsState[T] }) => React.ReactNode;
 
 const StyledGrid = styled.div`
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-gap: 85px;
-
-  @media (max-width: 1500px) {
-    grid-gap: 45px;
-    grid-template-columns: repeat(2, 1fr);
+  & > * {
+    margin-bottom: 2rem;
   }
 
-  @media (max-width: 1100px) {
-    grid-template-columns: 1fr;
-  }
+  ${media.greaterThan('sm')`
+    
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(45.4rem, 1fr));
+    gap: 7rem;
+
+    & > * {
+      margin-bottom: 0;
+    }
+  `}
+
+  ${media.greaterThan('xl')`
+    gap: 8.6rem;
+  `}
 `;
 
 const StyledEmptyStateTitle = styled(Heading)`
