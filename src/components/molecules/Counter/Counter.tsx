@@ -5,12 +5,22 @@ import Paragraph from '~/components/atoms/Paragraph/Paragraph';
 import Skeleton from '~/components/atoms/Skeleton/Skeleton';
 import { TEST_ID } from '~/constants';
 import { useItemsStatus, useCurrentPageVariant, useCounter } from '~/hooks';
+import { media } from '~/theme/mixins';
 
 const StyledParagraph = styled(Paragraph)`
   margin: 0;
   font-weight: ${({ theme }) => theme.bold};
   font-size: ${({ theme }) => theme.fontSize.m};
   color: ${({ theme }) => theme.grey500};
+  line-height: 1.7rem;
+
+  ${media.greaterThan('sm')`
+    font-size: 1.9rem;
+  `}
+
+  ${media.greaterThan('sm')`
+    font-size: 2.1rem;
+  `}
 `;
 
 const StyledSkeleton = styled(Skeleton)`
