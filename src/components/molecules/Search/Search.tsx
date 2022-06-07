@@ -17,6 +17,7 @@ const SearchForm = () => {
             id="search-input"
             type="search"
             search
+            label
             placeholder="Search"
             value={search}
             onChange={(event) => setSearch(event.target.value)}
