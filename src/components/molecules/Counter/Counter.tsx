@@ -10,22 +10,23 @@ import { media } from '~/theme/mixins';
 const StyledParagraph = styled(Paragraph)`
   margin: 0;
   font-weight: ${({ theme }) => theme.bold};
-  font-size: ${({ theme }) => theme.fontSize.m};
+  font-size: 1.7rem;
   color: ${({ theme }) => theme.grey500};
-  line-height: 1.7rem;
+  line-height: 2.1rem;
 
   ${media.greaterThan('sm')`
     font-size: 1.9rem;
   `}
 
   ${media.greaterThan('sm')`
-    font-size: 2.1rem;
+    font-size: ${({ theme }) => theme.fontSize.m};
   `}
 `;
 
 const StyledSkeleton = styled(Skeleton)`
   height: ${({ theme }) => theme.fontSize.m};
   width: 10rem;
+  margin: 0;
 `;
 
 const StyledAdditionalInfo = styled.span`
