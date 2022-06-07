@@ -9,13 +9,13 @@ export type HeadingProps = {
 const Heading = styled.h1<HeadingProps>`
   font-style: normal;
   font-weight: ${({ theme }) => theme.bold};
-  font-size: ${({ theme, big }) => (big ? theme.fontSize.xl : '2.2rem')};
+  font-size: ${({ big }) => (big ? '3rem' : '2.2rem')};
   line-height: ${({ big }) => (big ? 1 : 1.21)};
 
   color: ${({ theme }) => theme.black};
 
   ${media.greaterThan<HeadingProps>('xs')`;
-    font-size: ${({ theme, big }) => (big ? theme.fontSize.xl : theme.fontSize.l)};
+    font-size: ${({ theme, big }) => (big ? '3.6rem' : theme.fontSize.l)};
     line-height: ${({ big }) => (big ? 1.11 : 1.2)};
   `}
 
