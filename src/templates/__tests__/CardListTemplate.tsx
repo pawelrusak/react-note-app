@@ -33,9 +33,9 @@ const CSS_STYLES = {
     VISIBLE: 'transform: translate(0)',
     NOT_VISIBLE: 'transform: translate(100%)',
   },
-  TRANSFORM_ROTATE: {
-    ACTIVE: 'transform: rotate(-45deg)',
-    NOT_ACTIVE: 'transform: rotate(0)',
+  TRANSFORM_ROTATE_WITH_SCALE: {
+    ACTIVE: 'transform: rotate(-45deg) scale(0.676)',
+    NOT_ACTIVE: 'transform: rotate(0) scale(1)',
   },
 } as const;
 
@@ -79,21 +79,21 @@ describe('<CardListTemplate />', () => {
 
     expect(newItemBar).not.toBeVisible();
     expect(getByToggleNewItemBarNameAndButtonRole()).toHaveStyle(
-      CSS_STYLES.TRANSFORM_ROTATE.NOT_ACTIVE,
+      CSS_STYLES.TRANSFORM_ROTATE_WITH_SCALE.NOT_ACTIVE,
     );
 
     userEvent.click(getByToggleNewItemBarNameAndButtonRole());
 
     expect(newItemBar).toBeVisible();
     expect(getByToggleNewItemBarNameAndButtonRole()).toHaveStyle(
-      CSS_STYLES.TRANSFORM_ROTATE.ACTIVE,
+      CSS_STYLES.TRANSFORM_ROTATE_WITH_SCALE.ACTIVE,
     );
 
     userEvent.click(getByToggleNewItemBarNameAndButtonRole());
 
     expect(newItemBar).not.toBeVisible();
     expect(getByToggleNewItemBarNameAndButtonRole()).toHaveStyle(
-      CSS_STYLES.TRANSFORM_ROTATE.NOT_ACTIVE,
+      CSS_STYLES.TRANSFORM_ROTATE_WITH_SCALE.NOT_ACTIVE,
     );
   });
 
@@ -107,21 +107,21 @@ describe('<CardListTemplate />', () => {
 
     expect(newItemBar).toHaveStyle(CSS_STYLES.TRANSFORM_TRANSLATE.NOT_VISIBLE);
     expect(getByToggleNewItemBarNameAndButtonRole()).toHaveStyle(
-      CSS_STYLES.TRANSFORM_ROTATE.NOT_ACTIVE,
+      CSS_STYLES.TRANSFORM_ROTATE_WITH_SCALE.NOT_ACTIVE,
     );
 
     userEvent.click(getByToggleNewItemBarNameAndButtonRole());
 
     expect(newItemBar).toHaveStyle(CSS_STYLES.TRANSFORM_TRANSLATE.VISIBLE);
     expect(getByToggleNewItemBarNameAndButtonRole()).toHaveStyle(
-      CSS_STYLES.TRANSFORM_ROTATE.ACTIVE,
+      CSS_STYLES.TRANSFORM_ROTATE_WITH_SCALE.ACTIVE,
     );
 
     userEvent.click(getByToggleNewItemBarNameAndButtonRole());
 
     expect(newItemBar).toHaveStyle(CSS_STYLES.TRANSFORM_TRANSLATE.NOT_VISIBLE);
     expect(getByToggleNewItemBarNameAndButtonRole()).toHaveStyle(
-      CSS_STYLES.TRANSFORM_ROTATE.NOT_ACTIVE,
+      CSS_STYLES.TRANSFORM_ROTATE_WITH_SCALE.NOT_ACTIVE,
     );
   });
 
