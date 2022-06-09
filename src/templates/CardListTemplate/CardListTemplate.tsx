@@ -82,9 +82,6 @@ type StyledButtonIconProps = {
 const StyledButtonIcon = styled(ButtonIcon)<StyledButtonIconProps>`
   position: fixed;
   inset: auto 1.5rem 8rem auto;
-
-  /* bottom: 40px; */
-  /* right: 40px; */
   background-color: ${styledMixin.variantColorValue()};
   background-size: 2.5rem;
   border-radius: 50px;
@@ -101,12 +98,15 @@ const StyledButtonIcon = styled(ButtonIcon)<StyledButtonIconProps>`
   transform: rotate(${({ active }) => (active ? '-45deg' : '0')})
     scale(${({ active }) => (active ? 0.676 : 1)});
 
+  box-shadow: ${({ active }) => (active ? 'none' : '0px 0px 5px rgba(0, 0, 0, 0.25)')};
+
   ${media.greaterThan('xs')`
     inset: auto 2.5rem 9rem auto;
   `}
 
   ${media.greaterThan('sm')`
     inset: auto 4rem 3rem auto;
+    box-shadow: none;
   `}
 
   ${media.greaterThan('xl')`
@@ -127,10 +127,12 @@ const CardListTemplate = ({ children }: CardListTemplateProps) => {
       <StyledMain>
         <StyledMainHeader>
           <Search />
-          <StyledHeading big as="h1">
-            {pageVariant}
-          </StyledHeading>
-          <Counter />
+          <div>
+            <StyledHeading big as="h1">
+              {pageVariant}
+            </StyledHeading>
+            <Counter />
+          </div>
         </StyledMainHeader>
         {children}
         <StyledButtonIcon
