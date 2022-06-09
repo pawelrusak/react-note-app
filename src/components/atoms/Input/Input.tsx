@@ -5,11 +5,15 @@ import magnifierIcon from '~/assets/icons/magnifier.svg';
 import { shake } from '~/theme/keyframes';
 
 /**
- * @todo Remove the 'label' property after implement the floating label
+ * @todo Remove the 'strongPlaceholder' property after implement the floating label
  */
+type StrongPlaceholder = {
+  readonly strongPlaceholder?: boolean;
+};
+
 export type InputProps =
-  | { readonly search: true; readonly invalid?: never; label?: boolean }
-  | { readonly search?: false; readonly invalid?: boolean; label?: boolean };
+  | ({ readonly search: true; readonly invalid?: never } & StrongPlaceholder)
+  | ({ readonly search?: false; readonly invalid?: boolean } & StrongPlaceholder);
 
 const Input = styled.input<InputProps>`
   box-sizing: border-box;
@@ -32,8 +36,8 @@ const Input = styled.input<InputProps>`
     // color: hsla(0, 0%, 51%, 0.6);
     // color: ${({ theme }) => theme.grey300};
     color: ${({ theme }) => transparentize(0.4, theme.grey500)};
-    ${({ label }) =>
-      label &&
+    ${({ strongPlaceholder }) =>
+      strongPlaceholder &&
       css`
         font-weight: ${({ theme }) => theme.bold};
         text-transform: uppercase;

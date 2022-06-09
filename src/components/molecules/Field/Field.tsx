@@ -54,7 +54,7 @@ const Field = ({ component: Component = StyledInput, className, ...props }: Fiel
         invalid={isInvalid()}
         aria-errormessage={errorMessageId}
         aria-invalid={isInvalid()}
-        label
+        strongPlaceholder
       />
       {isInvalid() && (
         <StyledErrorMessage id={errorMessageId} aria-live="polite">
