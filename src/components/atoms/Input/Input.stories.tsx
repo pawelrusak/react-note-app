@@ -15,26 +15,26 @@ export const Default = Template.bind({});
 Default.args = {
   placeholder: 'Login',
   search: false,
-  label: false,
+  strongPlaceholder: false,
 };
 
 export const WithLabel = Template.bind({});
 WithLabel.args = {
   ...Default.args,
-  label: true,
+  strongPlaceholder: true,
 };
 
 export const Search = Template.bind({});
 Search.args = {
   placeholder: 'Search',
   search: true,
-  label: false,
+  strongPlaceholder: false,
 };
 
 export const SearchWithLabel = Template.bind({});
 SearchWithLabel.args = {
   ...Search.args,
-  label: true,
+  strongPlaceholder: true,
 };
 
 export const Invalid = Template.bind({});
@@ -47,5 +47,5 @@ Invalid.args = {
 export const InvalidWithLabel = Template.bind({});
 InvalidWithLabel.args = {
   ...Invalid.args,
-  label: true,
+  strongPlaceholder: true,
 };
