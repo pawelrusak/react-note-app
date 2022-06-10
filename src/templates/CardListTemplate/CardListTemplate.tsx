@@ -46,11 +46,22 @@ const StyledMainHeader = styled.header`
   `}
 
   ${media.greaterThan('sm')`
+    display: flex;
+    flex-direction: column-reverse;
+
     margin-bottom: 4.4rem;
   `}
 
   ${media.greaterThan('xl')`
     margin-bottom: 5.4rem;
+  `}
+`;
+
+const StyledHeadings = styled.div`
+  margin-bottom: 2rem;
+
+  ${media.greaterThan('sm')`
+    margin-bottom: 0;
   `}
 `;
 
@@ -126,13 +137,13 @@ const CardListTemplate = ({ children }: CardListTemplateProps) => {
     <UserPageTemplate>
       <StyledMain>
         <StyledMainHeader>
-          <Search />
-          <div>
+          <StyledHeadings>
             <StyledHeading big as="h1">
               {pageVariant}
             </StyledHeading>
             <Counter />
-          </div>
+          </StyledHeadings>
+          <Search />
         </StyledMainHeader>
         {children}
         <StyledButtonIcon
