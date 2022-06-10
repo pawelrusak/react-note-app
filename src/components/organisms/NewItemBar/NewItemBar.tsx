@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import NewItemForm from '~/components/organisms/NewItemForm/NewItemForm';
 import { TEST_ID } from '~/constants';
 import { useCurrentPageVariant, useAddItemAction } from '~/hooks';
+import { media } from '~/theme/mixins';
 import * as styledMixin from '~/theme/mixins';
 import { newItemSchema } from '~/validations';
 
@@ -13,22 +14,35 @@ type Visible = { readonly visible: boolean };
 type StyledWrapperProps = Required<VariantColorValueProp> & Visible;
 
 const StyledWrapper = styled.div<StyledWrapperProps>`
-  border-left: 10px solid ${styledMixin.variantColorValue()};
   ${styledMixin.zIndexDeclaration('newItemBar')};
   position: fixed;
   display: flex;
-  padding: 100px 90px;
-  flex-direction: column;
+  padding: 2rem 1.5rem 9rem;
   right: 0;
   top: 0;
   height: 100%;
   min-height: 100vh;
-  width: 680px;
+  width: 100vw;
   background-color: white;
-  box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+  box-shadow: -10px 0 8.5px rgba(0, 0, 0, 0.06);
   transform: translate(${({ visible }) => (visible ? '0' : '100%')});
   ${styledMixin.transitionTransformForNewItemBarAndHisToggleButton};
   overflow-y: scroll;
+
+  ${media.greaterThan('sm')`
+    border-left: 11px solid ${styledMixin.variantColorValue()};
+    align-items: center;
+    padding: 2rem 5.9rem 2rem 7.2rem;
+    width: 58.2rem;
+  `}
+
+  ${media.greaterThan('xl')`
+    border-left: 11px solid ${styledMixin.variantColorValue()};
+    padding: 2rem 8.3rem 2rem 10.6rem;
+    padding-top: clamp(10rem, 14vh, 14.6rem);
+    align-items: normal;
+    width: 64rem;
+  `}
 `;
 
 export type NewItemBarProps = Visible & { readonly handleClose: () => void };
