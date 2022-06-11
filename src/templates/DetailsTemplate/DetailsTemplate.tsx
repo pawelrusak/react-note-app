@@ -17,6 +17,10 @@ import type { DetailsItem } from '~/commonTypes';
 const StyledWrapper = styled.div`
   padding: 1.5rem 1.5rem 6rem;
 
+  ${media.greaterThan('xs')`
+    padding: 3rem 6rem 6rem;
+  `}
+
   ${media.greaterThan('sm')`
     padding: 4rem 9rem 2rem;
     max-width: 50vw;
@@ -42,16 +46,6 @@ const StyledDetailsWrapper = styled.article`
 const StyledHeader = styled.header`
   display: flex;
   justify-content: space-between;
-
-  /* margin-bottom: 2rem;
-
-  ${media.greaterThan('sm')`
-    margin-bottom: 0.5rem;
-  `}
-
-  ${media.greaterThan('lg')`
-    margin-bottom: 0.4rem;
-  `} */
 `;
 
 const StyledHeading = styled(Heading)`
