@@ -29,6 +29,10 @@ const StyledWrapper = styled.div<StyledWrapperProps>`
   ${styledMixin.transitionTransformForNewItemBarAndHisToggleButton};
   overflow-y: scroll;
 
+  ${media.greaterThan('xs')`
+    padding: 3rem 6rem 9rem;
+  `}
+
   ${media.greaterThan('sm')`
     border-left: 11px solid ${styledMixin.variantColorValue()};
     align-items: center;
