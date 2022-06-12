@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import Heading from '~/components/atoms/Heading/Heading';
 import SkeletonCardList from '~/components/organisms/SkeletonCardList/SkeletonCardList';
 import { useFetchItems } from '~/hooks';
-import { media } from '~/theme/mixins';
+import { media, cardListBreakpointsInEm } from '~/theme/mixins';
 import { VisuallyHidden } from '~/utils';
 
 import type { Variants } from '~/commonTypes';
@@ -26,6 +26,11 @@ const StyledGrid = styled.div`
       margin-bottom: 0;
     }
   `}
+
+  @media (min-width: ${cardListBreakpointsInEm.smd}) and (max-width: ${cardListBreakpointsInEm.lmd}) {
+    gap: 5rem;
+    grid-template-columns: repeat(2, 1fr);
+  }
 
   ${media.greaterThan('xl')`
     gap: 8.6rem;

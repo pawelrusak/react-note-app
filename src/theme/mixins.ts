@@ -62,6 +62,13 @@ const breakpointsInPx = {
   xl: '1800px',
 };
 
+const cardListBreakpointsInPx = {
+  smd: '1279px',
+  lmd: '1340px',
+};
+
 export const breakpointsInEm = pxToEm(breakpointsInPx);
+
+export const cardListBreakpointsInEm = pxToEm(cardListBreakpointsInPx);
 
 export const media = generateMedia<typeof breakpointsInPx, DefaultTheme>(breakpointsInEm);
