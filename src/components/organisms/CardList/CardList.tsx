@@ -20,6 +20,7 @@ const StyledGrid = styled.div`
     
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(45.4rem, 1fr));
+    grid-auto-rows: min-content;
     gap: 7rem;
 
     & > * {
