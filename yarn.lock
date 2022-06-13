@@ -14005,6 +14005,14 @@ styled-components@^5.3.0:
     shallowequal "^1.1.0"
     supports-color "^5.5.0"
 
+styled-media-query@^2.1.2:
+  version "2.1.2"
+  resolved "https://registry.yarnpkg.com/styled-media-query/-/styled-media-query-2.1.2.tgz#d59e8d91bc4bcff210dc511bdcecedf16eb2c5b7"
+
+styled-reset@^4.4.1:
+  version "4.4.1"
+  resolved "https://registry.yarnpkg.com/styled-reset/-/styled-reset-4.4.1.tgz#c7b3aa247d4f8c5d14f1dc72fde9d02b8bee1758"
+
 stylehacks@^4.0.0:
   version "4.0.3"
   resolved "https://registry.yarnpkg.com/stylehacks/-/stylehacks-4.0.3.tgz#6718fcaf4d1e07d8a1318690881e8d96726a71d5"

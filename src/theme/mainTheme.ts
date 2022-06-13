@@ -14,7 +14,7 @@ export const theme: DefaultTheme = {
   red200: 'hsl(359, 100%, 65%)',
   red300: 'hsl(359, 100%, 59%)',
   lineHeight: 1.7,
-  light: 300,
+  normal: 400,
   bold: 600,
   fontSize: {
     xxs: '1rem',
@@ -28,6 +28,7 @@ export const theme: DefaultTheme = {
     cardHeader: 1000,
     newItemBar: 1010,
     gridTemplateButtonIcon: 1020,
+    navbar: 1030,
     modal: 1050,
   },
 };

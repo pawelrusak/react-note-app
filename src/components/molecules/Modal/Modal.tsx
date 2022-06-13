@@ -25,7 +25,7 @@ const StyledWrapper = styled.div`
 `;
 
 const StyledHeader = styled.div`
-  padding: 2.5rem 10rem 3.7rem;
+  padding: 2.5rem 2rem 3.7rem;
 `;
 
 const StyledPrimaryButton = styled(Button)`
@@ -39,7 +39,7 @@ const StyledPrimaryButton = styled(Button)`
 
 const StyledContainer = styled.div<Required<VariantColorValueProp>>`
   background: white;
-  min-width: 45.5rem;
+  width: min(45.5rem, calc(100% - 4rem));
   min-height: 5rem;
   border-radius: 0.7rem;
   overflow: hidden;
@@ -55,7 +55,7 @@ const StyledContainer = styled.div<Required<VariantColorValueProp>>`
 `;
 
 const StyledBody = styled.div`
-  padding: ${({ theme }) => 3.7 - (+theme.lineHeight * 1.5) / 2 + 0.8}rem 10rem;
+  padding: ${({ theme }) => 3.7 - (+theme.lineHeight * 1.5) / 2 + 0.8}rem 2rem;
   text-align: center;
 `;
 
@@ -67,7 +67,7 @@ const StyledTitle = styled(Heading)`
 `;
 
 const StyledFooter = styled.div`
-  padding: 2.5rem 10rem;
+  padding: 2.5rem 2rem;
   display: flex;
   display: flex;
   flex-direction: column;

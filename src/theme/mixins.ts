@@ -1,5 +1,6 @@
 import * as polished from 'polished';
 import { css } from 'styled-components';
+import { generateMedia, pxToEm } from 'styled-media-query';
 
 import { isNumber } from '~/utils';
 
@@ -52,3 +53,22 @@ type ZIndexDefaultThemeKeys = keyof ZIndexDefaultTheme;
 export const zIndexDeclaration = (themeZIndex: ZIndexDefaultThemeKeys | number) => css`
   z-index: ${({ theme }) => (isNumber(themeZIndex) ? themeZIndex : theme.zIndex[themeZIndex])};
 `;
+
+const breakpointsInPx = {
+  xs: '600px',
+  sm: '900px',
+  md: '1200px',
+  lg: '1600px',
+  xl: '1800px',
+};
+
+const cardListBreakpointsInPx = {
+  smd: '1279px',
+  lmd: '1340px',
+};
+
+export const breakpointsInEm = pxToEm(breakpointsInPx);
+
+export const cardListBreakpointsInEm = pxToEm(cardListBreakpointsInPx);
+
+export const media = generateMedia<typeof breakpointsInPx, DefaultTheme>(breakpointsInEm);

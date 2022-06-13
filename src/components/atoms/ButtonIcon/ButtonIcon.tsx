@@ -1,3 +1,4 @@
+import { transparentize } from 'polished';
 import styled from 'styled-components';
 
 export type ButtonIconProps = {
@@ -7,9 +8,9 @@ export type ButtonIconProps = {
 
 const ButtonIcon = styled.button<ButtonIconProps>`
   display: block;
-  width: 67px;
-  height: 67px;
-  border-radius: 20px;
+  width: 6.7rem;
+  height: 6.7rem;
+  border-radius: 2rem;
   background-image: url(${({ icon }) => icon});
   background-color: transparent;
   background-repeat: no-repeat;
@@ -17,6 +18,10 @@ const ButtonIcon = styled.button<ButtonIconProps>`
   background-size: 50% 50%;
   border: none;
   cursor: pointer;
+
+  &:hover {
+    background-color: ${transparentize(0.7, 'white')};
+  }
 
   &.active {
     background-color: white;

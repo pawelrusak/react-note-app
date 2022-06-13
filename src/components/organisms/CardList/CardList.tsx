@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import Heading from '~/components/atoms/Heading/Heading';
 import SkeletonCardList from '~/components/organisms/SkeletonCardList/SkeletonCardList';
 import { useFetchItems } from '~/hooks';
+import { media, cardListBreakpointsInEm } from '~/theme/mixins';
 import { VisuallyHidden } from '~/utils';
 
 import type { Variants } from '~/commonTypes';
@@ -11,18 +12,30 @@ import type { ItemsState } from '~/store';
 type Children<T extends Variants> = ({ data }: { data: ItemsState[T] }) => React.ReactNode;
 
 const StyledGrid = styled.div`
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-gap: 85px;
+  & > * {
+    margin-bottom: 2rem;
+  }
 
-  @media (max-width: 1500px) {
-    grid-gap: 45px;
+  ${media.greaterThan('sm')`
+    
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(45.4rem, 1fr));
+    grid-auto-rows: min-content;
+    gap: 7rem;
+
+    & > * {
+      margin-bottom: 0;
+    }
+  `}
+
+  @media (min-width: ${cardListBreakpointsInEm.smd}) and (max-width: ${cardListBreakpointsInEm.lmd}) {
+    gap: 5rem;
     grid-template-columns: repeat(2, 1fr);
   }
 
-  @media (max-width: 1100px) {
-    grid-template-columns: 1fr;
-  }
+  ${media.greaterThan('xl')`
+    gap: 8.6rem;
+  `}
 `;
 
 const StyledEmptyStateTitle = styled(Heading)`

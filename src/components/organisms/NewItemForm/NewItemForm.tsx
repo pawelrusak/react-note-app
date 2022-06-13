@@ -5,6 +5,7 @@ import Button from '~/components/atoms/Button/Button';
 import Heading from '~/components/atoms/Heading/Heading';
 import Input from '~/components/atoms/Input/Input';
 import Field from '~/components/molecules/Field/Field';
+import { media } from '~/theme/mixins';
 import { isNewItemVariantTouched } from '~/utils';
 
 import type { Variants, Item } from '~/commonTypes';
@@ -12,20 +13,61 @@ import type { Variants, Item } from '~/commonTypes';
 const StyledForm = styled(Form)`
   display: flex;
   flex-direction: column;
+  width: 100%;
 `;
 
-const StyledTitleField = styled(Field)`
-  margin-top: 30px;
+const StyledHeader = styled.header`
+  margin-bottom: 3rem;
+
+  ${media.greaterThan('xl')`
+    margin-bottom: 4.3rem;
+  `}
+`;
+
+const StyledFieldsWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+
+  margin-bottom: 4rem;
+  flex-grow: 1;
+
+  ${media.greaterThan('sm')`
+    flex-grow: 0;
+    min-height: 100%;
+    min-height: clamp(39rem, 54vh, 41.4rem);
+    margin-bottom: 5rem;
+  `}
+
+  ${media.greaterThan('lg')`
+    min-height: clamp(41.4rem, 42.2vh, 45.6rem);
+    margin-bottom: clamp(5rem, 9.3vh, 10rem);
+  `}
+`;
+
+const StyledField = styled(Field)`
+  max-width: min(100%, 37.4rem);
 `;
 
 const StyledTextAreaField = styled(Field)`
-  margin-bottom: 70px;
+  width: auto;
+  flex-grow: 1;
+
+  display: flex;
+  flex-direction: column;
 `;
 
-const StyledTextArea = styled(Input).attrs(() => ({ as: 'textarea' }))`
-  border-radius: 20px;
+const StyledInput = styled(Input)`
+  min-width: 100%;
+`;
+
+const StyledTextArea = styled(StyledInput).attrs(() => ({ as: 'textarea' }))`
+  border-radius: 2rem;
   width: 100%;
-  height: 30vh;
+  height: 100%;
+  margin-bottom: 0;
+  resize: none;
+
+  flex-grow: 1;
 `;
 
 export type NewItemFormProps = {
@@ -37,17 +79,26 @@ const NewItemForm = ({ formVariant }: NewItemFormProps) => {
 
   return (
     <StyledForm>
-      <header>
+      <StyledHeader>
         <Heading big as="h2" id="new-item-bar">
           Create new {formVariant}
         </Heading>
-      </header>
-      <StyledTitleField type="text" name="title" placeholder="title" />
-      {formVariant === 'twitters' && (
-        <Field placeholder="twitter name eg. hello_roman" type="text" name="twitterName" />
-      )}
-      {formVariant === 'articles' && <Field placeholder="link" type="text" name="articleUrl" />}
-      <StyledTextAreaField placeholder="description" name="content" component={StyledTextArea} />
+      </StyledHeader>
+      <StyledFieldsWrapper>
+        <StyledField type="text" name="title" placeholder="title" component={StyledInput} />
+        {formVariant === 'twitters' && (
+          <StyledField
+            placeholder="twitter name eg. hello_roman"
+            type="text"
+            name="twitterName"
+            component={StyledInput}
+          />
+        )}
+        {formVariant === 'articles' && (
+          <StyledField placeholder="link" type="text" name="articleUrl" component={StyledInput} />
+        )}
+        <StyledTextAreaField placeholder="description" name="content" component={StyledTextArea} />
+      </StyledFieldsWrapper>
       <Button
         type="submit"
         pending={isSubmitting}

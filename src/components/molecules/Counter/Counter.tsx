@@ -5,17 +5,28 @@ import Paragraph from '~/components/atoms/Paragraph/Paragraph';
 import Skeleton from '~/components/atoms/Skeleton/Skeleton';
 import { TEST_ID } from '~/constants';
 import { useItemsStatus, useCurrentPageVariant, useCounter } from '~/hooks';
+import { media } from '~/theme/mixins';
 
 const StyledParagraph = styled(Paragraph)`
   margin: 0;
   font-weight: ${({ theme }) => theme.bold};
-  font-size: ${({ theme }) => theme.fontSize.m};
+  font-size: 1.7rem;
   color: ${({ theme }) => theme.grey500};
+  line-height: 2.1rem;
+
+  ${media.greaterThan('sm')`
+    font-size: 1.9rem;
+  `}
+
+  ${media.greaterThan('sm')`
+    font-size: ${({ theme }) => theme.fontSize.m};
+  `}
 `;
 
 const StyledSkeleton = styled(Skeleton)`
   height: ${({ theme }) => theme.fontSize.m};
   width: 10rem;
+  margin: 0;
 `;
 
 const StyledAdditionalInfo = styled.span`

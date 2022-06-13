@@ -1,9 +1,16 @@
 import styled from 'styled-components';
 
 import Navbar from '~/components/organisms/Navbar/Navbar';
+import { media } from '~/theme/mixins';
 
 const StyledWrapper = styled.div`
-  padding-left: 150px;
+  ${media.greaterThan('sm')`
+    padding-left: 13rem;
+  `}
+
+  ${media.greaterThan('xl')`
+    padding-left: 15rem;
+  `}
 `;
 
 export type UserPageTemplateProps = {

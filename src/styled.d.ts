@@ -18,7 +18,7 @@ declare module 'styled-components' {
     red200: string;
     red300: string;
     lineHeight: string | number;
-    light: number;
+    normal: number;
     bold: number;
     fontSize: {
       xxs: string;
@@ -32,6 +32,7 @@ declare module 'styled-components' {
       cardHeader: number;
       newItemBar: number;
       gridTemplateButtonIcon: number;
+      navbar: number;
       modal: number;
     };
   }
