@@ -14,6 +14,7 @@ export const theme: DefaultTheme = {
   red200: 'hsl(359, 100%, 65%)',
   red300: 'hsl(359, 100%, 59%)',
   lineHeight: 1.7,
+  light: 300,
   normal: 400,
   bold: 600,
   fontSize: {
