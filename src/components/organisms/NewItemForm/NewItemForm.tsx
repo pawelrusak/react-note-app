@@ -2,11 +2,9 @@ import { Form, useFormikContext } from 'formik';
 import styled from 'styled-components';
 
 import Button from '~/components/atoms/Button/Button';
-import Heading from '~/components/atoms/Heading/Heading';
 import Input from '~/components/atoms/Input/Input';
-import Paragraph from '~/components/atoms/Paragraph/Paragraph';
 import Field from '~/components/molecules/Field/Field';
-import { TEST_ID } from '~/constants';
+import NewItemFormHeader from '~/components/molecules/NewItemFormHeader/NewItemFormHeader';
 import { media } from '~/theme/mixins';
 import { isNewItemVariantTouched } from '~/utils';
 
@@ -16,14 +14,6 @@ const StyledForm = styled(Form)`
   display: flex;
   flex-direction: column;
   width: 100%;
-`;
-
-const StyledHeader = styled.header`
-  margin-bottom: 3rem;
-
-  ${media.greaterThan('xl')`
-    margin-bottom: 4.3rem;
-  `}
 `;
 
 const StyledFieldsWrapper = styled.div`
@@ -72,40 +62,6 @@ const StyledTextArea = styled(StyledInput).attrs(() => ({ as: 'textarea' }))`
   flex-grow: 1;
 `;
 
-const StyledParagraph = styled(Paragraph)`
-  display: none;
-
-  ${media.greaterThan('xl')`
-    display: inline-block;
-    padding-top: 1.2rem;
-    font-weight: 300;
-    font-size: 2.5rem;
-    line-height: 124%;
-  `}
-`;
-
-const StyleLineBreak = styled.span`
-  display: block;
-`;
-
-const subHeading = {
-  notes: (
-    <StyledParagraph data-testid={TEST_ID.NEW_ITEM_FORM.NOTE_SUBHEADING}>
-      <StyleLineBreak>A note requires title</StyleLineBreak> and description
-    </StyledParagraph>
-  ),
-  twitters: (
-    <StyledParagraph data-testid={TEST_ID.NEW_ITEM_FORM.TWITTER_SUBHEADING}>
-      <StyleLineBreak>A twitter requires account name,</StyleLineBreak>title and description
-    </StyledParagraph>
-  ),
-  articles: (
-    <StyledParagraph data-testid={TEST_ID.NEW_ITEM_FORM.ARTICLE_SUBHEADING}>
-      <StyleLineBreak>An article requires title, description</StyleLineBreak> and a link
-    </StyledParagraph>
-  ),
-};
-
 export type NewItemFormProps = {
   readonly formVariant: Variants;
 };
@@ -115,12 +71,7 @@ const NewItemForm = ({ formVariant }: NewItemFormProps) => {
 
   return (
     <StyledForm>
-      <StyledHeader>
-        <Heading big as="h2" id="new-item-bar">
-          Create new {formVariant}
-        </Heading>
-        {subHeading[formVariant]}
-      </StyledHeader>
+      <NewItemFormHeader variant={formVariant} headingId="new-item-bar" />
       <StyledFieldsWrapper>
         <StyledField type="text" name="title" placeholder="title" component={StyledInput} />
         {formVariant === 'twitters' && (
