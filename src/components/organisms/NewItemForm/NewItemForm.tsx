@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import Button from '~/components/atoms/Button/Button';
 import Heading from '~/components/atoms/Heading/Heading';
 import Input from '~/components/atoms/Input/Input';
+import Paragraph from '~/components/atoms/Paragraph/Paragraph';
 import Field from '~/components/molecules/Field/Field';
 import { media } from '~/theme/mixins';
 import { isNewItemVariantTouched } from '~/utils';
@@ -70,6 +71,40 @@ const StyledTextArea = styled(StyledInput).attrs(() => ({ as: 'textarea' }))`
   flex-grow: 1;
 `;
 
+const StyledParagraph = styled(Paragraph)`
+  display: none;
+
+  ${media.greaterThan('xl')`
+    display: inline-block;
+    padding-top: 1.2rem;
+    font-weight: 300;
+    font-size: 2.5rem;
+    line-height: 124%;
+  `}
+`;
+
+const StyleLineBreak = styled.span`
+  display: block;
+`;
+
+const subHeading = {
+  notes: (
+    <StyledParagraph data-testid="NewItemForm_NoteSubheading">
+      <StyleLineBreak>A note requires title</StyleLineBreak> and description
+    </StyledParagraph>
+  ),
+  twitters: (
+    <StyledParagraph data-testid="NewItemForm_TwitterSubheading">
+      <StyleLineBreak>A twitter requires account name,</StyleLineBreak>title and description
+    </StyledParagraph>
+  ),
+  articles: (
+    <StyledParagraph data-testid="NewItemForm_ArticleSubheading">
+      <StyleLineBreak>An article requires title, description</StyleLineBreak> and a link
+    </StyledParagraph>
+  ),
+};
+
 export type NewItemFormProps = {
   readonly formVariant: Variants;
 };
@@ -83,6 +118,7 @@ const NewItemForm = ({ formVariant }: NewItemFormProps) => {
         <Heading big as="h2" id="new-item-bar">
           Create new {formVariant}
         </Heading>
+        {subHeading[formVariant]}
       </StyledHeader>
       <StyledFieldsWrapper>
         <StyledField type="text" name="title" placeholder="title" component={StyledInput} />
