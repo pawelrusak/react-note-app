@@ -55,6 +55,11 @@ export const TEST_ID = {
   NEW_ITEM_BAR: {
     WRAPPER: 'NewItemBar',
   },
+  NEW_ITEM_FORM: {
+    NOTE_SUBHEADING: 'NewItemForm_NoteSubheading',
+    TWITTER_SUBHEADING: 'NewItemForm_TwitterSubheading',
+    ARTICLE_SUBHEADING: 'NewItemForm_ArticleSubheading',
+  },
   SKELETON_CARD: {
     WRAPPER: 'SkeletonCard',
     AVATAR_SKELETON: 'SkeletonCard_AvatarSkeleton',

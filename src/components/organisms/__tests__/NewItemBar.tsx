@@ -10,7 +10,7 @@ import {
 
 import NewItemBar, { NewItemBarProps } from '../NewItemBar/NewItemBar';
 import * as NewItemBarStories from '../NewItemBar/NewItemBar.stories';
-import { ROUTES_PATHS } from '~/constants';
+import { ROUTES_PATHS, TEST_ID } from '~/constants';
 
 import type { NewItem, RoutesVariantRootPaths } from '~/commonTypes';
 
@@ -32,10 +32,18 @@ const queryByTwitterPlaceholderText = () => screen.queryByPlaceholderText(/twitt
 const queryByLinkPlaceholderText = () => screen.queryByPlaceholderText(/link/i);
 const getAllByHeadingRole = () => screen.getAllByRole('heading');
 const getByAddNoteButtonRole = () => screen.getByRole('button', { name: /add note/i });
+const queryByNoteSubheading = () => screen.queryByTestId(TEST_ID.NEW_ITEM_FORM.NOTE_SUBHEADING);
+const queryByTwitterSubheading = () =>
+  screen.queryByTestId(TEST_ID.NEW_ITEM_FORM.TWITTER_SUBHEADING);
+const queryByArticleSubheading = () =>
+  screen.queryByTestId(TEST_ID.NEW_ITEM_FORM.ARTICLE_SUBHEADING);
 
 const TEST_NAME = {
   TWITTER_NAME_INPUT: 'twitter user input',
   ARTICLE_URL_INPUT: 'article URL input',
+  NOTE_SUBHEADING: 'should be displayed with a specific subheading for the note type',
+  TWITTER_SUBHEADING: 'should be displayed with a specific subheading for the twitter type',
+  ARTICLE_SUBHEADING: 'should be displayed with a specific subheading for the article type',
 };
 
 const newItemBuilder = build<NewItem>({
@@ -102,6 +110,9 @@ describe('<NewItemBar />', () => {
   })
     .not.toBeInTheDocument(TEST_NAME.TWITTER_NAME_INPUT, queryByTwitterPlaceholderText)
     .not.toBeInTheDocument(TEST_NAME.ARTICLE_URL_INPUT, queryByLinkPlaceholderText)
+    .toBeInTheDocument(TEST_NAME.NOTE_SUBHEADING, queryByNoteSubheading)
+    .not.toBeInTheDocument(TEST_NAME.TWITTER_SUBHEADING, queryByTwitterSubheading)
+    .not.toBeInTheDocument(TEST_NAME.ARTICLE_SUBHEADING, queryByArticleSubheading)
     .run();
 
   testComponent(() => renderNewItemBar(ROUTES_PATHS.twitters), {
@@ -109,6 +120,9 @@ describe('<NewItemBar />', () => {
   })
     .toBeInTheDocument(TEST_NAME.TWITTER_NAME_INPUT, queryByTwitterPlaceholderText)
     .not.toBeInTheDocument(TEST_NAME.ARTICLE_URL_INPUT, queryByLinkPlaceholderText)
+    .not.toBeInTheDocument(TEST_NAME.NOTE_SUBHEADING, queryByNoteSubheading)
+    .toBeInTheDocument(TEST_NAME.TWITTER_SUBHEADING, queryByTwitterSubheading)
+    .not.toBeInTheDocument(TEST_NAME.ARTICLE_SUBHEADING, queryByArticleSubheading)
     .run();
 
   testComponent(() => renderNewItemBar(ROUTES_PATHS.articles), {
@@ -116,5 +130,8 @@ describe('<NewItemBar />', () => {
   })
     .toBeInTheDocument(TEST_NAME.ARTICLE_URL_INPUT, queryByLinkPlaceholderText)
     .not.toBeInTheDocument(TEST_NAME.TWITTER_NAME_INPUT, queryByTwitterPlaceholderText)
+    .not.toBeInTheDocument(TEST_NAME.NOTE_SUBHEADING, queryByNoteSubheading)
+    .not.toBeInTheDocument(TEST_NAME.TWITTER_SUBHEADING, queryByTwitterSubheading)
+    .toBeInTheDocument(TEST_NAME.ARTICLE_SUBHEADING, queryByArticleSubheading)
     .run();
 });
