@@ -10,7 +10,7 @@ import {
 
 import NewItemBar, { NewItemBarProps } from '../NewItemBar/NewItemBar';
 import * as NewItemBarStories from '../NewItemBar/NewItemBar.stories';
-import { ROUTES_PATHS } from '~/constants';
+import { ROUTES_PATHS, TEST_ID } from '~/constants';
 
 import type { NewItem, RoutesVariantRootPaths } from '~/commonTypes';
 
@@ -32,9 +32,11 @@ const queryByTwitterPlaceholderText = () => screen.queryByPlaceholderText(/twitt
 const queryByLinkPlaceholderText = () => screen.queryByPlaceholderText(/link/i);
 const getAllByHeadingRole = () => screen.getAllByRole('heading');
 const getByAddNoteButtonRole = () => screen.getByRole('button', { name: /add note/i });
-const queryByNoteSubheading = () => screen.queryByTestId('NewItemForm_NoteSubheading');
-const queryByTwitterSubheading = () => screen.queryByTestId('NewItemForm_TwitterSubheading');
-const queryByArticleSubheading = () => screen.queryByTestId('NewItemForm_ArticleSubheading');
+const queryByNoteSubheading = () => screen.queryByTestId(TEST_ID.NEW_ITEM_FORM.NOTE_SUBHEADING);
+const queryByTwitterSubheading = () =>
+  screen.queryByTestId(TEST_ID.NEW_ITEM_FORM.TWITTER_SUBHEADING);
+const queryByArticleSubheading = () =>
+  screen.queryByTestId(TEST_ID.NEW_ITEM_FORM.ARTICLE_SUBHEADING);
 
 const TEST_NAME = {
   TWITTER_NAME_INPUT: 'twitter user input',

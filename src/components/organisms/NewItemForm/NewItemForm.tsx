@@ -6,6 +6,7 @@ import Heading from '~/components/atoms/Heading/Heading';
 import Input from '~/components/atoms/Input/Input';
 import Paragraph from '~/components/atoms/Paragraph/Paragraph';
 import Field from '~/components/molecules/Field/Field';
+import { TEST_ID } from '~/constants';
 import { media } from '~/theme/mixins';
 import { isNewItemVariantTouched } from '~/utils';
 
@@ -89,17 +90,17 @@ const StyleLineBreak = styled.span`
 
 const subHeading = {
   notes: (
-    <StyledParagraph data-testid="NewItemForm_NoteSubheading">
+    <StyledParagraph data-testid={TEST_ID.NEW_ITEM_FORM.NOTE_SUBHEADING}>
       <StyleLineBreak>A note requires title</StyleLineBreak> and description
     </StyledParagraph>
   ),
   twitters: (
-    <StyledParagraph data-testid="NewItemForm_TwitterSubheading">
+    <StyledParagraph data-testid={TEST_ID.NEW_ITEM_FORM.TWITTER_SUBHEADING}>
       <StyleLineBreak>A twitter requires account name,</StyleLineBreak>title and description
     </StyledParagraph>
   ),
   articles: (
-    <StyledParagraph data-testid="NewItemForm_ArticleSubheading">
+    <StyledParagraph data-testid={TEST_ID.NEW_ITEM_FORM.ARTICLE_SUBHEADING}>
       <StyleLineBreak>An article requires title, description</StyleLineBreak> and a link
     </StyledParagraph>
   ),
