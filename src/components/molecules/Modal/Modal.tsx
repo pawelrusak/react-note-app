@@ -1,3 +1,9 @@
+import {
+  AlertDialogLabel,
+  AlertDialogDescription,
+  AlertDialogOverlay,
+  AlertDialogContent,
+} from '@reach/alert-dialog';
 import { useRef } from 'react';
 import styled from 'styled-components';
 
@@ -7,12 +13,11 @@ import Paragraph from '~/components/atoms/Paragraph/Paragraph';
 import TextButton from '~/components/atoms/TextButton/TextButton';
 import { useClickAway } from '~/hooks';
 import * as styledMixin from '~/theme/mixins';
-import { Portal } from '~/utils/components';
 
 import type { Variants } from '~/commonTypes';
 import type { VariantColorValueProp } from '~/theme/mixins';
 
-const StyledWrapper = styled.div`
+const StyledWrapper = styled(AlertDialogOverlay)`
   position: fixed;
   top: 0;
   left: 0;
@@ -24,7 +29,7 @@ const StyledWrapper = styled.div`
   background: rgba(10, 10, 10, 0.45);
 `;
 
-const StyledHeader = styled.div`
+const StyledHeader = styled(AlertDialogLabel)`
   padding: 2.5rem 2rem 3.7rem;
 `;
 
@@ -37,7 +42,7 @@ const StyledPrimaryButton = styled(Button)`
   line-height: ${({ theme }) => theme.fontSize.xxs};
 `;
 
-const StyledContainer = styled.div<Required<VariantColorValueProp>>`
+const StyledContainer = styled(AlertDialogContent)<Required<VariantColorValueProp>>`
   background: white;
   width: min(45.5rem, calc(100% - 4rem));
   min-height: 5rem;
@@ -54,7 +59,7 @@ const StyledContainer = styled.div<Required<VariantColorValueProp>>`
   }
 `;
 
-const StyledBody = styled.div`
+const StyledBody = styled(AlertDialogDescription)`
   padding: ${({ theme }) => 3.7 - (+theme.lineHeight * 1.5) / 2 + 0.8}rem 2rem;
   text-align: center;
 `;
@@ -89,9 +94,18 @@ export type ModalProps = {
   readonly variant: Variants;
   readonly children?: React.ReactNode;
   readonly onClickOutside?: (event: React.MouseEvent) => void;
+  readonly onDismiss?: (event?: React.SyntheticEvent) => void;
+  readonly leastDestructiveRef?: React.RefObject<HTMLElement>;
 };
 
-const Modal = ({ show, variant, children, onClickOutside }: ModalProps) => {
+const Modal = ({
+  show,
+  variant,
+  children,
+  onClickOutside,
+  onDismiss,
+  leastDestructiveRef,
+}: ModalProps) => {
   const containerRef = useRef<HTMLDivElement>(null);
 
   // eslint-disable-next-line
@@ -102,15 +116,16 @@ const Modal = ({ show, variant, children, onClickOutside }: ModalProps) => {
     }
   });
 
-  return show ? (
-    <Portal>
-      <StyledWrapper>
-        <StyledContainer ref={containerRef} variant={variant}>
-          {children}
-        </StyledContainer>
-      </StyledWrapper>
-    </Portal>
-  ) : null;
+  return (
+    <StyledWrapper
+      ref={containerRef}
+      isOpen={show}
+      onDismiss={onDismiss}
+      leastDestructiveRef={leastDestructiveRef}
+    >
+      <StyledContainer variant={variant}>{children}</StyledContainer>
+    </StyledWrapper>
+  );
 };
 
 Modal.Header = StyledHeader;

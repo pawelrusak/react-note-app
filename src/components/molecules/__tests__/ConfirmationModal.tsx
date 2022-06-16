@@ -1,3 +1,4 @@
+import { createRef } from 'react';
 import { render, screen, userEvent } from 'testUtils';
 
 import ConfirmationModal, { ConfirmationModalProps } from '../ConfirmationModal/ConfirmationModal';
@@ -9,13 +10,22 @@ const renderConfirmationModal = ({
   variant = 'notes',
   onConfirm = () => ({}),
   onCancel = () => ({}),
-}: RenderConfirmationModalProps = {}) =>
+}: RenderConfirmationModalProps = {}) => {
+  const cancelRef = createRef<HTMLButtonElement>();
+
   render(
-    <ConfirmationModal show={show} variant={variant} onConfirm={onConfirm} onCancel={onCancel} />,
+    <ConfirmationModal
+      show={show}
+      variant={variant}
+      onConfirm={onConfirm}
+      onCancel={onCancel}
+      cancelRef={cancelRef}
+    />,
     {
       baseElement: document.getElementById('portal-root') as HTMLElement,
     },
   );
+};
 
 const queryByHeadingRoleWithName = () => screen.queryByRole('heading', { name: /are you sure?/i });
 

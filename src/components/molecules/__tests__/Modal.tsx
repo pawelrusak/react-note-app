@@ -1,3 +1,4 @@
+import { createRef } from 'react';
 import { render, screen, userEvent } from 'testUtils';
 
 import Modal, { ModalProps } from '../Modal/Modal';
@@ -10,15 +11,18 @@ const MODAL_TEST_ID = {
 
 type RenderModalProps = Partial<Omit<ModalProps, 'children'>>;
 
-const renderModal = ({ variant = 'notes', show = true, ...props }: RenderModalProps = {}) =>
-  render(
-    <Modal variant={variant} show={show} {...props}>
+const renderModal = ({ variant = 'notes', show = true, ...props }: RenderModalProps = {}) => {
+  const buttonRef = createRef<HTMLButtonElement>();
+
+  return render(
+    <Modal variant={variant} show={show} {...props} leastDestructiveRef={buttonRef}>
       <Modal.Header data-testid={MODAL_TEST_ID.HEADER} />
       <Modal.PrimaryButton />
       <div data-testid={MODAL_TEST_ID.TEST_ELEMENT} />
     </Modal>,
     { baseElement: document.getElementById('portal-root') as HTMLElement },
   );
+};
 
 const queryModalTestElement = () => screen.queryByTestId(MODAL_TEST_ID.TEST_ELEMENT);
 
