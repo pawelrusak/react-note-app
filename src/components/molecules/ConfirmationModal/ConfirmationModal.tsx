@@ -2,12 +2,25 @@ import Modal, { ModalProps } from '~/components/molecules/Modal/Modal';
 import { TEST_ID } from '~/constants';
 
 export type ConfirmationModalProps = {
-  onConfirm: (event: React.MouseEvent) => void;
-  onCancel: (event: React.MouseEvent) => void;
-} & Omit<ModalProps, 'children' | 'onClickOutside'>;
+  readonly onConfirm: (event: React.MouseEvent) => void;
+  readonly onCancel: ModalProps['onDismiss'];
+  readonly cancelRef: React.RefObject<HTMLButtonElement>;
+} & Omit<ModalProps, 'children' | 'onClickOutside' | 'onDismiss'>;
 
-const ConfirmationModal = ({ variant, show, onConfirm, onCancel }: ConfirmationModalProps) => (
-  <Modal variant={variant} show={show} onClickOutside={onCancel}>
+const ConfirmationModal = ({
+  variant,
+  show,
+  onConfirm,
+  onCancel,
+  cancelRef,
+}: ConfirmationModalProps) => (
+  <Modal
+    variant={variant}
+    show={show}
+    onClickOutside={onCancel}
+    onDismiss={onCancel}
+    leastDestructiveRef={cancelRef}
+  >
     <Modal.Header>
       <Modal.Title>Are you sure?</Modal.Title>
     </Modal.Header>
@@ -21,7 +34,9 @@ const ConfirmationModal = ({ variant, show, onConfirm, onCancel }: ConfirmationM
       >
         Remove
       </Modal.PrimaryButton>
-      <Modal.SecondaryButton onClick={onCancel}>no, wait</Modal.SecondaryButton>
+      <Modal.SecondaryButton ref={cancelRef} onClick={onCancel}>
+        no, wait
+      </Modal.SecondaryButton>
     </Modal.Footer>
   </Modal>
 );
