@@ -1,3 +1,4 @@
+import { useRef } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 
@@ -158,6 +159,7 @@ const DetailsTemplate = ({
   const pageVariant = useCurrentPageVariant();
   const { isOpen, closeModal, openModal, removeItemAction } = useConfirmationModal();
   const history = useHistory();
+  const cancelRef = useRef<HTMLButtonElement>(null);
 
   const handleConfirm = () => {
     removeItemAction(pageVariant, id);
@@ -222,6 +224,7 @@ const DetailsTemplate = ({
             show={isOpen()}
             onCancel={closeModal}
             onConfirm={handleConfirm}
+            cancelRef={cancelRef}
           />
         </StyledDetailsWrapper>
       </StyledWrapper>
