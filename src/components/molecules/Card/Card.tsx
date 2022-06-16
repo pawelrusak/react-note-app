@@ -1,4 +1,5 @@
 import { darken } from 'polished';
+import { useRef } from 'react';
 import { Link } from 'react-router-dom';
 import styled, { css } from 'styled-components';
 
@@ -220,6 +221,8 @@ const Card = <V extends Variants>({
   const historyPush = useHistoryPush(URLPathToDetails);
   const { isOpen, closeModal, openModal, removeItemAction } = useConfirmationModal();
 
+  const cancelRef = useRef<HTMLButtonElement>(null);
+
   return (
     <StyledWrapperWithHover as="article">
       <HeaderWrapperWithHover
@@ -250,6 +253,7 @@ const Card = <V extends Variants>({
           variant={pageVariant}
           onConfirm={() => removeItemAction(pageVariant, id)}
           onCancel={closeModal}
+          cancelRef={cancelRef}
         />
       </ContentWrapper>
     </StyledWrapperWithHover>
