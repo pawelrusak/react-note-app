@@ -20,6 +20,10 @@ const GlobalStyle = createGlobalStyle`
     font-size: 1.6rem;
     font-family: 'Montserrat', sans-serif;
   }
+
+  :root {  
+    --reach-dialog: 1;
+  }
 `;
 
 export default GlobalStyle;
