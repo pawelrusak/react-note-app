@@ -1,3 +1,5 @@
+import { useRef } from 'react';
+
 import ConfirmationModal, { ConfirmationModalProps } from './ConfirmationModal';
 
 import type { Meta, Story } from '@storybook/react';
@@ -21,7 +23,11 @@ export default {
   },
 } as Meta;
 
-const Template: Story<ConfirmationModalProps> = (args) => <ConfirmationModal {...args} />;
+const Template: Story<ConfirmationModalProps> = (args) => {
+  const buttonRef = useRef<HTMLButtonElement>(null);
+
+  return <ConfirmationModal {...args} cancelRef={buttonRef} />;
+};
 
 export const Note = Template.bind({});
 Note.args = {
