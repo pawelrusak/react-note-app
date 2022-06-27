@@ -21,9 +21,9 @@ type GreyProp = {
   readonly grey: boolean;
 };
 
-type StyledCardHeaderWrapperProps = LightenProps & Required<VariantColorValueProp> & GreyProp;
+type StyledCardHeaderProps = LightenProps & Required<VariantColorValueProp> & GreyProp;
 
-const StyledCardHeaderWrapper = styled(Card.Header)<StyledCardHeaderWrapperProps>`
+const StyledCardHeader = styled(Card.Header)<StyledCardHeaderProps>`
   background-color: ${styledMixin.variantColorValue({ lighten: true })};
 
   ${({ lighten }) =>
@@ -123,7 +123,7 @@ const SkeletonCard = ({
 
   return (
     <Card.Wrapper data-testid={TEST_ID.SKELETON_CARD.WRAPPER}>
-      <StyledCardHeaderWrapper
+      <StyledCardHeader
         lighten={lighten}
         lightenAmount={lightenAmount}
         variant={pageVariant}
@@ -146,7 +146,7 @@ const SkeletonCard = ({
             dark
           />
         )}
-      </StyledCardHeaderWrapper>
+      </StyledCardHeader>
       <Card.Body>
         <Skeleton width="80%" />
         <Skeleton width="95%" />
