@@ -128,6 +128,7 @@ const SkeletonCard = ({
         lightenAmount={lightenAmount}
         variant={pageVariant}
         grey={grey}
+        as="div"
       >
         <StyledSkeletonHeading dark />
         <StyledSkeletonTime dark />
