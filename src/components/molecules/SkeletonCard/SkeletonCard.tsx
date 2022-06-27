@@ -23,7 +23,7 @@ type GreyProp = {
 
 type StyledCardHeaderWrapperProps = LightenProps & Required<VariantColorValueProp> & GreyProp;
 
-const StyledCardHeaderWrapper = styled(Card.HeaderWrapper)<StyledCardHeaderWrapperProps>`
+const StyledCardHeaderWrapper = styled(Card.Header)<StyledCardHeaderWrapperProps>`
   background-color: ${styledMixin.variantColorValue({ lighten: true })};
 
   ${({ lighten }) =>
@@ -147,13 +147,13 @@ const SkeletonCard = ({
           />
         )}
       </StyledCardHeaderWrapper>
-      <Card.ContentWrapper>
+      <Card.Body>
         <Skeleton width="80%" />
         <Skeleton width="95%" />
         <Skeleton width="70%" />
         <Skeleton width="9rem" dark />
         <StyledSecondaryButtonSkeleton />
-      </Card.ContentWrapper>
+      </Card.Body>
     </Card.Wrapper>
   );
 };

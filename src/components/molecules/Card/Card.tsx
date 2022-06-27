@@ -50,7 +50,7 @@ const StyledWrapperWithHover = styled(StyledWrapper)`
   }
 `;
 
-const HeaderWrapper = styled.header<VariantColorValueProp>`
+const StyledHeader = styled.header<VariantColorValueProp>`
   position: relative;
   background-color: ${styledMixin.variantColorValue()};
   ${styledMixin.zIndexDeclaration('cardHeader')};
@@ -58,12 +58,12 @@ const HeaderWrapper = styled.header<VariantColorValueProp>`
   ${cardPadding}
 `;
 
-type HeaderWrapperWithHoverProp = {
+type StyledHeaderWithHoverProp = {
   variantExtraPadding?: Variants;
 } & VariantColorValueProp;
 
 // create new component because the base one is reuse in others places
-const HeaderWrapperWithHover = styled(HeaderWrapper)<HeaderWrapperWithHoverProp>`
+const StyledHeaderWithHover = styled(StyledHeader)<StyledHeaderWithHoverProp>`
   cursor: pointer;
 
   @media (prefers-reduced-motion: no-preference) {
@@ -88,7 +88,7 @@ const HeaderWrapperWithHover = styled(HeaderWrapper)<HeaderWrapperWithHoverProp>
     `}
 `;
 
-const ContentWrapper = styled.div`
+const StyledBody = styled.div`
   background-color: white;
   display: flex;
   flex-direction: column;
@@ -135,7 +135,7 @@ const StyledAvatar = styled.img`
     transition: border-color 0.2s ease-in-out;
   }
 
-  ${HeaderWrapperWithHover}:hover & {
+  ${StyledHeaderWithHover}:hover & {
     border-color: ${(props) => darken(0.075, props.theme.twitters)};
   }
 `;
@@ -225,7 +225,7 @@ const Card = <V extends Variants>({
 
   return (
     <StyledWrapperWithHover as="article">
-      <HeaderWrapperWithHover
+      <StyledHeaderWithHover
         data-testid={TEST_ID.CARD.HEADER}
         onClick={historyPush}
         variant={pageVariant}
@@ -241,8 +241,8 @@ const Card = <V extends Variants>({
         {pageVariant === 'articles' && (
           <StyledArticleLink data-testid={TEST_ID.CARD.ARTICLE_LINK} href={articleUrl || ''} />
         )}
-      </HeaderWrapperWithHover>
-      <ContentWrapper>
+      </StyledHeaderWithHover>
+      <StyledBody>
         <StyledParagraph>{content}</StyledParagraph>
         <StyledDetailsLink to={URLPathToDetails}>read more</StyledDetailsLink>
         <Button onClick={openModal} secondary>
@@ -255,7 +255,7 @@ const Card = <V extends Variants>({
           onCancel={closeModal}
           cancelRef={cancelRef}
         />
-      </ContentWrapper>
+      </StyledBody>
     </StyledWrapperWithHover>
   );
 };
@@ -263,7 +263,7 @@ const Card = <V extends Variants>({
 Card.defaultProps = defaultCardProps;
 
 Card.Wrapper = StyledWrapper;
-Card.HeaderWrapper = HeaderWrapper;
-Card.ContentWrapper = ContentWrapper;
+Card.Header = StyledHeader;
+Card.Body = StyledBody;
 
 export default Card;
