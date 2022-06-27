@@ -1,3 +1,5 @@
+import { useRef } from 'react';
+
 import Modal, { ModalProps } from './Modal';
 
 import type { Meta, Story } from '@storybook/react';
@@ -39,26 +41,30 @@ const Template: Story<ModalProps & AdditionalModalStoryProps> = ({
   showSecondaryButton,
   secondaryButtonText,
   ...args
-}) => (
-  <Modal {...args}>
-    {showHeader && (
-      <Modal.Header>{showTitle && <Modal.Title>{titleText}</Modal.Title>}</Modal.Header>
-    )}
-    {showBody && (
-      <Modal.Body>
-        {showDescription && <Modal.Description>{descriptionText}</Modal.Description>}
-      </Modal.Body>
-    )}
-    {showFooter && (
-      <Modal.Footer>
-        {showPrimaryButton && <Modal.PrimaryButton>{primaryButtonText}</Modal.PrimaryButton>}
-        {showSecondaryButton && (
-          <Modal.SecondaryButton>{secondaryButtonText}</Modal.SecondaryButton>
-        )}
-      </Modal.Footer>
-    )}
-  </Modal>
-);
+}) => {
+  const elementRef = useRef<HTMLElement>(null);
+
+  return (
+    <Modal {...args} leastDestructiveRef={elementRef}>
+      {showHeader && (
+        <Modal.Header>{showTitle && <Modal.Title>{titleText}</Modal.Title>}</Modal.Header>
+      )}
+      {showBody && (
+        <Modal.Body>
+          {showDescription && <Modal.Description>{descriptionText}</Modal.Description>}
+        </Modal.Body>
+      )}
+      {showFooter && (
+        <Modal.Footer>
+          {showPrimaryButton && <Modal.PrimaryButton>{primaryButtonText}</Modal.PrimaryButton>}
+          {showSecondaryButton && (
+            <Modal.SecondaryButton>{secondaryButtonText}</Modal.SecondaryButton>
+          )}
+        </Modal.Footer>
+      )}
+    </Modal>
+  );
+};
 
 export const Note = Template.bind({});
 Note.args = {
