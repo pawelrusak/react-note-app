@@ -137,5 +137,8 @@
     "redux-thunk": "^2.3.0",
     "storybook-formik": "^2.1.6",
     "storybook-react-router": "^1.0.8"
+  },
+  "engines": {
+    "node": ">=16.0.0 <18.0.0"
   }
 }
