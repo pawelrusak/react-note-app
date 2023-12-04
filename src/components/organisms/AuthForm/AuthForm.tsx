@@ -10,7 +10,7 @@ import { AUTH_FORM_DATA_VARIANTS } from '~/constants';
 import { media } from '~/theme/mixins';
 import { isAuthCredentialsTouched } from '~/utils';
 
-import type { AuthCredentials } from '~/commonTypes';
+import type { AuthCredential } from '~/commonTypes';
 
 const StyledHeading = styled(Heading)`
   font-size: 3.3rem;
@@ -79,7 +79,7 @@ export type AuthFormProps = {
 };
 
 const AuthForm = ({ formVariant }: AuthFormProps) => {
-  const { isSubmitting, touched, isValid } = useFormikContext<AuthCredentials>();
+  const { isSubmitting, touched, isValid } = useFormikContext<AuthCredential>();
   const { headingText, buttonText, linkPath, linkText } = AUTH_FORM_DATA_VARIANTS[formVariant];
 
   return (

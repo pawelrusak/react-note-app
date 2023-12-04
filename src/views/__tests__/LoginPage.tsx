@@ -6,7 +6,7 @@ import { fakeStateWithNotLoggedInUser } from 'testUtils/fakers';
 import LoginPage from '../LoginPage/LoginPage';
 import { REGISTERED_USER_CREDENTIALS, AUTH_ERRORS, ROUTES_PATHS } from '~/constants';
 
-import type { AuthCredentials } from '~/commonTypes';
+import type { AuthCredential } from '~/commonTypes';
 
 jest.mock('~/services');
 
@@ -29,7 +29,7 @@ const renderLoginPage = () =>
     },
   );
 
-const authCredentialsBuilder = build<AuthCredentials>({
+const authCredentialsBuilder = build<AuthCredential>({
   fields: {
     email: fake((faker) => faker.internet.email()),
     password: fake((faker) => faker.internet.password()),

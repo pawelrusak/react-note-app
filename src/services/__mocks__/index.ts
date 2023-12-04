@@ -9,7 +9,7 @@ import {
 } from '~/constants';
 
 import type { DocumentItemQueryArgs, NewDocumentItem } from '../servicesTypes';
-import type { Variant, Item, AuthCredentials } from '~/commonTypes';
+import type { Variant, Item, AuthCredential } from '~/commonTypes';
 
 export const removeItem = async () => {
   try {
@@ -59,20 +59,20 @@ export const addItem = async <V extends Variant>({ ...itemContent }: NewDocument
   }
 };
 
-const isEmailBelongsToRegisterUser = (email: AuthCredentials['email']) => {
+const isEmailBelongsToRegisterUser = (email: AuthCredential['email']) => {
   return REGISTERED_USER_CREDENTIALS.EMAIL === email;
 };
 
 const isRegisterUserButWithWrongPassword = (
-  email: AuthCredentials['email'],
-  password: AuthCredentials['password'],
+  email: AuthCredential['email'],
+  password: AuthCredential['password'],
 ) => {
   return isEmailBelongsToRegisterUser(email) && REGISTERED_USER_CREDENTIALS.PASSWORD !== password;
 };
 
 export const authenticateUser = async (
-  email: AuthCredentials['email'],
-  password: AuthCredentials['password'],
+  email: AuthCredential['email'],
+  password: AuthCredential['password'],
 ) => {
   try {
     if (!isEmailBelongsToRegisterUser(email)) {
@@ -91,7 +91,7 @@ export const authenticateUser = async (
   }
 };
 
-const isValidEmail = (email: AuthCredentials['email']) => {
+const isValidEmail = (email: AuthCredential['email']) => {
   return yup.string().email().required().isValidSync(email);
 };
 /**
@@ -100,7 +100,7 @@ const isValidEmail = (email: AuthCredentials['email']) => {
  *
  * @see {@link https://firebase.google.com/docs/reference/android/com/google/firebase/auth/FirebaseAuthWeakPasswordException}
  */
-const isStrongPassword = (password: AuthCredentials['password']) => {
+const isStrongPassword = (password: AuthCredential['password']) => {
   const MIN_PASSWORD_LENGTH = 6;
   const passwordLongEnough = yup.string().min(MIN_PASSWORD_LENGTH).required().isValidSync(password);
 
@@ -108,8 +108,8 @@ const isStrongPassword = (password: AuthCredentials['password']) => {
 };
 
 export const register = async (
-  email: AuthCredentials['email'],
-  password: AuthCredentials['password'],
+  email: AuthCredential['email'],
+  password: AuthCredential['password'],
 ) => {
   try {
     if (isEmailBelongsToRegisterUser(email)) {

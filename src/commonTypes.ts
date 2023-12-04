@@ -74,12 +74,12 @@ export type DetailsItem = Modify<NoteItem, Partial<TwitterNameProp & ArticleUrlP
  * OTHER
  *
  */
-export type AuthCredentials = {
+export type AuthCredential = {
   email: string;
   password: string;
 };
 
-export type URLParams = {
+export type URLParam = {
   id: string;
 };
 
