@@ -2,9 +2,9 @@ import { useDispatch } from 'react-redux';
 
 import { removeItem } from '~/store/items/itemsSlice';
 
-import type { Variants, Item } from '~/commonTypes';
+import type { Variant, Item } from '~/commonTypes';
 
-export const useRemoveItemAction = <V extends Variants>() => {
+export const useRemoveItemAction = <V extends Variant>() => {
   const dispatch = useDispatch();
 
   return (variant: V, id: Item['id']) => dispatch(removeItem({ variant, id }));

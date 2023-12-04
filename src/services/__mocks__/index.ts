@@ -9,7 +9,7 @@ import {
 } from '~/constants';
 
 import type { DocumentItemQueryArgs, NewDocumentItem } from '../servicesTypes';
-import type { Variants, Item, AuthCredentials } from '~/commonTypes';
+import type { Variant, Item, AuthCredentials } from '~/commonTypes';
 
 export const removeItem = async () => {
   try {
@@ -19,7 +19,7 @@ export const removeItem = async () => {
   }
 };
 
-export const fetchItems = async <V extends Variants>({ variant }: DocumentItemQueryArgs<V>) => {
+export const fetchItems = async <V extends Variant>({ variant }: DocumentItemQueryArgs<V>) => {
   try {
     const data = fakeItemsData[variant] as Item<V>[];
 
@@ -45,7 +45,7 @@ export const fetchItem = async (id: Item['id']) => {
   }
 };
 
-export const addItem = async <V extends Variants>({ ...itemContent }: NewDocumentItem<V>) => {
+export const addItem = async <V extends Variant>({ ...itemContent }: NewDocumentItem<V>) => {
   try {
     const data = {
       id: nanoid(),

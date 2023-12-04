@@ -1,13 +1,13 @@
 import { createContext, useContext } from 'react';
 import { useLocation } from 'react-router-dom';
 
-import type { Variants } from '~/commonTypes';
+import type { Variant } from '~/commonTypes';
 
 const AVAILABLE_PAGE_VARIANTS = ['twitters', 'articles', 'notes'] as const;
 
 // I intentionally use objects instead of string literals to handle all available error types
 type CurrentPageVariant = {
-  currentPageVariant: Variants | undefined;
+  currentPageVariant: Variant | undefined;
 };
 
 // Export for storybook only

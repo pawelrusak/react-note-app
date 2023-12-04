@@ -2,7 +2,7 @@ import { useSelector } from 'react-redux';
 
 import { itemByTypeAndIDSelector } from '~/store/items/itemsSelectors';
 
-import type { Variants, Item } from '~/commonTypes';
+import type { Variant, Item } from '~/commonTypes';
 
-export const useItemSelector = <V extends Variants>(itemType: V, itemID: Item['id']) =>
+export const useItemSelector = <V extends Variant>(itemType: V, itemID: Item['id']) =>
   useSelector(itemByTypeAndIDSelector(itemType, itemID));

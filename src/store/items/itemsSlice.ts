@@ -4,7 +4,7 @@ import { Status } from '~/commonTypes';
 import { ACTION_DOMAINS } from '~/constants';
 import * as services from '~/services';
 
-import type { Item, NewItem, Variants } from '~/commonTypes';
+import type { Item, NewItem, Variant } from '~/commonTypes';
 
 export type ItemsState = {
   notes: Item<'notes'>[];
@@ -22,11 +22,11 @@ const initialState: ItemsState = {
 
 // eslint-disable-next-line @typescript-eslint/ban-types
 type ObjectWithItemVariant<T extends object | never = never> = {
-  variant: Variants;
+  variant: Variant;
 } & T;
 
 type FetchItemsReturn = ObjectWithItemVariant<{ data: Item[] }>;
-type FetchItemsArg = { variant: Variants };
+type FetchItemsArg = { variant: Variant };
 
 export const fetchItems = createAsyncThunk<FetchItemsReturn, FetchItemsArg, AppThunkConfig>(
   `${ACTION_DOMAINS.ITEMS}/fetchItems`,

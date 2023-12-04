@@ -14,7 +14,7 @@ import { useHistoryPush, useCurrentPageVariant, useConfirmationModal } from '~/h
 import { media } from '~/theme/mixins';
 import * as styledMixin from '~/theme/mixins';
 
-import type { Variants, Item } from '~/commonTypes';
+import type { Variant, Item } from '~/commonTypes';
 import type { VariantColorValueProp } from '~/theme/mixins';
 
 const cardPadding = css`
@@ -59,7 +59,7 @@ const StyledHeader = styled.header<VariantColorValueProp>`
 `;
 
 type StyledHeaderWithHoverProp = {
-  variantExtraPadding?: Variants;
+  variantExtraPadding?: Variant;
 } & VariantColorValueProp;
 
 // create new component because the base one is reuse in others places
@@ -201,14 +201,14 @@ const StyledDetailsLink = styled(Link)`
   }
 `;
 
-export type CardProps<V extends Variants> = Item<V>;
+export type CardProps<V extends Variant> = Item<V>;
 
 const defaultCardProps = {
   twitterName: null,
   articleUrl: null,
 };
 
-const Card = <V extends Variants>({
+const Card = <V extends Variant>({
   id,
   title,
   created,

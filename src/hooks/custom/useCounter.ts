@@ -6,9 +6,9 @@ import {
   searchVariantSelector,
 } from '~/store/search/searchSelectors';
 
-import type { Variants } from '~/commonTypes';
+import type { Variant } from '~/commonTypes';
 
-export const useCounter = <V extends Variants>(variant: V) => {
+export const useCounter = <V extends Variant>(variant: V) => {
   const searchedItems = useSelector(searchItemsByVariantSelector(variant));
   const items = useSelector(itemVariantSelector(variant));
   const searchQuery = useSelector(searchVariantSelector(variant));

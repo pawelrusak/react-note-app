@@ -5,7 +5,7 @@ import Paragraph from '~/components/atoms/Paragraph/Paragraph';
 import { TEST_ID } from '~/constants';
 import { media } from '~/theme/mixins';
 
-import type { Variants } from '~/commonTypes';
+import type { Variant } from '~/commonTypes';
 
 const StyledHeader = styled.header`
   margin-bottom: 3rem;
@@ -49,7 +49,7 @@ const subHeading = {
 };
 
 export type NewItemFormHeaderProps = {
-  readonly variant: Variants;
+  readonly variant: Variant;
   readonly headingId: string;
 };
 

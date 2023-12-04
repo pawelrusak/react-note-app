@@ -28,7 +28,7 @@ export type RequiredOnlyWithNever<T, K extends keyof T> = Pick<Required<T>, K> &
  * VARIANTS
  *
  */
-export type Variants = 'notes' | 'twitters' | 'articles';
+export type Variant = 'notes' | 'twitters' | 'articles';
 
 /*
  *
@@ -59,13 +59,13 @@ type TwitterItem = Modify<NoteItem, TwitterNameProp>;
 
 type ArticleItem = Modify<NoteItem, ArticleUrlProp>;
 
-export type Item<V extends Variants = Variants> = {
+export type Item<V extends Variant = Variant> = {
   notes: NoteItem;
   twitters: TwitterItem;
   articles: ArticleItem;
 }[V];
 
-export type NewItem<V extends Variants = Variants> = Omit<Item<V>, 'id' | 'created'>;
+export type NewItem<V extends Variant = Variant> = Omit<Item<V>, 'id' | 'created'>;
 
 export type DetailsItem = Modify<NoteItem, Partial<TwitterNameProp & ArticleUrlProp>>;
 

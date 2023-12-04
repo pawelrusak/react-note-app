@@ -3,9 +3,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { searchVariantSelector } from '~/store/search/searchSelectors';
 import { searchItems } from '~/store/search/searchSlice';
 
-import type { Variants } from '~/commonTypes';
+import type { Variant } from '~/commonTypes';
 
-export const useSearchState = <T extends Variants>(variant: T) => {
+export const useSearchState = <T extends Variant>(variant: T) => {
   const dispatch = useDispatch();
   const search = useSelector(searchVariantSelector(variant));
 

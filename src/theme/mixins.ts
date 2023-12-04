@@ -5,7 +5,7 @@ import { generateMedia, pxToEm } from 'styled-media-query';
 import { isNumber } from '~/utils';
 
 import type { DefaultTheme } from 'styled-components';
-import type { Variants } from '~/commonTypes';
+import type { Variant } from '~/commonTypes';
 
 export const lightenBlack = css`
   ${({ theme }) => polished.lighten(0.3, theme.black)}
@@ -16,7 +16,7 @@ export const lightenBlackText = css`
 `;
 
 export type VariantColorValueProp = {
-  readonly variant?: Variants;
+  readonly variant?: Variant;
 };
 
 type VariantColorValueArgs = {

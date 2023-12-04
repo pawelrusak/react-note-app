@@ -7,7 +7,7 @@ import {
 } from './queries/items';
 
 import type { NewDocumentItem, DocumentItemQueryArgs } from './servicesTypes';
-import type { Item, Variants, AuthCredentials } from '~/commonTypes';
+import type { Item, Variant, AuthCredentials } from '~/commonTypes';
 
 export const authenticateUser = (
   email: AuthCredentials['email'],
@@ -19,7 +19,7 @@ export const register = (email: AuthCredentials['email'], password: AuthCredenti
 
 export const logout = () => auth.signOut();
 
-export const fetchItems = async <V extends Variants = Variants>({
+export const fetchItems = async <V extends Variant = Variant>({
   variant,
   userID,
 }: DocumentItemQueryArgs<V>) => {
@@ -33,7 +33,7 @@ export const fetchItems = async <V extends Variants = Variants>({
   }
 };
 
-export const fetchItem = async <V extends Variants>(id: Item['id']) => {
+export const fetchItem = async <V extends Variant>(id: Item['id']) => {
   try {
     const itemSnap = await queryGetItemByID(id);
     const data = itemSnap.data() as Item<V>;
@@ -58,7 +58,7 @@ export const removeItem = async (id: Item['id']) => {
   }
 };
 
-export const addItem = async <V extends Variants>({
+export const addItem = async <V extends Variant>({
   userID,
   variant,
   ...itemContent

@@ -1,13 +1,13 @@
 import firebase from 'firebase/app';
 
-import type { Variants, Item, Modify, Writeable, NewItem } from '~/commonTypes';
+import type { Variant, Item, Modify, Writeable, NewItem } from '~/commonTypes';
 
-export type DocumentItemQueryArgs<V extends Variants = Variants> = {
+export type DocumentItemQueryArgs<V extends Variant = Variant> = {
   variant: V;
   userID: null | string;
 };
 
-export type DocumentItem<V extends Variants = Variants> = Partial<DocumentItemQueryArgs<V>> &
+export type DocumentItem<V extends Variant = Variant> = Partial<DocumentItemQueryArgs<V>> &
   Modify<
     Writeable<Item<V>>,
     {
@@ -16,12 +16,12 @@ export type DocumentItem<V extends Variants = Variants> = Partial<DocumentItemQu
     }
   >;
 
-export type NewDocumentItem<V extends Variants = Variants> = DocumentItemQueryArgs<V> &
+export type NewDocumentItem<V extends Variant = Variant> = DocumentItemQueryArgs<V> &
   NewItem<V> & {
     created?: firebase.firestore.Timestamp;
   };
 
-export type FirestoreDocumentItem<V extends Variants = Variants> = Modify<
+export type FirestoreDocumentItem<V extends Variant = Variant> = Modify<
   DocumentItem<V>,
   {
     created: firebase.firestore.Timestamp;
