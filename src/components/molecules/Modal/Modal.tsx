@@ -14,7 +14,7 @@ import TextButton from '~/components/atoms/TextButton/TextButton';
 import { useClickAway } from '~/hooks';
 import * as styledMixin from '~/theme/mixins';
 
-import type { Variants } from '~/commonTypes';
+import type { Variant } from '~/commonTypes';
 import type { VariantColorValueProp } from '~/theme/mixins';
 
 const StyledWrapper = styled(AlertDialogOverlay)`
@@ -91,7 +91,7 @@ const StyledDescription = styled(Paragraph)`
 
 export type ModalProps = {
   readonly show: boolean;
-  readonly variant: Variants;
+  readonly variant: Variant;
   readonly children?: React.ReactNode;
   readonly onClickOutside?: (event: React.MouseEvent) => void;
   readonly onDismiss?: (event?: React.SyntheticEvent) => void;

@@ -5,7 +5,7 @@ import { getEarlierDateOfDay } from '~/utils';
 import { StoreDecorator, CardWrapperDecorator } from '~~/.storybook/decorators';
 
 import type { Meta, Story } from '@storybook/react';
-import type { Variants } from '~/commonTypes';
+import type { Variant } from '~/commonTypes';
 
 export default {
   title: 'Molecules/Card',
@@ -13,7 +13,7 @@ export default {
   decorators: [StoryRouter(), StoreDecorator, CardWrapperDecorator],
 } as Meta;
 
-const Template: Story<CardProps<Variants>> = (args) => <Card {...args} />;
+const Template: Story<CardProps<Variant>> = (args) => <Card {...args} />;
 
 export const Note = Template.bind({});
 Note.args = {

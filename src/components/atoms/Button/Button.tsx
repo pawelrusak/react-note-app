@@ -4,13 +4,13 @@ import styled, { css } from 'styled-components';
 import * as styledKeyframe from '~/theme/keyframes';
 import * as styledMixin from '~/theme/mixins';
 
-import type { Variants } from '~/commonTypes';
+import type { Variant } from '~/commonTypes';
 
 const SPINNER_HEIGHT = 18;
 
 export type ButtonProps =
   | Readonly<{ variant?: never; secondary: true; pending?: never }>
-  | Readonly<{ variant?: Variants; secondary?: never; pending?: boolean }>;
+  | Readonly<{ variant?: Variant; secondary?: never; pending?: boolean }>;
 
 const Button = styled.button<ButtonProps>`
   display: block;

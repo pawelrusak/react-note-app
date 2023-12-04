@@ -6,10 +6,10 @@ import { useFetchItems } from '~/hooks';
 import { media, cardListBreakpointsInEm } from '~/theme/mixins';
 import { VisuallyHidden } from '~/utils';
 
-import type { Variants } from '~/commonTypes';
+import type { Variant } from '~/commonTypes';
 import type { ItemsState } from '~/store';
 
-type Children<T extends Variants> = ({ data }: { data: ItemsState[T] }) => React.ReactNode;
+type Children<T extends Variant> = ({ data }: { data: ItemsState[T] }) => React.ReactNode;
 
 const StyledGrid = styled.div`
   & > * {
@@ -50,12 +50,12 @@ const StyledEmptyStateWrapper = styled.section`
   min-height: 100%;
 `;
 
-export type CardListProps<T extends Variants> = {
+export type CardListProps<T extends Variant> = {
   readonly variant: T;
   readonly children: Children<T>;
 };
 
-const CardList = <T extends Variants>({ variant, children }: CardListProps<T>) => {
+const CardList = <T extends Variant>({ variant, children }: CardListProps<T>) => {
   const { data, isLoading, isSucceeded } = useFetchItems(variant);
 
   return (

@@ -1,6 +1,6 @@
 import { ROUTES_PATHS } from './route';
 
-import type { RoutesPaths } from '~/commonTypes';
+import type { RoutesPath } from '~/commonTypes';
 
 /**
  * This constant can be shared between tests and the code base.
@@ -27,7 +27,7 @@ type AuthFormData = {
   readonly headingText: string;
   readonly buttonText: string;
   readonly linkText: string;
-  readonly linkPath: RoutesPaths;
+  readonly linkPath: RoutesPath;
 };
 
 type AuthFormDataVariants = {

@@ -2,7 +2,7 @@
 import { isNewItemVariantTouched } from '../index';
 
 import type { FormikTouched } from 'formik';
-import type { NewItem, Variants } from '~/commonTypes';
+import type { NewItem, Variant } from '~/commonTypes';
 
 type NewItemFormikTouched = FormikTouched<NewItem>;
 
@@ -20,7 +20,7 @@ const notTouchedNewItem: NewItemFormikTouched = {
   articleUrl: false,
 };
 
-const NEW_ITEM_VARIANTS: Variants[] = ['notes', 'articles', 'twitters'];
+const NEW_ITEM_VARIANTS: Variant[] = ['notes', 'articles', 'twitters'];
 
 describe('isNewItemVariantTouched utils', () => {
   it.each(NEW_ITEM_VARIANTS)(

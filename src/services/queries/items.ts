@@ -2,9 +2,9 @@ import { itemConverter } from '../converters/items';
 import { getNotesCollectionRef, getNoteDocumentRefById } from '../refs/items';
 
 import type { NewDocumentItem, DocumentItem } from '../servicesTypes';
-import type { Variants } from '~/commonTypes';
+import type { Variant } from '~/commonTypes';
 
-export const queryGetItemsByTypeAndUserID = <V extends Variants = Variants>(
+export const queryGetItemsByTypeAndUserID = <V extends Variant = Variant>(
   type: V,
   userID: null | string = null,
 ) =>
@@ -15,7 +15,7 @@ export const queryGetItemsByTypeAndUserID = <V extends Variants = Variants>(
     .withConverter(itemConverter)
     .get();
 
-export const queryGetItemByID = <V extends Variants = Variants>(
+export const queryGetItemByID = <V extends Variant = Variant>(
   id: Exclude<DocumentItem['id'], undefined>,
 ) => getNoteDocumentRefById<V>(id).withConverter(itemConverter).get();
 

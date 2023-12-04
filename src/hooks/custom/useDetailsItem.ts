@@ -7,11 +7,11 @@ import { Status } from '~/commonTypes';
 import { useCurrentPageVariant } from '~/context';
 import { createDetailsItemMachine } from '~/machines';
 
-import type { URLParams } from '~/commonTypes';
+import type { URLParam } from '~/commonTypes';
 
 export const useDetailsItem = () => {
   const pageVariant = useCurrentPageVariant();
-  const { id: detailsItemId } = useParams<URLParams>();
+  const { id: detailsItemId } = useParams<URLParam>();
   const detailsItem = useItemSelector(pageVariant, detailsItemId);
   const [state, send] = useMachine(createDetailsItemMachine(detailsItemId, detailsItem));
 

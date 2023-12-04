@@ -13,11 +13,11 @@ import { TEST_ID } from '~/constants';
 import * as services from '~/services';
 import { capitalize } from '~/utils';
 
-import type { Variants } from '~/commonTypes';
+import type { Variant } from '~/commonTypes';
 
 type FetchItemsTestSuiteConfigArgs = {
   render(): ReturnType<typeof renderWithProviders>;
-  variant: Variants;
+  variant: Variant;
 };
 
 export const fetchItemsTestSuite = (

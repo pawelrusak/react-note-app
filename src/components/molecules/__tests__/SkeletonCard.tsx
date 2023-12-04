@@ -3,9 +3,9 @@ import { render, screen, testComponent } from 'testUtils';
 import SkeletonCard from '../SkeletonCard/SkeletonCard';
 import { TEST_ID, ROUTES_PATHS } from '~/constants';
 
-import type { RoutesVariantRootPaths } from '~/commonTypes';
+import type { RoutesVariantRootPath } from '~/commonTypes';
 
-const renderSkeletonCard = (path: RoutesVariantRootPaths) => render(<SkeletonCard />, { path });
+const renderSkeletonCard = (path: RoutesVariantRootPath) => render(<SkeletonCard />, { path });
 
 const querySkeletonCardAvatarSkeleton = () =>
   screen.queryByTestId(TEST_ID.SKELETON_CARD.AVATAR_SKELETON);

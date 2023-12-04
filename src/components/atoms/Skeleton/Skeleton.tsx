@@ -3,7 +3,7 @@ import styled, { DefaultTheme } from 'styled-components';
 
 import * as styledKeyframe from '~/theme/keyframes';
 
-import type { CSSSizeUnitVariants } from '~/commonTypes';
+import type { CSSSizeUnitVariant } from '~/commonTypes';
 
 const calculateLineHeightSpace = (theme: DefaultTheme) =>
   parseFloat(theme.lineHeight as string) * parseFloat(theme.fontSize.s) -
@@ -11,7 +11,7 @@ const calculateLineHeightSpace = (theme: DefaultTheme) =>
 
 export type SkeletonProps = {
   readonly dark?: true;
-  readonly width?: `${number}${CSSSizeUnitVariants}`;
+  readonly width?: `${number}${CSSSizeUnitVariant}`;
 };
 
 const Skeleton = styled.div<SkeletonProps>`

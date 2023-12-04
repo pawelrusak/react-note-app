@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { ACTION_DOMAINS } from '~/constants';
 
-import type { Variants } from '~/commonTypes';
+import type { Variant } from '~/commonTypes';
 
 export type SearchState = {
   notes: string;
@@ -17,7 +17,7 @@ const initialState: SearchState = {
 };
 
 type SearchItemsPayloadAction = PayloadAction<{
-  variant: Variants;
+  variant: Variant;
   value: string;
 }>;
 

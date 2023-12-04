@@ -8,7 +8,7 @@ import NewItemFormHeader from '~/components/molecules/NewItemFormHeader/NewItemF
 import { media } from '~/theme/mixins';
 import { isNewItemVariantTouched } from '~/utils';
 
-import type { Variants, Item } from '~/commonTypes';
+import type { Variant, Item } from '~/commonTypes';
 
 const StyledForm = styled(Form)`
   display: flex;
@@ -63,7 +63,7 @@ const StyledTextArea = styled(StyledInput).attrs(() => ({ as: 'textarea' }))`
 `;
 
 export type NewItemFormProps = {
-  readonly formVariant: Variants;
+  readonly formVariant: Variant;
 };
 
 const NewItemForm = ({ formVariant }: NewItemFormProps) => {
