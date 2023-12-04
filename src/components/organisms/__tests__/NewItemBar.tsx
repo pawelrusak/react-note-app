@@ -12,14 +12,14 @@ import NewItemBar, { NewItemBarProps } from '../NewItemBar/NewItemBar';
 import * as NewItemBarStories from '../NewItemBar/NewItemBar.stories';
 import { ROUTES_PATHS, TEST_ID } from '~/constants';
 
-import type { NewItem, RoutesVariantRootPaths } from '~/commonTypes';
+import type { NewItem, RoutesVariantRootPath } from '~/commonTypes';
 
 const exampleProps = {
   ...NewItemBarStories.Note.args,
 } as NewItemBarProps;
 
 const renderNewItemBar = (
-  path: RoutesVariantRootPaths,
+  path: RoutesVariantRootPath,
   handleCloseProp = exampleProps.handleClose,
 ) =>
   render(<NewItemBar {...exampleProps} handleClose={handleCloseProp} />, {

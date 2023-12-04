@@ -113,10 +113,10 @@ export enum Status {
  * Routes
  *
  */
-type Routes = typeof ROUTES_PATHS;
+type Route = typeof ROUTES_PATHS;
 
-export type RoutesVariantRootPaths = Routes['notes'] | Routes['twitters'] | Routes['articles'];
+export type RoutesVariantRootPath = Route['notes'] | Route['twitters'] | Route['articles'];
 
-export type RoutesKeys = keyof typeof ROUTES_PATHS;
+export type RoutesKey = keyof typeof ROUTES_PATHS;
 
-export type RoutesPaths = Routes[RoutesKeys];
+export type RoutesPath = Route[RoutesKey];

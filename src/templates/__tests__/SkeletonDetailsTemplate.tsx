@@ -3,9 +3,9 @@ import { render, screen, testComponent } from 'testUtils';
 import SkeletonDetailsTemplate from '../SkeletonDetailsTemplate/SkeletonDetailsTemplate';
 import { TEST_ID, ROUTES_PATHS } from '~/constants';
 
-import type { RoutesVariantRootPaths } from '~/commonTypes';
+import type { RoutesVariantRootPath } from '~/commonTypes';
 
-const renderSkeletonDetailsTemplate = (path: RoutesVariantRootPaths) =>
+const renderSkeletonDetailsTemplate = (path: RoutesVariantRootPath) =>
   render(<SkeletonDetailsTemplate />, { path });
 
 const querySkeletonDetailsTemplateAvatarSkeleton = () =>

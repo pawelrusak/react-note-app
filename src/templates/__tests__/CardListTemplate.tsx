@@ -5,11 +5,11 @@ import { fakeStateWithDataAndLoggedInUser } from 'testUtils/fakers';
 import CardListTemplate from '../CardListTemplate/CardListTemplate';
 import { TEST_ID, ROUTES_PATHS } from '~/constants';
 
-import type { Item, RoutesVariantRootPaths } from '~/commonTypes';
+import type { Item, RoutesVariantRootPath } from '~/commonTypes';
 
 jest.mock('~/services');
 
-const renderCardListTemplate = (path: RoutesVariantRootPaths = ROUTES_PATHS.notes) =>
+const renderCardListTemplate = (path: RoutesVariantRootPath = ROUTES_PATHS.notes) =>
   render(
     <CardListTemplate>
       <></>
