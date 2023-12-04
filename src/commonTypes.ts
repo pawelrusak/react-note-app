@@ -83,7 +83,7 @@ export type URLParams = {
   id: string;
 };
 
-export type CSSSizeUnitVariants =
+export type CSSSizeUnitVariant =
   | '%'
   | 'cm'
   | 'mm'
