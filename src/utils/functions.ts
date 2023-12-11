@@ -50,3 +50,9 @@ export type AuthCredentialsTouched = FormikTouched<AuthCredential>;
 
 export const isAuthCredentialsTouched = (authCredentialsTouched: AuthCredentialsTouched) =>
   hasPropertiesWithTrueValues(authCredentialsTouched, ['email', 'password']);
+
+export const getTwitterAvatarUrl = (twitterUsername: string) => {
+  const TWITTER_AVATAR_URL = String(process.env.REACT_APP_BASE_TWITTER_AVATAR_URL);
+
+  return `${TWITTER_AVATAR_URL}/${twitterUsername}`;
+};

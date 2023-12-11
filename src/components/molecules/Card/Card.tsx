@@ -13,6 +13,7 @@ import { TEST_ID } from '~/constants';
 import { useHistoryPush, useCurrentPageVariant, useConfirmationModal } from '~/hooks';
 import { media } from '~/theme/mixins';
 import * as styledMixin from '~/theme/mixins';
+import { getTwitterAvatarUrl } from '~/utils/functions';
 
 import type { Variant, Item } from '~/commonTypes';
 import type { VariantColorValueProp } from '~/theme/mixins';
@@ -236,7 +237,7 @@ const Card = <V extends Variant>({
         </StyledHeading>
         <DateInfo data-testid={TEST_ID.CARD.DATE_INFO} date={created} />
         {pageVariant === 'twitters' && (
-          <StyledAvatar src={`https://unavatar.now.sh/twitter/${twitterName || ''}`} />
+          <StyledAvatar src={getTwitterAvatarUrl(twitterName || '')} />
         )}
         {pageVariant === 'articles' && (
           <StyledArticleLink data-testid={TEST_ID.CARD.ARTICLE_LINK} href={articleUrl || ''} />
