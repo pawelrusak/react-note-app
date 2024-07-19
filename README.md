@@ -26,7 +26,7 @@ The project is application extension from the course ["Kurs React - W Praktyce"]
 
 ## The course code changes
 
-I followed the instructions of the author of the course up to the 0.15.0 tag with some exceptions such as the use of Firebase and Storybook 6, which I marked using special convention for commit messages - more about commit messages [here](https://github.com/pawelrusak/react-note-app/tree/develop#commit-messages). Later on, however, I modified almost all of the source code presented during the course and it was before I started implementing new types of functionality. Major changes include:
+I followed the instructions of the author of the course up to the 0.15.0 tag with some exceptions such as the use of Firebase and Storybook 6. Later on, however, I modified almost all of the source code presented during the course and it was before I started implementing new types of functionality. Major changes include:
 
 - writing tests for the entire application using the [React Testing Library](https://testing-library.com/docs/react-testing-library/intro/) - which I tried to do before making any changes to the source code. That in return, gave me more confidence and helped protect myself from bugs during later modifications.
 - writing the stories for each component by using the [Storybook 6](https://storybook.js.org/docs/riot/get-started/introduction) - The course included StoryBook related content, but it used the deprecated API of Storybook 5, so I had to write it from scratch.
@@ -39,20 +39,6 @@ I followed the instructions of the author of the course up to the 0.15.0 tag wit
 and more...
 
 You can preview the changes I have made by comparing the code from the [latest commit](https://github.com/pawelrusak/react-note-app/tree/develop) (branch develop) up to the [0.15.0 tag](https://github.com/pawelrusak/react-note-app/tree/v0.15.0) - which is the tag that ends up the course - or with the [original source code](https://github.com/eduwebpl/kurs-react-w-praktyce).
-
-### Commit messages
-
-I follow by the [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) specification in my commit messages, which are structured as follows:
-
-```
-<type>(scope): <description>
-
-[optional body]
-
-[optional footer(s)]
-```
-
-However in my case I used the word "my" in `scope` only when I did something on my own during the course, like connecting Firebase API or creating stories of StoryBook 6, because the course didn't cover that. I used this solution up to the Tag 0.15.0. All the following commits even if they didn't have a "my" in the "scope" were written by me, too.
 
 ### Used technologies
 
