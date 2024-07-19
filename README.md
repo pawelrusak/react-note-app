@@ -22,7 +22,7 @@ This project was bootstrapped with [Create React App](https://create-react-app.d
 
 ## About the project
 
-The project is application extension from the course ["Kurs React - W Praktyce"](https://eduweb.pl/programowanie-i-www/reactjs/react-w-praktyce) (en."React Course - in Practice") by [Adam Romanski](https://helloroman.pl/). I continued the course up to tag 0.15.0 (more about tagging [here](https://github.com/pawelrusak/react-note-app/tree/develop#tagging)). My main motivation for taking up the course was it's very smart UI design and interesting idea for application, which I thought showed a great potential for introducing new features (types of functionality) and technologies. However, at the end of tne course only some of the designed types of functionality worked.
+The project is application extension from the course ["Kurs React - W Praktyce"](https://eduweb.pl/programowanie-i-www/reactjs/react-w-praktyce) (en."React Course - in Practice") by [Adam Romanski](https://helloroman.pl/). I continued the course up to tag 0.15.0. My main motivation for taking up the course was it's very smart UI design and interesting idea for application, which I thought showed a great potential for introducing new features (types of functionality) and technologies. However, at the end of tne course only some of the designed types of functionality worked.
 
 ## The course code changes
 
@@ -53,10 +53,6 @@ I follow by the [Conventional Commits](https://www.conventionalcommits.org/en/v1
 ```
 
 However in my case I used the word "my" in `scope` only when I did something on my own during the course, like connecting Firebase API or creating stories of StoryBook 6, because the course didn't cover that. I used this solution up to the Tag 0.15.0. All the following commits even if they didn't have a "my" in the "scope" were written by me, too.
-
-### Tagging
-
-I have tried using tags in the MAJOR.MINOR.PATCH convention, suggested in ["Semantic Versioning"](https://semver.org/), guided by the changes from the user's perspective. For example, I increased the "MINOR" version when adding new user functionality, like possibility to create new notes, or implementing a counter for a specific type of items.
 
 ### Used technologies
 
