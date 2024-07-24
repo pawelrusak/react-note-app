@@ -28,17 +28,18 @@ A simple, but very functional application that allows the creation of various ty
 
 In the project I used the following libraries and tools:
 
-- [React 17](https://reactjs.org/blog/2020/10/20/react-v17.html),
-- React Hooks (migration from Class Component),
+- [React](https://react.dev/learn),
 - [React Router](https://reactrouter.com/)
-- Redux Toolkit (migration from Redux)
+- [Redux Toolkit](https://redux-toolkit.js.org/introduction/getting-started)
 - [Styled Components](https://styled-components.com/docs/basics#getting-started)
-- Typescript (migration from JavaScript)
+- [Typescript](https://www.typescriptlang.org/)
 - [Formik](https://formik.org/) with [Yup](https://github.com/jquense/yup#yup)
 - [ESLint](https://eslint.org/docs/user-guide/getting-started) and [Prettier](https://prettier.io/docs/en/index.html)
 - [Husky](https://typicode.github.io/husky/#/) 6 with [lint-staged](https://github.com/okonet/lint-staged#-lint-staged----)
 - [Firebase Authentication](https://firebase.google.com/docs/auth) and [Cloud Firestore](https://firebase.google.com/docs/firestore)
-- [Storybook 6](https://storybook.js.org/)
+- [Storybook](https://storybook.js.org/docs)
+- [React Testing Library](https://testing-library.com/docs/react-testing-library/intro/)
+- [Jest](https://jestjs.io/docs/getting-started)
 
 and more...
 
