@@ -84,6 +84,12 @@ After [version 0.15.0](https://github.com/pawelrusak/react-note-app/tree/develop
 
 \* if the box is not checked, it means the work is in progress
 
+## Acknowledgments
+
+The following list contains acknowledgments for individuals and organizations who had a significant impact on the project:
+
+- Adam Romański - for the project idea and permission to publicly use it in my repository, as well as for allowing the use of their application design.
+
 ## License
 
 Licensed under the MIT License. See [LICENSE](./LICENSE) for more information.
