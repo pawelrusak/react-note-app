@@ -10,7 +10,7 @@ import type { AuthCredential } from '~/commonTypes';
 
 jest.mock('~/services');
 
-const getByLoginPlaceholderText = () => screen.getByPlaceholderText(/login/i);
+const getByLoginPlaceholderText = () => screen.getByPlaceholderText(/e-mail/i);
 const getByPasswordPlaceholderText = () => screen.getByPlaceholderText(/password/i);
 const getByLoginButton = () => screen.getByRole('button');
 const queryFakeHomePage = () => screen.queryByTestId('FakeHomePage');

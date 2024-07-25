@@ -91,7 +91,7 @@ const AuthForm = ({ formVariant }: AuthFormProps) => {
         <StyledField
           name="email"
           type="email"
-          placeholder="Login"
+          placeholder="E-mail"
           component={StyledInput}
           aria-required="true"
         />
