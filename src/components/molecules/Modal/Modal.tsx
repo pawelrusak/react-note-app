@@ -26,7 +26,8 @@ const StyledWrapper = styled(AlertDialogOverlay)`
   display: grid;
   place-items: center;
   ${styledMixin.zIndexDeclaration('modal')};
-  background: rgba(10, 10, 10, 0.45);
+  background: rgba(10, 10, 10, 0.2); // or 0.45
+  backdrop-filter: blur(3px);
 `;
 
 const StyledHeader = styled(AlertDialogLabel)`
