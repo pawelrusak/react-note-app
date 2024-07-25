@@ -11,6 +11,13 @@
 
 ## About the project
 
+<p align="center">
+  <img src="./docs/assets/screenshots/notes-list-screenshot.png" alt="Screenshot of the notes list page" />
+  <br />
+  <img src="./docs/assets/screenshots/tweet-details-screenshot.png" alt="Screenshot of a tweet details page with an open modal for deleting the tweet" />
+  <br />
+</p>
+
 A simple yet very functional application that allows the creation of various types of notes, secure storage, and easy management. Additionally, the application features an elegant user interface that ensures a high-quality user experience.
 
 ### Used technologies
