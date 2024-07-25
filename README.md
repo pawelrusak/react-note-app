@@ -1,8 +1,11 @@
-<p align="center"><img src="https://raw.githubusercontent.com/pawelrusak/react-note-app/851af0930676810310cac0c0e39832b03580d972/logo.svg" height="150" alt="FAV Note."><p>
-  
 # FavNote. - React app to help you master your notes
 
-FavNote. is the application that enables you to conveniently browse, create, remove and filter several content types like notes, favorites twitts or interesting articles and get back to the them later whenever you want.
+<p align="center">
+  <img src="https://raw.githubusercontent.com/pawelrusak/react-note-app/851af0930676810310cac0c0e39832b03580d972/logo.svg" height="150" alt="FAV Note.">
+  <br />
+  <em>FavNote is a simple yet functional app for creating and managing various types of notes.</em>
+  <br />
+</p>
 
 ## Getting started
 
@@ -22,7 +25,7 @@ This project was bootstrapped with [Create React App](https://create-react-app.d
 
 ## About the project
 
-A simple, but very functional application that allows the creation of various types of notes, secure storage, and easy management. Additionally, the application features an elegant user interface that ensures a high-quality user experience.
+A simple yet very functional application that allows the creation of various types of notes, secure storage, and easy management. Additionally, the application features an elegant user interface that ensures a high-quality user experience.
 
 ### Used technologies
 
