@@ -12,6 +12,7 @@ import { TEST_ID, ROUTES_PATHS } from '~/constants';
 import { useCurrentPageVariant, useConfirmationModal } from '~/hooks';
 import UserPageTemplate from '~/templates/UserPageTemplate/UserPageTemplate';
 import { media } from '~/theme/mixins';
+import { getTwitterAvatarUrl } from '~/utils/functions';
 
 import type { DetailsItem } from '~/commonTypes';
 
@@ -184,11 +185,11 @@ const DetailsTemplate = ({
                 />
               </StyledParagraph>
             </div>
-            {pageVariant === 'twitters' && (
+            {pageVariant === 'twitters' && twitterName && (
               <StyledAvatar
                 data-testid={TEST_ID.DETAILS_TEMPLATE.AVATAR}
                 alt={title}
-                src={`https://unavatar.now.sh/twitter/${twitterName as string}  `}
+                src={getTwitterAvatarUrl(twitterName)}
               />
             )}
           </StyledHeader>
