@@ -9,20 +9,6 @@
   <br />
 </p>
 
-## Getting started
-
-**Obsolete! Will be updated soon!**
-
-Build using [NPM](https://www.npmjs.com/get-npm) scripts. The following scripts are available:
-
-- `start` - starts the development server,
-- `build` - bundles the app into static files for production,
-- `test` - starts the test runner,
-- `eject` - removes this CRA tool and copies build dependencies, configuration files
-  and scripts into the app directory. **If you do this, you can’t go back!**,
-- `storybook` - start the component explorer,
-- `build-storybook` - bundles the component explorer,
-
 ## About the project
 
 A simple yet very functional application that allows the creation of various types of notes, secure storage, and easy management. Additionally, the application features an elegant user interface that ensures a high-quality user experience.
@@ -59,6 +45,20 @@ Currently, the application includes the following functionalities:
 - [x] Works on both desktop and mobile devices (Responsive Web Design)
 - [x] Ability to search notes using a search box
 - [x] Page title management
+
+## Getting started
+
+**Obsolete! Will be updated soon!**
+
+Build using [NPM](https://www.npmjs.com/get-npm) scripts. The following scripts are available:
+
+- `start` - starts the development server,
+- `build` - bundles the app into static files for production,
+- `test` - starts the test runner,
+- `eject` - removes this CRA tool and copies build dependencies, configuration files
+  and scripts into the app directory. **If you do this, you can’t go back!**,
+- `storybook` - start the component explorer,
+- `build-storybook` - bundles the component explorer,
 
 ## Acknowledgments
 
