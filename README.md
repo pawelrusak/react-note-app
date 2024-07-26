@@ -6,15 +6,23 @@
   <br />
   <em>FavNote is a simple yet functional app for creating and managing various types of notes.</em>
   <br />
-  <br />
+</p>
+
+<p align="center">
+  <a href="https://react-note-app-1qfd.onrender.com/"><strong>Demo</strong></a>
+  <br>
 </p>
 
 ## About the project
 
 <p align="center">
-  <img src="./docs/assets/screenshots/notes-list-screenshot.png" alt="Screenshot of the notes list page" />
+  <a href="https://react-note-app-1qfd.onrender.com/">
+    <img src="./docs/assets/screenshots/notes-list-screenshot.png" alt="Screenshot of the notes list page" />
+  </a>
   <br />
-  <img src="./docs/assets/screenshots/tweet-details-screenshot.png" alt="Screenshot of a tweet details page with an open modal for deleting the tweet" />
+  <a href="https://react-note-app-1qfd.onrender.com/">
+    <img src="./docs/assets/screenshots/tweet-details-screenshot.png" alt="Screenshot of a tweet details page with an open modal for deleting the tweet" />
+  </a>
   <br />
 </p>
 
