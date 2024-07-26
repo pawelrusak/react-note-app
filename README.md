@@ -10,7 +10,14 @@
 
 <p align="center">
   <a href="https://react-note-app-1qfd.onrender.com/"><strong>Demo</strong></a>
-  <br>
+  <br />
+</p>
+
+<p align="center">
+  <img src="https://img.shields.io/github/last-commit/pawelrusak/react-note-app?style=flat-square" alt="GitHub last commit" />&nbsp;
+  <img src="https://img.shields.io/github/commit-activity/w/pawelrusak/react-note-app?style=flat-square" alt="GitHub commit activity" />&nbsp;
+  <img src="https://img.shields.io/github/license/pawelrusak/react-note-app?style=flat-square" alt="GitHub License" />&nbsp;
+  <br />
 </p>
 
 ## About the project
